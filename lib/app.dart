@@ -23,9 +23,10 @@ class _MyAppState extends State<MyApp> {
         navigatorKey: navigatorKey,
         onGenerateRoute: (settings) => DigRoute().generateRoute(settings),
         supportedLocales: DigLocale.supportedLocale,
-        navigatorObservers: <NavigatorObserver>[
-          FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)
-        ],
+        /// TODO: Uncomment after setup Firebase
+        // navigatorObservers: <NavigatorObserver>[
+        //   FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)
+        // ],
         localizationsDelegates: [
           S.delegate,
           GlobalMaterialLocalizations.delegate,

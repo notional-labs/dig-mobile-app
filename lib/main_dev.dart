@@ -11,7 +11,9 @@ void main() {
 
   runZonedGuarded(() async {
     initDI(core.DevENV());
-    await initFirebase();
+
+    /// TODO: Uncomment after setup Firebase
+    // await initFirebase();
 
     runApp(const MyApp());
   }, (error, stackTrace) {

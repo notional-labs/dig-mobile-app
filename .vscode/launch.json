@@ -1,0 +1,46 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "[Debug] DIG DEV",
+            "program": "lib/main_dev.dart",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--flavor=dev",
+            ]
+        },
+        {
+            "name": "[Profile] DIG DEV",
+            "program": "lib/main_dev.dart",
+            "request": "launch",
+            "flutterMode": "profile",
+            "type": "dart",
+            "args": [
+                "--flavor=dev",
+            ]
+        },
+        {
+            "name": "[Debug] DIG PROD",
+            "program": "lib/main_prod.dart",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--flavor=prod",
+            ]
+        },
+        {
+            "name": "[Profile] DIG PROD",
+            "program": "lib/main_prod.dart",
+            "request": "launch",
+            "flutterMode": "profile",
+            "type": "dart",
+            "args": [
+                "--flavor=prod",
+            ]
+        }
+    ]
+}
