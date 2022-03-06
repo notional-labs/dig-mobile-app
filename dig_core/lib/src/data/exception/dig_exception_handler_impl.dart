@@ -18,7 +18,7 @@ class DigExceptionHandler implements BaseDigExceptionHandler {
       return any;
     }
 
-    return BeanstalkException(message: any.toString());
+    return DigException(message: any.toString());
   }
 
   BaseDigException _handleDioError(DioError any) {
@@ -26,7 +26,7 @@ class DigExceptionHandler implements BaseDigExceptionHandler {
       return any.error;
     }
 
-    return const BeanstalkNetworkException();
+    return const DigNetworkException();
   }
 
   BaseDigException _handleFirebaseAuthError(FirebaseAuthException any) {

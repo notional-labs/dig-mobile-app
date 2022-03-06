@@ -45,7 +45,7 @@ class DigIntercepter extends InterceptorsWrapper {
     if (err.type != DioErrorType.response) {
       return handler.reject(DioError(
           requestOptions: err.requestOptions,
-          error: const BeanstalkNetworkException()));
+          error: const DigNetworkException()));
     }
 
     /// Continue with a response
@@ -57,7 +57,7 @@ class DigIntercepter extends InterceptorsWrapper {
     if (statusCode == HttpCode.expiredToken) {
       return handler.reject(DioError(
           requestOptions: err.requestOptions,
-          error: const BeanstalkNetworkException()));
+          error: const DigNetworkException()));
     }
 
     handler.reject(DioError(

@@ -9,7 +9,7 @@ abstract class CreateDBDatasource {
 
 @Injectable(as: CreateDBDatasource)
 class CreateDBDatasourceImpl implements CreateDBDatasource {
-  final String dbPath = 'beanstalk.db';
+  final String dbPath = 'dig.db';
 
   @override
   Future<Database> create() async {

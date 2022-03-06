@@ -22,8 +22,8 @@ class DigServerException extends BaseDigException {
   bool? get stringify => true;
 }
 
-class BeanstalkNetworkException extends BaseDigException {
-  const BeanstalkNetworkException({String message = ''})
+class DigNetworkException extends BaseDigException {
+  const DigNetworkException({String message = ''})
       : super(message: message);
 
   @override
@@ -33,9 +33,9 @@ class BeanstalkNetworkException extends BaseDigException {
   bool? get stringify => true;
 }
 
-class BeanstalkException extends BaseDigException {
+class DigException extends BaseDigException {
   final StackTrace? trace;
-  const BeanstalkException({String message = '', this.trace})
+  const DigException({String message = '', this.trace})
       : super(message: message);
 
   @override
