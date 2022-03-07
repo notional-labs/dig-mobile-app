@@ -1,4 +1,5 @@
 import 'package:dig_mobile_app/app/definition/string.dart';
+import 'package:dig_mobile_app/app/page/splash.dart';
 import 'package:flutter/material.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -11,6 +12,7 @@ class DigRoute {
     switch (name) {
       case DigPageName.root:
       case DigPageName.splash:
+        return _materialPage(const SplashPage(), settings);
       case DigPageName.log_in:
       case DigPageName.home:
       default:
