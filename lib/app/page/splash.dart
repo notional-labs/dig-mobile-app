@@ -1,5 +1,6 @@
 import 'package:dig_mobile_app/app/cubit/splash_cubit.dart';
 import 'package:dig_mobile_app/app/definition/app_assets.dart';
+import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
@@ -23,6 +24,10 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       _cubit.checkAuthencation();
+      Future.delayed(const Duration(seconds: 3), () {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(DigPageName.home, (route) => false);
+      });
     });
   }
 
