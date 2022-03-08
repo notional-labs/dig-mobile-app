@@ -48,3 +48,6 @@ app.*.map.json
 pubspec.lock
 ios/Podfile.lock
 .metadata
+
+# fvm.app
+.fvm/
