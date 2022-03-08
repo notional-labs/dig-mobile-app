@@ -7,4 +7,5 @@ class AppAssets {
   static final String icDigLogo = _generateImagePath('ic_dig_logo.png');
   static final String icArrowRight = _generateImagePath('ic_arrow_right.png');
   static final String icScanQr = _generateImagePath('ic_scan_qr.png');
+  static final String icDiggerHead = _generateImagePath('ic_digger_head.png');
 }
