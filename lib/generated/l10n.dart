@@ -50,11 +50,11 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `chain`
-  String get chain {
+  /// `ig CHAIN`
+  String get ig_chain {
     return Intl.message(
-      'chain',
-      name: 'chain',
+      'ig CHAIN',
+      name: 'ig_chain',
       desc: '',
       args: [],
     );
