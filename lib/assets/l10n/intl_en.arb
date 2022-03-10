@@ -1,4 +1,8 @@
 {
     "ig_chain": "ig CHAIN",
-    "into_the_mine": "into the mine"
+    "into_the_mine": "into the mine",
+    "buy": "Buy",
+    "send": "Send",
+    "exchange": "Exchange",
+    "delete": "Delete"
 }

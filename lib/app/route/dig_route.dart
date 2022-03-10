@@ -14,7 +14,7 @@ class DigRoute {
       case DigPageName.root:
       case DigPageName.splash:
         return _materialPage(const SplashPage(), settings);
-      case DigPageName.log_in:
+      case DigPageName.logIn:
       case DigPageName.home:
         return _materialPage(const HomePage(), settings);
       default:
