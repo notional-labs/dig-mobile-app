@@ -1,6 +1,7 @@
 import 'package:dig_mobile_app/app/definition/app_assets.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
+import 'package:dig_mobile_app/app/page/active_account/active_account_page.dart';
 import 'package:dig_mobile_app/app/page/home/home_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +29,14 @@ class _HomePageState extends State<HomePage> {
                   top: 50,
                   start: 0,
                   end: 0,
-                )
+                ),
+                Positioned.directional(
+                    top: 80,
+                    start: 0,
+                    end: 0,
+                    bottom: 0,
+                    textDirection: TextDirection.ltr,
+                    child: const ActiveAccountPage())
               ],
             ),
           )),

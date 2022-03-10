@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
+export 'string_extension.dart';
+export 'text_editting_controller_extension.dart';
 
 class DigExtension{}
-
-extension TextEditingControllerExt on TextEditingController {
-  void clear() {
-    this.text = '';
-  }
-}
