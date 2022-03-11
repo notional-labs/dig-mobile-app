@@ -1,4 +1,4 @@
-import 'package:dig_mobile_app/app/cubit/splash_cubit.dart';
+import 'package:dig_mobile_app/app/cubit/splash/splash_cubit.dart';
 import 'package:dig_mobile_app/app/definition/app_assets.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
