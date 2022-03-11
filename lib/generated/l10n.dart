@@ -109,6 +109,126 @@ class S {
       args: [],
     );
   }
+
+  /// `ig`
+  String get ig {
+    return Intl.message(
+      'ig',
+      name: 'ig',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `WELCOME`
+  String get wellcome {
+    return Intl.message(
+      'WELCOME',
+      name: 'wellcome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in on your account`
+  String get sign_in_on_your_account {
+    return Intl.message(
+      'Sign in on your account',
+      name: 'sign_in_on_your_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign In`
+  String get sign_in {
+    return Intl.message(
+      'Sign In',
+      name: 'sign_in',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Or sign in with`
+  String get or_sign_in_with {
+    return Intl.message(
+      'Or sign in with',
+      name: 'or_sign_in_with',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don’t have account? Create`
+  String get dont_have_account_create {
+    return Intl.message(
+      'Don’t have account? Create',
+      name: 'dont_have_account_create',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copyright © 2021 Digchain.`
+  String get copyright_2021_digchain {
+    return Intl.message(
+      'Copyright © 2021 Digchain.',
+      name: 'copyright_2021_digchain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot you Password ?`
+  String get forgot_you_password {
+    return Intl.message(
+      'Forgot you Password ?',
+      name: 'forgot_you_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid Email`
+  String get sign_up_form_hint_invalid_email {
+    return Intl.message(
+      'Invalid Email',
+      name: 'sign_up_form_hint_invalid_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create`
+  String get create {
+    return Intl.message(
+      'Create',
+      name: 'create',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
