@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 class DSBackground extends StatelessWidget {
   final Widget child;
   final LinearGradient gradient;
+  final VoidCallback? onTap;
   const DSBackground(
       {required this.child,
+      this.onTap,
       this.gradient = const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -15,11 +17,16 @@ class DSBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(gradient: gradient),
-      child: child,
+    return GestureDetector(
+      onTap: () {
+        onTap?.call();
+      },
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(gradient: gradient),
+        child: child,
+      ),
     );
   }
 }
