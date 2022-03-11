@@ -40,4 +40,5 @@ class DSColors {
   static const Color tulipTree = Color(0xffEEC13F);
   static const Color codGray = Color(0xff141414);
   static const Color tundora = Color(0xff4D4D4D);
+  static const Color yellowOrange = Color(0xffFFAC38);
 }

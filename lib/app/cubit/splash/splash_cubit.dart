@@ -12,7 +12,7 @@ class SplashCubit extends Cubit<SplashState> {
   void checkAuthencation() {
     Future.delayed(const Duration(seconds: 2), () {
       navigatorKey.currentState
-          ?.pushNamedAndRemoveUntil(DigPageName.home, (route) => false);
+          ?.pushNamedAndRemoveUntil(DigPageName.login, (route) => false);
     });
   }
 }

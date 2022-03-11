@@ -23,10 +23,28 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "buy": MessageLookupByLibrary.simpleMessage("Buy"),
+        "copyright_2021_digchain":
+            MessageLookupByLibrary.simpleMessage("Copyright © 2021 Digchain."),
+        "create": MessageLookupByLibrary.simpleMessage("Create"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "dont_have_account_create":
+            MessageLookupByLibrary.simpleMessage("Don’t have account? Create"),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
         "exchange": MessageLookupByLibrary.simpleMessage("Exchange"),
+        "forgot_you_password":
+            MessageLookupByLibrary.simpleMessage("Forgot you Password ?"),
+        "ig": MessageLookupByLibrary.simpleMessage("ig"),
         "ig_chain": MessageLookupByLibrary.simpleMessage("ig CHAIN"),
         "into_the_mine": MessageLookupByLibrary.simpleMessage("into the mine"),
-        "send": MessageLookupByLibrary.simpleMessage("Send")
+        "or_sign_in_with":
+            MessageLookupByLibrary.simpleMessage("Or sign in with"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "send": MessageLookupByLibrary.simpleMessage("Send"),
+        "sign_in": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "sign_in_on_your_account":
+            MessageLookupByLibrary.simpleMessage("Sign in on your account"),
+        "sign_up_form_hint_invalid_email":
+            MessageLookupByLibrary.simpleMessage("Invalid Email"),
+        "wellcome": MessageLookupByLibrary.simpleMessage("WELCOME")
       };
 }
