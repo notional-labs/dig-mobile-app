@@ -127,7 +127,7 @@ class _DSTextFieldState extends State<DSTextField> {
               ),
             ),
           ),
-          if (_shouldShowErrorMessage) _ErrorMessageWidger(errorText: errorText)
+          if (_shouldShowErrorMessage) _ErrorMessageWidget(errorText: errorText)
         ],
       );
 }
@@ -161,8 +161,8 @@ class _PasswordToggleWidget extends StatelessWidget {
   }
 }
 
-class _ErrorMessageWidger extends StatelessWidget {
-  const _ErrorMessageWidger({
+class _ErrorMessageWidget extends StatelessWidget {
+  const _ErrorMessageWidget({
     required this.errorText,
     Key? key,
   }) : super(key: key);
