@@ -39,12 +39,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "or_sign_in_with":
             MessageLookupByLibrary.simpleMessage("Or sign in with"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "real_estate": MessageLookupByLibrary.simpleMessage("Real estate"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign In"),
         "sign_in_on_your_account":
             MessageLookupByLibrary.simpleMessage("Sign in on your account"),
         "sign_up_form_hint_invalid_email":
             MessageLookupByLibrary.simpleMessage("Invalid Email"),
+        "token": MessageLookupByLibrary.simpleMessage("Token"),
         "wellcome": MessageLookupByLibrary.simpleMessage("WELCOME")
       };
 }
