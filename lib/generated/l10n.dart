@@ -229,6 +229,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Create your account`
+  String get create_your_account {
+    return Intl.message(
+      'Create your account',
+      name: 'create_your_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First Name`
+  String get first_name {
+    return Intl.message(
+      'First Name',
+      name: 'first_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Name`
+  String get last_name {
+    return Intl.message(
+      'Last Name',
+      name: 'last_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{a}*`
+  String a_with_asterisk(Object a) {
+    return Intl.message(
+      '$a*',
+      name: 'a_with_asterisk',
+      desc: '',
+      args: [a],
+    );
+  }
+
+  /// `I accpect all terms and conditions`
+  String get i_accpect_all_terms_and_conditions {
+    return Intl.message(
+      'I accpect all terms and conditions',
+      name: 'i_accpect_all_terms_and_conditions',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,4 +1,5 @@
 import 'package:dig_mobile_app/app/definition/string.dart';
+import 'package:dig_mobile_app/app/page/create_account/create_account_page.dart';
 import 'package:dig_mobile_app/app/page/home/home_page.dart';
 import 'package:dig_mobile_app/app/page/login/login_page.dart';
 import 'package:dig_mobile_app/app/page/splash/splash.dart';
@@ -19,6 +20,8 @@ class DigRoute {
         return _materialPage(const LoginPage(), settings);
       case DigPageName.home:
         return _materialPage(const HomePage(), settings);
+      case DigPageName.create_account:
+        return _materialPage(const CreateAccountPage(), settings);
       default:
         return _materialPage(const SizedBox.shrink(), settings);
     }
