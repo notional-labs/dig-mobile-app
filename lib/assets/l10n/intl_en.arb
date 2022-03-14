@@ -16,5 +16,7 @@
     "copyright_2021_digchain": "Copyright © 2021 Digchain.",
     "forgot_you_password": "Forgot you Password ?",
     "sign_up_form_hint_invalid_email": "Invalid Email",
-    "create": "Create"
+    "create": "Create",
+    "token": "Token",
+    "real_estate": "Real estate"
 }
