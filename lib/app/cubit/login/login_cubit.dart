@@ -19,16 +19,13 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   void changeEmailEvent(String email) {
-    emit(LoginPrimaryState(
-        viewmodel: state.viewmodel
-            .copyWith(email: email, password: state.viewmodel.password)));
+    emit(LoginPrimaryState(viewmodel: state.viewmodel.copyWith(email: email)));
     emit(LoginPrimaryState(viewmodel: state.viewmodel.copyWith()));
   }
 
   void changePasswordEvent(String password) {
     emit(LoginPrimaryState(
-        viewmodel: state.viewmodel
-            .copyWith(email: state.viewmodel.email, password: password)));
+        viewmodel: state.viewmodel.copyWith(password: password)));
     emit(LoginPrimaryState(viewmodel: state.viewmodel.copyWith()));
   }
 
@@ -48,7 +45,8 @@ class LoginCubit extends Cubit<LoginState> {
   void loginWithAppleEvent() {}
 
   /// TODO: Impl [goToCreateAccountEvent]
-  Future<dynamic> goToCreateAccountEvent() async {}
+  Future<dynamic> goToCreateAccountEvent() =>
+      navigatorKey.currentState!.pushNamed(DigPageName.create_account);
 
   Future<dynamic> goToHomeEvent() => navigatorKey.currentState!
       .pushNamedAndRemoveUntil(DigPageName.home, (route) => false);
