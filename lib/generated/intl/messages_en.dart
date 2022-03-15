@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(year) => "Copyright © ${year} Digchain.";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "back_up_later": MessageLookupByLibrary.simpleMessage("Back up later"),
@@ -35,8 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "back_up_your_wallet_reminder_3": MessageLookupByLibrary.simpleMessage(
             "If you don’t backup your wallet or lose your recovery phrase, you will not able to recover your account"),
         "buy": MessageLookupByLibrary.simpleMessage("Buy"),
-        "copyright_2021_digchain":
-            MessageLookupByLibrary.simpleMessage("Copyright © 2021 Digchain."),
+        "copyright_digchain": m0,
         "create": MessageLookupByLibrary.simpleMessage("Create"),
         "create_account":
             MessageLookupByLibrary.simpleMessage("Create account"),
