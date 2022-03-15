@@ -25,5 +25,8 @@
     "back_up_your_wallet_reminder_2": "Never share your recovery phrase with anyone, store it securely",
     "back_up_your_wallet_reminder_3": "If you don’t backup your wallet or lose your recovery phrase, you will not able to recover your account",
     "back_up_now": "Back up now",
-    "back_up_later": "Back up later"
+    "back_up_later": "Back up later",
+    "to_digchain": "To Digchain",
+    "create_account": "Create account",
+    "import_account": "Import account"
 }

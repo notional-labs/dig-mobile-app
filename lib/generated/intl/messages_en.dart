@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copyright_2021_digchain":
             MessageLookupByLibrary.simpleMessage("Copyright © 2021 Digchain."),
         "create": MessageLookupByLibrary.simpleMessage("Create"),
+        "create_account":
+            MessageLookupByLibrary.simpleMessage("Create account"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "dont_have_account_create":
             MessageLookupByLibrary.simpleMessage("Don’t have account? Create"),
@@ -47,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot you Password ?"),
         "ig": MessageLookupByLibrary.simpleMessage("ig"),
         "ig_chain": MessageLookupByLibrary.simpleMessage("ig CHAIN"),
+        "import_account":
+            MessageLookupByLibrary.simpleMessage("Import account"),
         "into_the_mine": MessageLookupByLibrary.simpleMessage("into the mine"),
         "or_sign_in_with":
             MessageLookupByLibrary.simpleMessage("Or sign in with"),
@@ -58,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sign in on your account"),
         "sign_up_form_hint_invalid_email":
             MessageLookupByLibrary.simpleMessage("Invalid Email"),
+        "to_digchain": MessageLookupByLibrary.simpleMessage("To Digchain"),
         "token": MessageLookupByLibrary.simpleMessage("Token"),
         "wellcome": MessageLookupByLibrary.simpleMessage("WELCOME")
       };
