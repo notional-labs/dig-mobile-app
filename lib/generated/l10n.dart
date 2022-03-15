@@ -190,13 +190,13 @@ class S {
     );
   }
 
-  /// `Copyright © 2021 Digchain.`
-  String get copyright_2021_digchain {
+  /// `Copyright © {year} Digchain.`
+  String copyright_digchain(Object year) {
     return Intl.message(
-      'Copyright © 2021 Digchain.',
-      name: 'copyright_2021_digchain',
+      'Copyright © $year Digchain.',
+      name: 'copyright_digchain',
       desc: '',
-      args: [],
+      args: [year],
     );
   }
 

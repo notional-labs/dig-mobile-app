@@ -182,7 +182,7 @@ class _BottomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Text(
-        S.current.copyright_2021_digchain,
+        S.current.copyright_digchain(DateTime.now().year),
         style: DSTextStyle.tsMontserrat.copyWith(
           color: Colors.white,
           fontSize: 12,
