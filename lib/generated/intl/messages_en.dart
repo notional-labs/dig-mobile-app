@@ -22,6 +22,18 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "back_up_later": MessageLookupByLibrary.simpleMessage("Back up later"),
+        "back_up_now": MessageLookupByLibrary.simpleMessage("Back up now"),
+        "back_up_your_wallet":
+            MessageLookupByLibrary.simpleMessage("Back up your wallet"),
+        "back_up_your_wallet_description": MessageLookupByLibrary.simpleMessage(
+            "If your device is lost or stolen, you will be able to recover your account."),
+        "back_up_your_wallet_reminder_1": MessageLookupByLibrary.simpleMessage(
+            "We will never ask you to share your recovery phrase"),
+        "back_up_your_wallet_reminder_2": MessageLookupByLibrary.simpleMessage(
+            "Never share your recovery phrase with anyone, store it securely"),
+        "back_up_your_wallet_reminder_3": MessageLookupByLibrary.simpleMessage(
+            "If you don’t backup your wallet or lose your recovery phrase, you will not able to recover your account"),
         "buy": MessageLookupByLibrary.simpleMessage("Buy"),
         "copyright_2021_digchain":
             MessageLookupByLibrary.simpleMessage("Copyright © 2021 Digchain."),

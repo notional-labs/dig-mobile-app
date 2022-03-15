@@ -249,6 +249,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Back up your wallet`
+  String get back_up_your_wallet {
+    return Intl.message(
+      'Back up your wallet',
+      name: 'back_up_your_wallet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If your device is lost or stolen, you will be able to recover your account.`
+  String get back_up_your_wallet_description {
+    return Intl.message(
+      'If your device is lost or stolen, you will be able to recover your account.',
+      name: 'back_up_your_wallet_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We will never ask you to share your recovery phrase`
+  String get back_up_your_wallet_reminder_1 {
+    return Intl.message(
+      'We will never ask you to share your recovery phrase',
+      name: 'back_up_your_wallet_reminder_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Never share your recovery phrase with anyone, store it securely`
+  String get back_up_your_wallet_reminder_2 {
+    return Intl.message(
+      'Never share your recovery phrase with anyone, store it securely',
+      name: 'back_up_your_wallet_reminder_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you don’t backup your wallet or lose your recovery phrase, you will not able to recover your account`
+  String get back_up_your_wallet_reminder_3 {
+    return Intl.message(
+      'If you don’t backup your wallet or lose your recovery phrase, you will not able to recover your account',
+      name: 'back_up_your_wallet_reminder_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back up now`
+  String get back_up_now {
+    return Intl.message(
+      'Back up now',
+      name: 'back_up_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back up later`
+  String get back_up_later {
+    return Intl.message(
+      'Back up later',
+      name: 'back_up_later',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
