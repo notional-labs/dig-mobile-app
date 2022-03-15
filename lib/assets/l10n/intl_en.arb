@@ -18,5 +18,12 @@
     "sign_up_form_hint_invalid_email": "Invalid Email",
     "create": "Create",
     "token": "Token",
-    "real_estate": "Real estate"
+    "real_estate": "Real estate",
+    "back_up_your_wallet": "Back up your wallet",
+    "back_up_your_wallet_description": "If your device is lost or stolen, you will be able to recover your account.",
+    "back_up_your_wallet_reminder_1": "We will never ask you to share your recovery phrase",
+    "back_up_your_wallet_reminder_2": "Never share your recovery phrase with anyone, store it securely",
+    "back_up_your_wallet_reminder_3": "If you don’t backup your wallet or lose your recovery phrase, you will not able to recover your account",
+    "back_up_now": "Back up now",
+    "back_up_later": "Back up later"
 }
