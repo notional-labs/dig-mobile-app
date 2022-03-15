@@ -319,6 +319,36 @@ class S {
       args: [],
     );
   }
+
+  /// `To Digchain`
+  String get to_digchain {
+    return Intl.message(
+      'To Digchain',
+      name: 'to_digchain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create account`
+  String get create_account {
+    return Intl.message(
+      'Create account',
+      name: 'create_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import account`
+  String get import_account {
+    return Intl.message(
+      'Import account',
+      name: 'import_account',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

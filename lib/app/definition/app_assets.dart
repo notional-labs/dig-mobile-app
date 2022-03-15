@@ -22,4 +22,8 @@ class AppAssets {
   static final String icFacebook = _generateImagePath('ic_facebook.png');
   static final String icTwitter = _generateImagePath('ic_twitter.png');
   static final String icGoogle = _generateImagePath('ic_google.png');
+  static final String icImportAccount =
+      _generateImagePath('ic_import_account.png');
+  static final String icCreateAccount =
+      _generateImagePath('ic_create_account.png');
 }
