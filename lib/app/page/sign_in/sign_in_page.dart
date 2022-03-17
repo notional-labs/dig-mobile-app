@@ -1,20 +1,14 @@
 import 'package:dig_mobile_app/app/cubit/sign_in/sign_in_cubit.dart';
-import 'package:dig_mobile_app/app/cubit/sign_in/sign_in_state.dart';
 import 'package:dig_mobile_app/app/definition/app_assets.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
-import 'package:dig_mobile_app/app/designsystem/ds_primary_button.dart';
-import 'package:dig_mobile_app/app/designsystem/ds_text_field.dart';
-import 'package:dig_mobile_app/app/designsystem/ds_text_span.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -25,9 +19,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> with WidgetUtil {
   final SignInCubit _cubit = di();
-
-  bool get _shouldShowLogInBottomWidget =>
-      MediaQuery.of(context).viewInsets.bottom == 0;
 
   @override
   Widget build(BuildContext context) => BlocProvider<SignInCubit>(
@@ -63,7 +54,7 @@ class _LoginPageState extends State<LoginPage> with WidgetUtil {
                       ),
                     ),
                   ),
-                  if (_shouldShowLogInBottomWidget)
+                  if (!checkKeyboardOpening(context))
                     const Padding(
                         padding: EdgeInsets.only(top: 10),
                         child: _BottomWidget())

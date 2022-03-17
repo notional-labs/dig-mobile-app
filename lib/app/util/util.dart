@@ -29,6 +29,9 @@ mixin WidgetUtil {
   bool checkLandscape(BuildContext context) =>
       MediaQuery.of(context).orientation ==
       Orientation.landscape;
+
+  bool checkKeyboardOpening(BuildContext context) =>
+      MediaQuery.of(context).viewInsets.bottom != 0;
 }
 
 mixin ImageUtil {
