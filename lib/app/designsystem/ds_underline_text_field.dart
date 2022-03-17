@@ -14,7 +14,6 @@ class DSUnderlineTextField extends StatefulWidget {
   final bool autocorrect;
   final FormFieldValidator<String>? validator;
   final int? maxLine;
-  final TextInputType? keyboardType;
   const DSUnderlineTextField(
       {required this.onChange,
       this.textInputAction,
@@ -26,7 +25,6 @@ class DSUnderlineTextField extends StatefulWidget {
       this.autocorrect = true,
       this.validator,
       this.maxLine = 1,
-      this.keyboardType,
       Key? key})
       : super(key: key);
 
@@ -83,7 +81,7 @@ class _DSUnderlineTextFieldState extends State<DSUnderlineTextField> {
                   child: TextFormField(
                     controller: _controller,
                     focusNode: _focusNode,
-                    keyboardType: widget.keyboardType,
+                    keyboardType: widget.textInputType,
                     maxLines: widget.maxLine,
                     textInputAction: widget.textInputAction,
                     style: DSTextStyle.tsMontserrat.copyWith(
