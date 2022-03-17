@@ -40,10 +40,19 @@ class _ImportAccountPageState extends State<ImportAccountPage> with WidgetUtil {
                   children: [
                     if (checkLandscape(context)) const SizedBox(height: 30),
                     const _Header(),
-                    const SizedBox(height: 38),
-                    const Expanded(child: _Body()),
                     const SizedBox(height: 15),
-                    const _FooterWidget()
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: const [
+                            SizedBox(height: 15),
+                            _Body(),
+                            SizedBox(height: 15),
+                          ],
+                        ),
+                      ),
+                    ),
+                    if (!checkKeyboardOpening(context)) const _FooterWidget(),
                   ]),
             ),
           ),
@@ -83,7 +92,6 @@ class _Body extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
-          mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -103,18 +111,14 @@ class _Body extends StatelessWidget {
                   fontSize: 12),
             ),
             const SizedBox(height: 15),
-            Expanded(
-              child: SingleChildScrollView(
-                child: DSUnderlineTextField(
-                  onChange: (value) {
-                    BlocProvider.of<ImportAccountCubit>(context)
-                        .changeRecoveryPhraseEvent(value);
-                  },
-                  maxLine: null,
-                  keyboardType: TextInputType.multiline,
-                ),
-              ),
-            )
+            DSUnderlineTextField(
+                onChange: (value) {
+                  BlocProvider.of<ImportAccountCubit>(context)
+                      .changeRecoveryPhraseEvent(value);
+                },
+                maxLine: null,
+                textInputType: TextInputType.multiline,
+                textInputAction: TextInputAction.done)
           ],
         ),
       );
