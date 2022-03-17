@@ -23,7 +23,7 @@ class BackUpYourWalletPage extends StatelessWidget {
           children: [
             Positioned.directional(
               textDirection: TextDirection.ltr,
-              child: DSPrimaryAppBar(
+              child: DSPrimaryAppBar.normal(
                 onBackButtonPressed: () => Navigator.of(context).pop(),
               ),
               top: 50,
