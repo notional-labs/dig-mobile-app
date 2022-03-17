@@ -25,6 +25,10 @@ mixin WidgetUtil {
   void closeGlobalKeyboard() {
     FocusScope.of(navigatorKey.currentContext!).requestFocus(FocusNode());
   }
+
+  bool checkLandscape(BuildContext context) =>
+      MediaQuery.of(context).orientation ==
+      Orientation.landscape;
 }
 
 mixin ImageUtil {
