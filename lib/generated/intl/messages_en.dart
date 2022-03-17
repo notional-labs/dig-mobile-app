@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
         "back_up_later": MessageLookupByLibrary.simpleMessage("Back up later"),
         "back_up_now": MessageLookupByLibrary.simpleMessage("Back up now"),
         "back_up_your_wallet":
@@ -50,11 +51,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "dont_have_account_create":
             MessageLookupByLibrary.simpleMessage("Don’t have account? Create"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "enter_your_recovery_phrase":
+            MessageLookupByLibrary.simpleMessage("Enter your recovery phrase"),
         "exchange": MessageLookupByLibrary.simpleMessage("Exchange"),
         "forgot_you_password":
             MessageLookupByLibrary.simpleMessage("Forgot you Password ?"),
         "ig": MessageLookupByLibrary.simpleMessage("ig"),
         "ig_chain": MessageLookupByLibrary.simpleMessage("ig CHAIN"),
+        "import": MessageLookupByLibrary.simpleMessage("Import"),
         "import_account":
             MessageLookupByLibrary.simpleMessage("Import account"),
         "into_the_mine": MessageLookupByLibrary.simpleMessage("into the mine"),

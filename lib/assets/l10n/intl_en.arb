@@ -33,5 +33,8 @@
     "your_recovery_phrase_description": "Please write down your 24 words in safe space manually on paper.",
     "continue_text": "Continue",
     "copy_to_clipboard": "Copy to clipboard",
-    "copied_to_clipboard": "Copied to clipboard"
+    "copied_to_clipboard": "Copied to clipboard",
+    "advanced": "Advanced",
+    "enter_your_recovery_phrase": "Enter your recovery phrase",
+    "import": "Import"
 }
