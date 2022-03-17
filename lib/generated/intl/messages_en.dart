@@ -37,6 +37,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "back_up_your_wallet_reminder_3": MessageLookupByLibrary.simpleMessage(
             "If you don’t backup your wallet or lose your recovery phrase, you will not able to recover your account"),
         "buy": MessageLookupByLibrary.simpleMessage("Buy"),
+        "continue_text": MessageLookupByLibrary.simpleMessage("Continue"),
+        "copied_to_clipboard":
+            MessageLookupByLibrary.simpleMessage("Copied to clipboard"),
+        "copy_to_clipboard":
+            MessageLookupByLibrary.simpleMessage("Copy to clipboard"),
         "copyright_digchain": m0,
         "create": MessageLookupByLibrary.simpleMessage("Create"),
         "create_account":
@@ -65,6 +70,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid Email"),
         "to_digchain": MessageLookupByLibrary.simpleMessage("To Digchain"),
         "token": MessageLookupByLibrary.simpleMessage("Token"),
-        "wellcome": MessageLookupByLibrary.simpleMessage("WELCOME")
+        "wellcome": MessageLookupByLibrary.simpleMessage("WELCOME"),
+        "your_recovery_phrase":
+            MessageLookupByLibrary.simpleMessage("Your recovery phrase"),
+        "your_recovery_phrase_description": MessageLookupByLibrary.simpleMessage(
+            "Please write down your 24 words in safe space manually on paper.")
       };
 }

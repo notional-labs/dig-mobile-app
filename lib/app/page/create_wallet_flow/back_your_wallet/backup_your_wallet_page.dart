@@ -1,9 +1,11 @@
+import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_plain_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_appbar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
+import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -77,7 +79,9 @@ class BackUpYourWalletPage extends StatelessWidget {
           const SizedBox(
             height: 40,
           ),
-          DSPrimaryButton(title: S.current.back_up_now, onTap: () {}),
+          DSPrimaryButton(title: S.current.back_up_now, onTap: () {
+            navigatorKey.currentState!.pushNamed(DigPageName.recoveryPhrase);
+          }),
           const SizedBox(
             height: 16,
           ),

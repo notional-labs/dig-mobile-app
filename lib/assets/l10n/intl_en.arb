@@ -28,5 +28,10 @@
     "back_up_later": "Back up later",
     "to_digchain": "To Digchain",
     "create_account": "Create account",
-    "import_account": "Import account"
+    "import_account": "Import account",
+    "your_recovery_phrase": "Your recovery phrase",
+    "your_recovery_phrase_description": "Please write down your 24 words in safe space manually on paper.",
+    "continue_text": "Continue",
+    "copy_to_clipboard": "Copy to clipboard",
+    "copied_to_clipboard": "Copied to clipboard"
 }
