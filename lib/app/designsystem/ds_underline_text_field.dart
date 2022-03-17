@@ -57,7 +57,7 @@ class _DSUnderlineTextFieldState extends State<DSUnderlineTextField> {
     });
   }
 
-  void _onIcEyeTap() {
+  void _onClearTap() {
     _controller.clear();
   }
 
@@ -109,7 +109,7 @@ class _DSUnderlineTextFieldState extends State<DSUnderlineTextField> {
                 ),
                 const SizedBox(width: 5),
                 _ClearWidget(
-                  onTap: _onIcEyeTap,
+                  onTap: _onClearTap,
                 )
               ],
             ),
