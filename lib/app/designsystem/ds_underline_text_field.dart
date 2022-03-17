@@ -47,6 +47,16 @@ class _DSUnderlineTextFieldState extends State<DSUnderlineTextField> {
     });
   }
 
+  void _onTextChanged() {
+    _controller.addListener(() {
+      final value = _controller.text;
+      widget.onChange.call(value);
+      setState(() {
+        errorText = widget.validator?.call(value) ?? '';
+      });
+    });
+  }
+
   void _onIcEyeTap() {
     _controller.clear();
   }
@@ -55,6 +65,7 @@ class _DSUnderlineTextFieldState extends State<DSUnderlineTextField> {
   void initState() {
     super.initState();
     _onFocus();
+    _onTextChanged();
   }
 
   @override
@@ -72,12 +83,6 @@ class _DSUnderlineTextFieldState extends State<DSUnderlineTextField> {
                   child: TextFormField(
                     controller: _controller,
                     focusNode: _focusNode,
-                    onChanged: (value) {
-                      widget.onChange.call(value);
-                      setState(() {
-                        errorText = widget.validator?.call(value) ?? '';
-                      });
-                    },
                     keyboardType: widget.keyboardType,
                     maxLines: widget.maxLine,
                     textInputAction: widget.textInputAction,
