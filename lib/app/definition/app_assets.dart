@@ -26,4 +26,7 @@ class AppAssets {
       _generateImagePath('ic_import_account.png');
   static final String icCreateAccount =
       _generateImagePath('ic_create_account.png');
+
+  // -------- SVG --------
+  static final String icCopied = _generateImagePath('ic_copied.svg');
 }

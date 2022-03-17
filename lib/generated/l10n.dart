@@ -349,6 +349,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Your recovery phrase`
+  String get your_recovery_phrase {
+    return Intl.message(
+      'Your recovery phrase',
+      name: 'your_recovery_phrase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please write down your 24 words in safe space manually on paper.`
+  String get your_recovery_phrase_description {
+    return Intl.message(
+      'Please write down your 24 words in safe space manually on paper.',
+      name: 'your_recovery_phrase_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get continue_text {
+    return Intl.message(
+      'Continue',
+      name: 'continue_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy to clipboard`
+  String get copy_to_clipboard {
+    return Intl.message(
+      'Copy to clipboard',
+      name: 'copy_to_clipboard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copied to clipboard`
+  String get copied_to_clipboard {
+    return Intl.message(
+      'Copied to clipboard',
+      name: 'copied_to_clipboard',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
