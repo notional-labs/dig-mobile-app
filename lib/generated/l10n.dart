@@ -399,6 +399,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Advanced`
+  String get advanced {
+    return Intl.message(
+      'Advanced',
+      name: 'advanced',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your recovery phrase`
+  String get enter_your_recovery_phrase {
+    return Intl.message(
+      'Enter your recovery phrase',
+      name: 'enter_your_recovery_phrase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import`
+  String get import {
+    return Intl.message(
+      'Import',
+      name: 'import',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
