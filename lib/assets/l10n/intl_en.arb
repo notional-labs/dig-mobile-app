@@ -36,5 +36,6 @@
     "copied_to_clipboard": "Copied to clipboard",
     "advanced": "Advanced",
     "enter_your_recovery_phrase": "Enter your recovery phrase",
-    "import": "Import"
+    "import": "Import",
+    "name_account": "Name account"
 }

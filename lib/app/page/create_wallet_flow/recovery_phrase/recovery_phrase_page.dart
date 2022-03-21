@@ -1,4 +1,5 @@
 import 'package:dig_mobile_app/app/definition/app_assets.dart';
+import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_appbar.dart';
@@ -22,7 +23,7 @@ class RecoveryPhrasePage extends StatelessWidget {
           children: [
             Positioned.directional(
               textDirection: TextDirection.ltr,
-              child: DSPrimaryAppBar(
+              child: DSPrimaryAppBar.normal(
                 onBackButtonPressed: () => Navigator.of(context).pop(),
               ),
               top: 50,
@@ -35,14 +36,14 @@ class RecoveryPhrasePage extends StatelessWidget {
                 end: 0,
                 bottom: 0,
                 textDirection: TextDirection.ltr,
-                child: _buildBody())
+                child: _buildBody(context))
           ],
         ),
       )),
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
       child: Column(
@@ -73,7 +74,12 @@ class RecoveryPhrasePage extends StatelessWidget {
               style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.white),
             ),
           ),
-          DSPrimaryButton(title: S.current.continue_text, onTap: () {})
+          DSPrimaryButton(
+              title: S.current.continue_text,
+              onTap: () {
+                /// TODO: Recheck later
+                Navigator.of(context).pushNamed(DigPageName.nameAccount);
+              })
         ],
       ),
     );

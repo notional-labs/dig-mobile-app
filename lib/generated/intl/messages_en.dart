@@ -62,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "import_account":
             MessageLookupByLibrary.simpleMessage("Import account"),
         "into_the_mine": MessageLookupByLibrary.simpleMessage("into the mine"),
+        "name_account": MessageLookupByLibrary.simpleMessage("Name account"),
         "or_sign_in_with":
             MessageLookupByLibrary.simpleMessage("Or sign in with"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
