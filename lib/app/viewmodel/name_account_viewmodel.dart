@@ -1,20 +1,20 @@
 import 'package:equatable/equatable.dart';
 
 class NameAccountViewmodel extends Equatable {
-  final String recoveryPhrase;
+  final String name;
 
-  const NameAccountViewmodel({this.recoveryPhrase = ''});
+  const NameAccountViewmodel({this.name = ''});
 
-  bool get isValid => recoveryPhrase.isNotEmpty;
+  bool get isValid => name.isNotEmpty;
 
   NameAccountViewmodel copyWith({
-    String? recoveryPhrase,
+    String? name,
   }) {
     return NameAccountViewmodel(
-      recoveryPhrase: recoveryPhrase ?? this.recoveryPhrase,
+      name: name ?? this.name,
     );
   }
 
   @override
-  List<Object> get props => [recoveryPhrase];
+  List<Object> get props => [name];
 }

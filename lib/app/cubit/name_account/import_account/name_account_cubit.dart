@@ -7,9 +7,9 @@ import 'package:injectable/injectable.dart';
 class NameAccountCubit extends Cubit<NameAccountState> {
   NameAccountCubit() : super(const NameAccountPrimaryState());
 
-  void changeNameAccountEvent(String recoveryPhrase) {
+  void changeNameAccountEvent(String name) {
     emit(NameAccountChangedFormState(
-        viewmodel: state.viewmodel.copyWith(recoveryPhrase: recoveryPhrase)));
+        viewmodel: state.viewmodel.copyWith(name: name)));
     emit(NameAccountPrimaryState(viewmodel: state.viewmodel.copyWith()));
   }
 
