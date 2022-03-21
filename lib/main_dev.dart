@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:dig_mobile_app/app.dart';
-import 'package:dig_mobile_app/app/util/initial_configs.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:logger/logger.dart';
 import 'package:dig_core/dig_core.dart' as core;
