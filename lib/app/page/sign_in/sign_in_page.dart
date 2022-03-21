@@ -85,7 +85,7 @@ class _BodyWidget extends StatelessWidget with WidgetUtil {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => SizedBox(
         width: double.infinity,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(

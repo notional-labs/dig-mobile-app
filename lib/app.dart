@@ -2,7 +2,6 @@ import 'package:dig_mobile_app/app/definition/locale.dart';
 import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -27,7 +26,7 @@ class _MyAppState extends State<MyApp> {
         // navigatorObservers: <NavigatorObserver>[
         //   FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)
         // ],
-        localizationsDelegates: [
+        localizationsDelegates: const [
           S.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

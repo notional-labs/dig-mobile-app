@@ -13,6 +13,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 class DigRoute {
   PageRoute generateRoute(RouteSettings settings) {
     final name = settings.name;
+    // ignore: unused_local_variable
     final args = settings.arguments;
 
     switch (name) {
