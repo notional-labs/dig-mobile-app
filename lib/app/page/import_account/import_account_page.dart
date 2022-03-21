@@ -88,7 +88,8 @@ class _Header extends StatelessWidget {
           onTap: () {
             BlocProvider.of<ImportAccountCubit>(context).tapAdvancedEvent();
           },
-          child: Text(S.current.advanced,
+          /// TODO: Impl `Advanced`
+          child: Text('',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: DSTextStyle.tsMontserrat.copyWith(
