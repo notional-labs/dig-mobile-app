@@ -4,6 +4,8 @@ import 'package:dig_core/src/di/di.config.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.dart';
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 @injectableInit
 void initDI(GetIt di, ENV env) {
@@ -20,5 +22,25 @@ void initDI(GetIt di, ENV env) {
   dio.interceptors.add(di<DigIntercepter>());
 
   di.registerLazySingleton<Dio>(() => dio);
+
+  _initCosmosCore(di, env);
+
   $initGetIt(di);
+}
+
+void _initCosmosCore(GetIt di, ENV env) {
+  di.registerFactory(() => TransactionSigningGateway(
+        transactionSummaryUI: NoOpTransactionSummaryUI(),
+        signers: [
+          AlanTransactionSigner(env.baseEnv.networkInfo),
+        ],
+        broadcasters: [
+          AlanTransactionBroadcaster(env.baseEnv.networkInfo),
+        ],
+        infoStorage: CosmosKeyInfoStorage(
+          serializers: [AlanCredentialsSerializer()],
+          secureDataStore: FlutterSecureStorageDataStore(),
+          plainDataStore: SharedPrefsPlainDataStore(),
+        ),
+      ));
 }

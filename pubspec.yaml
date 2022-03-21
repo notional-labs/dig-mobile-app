@@ -55,6 +55,8 @@ dev_dependencies:
   flutter_localizations: 
     sdk: flutter         
   build_runner:
+
+dev_dependencies_overrides:
   injectable_generator: ^1.5.3
 
   # The "flutter_lints" package below contains a set of recommended lints to
