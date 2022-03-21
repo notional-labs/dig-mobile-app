@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 class AccountAdditionalData {
-  AccountAdditionalData({
+  const AccountAdditionalData({
     required this.isBackedUp,
   });
 
@@ -25,6 +25,6 @@ class AccountAdditionalData {
 }
 
 extension AdditionalDataParsing on AccountPublicInfo {
-  AccountAdditionalData get data => AccountAdditionalData.fromJson(
+  AccountAdditionalData get accountAdditionalData => AccountAdditionalData.fromJson(
       jsonDecode(additionalData ?? '{}') as Map<String, dynamic>);
 }

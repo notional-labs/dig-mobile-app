@@ -23,24 +23,6 @@ void initDI(GetIt di, ENV env) {
 
   di.registerLazySingleton<Dio>(() => dio);
 
-  _initCosmosCore(di, env);
-
   $initGetIt(di);
 }
 
-void _initCosmosCore(GetIt di, ENV env) {
-  di.registerFactory(() => TransactionSigningGateway(
-        transactionSummaryUI: NoOpTransactionSummaryUI(),
-        signers: [
-          AlanTransactionSigner(env.baseEnv.networkInfo),
-        ],
-        broadcasters: [
-          AlanTransactionBroadcaster(env.baseEnv.networkInfo),
-        ],
-        infoStorage: CosmosKeyInfoStorage(
-          serializers: [AlanCredentialsSerializer()],
-          secureDataStore: FlutterSecureStorageDataStore(),
-          plainDataStore: SharedPrefsPlainDataStore(),
-        ),
-      ));
-}
