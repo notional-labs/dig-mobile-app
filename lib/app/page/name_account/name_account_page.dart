@@ -129,7 +129,7 @@ class _FooterWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: DSPrimaryButton(
                     enable: state.viewmodel.isValid,
-                    title: S.current.import,
+                    title: S.current.create,
                     onTap: () {
                       BlocProvider.of<NameAccountCubit>(context).createvent();
                     }),
