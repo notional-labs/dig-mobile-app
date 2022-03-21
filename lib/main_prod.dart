@@ -9,13 +9,13 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   runZonedGuarded(() async {
-    initDI(core.DevENV(core.BaseEnv()));
+    initDI(core.DevENV());
 
     /// TODO: Uncomment after setup Firebase
     // await initFirebase();
 
     runApp(const MyApp());
   }, (error, stackTrace) {
-    Logger().e('error while running app', error, stackTrace);
+    Logger().e('Error while running app', error, stackTrace);
   });
 }

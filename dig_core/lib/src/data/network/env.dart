@@ -1,26 +1,26 @@
 import 'package:dig_core/dig_core.dart';
+import 'package:dig_core/src/data/network/chain/dig_chain.dart';
 
 abstract class ENV {
   String get baseUrl;
-  late final BaseEnv baseEnv;
+  ChainENV get digChain;
+
+  /// Define other chain:
+  /// ChainENV get cosmosChain;
 }
 
 class DevENV implements ENV {
   @override
-  String get baseUrl => baseEnv.baseApiUrl;
+  String get baseUrl => '';
 
   @override
-  BaseEnv baseEnv;
-
-  DevENV(this.baseEnv);
+  ChainENV get digChain => DigChainTestNet();
 }
 
 class ProdENV implements ENV {
   @override
-  String get baseUrl => baseEnv.baseApiUrl;
+  String get baseUrl => '';
 
   @override
-  BaseEnv baseEnv;
-
-  ProdENV(this.baseEnv);
+  ChainENV get digChain => DigChainMainNet();
 }
