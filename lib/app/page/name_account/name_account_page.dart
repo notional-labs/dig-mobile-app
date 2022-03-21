@@ -1,5 +1,5 @@
-import 'package:dig_mobile_app/app/cubit/import_account/import_account_cubit.dart';
-import 'package:dig_mobile_app/app/cubit/import_account/import_account_state.dart';
+import 'package:dig_mobile_app/app/cubit/name_account/import_account/name_account_cubit.dart';
+import 'package:dig_mobile_app/app/cubit/name_account/import_account/name_account_state.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_appbar.dart';
@@ -13,27 +13,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ImportAccountPage extends StatefulWidget {
-  const ImportAccountPage({Key? key}) : super(key: key);
+class NameAccountPage extends StatefulWidget {
+  const NameAccountPage({Key? key}) : super(key: key);
 
   @override
-  State<ImportAccountPage> createState() => _ImportAccountPageState();
+  State<NameAccountPage> createState() => _NameAccountPageState();
 }
 
-class _ImportAccountPageState extends State<ImportAccountPage> with WidgetUtil {
-  final ImportAccountCubit _cubit = di();
-
-  void _blocListener(context, state) {
-    if (state is ImportAccountLoadingState) {
-      showGlobalLoadingOverlay();
-      return;
-    }
-    dismissGlobalLoadingOverlay();
-    if (state is ImportAccountSuccessState) {
-      BlocProvider.of<ImportAccountCubit>(context).goToNameAccountEvent();
-      return;
-    }
-  }
+class _NameAccountPageState extends State<NameAccountPage> with WidgetUtil {
+  final NameAccountCubit _cubit = di();
 
   @override
   Widget build(BuildContext context) => DSBackground(
@@ -46,30 +34,26 @@ class _ImportAccountPageState extends State<ImportAccountPage> with WidgetUtil {
           backgroundColor: Colors.transparent,
           body: BlocProvider(
             create: (_) => _cubit,
-            child: BlocListener(
-              bloc: _cubit,
-              listener: _blocListener,
-              child: SafeArea(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (checkLandscape(context)) const SizedBox(height: 30),
-                      const _Header(),
-                      const SizedBox(height: 15),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: const [
-                              SizedBox(height: 15),
-                              _Body(),
-                              SizedBox(height: 15),
-                            ],
-                          ),
+            child: SafeArea(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (checkLandscape(context)) const SizedBox(height: 30),
+                    const _Header(),
+                    const SizedBox(height: 15),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: const [
+                            SizedBox(height: 15),
+                            _Body(),
+                            SizedBox(height: 15),
+                          ],
                         ),
                       ),
-                      if (!checkKeyboardOpening(context)) const _FooterWidget(),
-                    ]),
-              ),
+                    ),
+                    if (!checkKeyboardOpening(context)) const _FooterWidget(),
+                  ]),
             ),
           ),
         ),
@@ -82,11 +66,11 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) => DSPrimaryAppBar.action(
         onBackButtonPressed: () {
-          BlocProvider.of<ImportAccountCubit>(context).backEnvent();
+          BlocProvider.of<NameAccountCubit>(context).backEnvent();
         },
         action: GestureDetector(
           onTap: () {
-            BlocProvider.of<ImportAccountCubit>(context).tapAdvancedEvent();
+            BlocProvider.of<NameAccountCubit>(context).tapAdvancedEvent();
           },
           child: Text(S.current.advanced,
               maxLines: 1,
@@ -111,26 +95,18 @@ class _Body extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              S.current.import_account,
+              S.current.name_account,
               style: DSTextStyle.tsMontserrat.copyWith(
                 fontSize: 20,
                 color: DSColors.tulipTree,
                 fontWeight: FontWeight.w700,
               ),
             ),
-            const SizedBox(height: 15),
-            Text(
-              S.current.enter_your_recovery_phrase,
-              style: DSTextStyle.tsMontserrat.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12),
-            ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 30),
             DSUnderlineTextField(
                 onChange: (value) {
-                  BlocProvider.of<ImportAccountCubit>(context)
-                      .changeRecoveryPhraseEvent(value);
+                  BlocProvider.of<NameAccountCubit>(context)
+                      .changeNameAccountEvent(value);
                 },
                 maxLine: null,
                 textInputType: TextInputType.multiline,
@@ -147,15 +123,14 @@ class _FooterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      BlocBuilder<ImportAccountCubit, ImportAccountState>(
+      BlocBuilder<NameAccountCubit, NameAccountState>(
           builder: (_, state) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: DSPrimaryButton(
                     enable: state.viewmodel.isValid,
                     title: S.current.import,
                     onTap: () {
-                      BlocProvider.of<ImportAccountCubit>(context)
-                          .importEvent();
+                      BlocProvider.of<NameAccountCubit>(context).createvent();
                     }),
               ));
 }
