@@ -1,3 +1,4 @@
+import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/viewmodel/import_account_viewmodel.dart';
 import 'package:equatable/equatable.dart';
 
@@ -29,9 +30,14 @@ class ImportAccountSuccessState extends ImportAccountState {
 }
 
 class ImportAccountErrorState extends ImportAccountState {
+  final BaseDigException exception;
   const ImportAccountErrorState(
-      {ImportAccountViewmodel viewmodel = const ImportAccountViewmodel()})
+      {ImportAccountViewmodel viewmodel = const ImportAccountViewmodel(),
+      this.exception = const DigException()})
       : super(viewmodel: viewmodel);
+
+  @override
+  List<Object?> get props => [viewmodel, exception];
 }
 
 class ImportAccountChangedFormState extends ImportAccountState {
