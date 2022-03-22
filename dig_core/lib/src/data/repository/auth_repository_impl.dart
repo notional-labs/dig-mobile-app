@@ -8,7 +8,7 @@ import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 @Injectable(as: AuthRepository)
-class AuthRepisitoryImplement extends AuthRepository {
+class AuthRepositoryImplement extends AuthRepository {
   ChainENV? _chain;
   TransactionSigningGateway? _transactionSigningGateway;
 

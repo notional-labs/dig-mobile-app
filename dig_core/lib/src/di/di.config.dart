@@ -19,7 +19,7 @@ import '../domain/usecase/import_account_usecase.dart'
 _i1.GetIt $initGetIt(_i1.GetIt get,
     {String? environment, _i2.EnvironmentFilter? environmentFilter}) {
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
-  gh.factory<_i3.AuthRepository>(() => _i4.AuthRepisitoryImplement());
+  gh.factory<_i3.AuthRepository>(() => _i4.AuthRepositoryImplement());
   gh.factory<_i5.CreateDBDatasource>(() => _i5.CreateDBDatasourceImpl());
   gh.factory<_i6.CreateMnemonicUseCase>(
       () => _i6.CreateMnemonicUseCase(get<_i3.AuthRepository>()));
