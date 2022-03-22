@@ -81,6 +81,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "your_recovery_phrase":
             MessageLookupByLibrary.simpleMessage("Your recovery phrase"),
         "your_recovery_phrase_description": MessageLookupByLibrary.simpleMessage(
-            "Please write down your 24 words in safe space manually on paper.")
+            "Please write down your 12 words in safe space manually on paper.")
       };
 }

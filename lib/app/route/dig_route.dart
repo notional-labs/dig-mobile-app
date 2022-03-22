@@ -1,5 +1,5 @@
 import 'package:dig_mobile_app/app/definition/string.dart';
-import 'package:dig_mobile_app/app/page/create_wallet_flow/back_your_wallet/backup_your_wallet_page.dart';
+import 'package:dig_mobile_app/app/page/create_wallet_flow/backup_your_wallet/backup_your_wallet_page.dart';
 import 'package:dig_mobile_app/app/page/create_wallet_flow/recovery_phrase/recovery_phrase_page.dart';
 import 'package:dig_mobile_app/app/page/home/home_page.dart';
 import 'package:dig_mobile_app/app/page/import_account/import_account_page.dart';
@@ -27,7 +27,8 @@ class DigRoute {
       case DigPageName.backUpYourWallet:
         return _materialPage(const BackUpYourWalletPage(), settings);
       case DigPageName.recoveryPhrase:
-        return _materialPage(const RecoveryPhrasePage(), settings);
+        final mnemonic = (args as String?) ?? '';
+        return _materialPage(RecoveryPhrasePage(mnemonic: mnemonic), settings);
       case DigPageName.importAccount:
         return _materialPage(const ImportAccountPage(), settings);
       case DigPageName.nameAccount:
