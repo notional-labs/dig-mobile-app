@@ -43,7 +43,7 @@ class AuthRepositoryImplement extends AuthRepository {
   @override
   Future<String> createMnemonic(CreateMnemonic param) async {
     param.onMnemonicGenerationStarted?.call();
-    return await generateMnemonic(strength: param.strength);
+    return generateMnemonic(strength: param.strength);
   }
 
   @override
