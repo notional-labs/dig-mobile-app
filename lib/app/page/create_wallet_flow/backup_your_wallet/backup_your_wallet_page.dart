@@ -1,17 +1,24 @@
-import 'package:dig_mobile_app/app/definition/string.dart';
+import 'package:dig_mobile_app/app/cubit/backup_your_wallet/backup_your_wallet_cubit.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_plain_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_appbar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
-import 'package:dig_mobile_app/app/route/dig_route.dart';
+import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class BackUpYourWalletPage extends StatelessWidget {
+class BackUpYourWalletPage extends StatefulWidget {
   const BackUpYourWalletPage({Key? key}) : super(key: key);
+
+  @override
+  State<BackUpYourWalletPage> createState() => _BackUpYourWalletPageState();
+}
+
+class _BackUpYourWalletPageState extends State<BackUpYourWalletPage> {
+  final BackupYourWalletCubit _cubit = di();
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +86,9 @@ class BackUpYourWalletPage extends StatelessWidget {
           const SizedBox(
             height: 40,
           ),
-          DSPrimaryButton(title: S.current.back_up_now, onTap: () {
-            navigatorKey.currentState!.pushNamed(DigPageName.recoveryPhrase);
-          }),
+          DSPrimaryButton(
+              title: S.current.back_up_now,
+              onTap: () => _cubit.onBackUpNowTap()),
           const SizedBox(
             height: 16,
           ),

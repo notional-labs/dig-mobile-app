@@ -360,10 +360,10 @@ class S {
     );
   }
 
-  /// `Please write down your 24 words in safe space manually on paper.`
+  /// `Please write down your 12 words in safe space manually on paper.`
   String get your_recovery_phrase_description {
     return Intl.message(
-      'Please write down your 24 words in safe space manually on paper.',
+      'Please write down your 12 words in safe space manually on paper.',
       name: 'your_recovery_phrase_description',
       desc: '',
       args: [],

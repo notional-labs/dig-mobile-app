@@ -1,3 +1,4 @@
+import 'package:dig_mobile_app/app/cubit/recovery_phrase/recovery_phrase_cubit.dart';
 import 'package:dig_mobile_app/app/definition/app_assets.dart';
 import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
@@ -6,13 +7,32 @@ import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_appbar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
+import 'package:dig_mobile_app/app/viewmodel/recovery_phrase_viewmodel.dart';
+import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class RecoveryPhrasePage extends StatelessWidget {
-  const RecoveryPhrasePage({Key? key}) : super(key: key);
+class RecoveryPhrasePage extends StatefulWidget {
+  final String mnemonic;
+
+  const RecoveryPhrasePage({required this.mnemonic, Key? key})
+      : super(key: key);
+
+  @override
+  State<RecoveryPhrasePage> createState() => _RecoveryPhrasePageState();
+}
+
+class _RecoveryPhrasePageState extends State<RecoveryPhrasePage> {
+  final RecoveryPhraseCubit _cubit = di();
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit.init(widget.mnemonic);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +57,22 @@ class RecoveryPhrasePage extends StatelessWidget {
                 end: 0,
                 bottom: 0,
                 textDirection: TextDirection.ltr,
-                child: _buildBody(context))
+                child: BlocConsumer<RecoveryPhraseCubit, RecoveryPhraseState>(
+                  bloc: _cubit,
+                  listener: _cubitListener,
+                  builder: (context, state) => _buildBody(state.model),
+                ))
           ],
         ),
       )),
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  void _cubitListener(_, RecoveryPhraseState state) {
+
+  }
+
+  Widget _buildBody(RecoveryPhraseViewModel model) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
       child: Column(
@@ -61,12 +89,13 @@ class RecoveryPhrasePage extends StatelessWidget {
                 style:
                     DSTextStyle.tsMontserratT12R.copyWith(color: Colors.white)),
           ),
-          Expanded(child: _buildRecoveryPhraseGrid()),
+          Expanded(child: _buildRecoveryPhraseGrid(model)),
           const SizedBox(
             height: 20,
           ),
-          const _CopyToClipBoard(
-            isCopied: false,
+          _CopyToClipBoard(
+            onTap: () => _cubit.copyToClipboard(widget.mnemonic),
+            isCopied: model.isCopiedToClipboard,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -74,9 +103,7 @@ class RecoveryPhrasePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 DSCheckBox(
-                  onChanged: (isChecked) {
-                    // todo
-                  },
+                  onChanged: (isChecked) => _cubit.onCheckBoxClicked(isChecked),
                 ),
                 const SizedBox(
                   width: 10,
@@ -93,6 +120,7 @@ class RecoveryPhrasePage extends StatelessWidget {
           ),
           DSPrimaryButton(
               title: S.current.continue_text,
+              enable: model.canContinue,
               onTap: () {
                 /// TODO: Recheck later
                 Navigator.of(context).pushNamed(DigPageName.nameAccount);
@@ -102,9 +130,9 @@ class RecoveryPhrasePage extends StatelessWidget {
     );
   }
 
-  Widget _buildRecoveryPhraseGrid() {
+  Widget _buildRecoveryPhraseGrid(RecoveryPhraseViewModel model) {
     return GridView.builder(
-      itemCount: 24,
+      itemCount: model.mnemonics.length,
       padding: EdgeInsets.zero,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
@@ -114,8 +142,8 @@ class RecoveryPhrasePage extends StatelessWidget {
       ),
       itemBuilder: (BuildContext context, int index) {
         return _PhraseGridItem(
-          index: index,
-          text: 'dig',
+          index: index + 1,
+          text: model.mnemonics[index],
         );
       },
     );
