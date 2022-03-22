@@ -1,6 +1,7 @@
 import 'package:dig_mobile_app/app/definition/app_assets.dart';
 import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_check_box.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_appbar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_button.dart';
@@ -69,9 +70,25 @@ class RecoveryPhrasePage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Text(
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-              style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.white),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                DSCheckBox(
+                  onChanged: (isChecked) {
+                    // todo
+                  },
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Text(
+                    S.current.confirm_backup_recovery_phrase,
+                    style: DSTextStyle.tsMontserratT12R
+                        .copyWith(color: Colors.white),
+                  ),
+                )
+              ],
             ),
           ),
           DSPrimaryButton(
