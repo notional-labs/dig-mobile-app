@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "back_up_your_wallet_reminder_3": MessageLookupByLibrary.simpleMessage(
             "If you don’t backup your wallet or lose your recovery phrase, you will not able to recover your account"),
         "buy": MessageLookupByLibrary.simpleMessage("Buy"),
+        "confirm_backup_recovery_phrase": MessageLookupByLibrary.simpleMessage(
+            "I have backed up my recovery phrase, I understand that if I lose my recovery phrase, I will lose my fund"),
         "continue_text": MessageLookupByLibrary.simpleMessage("Continue"),
         "copied_to_clipboard":
             MessageLookupByLibrary.simpleMessage("Copied to clipboard"),

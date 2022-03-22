@@ -439,6 +439,16 @@ class S {
       args: [],
     );
   }
+
+  /// `I have backed up my recovery phrase, I understand that if I lose my recovery phrase, I will lose my fund`
+  String get confirm_backup_recovery_phrase {
+    return Intl.message(
+      'I have backed up my recovery phrase, I understand that if I lose my recovery phrase, I will lose my fund',
+      name: 'confirm_backup_recovery_phrase',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -25,7 +25,7 @@ class DSPrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onTap: onTap,
+        onTap: enable ? onTap : null,
         child: Container(
           decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(5)),

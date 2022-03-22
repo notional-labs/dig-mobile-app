@@ -37,5 +37,6 @@
     "advanced": "Advanced",
     "enter_your_recovery_phrase": "Enter your recovery phrase",
     "import": "Import",
-    "name_account": "Name account"
+    "name_account": "Name account",
+    "confirm_backup_recovery_phrase": "I have backed up my recovery phrase, I understand that if I lose my recovery phrase, I will lose my fund"
 }
