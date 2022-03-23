@@ -122,8 +122,9 @@ class _RecoveryPhrasePageState extends State<RecoveryPhrasePage> {
               title: S.current.continue_text,
               enable: model.canContinue,
               onTap: () {
-                /// TODO: Recheck later
-                Navigator.of(context).pushNamed(DigPageName.nameAccount);
+                Navigator.of(context).pushNamed(
+                    DigPageName.confirmRecoveryPhrase,
+                    arguments: widget.mnemonic);
               })
         ],
       ),

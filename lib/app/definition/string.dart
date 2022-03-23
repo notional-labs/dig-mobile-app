@@ -6,5 +6,6 @@ abstract class DigPageName {
   static const String backUpYourWallet = '/back_up_your_wallet';
   static const String importAccount = '/import_account';
   static const String recoveryPhrase = '/recovery_phrase';
-   static const String nameAccount = '/name_account';
+  static const String confirmRecoveryPhrase = '/confirm_recovery_phrase';
+  static const String nameAccount = '/name_account';
 }

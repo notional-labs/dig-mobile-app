@@ -449,6 +449,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Confirm recovery phrase`
+  String get confirm_recovery_phrase {
+    return Intl.message(
+      'Confirm recovery phrase',
+      name: 'confirm_recovery_phrase',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

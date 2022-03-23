@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buy": MessageLookupByLibrary.simpleMessage("Buy"),
         "confirm_backup_recovery_phrase": MessageLookupByLibrary.simpleMessage(
             "I have backed up my recovery phrase, I understand that if I lose my recovery phrase, I will lose my fund"),
+        "confirm_recovery_phrase":
+            MessageLookupByLibrary.simpleMessage("Confirm recovery phrase"),
         "continue_text": MessageLookupByLibrary.simpleMessage("Continue"),
         "copied_to_clipboard":
             MessageLookupByLibrary.simpleMessage("Copied to clipboard"),
