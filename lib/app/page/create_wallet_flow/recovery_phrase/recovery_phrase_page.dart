@@ -31,7 +31,9 @@ class _RecoveryPhrasePageState extends State<RecoveryPhrasePage> {
   @override
   void initState() {
     super.initState();
-    _cubit.init(widget.mnemonic);
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _cubit.init(widget.mnemonic);
+    });
   }
 
   @override
