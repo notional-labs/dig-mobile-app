@@ -7,3 +7,10 @@ abstract class UseCase<T, P> {
       DigExceptionHandler();
   Future<Either<BaseDigException, T>> call(P params);
 }
+
+abstract class SyncUseCase<T, P> {
+  final DigExceptionHandler exceptionHandler =
+      DigExceptionHandler();
+  Either<BaseDigException, T> call(P params);
+}
+
