@@ -1,8 +1,10 @@
+import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 OverlaySupportEntry? _overlayEntry;
+DSSnackBar? _snackBar;
 
 mixin WidgetUtil {
   void showGlobalLoadingOverlay() {
@@ -27,11 +29,20 @@ mixin WidgetUtil {
   }
 
   bool checkLandscape(BuildContext context) =>
-      MediaQuery.of(context).orientation ==
-      Orientation.landscape;
+      MediaQuery.of(context).orientation == Orientation.landscape;
 
   bool checkKeyboardOpening(BuildContext context) =>
       MediaQuery.of(context).viewInsets.bottom != 0;
+
+  void showGlobalDSSnackBar(
+      {required String message, DSSnackBarType type = DSSnackBarType.success}) {
+    _snackBar = DSSnackBar(message: message, type: type);
+    _snackBar!.show();
+  }
+
+  void dismissGlobalSnackBar() {
+    _snackBar?.dismiss(true);
+  }
 }
 
 mixin ImageUtil {
