@@ -11,6 +11,12 @@ abstract class NameAccountState extends Equatable {
   List<Object?> get props => [viewmodel];
 }
 
+class NameAccountUninitState extends NameAccountState {
+  const NameAccountUninitState(
+      {NameAccountViewmodel viewmodel = const NameAccountViewmodel()})
+      : super(viewmodel: viewmodel);
+}
+
 class NameAccountPrimaryState extends NameAccountState {
   const NameAccountPrimaryState(
       {NameAccountViewmodel viewmodel = const NameAccountViewmodel()})

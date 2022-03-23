@@ -88,6 +88,7 @@ class _Header extends StatelessWidget {
           onTap: () {
             BlocProvider.of<ImportAccountCubit>(context).tapAdvancedEvent();
           },
+
           /// TODO: Impl `Advanced`
           child: Text('',
               maxLines: 1,
@@ -132,6 +133,14 @@ class _Body extends StatelessWidget {
                 onChange: (value) {
                   BlocProvider.of<ImportAccountCubit>(context)
                       .changeRecoveryPhraseEvent(value);
+                },
+                validator: (value) {
+                  if ((value ?? '').isEmpty) {
+                    return '';
+                  }
+                  final message = BlocProvider.of<ImportAccountCubit>(context)
+                      .checkMnemonicValid(value!);
+                  return message;
                 },
                 maxLine: null,
                 textInputType: TextInputType.multiline,
