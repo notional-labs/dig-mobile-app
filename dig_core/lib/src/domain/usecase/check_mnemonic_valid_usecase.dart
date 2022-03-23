@@ -8,29 +8,32 @@ import 'package:logger/logger.dart';
 
 @injectable
 class CheckMnemonicValidUseCase
-    extends SyncUseCase<bool, CheckMnemonicValidParam> {
+    extends SyncUseCase<bool, CheckMnemonicValidUseCaseParam> {
   @override
-  Either<BaseDigException, bool> call(CheckMnemonicValidParam params) {
+  Either<BaseDigException, bool> call(CheckMnemonicValidUseCaseParam params) {
     try {
       if (params.mnemonic.isEmpty) {
         return const Left(DigException(message: 'Mnemonic cannot be empty'));
       } else if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(params.mnemonic)) {
         return const Left(DigException(message: 'Invalid character'));
-      } else if (![12, 24].contains(params.mnemonic.splitToWords().length)) {
-        return const Left(DigException(
-            message: 'Mnemonic must have at exactly 12 or 24 words'));
-      } else if (!bip39.validateMnemonic(params.mnemonic)) {
+      }
+      /// TOTO: Confirm later
+      // else if (![12, 24].contains(params.mnemonic.splitToWords().length)) {
+      //   return const Left(DigException(
+      //       message: 'Mnemonic must have at exactly 12 or 24 words'));
+      // }
+      else if (!bip39.validateMnemonic(params.mnemonic)) {
         return const Left(DigException(message: 'Invalid mnemonic'));
       }
       return const Right(true);
     } catch (e, trace) {
-      Logger().e('CheckMnemonicValid ERROR', e, trace);
+      Logger().e('CheckMnemonicValidUseCase ERROR', e, trace);
       return const Left(DigException(message: 'Invalid mnemonic'));
     }
   }
 }
 
-class CheckMnemonicValidParam {
+class CheckMnemonicValidUseCaseParam {
   final String mnemonic;
-  const CheckMnemonicValidParam({required this.mnemonic});
+  const CheckMnemonicValidUseCaseParam({required this.mnemonic});
 }
