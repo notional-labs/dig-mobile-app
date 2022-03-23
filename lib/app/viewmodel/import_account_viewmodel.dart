@@ -1,20 +1,26 @@
 import 'package:equatable/equatable.dart';
 
 class ImportAccountViewmodel extends Equatable {
-  final String recoveryPhrase;
+  final String mnemonic;
+  final String mnemonicMessage;
 
-  const ImportAccountViewmodel({this.recoveryPhrase = ''});
+  const ImportAccountViewmodel({
+    this.mnemonic = '',
+    this.mnemonicMessage = '',
+  });
 
-  bool get isValid => recoveryPhrase.isNotEmpty;
+  bool get isValid => mnemonic.isNotEmpty && mnemonicMessage.isEmpty;
 
   ImportAccountViewmodel copyWith({
-    String? recoveryPhrase,
+    String? mnemonic,
+    String? mnemonicMessage,
   }) {
     return ImportAccountViewmodel(
-      recoveryPhrase: recoveryPhrase ?? this.recoveryPhrase,
+      mnemonic: mnemonic ?? this.mnemonic,
+      mnemonicMessage: mnemonicMessage ?? this.mnemonicMessage,
     );
   }
 
   @override
-  List<Object> get props => [recoveryPhrase];
+  List<Object> get props => [mnemonic, mnemonicMessage];
 }

@@ -32,7 +32,12 @@ class DigRoute {
       case DigPageName.importAccount:
         return _materialPage(const ImportAccountPage(), settings);
       case DigPageName.nameAccount:
-        return _materialPage(const NameAccountPage(), settings);
+        final String mnemonic = (args as String?) ?? '';
+        return _materialPage(
+            NameAccountPage(
+              param: NameAccountPageParam(mnemonic: mnemonic),
+            ),
+            settings);
       default:
         return _materialPage(const SizedBox.shrink(), settings);
     }

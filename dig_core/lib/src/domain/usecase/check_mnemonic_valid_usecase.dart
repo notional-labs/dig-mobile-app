@@ -13,7 +13,7 @@ class CheckMnemonicValidUseCase
   Either<BaseDigException, bool> call(CheckMnemonicValidParam params) {
     try {
       if (params.mnemonic.isEmpty) {
-        return const Left(DigException(message: 'mnemonic cannot be empty'));
+        return const Left(DigException(message: 'Mnemonic cannot be empty'));
       } else if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(params.mnemonic)) {
         return const Left(DigException(message: 'Invalid character'));
       } else if (![12, 24].contains(params.mnemonic.splitToWords().length)) {

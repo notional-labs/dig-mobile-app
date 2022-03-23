@@ -1,23 +1,36 @@
+import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/cubit/import_account/import_account_state.dart';
 import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
+import 'package:dig_mobile_app/di/di.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class ImportAccountCubit extends Cubit<ImportAccountState> {
   ImportAccountCubit() : super(const ImportAccountPrimaryState());
+  final CheckMnemonicValidUseCase _checkMnemonicValidUseCase = di();
 
-  void changeRecoveryPhraseEvent(String recoveryPhrase) {
+  void changeRecoveryPhraseEvent(String mnemonic) {
     emit(ImportAccountChangedFormState(
-        viewmodel: state.viewmodel.copyWith(recoveryPhrase: recoveryPhrase)));
-    emit(ImportAccountPrimaryState(viewmodel: state.viewmodel.copyWith()));
+        viewmodel: state.viewmodel.copyWith(mnemonic: mnemonic)));
+    final mnemonicMessage = checkMnemonicValid(state.viewmodel.mnemonic);
+    emit(ImportAccountPrimaryState(
+        viewmodel: state.viewmodel.copyWith(mnemonicMessage: mnemonicMessage)));
   }
 
-  /// TODO: Impl [importEvent]
+  String checkMnemonicValid(String mnemonic) {
+    String message = '';
+    final result = _checkMnemonicValidUseCase
+        .call(CheckMnemonicValidParam(mnemonic: mnemonic));
+    result.fold((l) {
+      message = l.message;
+    }, (_) {});
+    return message;
+  }
+
   Future importEvent() async {
     emit(ImportAccountLoadingState(viewmodel: state.viewmodel.copyWith()));
-    await Future.delayed(const Duration(seconds: 2));
     emit(ImportAccountSuccessState(viewmodel: state.viewmodel.copyWith()));
   }
 
@@ -26,6 +39,6 @@ class ImportAccountCubit extends Cubit<ImportAccountState> {
   /// TODO: Impl [tapAdvancedEvent]
   void tapAdvancedEvent() {}
 
-  Future<dynamic> goToNameAccountEvent() =>
-      navigatorKey.currentState!.pushNamed(DigPageName.nameAccount);
+  Future<dynamic> goToNameAccountEvent() => navigatorKey.currentState!
+      .pushNamed(DigPageName.nameAccount, arguments: state.viewmodel.mnemonic);
 }
