@@ -1,12 +1,18 @@
+import 'package:dig_mobile_app/app/cubit/confirm_recovery_phrase/confirm_recovery_phrase_cubit.dart';
+import 'package:dig_mobile_app/app/cubit/confirm_recovery_phrase/confirm_recovery_phrase_data_item.dart';
 import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_appbar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
+import 'package:dig_mobile_app/app/viewmodel/confirm_recovery_phrase_viewmodel.dart';
+import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ConfirmRecoveryPhrase extends StatefulWidget {
   final String mnemonic;
@@ -19,6 +25,16 @@ class ConfirmRecoveryPhrase extends StatefulWidget {
 }
 
 class _ConfirmRecoveryPhraseState extends State<ConfirmRecoveryPhrase> {
+  final ConfirmRecoveryPhraseCubit _cubit = di();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _cubit.init(widget.mnemonic);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
@@ -42,14 +58,21 @@ class _ConfirmRecoveryPhraseState extends State<ConfirmRecoveryPhrase> {
                 end: 0,
                 bottom: 0,
                 textDirection: TextDirection.ltr,
-                child: _buildBody(context))
+                child: BlocConsumer<ConfirmRecoveryPhraseCubit,
+                    ConfirmRecoveryPhraseState>(
+                  bloc: _cubit,
+                  listener: _cubitListener,
+                  builder: (context, state) => _buildBody(state.model),
+                ))
           ],
         ),
       )),
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  void _cubitListener(_, state) {}
+
+  Widget _buildBody(ConfirmRecoveryPhraseViewModel model) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
       child: Column(
@@ -66,31 +89,32 @@ class _ConfirmRecoveryPhraseState extends State<ConfirmRecoveryPhrase> {
           Container(
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(5)),
-            child: _buildConfirmResultGrid(),
+            child: _buildConfirmResultGrid(model),
           ),
           const SizedBox(
             height: 40,
           ),
-          Expanded(child: _buildSelectGrid()),
+          Expanded(child: _buildSelectGrid(model)),
           const SizedBox(
             height: 20,
           ),
           DSPrimaryButton(
               title: S.current.continue_text,
+              enable: model.canContinue,
               onTap: () {
-                /// TODO: Recheck later
-                Navigator.of(context).pushNamed(DigPageName.nameAccount);
+                Navigator.of(context).pushNamed(DigPageName.nameAccount,
+                    arguments: widget.mnemonic);
               })
         ],
       ),
     );
   }
 
-  Widget _buildConfirmResultGrid() {
+  Widget _buildConfirmResultGrid(ConfirmRecoveryPhraseViewModel model) {
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: 2,
+      itemCount: model.confirmResults.length,
       padding: const EdgeInsets.all(6),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
@@ -100,16 +124,17 @@ class _ConfirmRecoveryPhraseState extends State<ConfirmRecoveryPhrase> {
       ),
       itemBuilder: (BuildContext context, int index) {
         return _ConfirmResultGridItem(
+          onTap: (word) => _cubit.unSelectWord(word),
           index: index + 1,
-          text: 'dig',
+          text: model.confirmResults[index],
         );
       },
     );
   }
 
-  Widget _buildSelectGrid() {
+  Widget _buildSelectGrid(ConfirmRecoveryPhraseViewModel model) {
     return GridView.builder(
-      itemCount: 50,
+      itemCount: model.selectItems.length,
       padding: EdgeInsets.zero,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
@@ -119,8 +144,8 @@ class _ConfirmRecoveryPhraseState extends State<ConfirmRecoveryPhrase> {
       ),
       itemBuilder: (BuildContext context, int index) {
         return _PhraseGridItem(
-          index: index + 1,
-          text: 'dig',
+          onTap: (data) => _cubit.selectWord(data),
+          data: model.selectItems[index],
         );
       },
     );
@@ -128,24 +153,45 @@ class _ConfirmRecoveryPhraseState extends State<ConfirmRecoveryPhrase> {
 }
 
 class _PhraseGridItem extends StatelessWidget {
-  final int index;
-  final String text;
+  final ConfirmRecoveryPhraseDataItem data;
+  final Function(ConfirmRecoveryPhraseDataItem)? onTap;
 
-  const _PhraseGridItem({this.index = 0, required this.text, Key? key})
+  const _PhraseGridItem({required this.data, this.onTap, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final child = Center(
+        child: Text(
+      data.isSelected ? '' : data.word,
+      style: DSTextStyle.tsMontserratT10R.copyWith(color: DSColors.tulipTree),
+    ));
+    return GestureDetector(
+      onTap: () => onTap?.call(data),
+      behavior: HitTestBehavior.opaque,
+      child: data.isSelected
+          ? _buildDottedBorderContainer(child)
+          : _buildRoundedContainer(child),
+    );
+  }
+
+  Widget _buildDottedBorderContainer(Widget child) {
+    return DottedBorder(
+      borderType: BorderType.RRect,
+      dashPattern: const [3, 4],
+      radius: const Radius.circular(5),
+      color: DSColors.tulipTree,
+      child: child,
+    );
+  }
+
+  Widget _buildRoundedContainer(Widget child) {
     return Container(
       decoration: BoxDecoration(
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(5),
           border: Border.all(color: DSColors.tulipTree)),
-      child: Center(
-          child: Text(
-        index.toString(),
-        style: DSTextStyle.tsMontserratT10R.copyWith(color: DSColors.tulipTree),
-      )),
+      child: child,
     );
   }
 }
@@ -153,39 +199,45 @@ class _PhraseGridItem extends StatelessWidget {
 class _ConfirmResultGridItem extends StatelessWidget {
   final int index;
   final String text;
+  final Function(String)? onTap;
 
-  const _ConfirmResultGridItem({this.index = 0, required this.text, Key? key})
+  const _ConfirmResultGridItem(
+      {this.index = 0, required this.text, this.onTap, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: DSColors.tundora, borderRadius: BorderRadius.circular(5)),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4.0),
-            child: Container(
-              width: 20,
-              height: 20,
-              decoration: const BoxDecoration(
-                  color: Colors.white, shape: BoxShape.circle),
-              child: Center(
-                  child: Text(
-                index.toString(),
-                style:
-                    DSTextStyle.tsMontserratT10R.copyWith(color: Colors.black),
-              )),
+    return GestureDetector(
+      onTap: () => onTap?.call(text),
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        decoration: BoxDecoration(
+            color: DSColors.tundora, borderRadius: BorderRadius.circular(5)),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              child: Container(
+                width: 20,
+                height: 20,
+                decoration: const BoxDecoration(
+                    color: Colors.white, shape: BoxShape.circle),
+                child: Center(
+                    child: Text(
+                  index.toString(),
+                  style: DSTextStyle.tsMontserratT10R
+                      .copyWith(color: Colors.black),
+                )),
+              ),
             ),
-          ),
-          Expanded(
-            child: Text(text,
-                maxLines: 1,
-                style:
-                    DSTextStyle.tsMontserratT10R.copyWith(color: Colors.white)),
-          )
-        ],
+            Expanded(
+              child: Text(text,
+                  maxLines: 1,
+                  style: DSTextStyle.tsMontserratT10R
+                      .copyWith(color: Colors.white)),
+            )
+          ],
+        ),
       ),
     );
   }
