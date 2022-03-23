@@ -24,14 +24,14 @@ class NameAccountCubit extends Cubit<NameAccountState> {
     emit(NameAccountPrimaryState(viewmodel: state.viewmodel.copyWith()));
   }
 
-  Future createvent() async {
+  Future createEvent() async {
     emit(NameAccountLoadingState(viewmodel: state.viewmodel.copyWith()));
     final result = await _importAccountUseCase.call(ImportAccountUseCaseParam(
         importAccount: ImportAccount(
             importAccountFormData: ImportAccountFormData(
                 name: state.viewmodel.name,
                 password: '',
-                mnemonic: state.viewmodel.name,
+                mnemonic: state.viewmodel.mnemonic,
                 additionalData:
                     const AccountAdditionalData(isBackedUp: false))),
         chain: _chain));
@@ -46,7 +46,7 @@ class NameAccountCubit extends Cubit<NameAccountState> {
   void goToHome() => navigatorKey.currentState!
       .pushNamedAndRemoveUntil(DigPageName.home, (route) => false);
 
-  void backEnvent() => navigatorKey.currentState!.pop();
+  void backEvent() => navigatorKey.currentState!.pop();
 
   /// TODO: Impl [tapAdvancedEvent]
   void tapAdvancedEvent() {}

@@ -103,7 +103,7 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) => DSPrimaryAppBar.action(
         onBackButtonPressed: () {
-          BlocProvider.of<NameAccountCubit>(context).backEnvent();
+          BlocProvider.of<NameAccountCubit>(context).backEvent();
         },
         action: GestureDetector(
           onTap: () {
@@ -169,7 +169,7 @@ class _FooterWidget extends StatelessWidget {
                     enable: state.viewmodel.isValid,
                     title: S.current.create,
                     onTap: () {
-                      BlocProvider.of<NameAccountCubit>(context).createvent();
+                      BlocProvider.of<NameAccountCubit>(context).createEvent();
                     }),
               ));
 }
