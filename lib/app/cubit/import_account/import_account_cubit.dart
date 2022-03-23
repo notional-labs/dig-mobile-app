@@ -22,7 +22,7 @@ class ImportAccountCubit extends Cubit<ImportAccountState> {
   String checkMnemonicValid(String mnemonic) {
     String message = '';
     final result = _checkMnemonicValidUseCase
-        .call(CheckMnemonicValidParam(mnemonic: mnemonic));
+        .call(CheckMnemonicValidUseCaseParam(mnemonic: mnemonic));
     result.fold((l) {
       message = l.message;
     }, (_) {});
