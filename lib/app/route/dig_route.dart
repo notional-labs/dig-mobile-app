@@ -8,6 +8,7 @@ import 'package:dig_mobile_app/app/page/name_account/name_account_page.dart';
 import 'package:dig_mobile_app/app/page/sign_in/sign_in_page.dart';
 import 'package:dig_mobile_app/app/page/splash/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -24,7 +25,8 @@ class DigRoute {
       case DigPageName.signIn:
         return _materialPage(const LoginPage(), settings);
       case DigPageName.home:
-        return _materialPage(const HomePage(), settings);
+        final account = args as AccountPublicInfo?;
+        return _materialPage(HomePage(accountPublicInfo: account), settings);
       case DigPageName.backUpYourWallet:
         return _materialPage(const BackUpYourWalletPage(), settings);
       case DigPageName.recoveryPhrase:

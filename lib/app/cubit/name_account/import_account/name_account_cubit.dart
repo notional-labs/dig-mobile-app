@@ -5,6 +5,7 @@ import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 @injectable
 class NameAccountCubit extends Cubit<NameAccountState> {
@@ -38,13 +39,16 @@ class NameAccountCubit extends Cubit<NameAccountState> {
     result.fold((l) {
       emit(NameAccountErrorState(
           exception: l, viewmodel: state.viewmodel.copyWith()));
-    }, (r) {
-      emit(NameAccountSuccessState(viewmodel: state.viewmodel.copyWith()));
+    }, (account) {
+      emit(NameAccountSuccessState(
+          accountPublicInfo: account, viewmodel: state.viewmodel.copyWith()));
     });
   }
 
-  void goToHome() => navigatorKey.currentState!
-      .pushNamedAndRemoveUntil(DigPageName.home, (route) => false);
+  void goToHome(AccountPublicInfo accountPublicInfo) =>
+      navigatorKey.currentState!.pushNamedAndRemoveUntil(
+          DigPageName.home, (route) => false,
+          arguments: accountPublicInfo);
 
   void backEvent() => navigatorKey.currentState!.pop();
 

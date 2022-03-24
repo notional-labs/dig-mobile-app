@@ -1,6 +1,7 @@
 import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/viewmodel/name_account_viewmodel.dart';
 import 'package:equatable/equatable.dart';
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 abstract class NameAccountState extends Equatable {
   final NameAccountViewmodel viewmodel;
@@ -30,13 +31,17 @@ class NameAccountLoadingState extends NameAccountState {
 }
 
 class NameAccountSuccessState extends NameAccountState {
+  final AccountPublicInfo accountPublicInfo;
+
   const NameAccountSuccessState(
-      {NameAccountViewmodel viewmodel = const NameAccountViewmodel()})
+      {required this.accountPublicInfo,
+      NameAccountViewmodel viewmodel = const NameAccountViewmodel()})
       : super(viewmodel: viewmodel);
 }
 
 class NameAccountErrorState extends NameAccountState {
   final BaseDigException exception;
+
   const NameAccountErrorState(
       {NameAccountViewmodel viewmodel = const NameAccountViewmodel(),
       this.exception = const DigException()})

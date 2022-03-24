@@ -112,7 +112,7 @@ class _SplashPageState extends State<SplashPage> {
                         setState(() {
                           _showArrowIcon = true;
                         });
-                        _cubit.checkAuthencation();
+                        _cubit.checkAuthentication();
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
