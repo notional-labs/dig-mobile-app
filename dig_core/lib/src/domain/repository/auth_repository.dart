@@ -12,4 +12,6 @@ abstract class AuthRepository {
   Future<String> createMnemonic(CreateMnemonic param);
 
   Future<AccountPublicInfo> importAccount(ImportAccount param);
+
+  Future<List<AccountPublicInfo>> getAccountList();
 }

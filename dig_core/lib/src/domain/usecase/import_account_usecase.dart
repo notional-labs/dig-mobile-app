@@ -12,7 +12,9 @@ import 'package:transaction_signing_gateway/model/account_public_info.dart';
 class ImportAccountUseCase
     extends UseCase<AccountPublicInfo, ImportAccountUseCaseParam> {
   final AuthRepository _repository;
+
   ImportAccountUseCase(this._repository);
+
   @override
   Future<Either<BaseDigException, AccountPublicInfo>> call(
       ImportAccountUseCaseParam params) async {
