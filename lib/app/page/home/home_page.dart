@@ -5,9 +5,12 @@ import 'package:dig_mobile_app/app/page/active_account/active_account_page.dart'
 import 'package:dig_mobile_app/app/page/home/home_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final AccountPublicInfo? accountPublicInfo;
+
+  const HomePage({this.accountPublicInfo, Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -36,7 +39,9 @@ class _HomePageState extends State<HomePage> {
                     end: 0,
                     bottom: 0,
                     textDirection: TextDirection.ltr,
-                    child: const ActiveAccountPage())
+                    child: ActiveAccountPage(
+                      accountPublicInfo: widget.accountPublicInfo,
+                    ))
               ],
             ),
           )),
