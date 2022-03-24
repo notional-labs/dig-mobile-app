@@ -93,4 +93,13 @@ class AuthRepositoryImplement extends AuthRepository {
       },
     );
   }
+
+  @override
+  Future<List<AccountPublicInfo>> getAccountList() {
+    final result = createTransactionSigningGateway().getAccountsList();
+    return result.asyncFold((fail) {
+      logError(fail);
+      throw fail;
+    }, (success) => success);
+  }
 }
