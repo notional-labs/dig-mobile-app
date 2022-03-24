@@ -12,9 +12,13 @@ import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 class ActiveAccountPage extends StatefulWidget {
-  const ActiveAccountPage({Key? key}) : super(key: key);
+  final AccountPublicInfo? accountPublicInfo;
+
+  const ActiveAccountPage({this.accountPublicInfo, Key? key})
+      : super(key: key);
 
   @override
   State<ActiveAccountPage> createState() => _ActiveAccountPageState();
@@ -44,7 +48,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage> {
           ),
         ),
         Text(
-          'Account 1',
+          widget.accountPublicInfo?.name ?? '',
           style: DSTextStyle.tsMontserrat.copyWith(
               color: DSColors.tulipTree,
               fontSize: 20,
@@ -54,15 +58,14 @@ class _ActiveAccountPageState extends State<ActiveAccountPage> {
           height: 12,
         ),
         Text(
-          '\$100',
+          '\$000',
           style: DSTextStyle.tsMontserrat.copyWith(
               color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400),
         ),
         const SizedBox(
           height: 12,
         ),
-        const _WalletAddress(
-            address: 'digbhfjh3455asdaadasdasdasdasasdasdahis'),
+        _WalletAddress(address: widget.accountPublicInfo?.publicAddress ?? ''),
         Padding(
           padding:
               const EdgeInsets.only(top: 20, left: 54, right: 54, bottom: 34),
@@ -171,7 +174,7 @@ class _WalletAddress extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              address.length > 20 ? address.trimMiddleWithDot(23) : address,
+              address.length > 20 ? address.trimMiddleWithDot(20) : address,
               textAlign: TextAlign.center,
               maxLines: 1,
               style: DSTextStyle.tsMontserrat.copyWith(
