@@ -1,3 +1,4 @@
+import 'package:dig_mobile_app/app/definition/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -39,7 +40,7 @@ class DSPinInput extends StatefulWidget {
   const DSPinInput(
       {required this.onChange,
       required this.onPINFit,
-      this.length = 6,
+      this.length = PinConfig.length,
       this.controller,
       Key? key})
       : super(key: key);
