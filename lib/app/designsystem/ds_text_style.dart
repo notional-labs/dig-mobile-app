@@ -15,4 +15,7 @@ class DSTextStyle {
 
   static TextStyle get tsMontserratT20B =>
       GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.bold);
+
+  static TextStyle get tsMontserratT32B =>
+      GoogleFonts.montserrat(fontSize: 32, fontWeight: FontWeight.bold);
 }
