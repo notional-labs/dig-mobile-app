@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "back_up_your_wallet_reminder_3": MessageLookupByLibrary.simpleMessage(
             "If you don’t backup your wallet or lose your recovery phrase, you will not able to recover your account"),
         "buy": MessageLookupByLibrary.simpleMessage("Buy"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "confirm_backup_recovery_phrase": MessageLookupByLibrary.simpleMessage(
             "I have backed up my recovery phrase, I understand that if I lose my recovery phrase, I will lose my fund"),
         "confirm_recovery_phrase":
@@ -55,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dont_have_account_create":
             MessageLookupByLibrary.simpleMessage("Don’t have account? Create"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "enter_your_password":
+            MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enter_your_recovery_phrase":
             MessageLookupByLibrary.simpleMessage("Enter your recovery phrase"),
         "exchange": MessageLookupByLibrary.simpleMessage("Exchange"),
