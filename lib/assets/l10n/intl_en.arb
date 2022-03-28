@@ -39,5 +39,7 @@
     "import": "Import",
     "name_account": "Name account",
     "confirm_backup_recovery_phrase": "I have backed up my recovery phrase, I understand that if I lose my recovery phrase, I will lose my fund",
-    "confirm_recovery_phrase": "Confirm recovery phrase"
+    "confirm_recovery_phrase": "Confirm recovery phrase",
+    "enter_your_password": "Enter your password",
+    "cancel": "Cancel"
 }

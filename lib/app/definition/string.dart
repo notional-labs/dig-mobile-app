@@ -8,4 +8,5 @@ abstract class DigPageName {
   static const String recoveryPhrase = '/recovery_phrase';
   static const String confirmRecoveryPhrase = '/confirm_recovery_phrase';
   static const String nameAccount = '/name_account';
+  static const String pin = '/pin';
 }
