@@ -18,6 +18,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return OverlaySupport.global(
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         initialRoute: DigPageName.splash,
         navigatorKey: navigatorKey,
         onGenerateRoute: (settings) => DigRoute().generateRoute(settings),
