@@ -150,16 +150,15 @@ class _RowBottom extends StatelessWidget {
               onTap: () {
                 onLeftTap();
               },
-              child: Expanded(
-                  child: Container(
+              child: Container(
                 color: Colors.transparent,
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  leftLabel,
-                  style: DSTextStyle.tsMontserratT12R
-                      .copyWith(color: Colors.white),
+              leftLabel,
+              style: DSTextStyle.tsMontserratT12R
+                  .copyWith(color: Colors.white),
                 ),
-              )),
+              ),
             ),
           ),
           Expanded(
