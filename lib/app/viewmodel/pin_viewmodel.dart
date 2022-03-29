@@ -1,4 +1,3 @@
-import 'package:dig_mobile_app/app/definition/config.dart';
 import 'package:equatable/equatable.dart';
 
 class PinViewmodel extends Equatable {
@@ -6,8 +5,6 @@ class PinViewmodel extends Equatable {
   const PinViewmodel({
     this.pin = '',
   });
-
-  bool get isValid => pin.isNotEmpty && pin.length == PinConfig.length;
 
   PinViewmodel copyWith({
     String? pin,
