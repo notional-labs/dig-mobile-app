@@ -1,4 +1,5 @@
 import 'package:dig_mobile_app/app/definition/string.dart';
+import 'package:dig_mobile_app/app/page/confirm_pin/confirm_pin_page.dart';
 import 'package:dig_mobile_app/app/page/create_wallet_flow/backup_your_wallet/backup_your_wallet_page.dart';
 import 'package:dig_mobile_app/app/page/create_wallet_flow/confirm_recovery_phrase/confirm_recovery_phrase.dart';
 import 'package:dig_mobile_app/app/page/create_wallet_flow/recovery_phrase/recovery_phrase_page.dart';
@@ -22,7 +23,7 @@ class DigRoute {
     switch (name) {
       case DigPageName.root:
       case DigPageName.splash:
-        return _materialPage(const SplashPage(), settings);
+        return _materialPage(const PinPage(), settings);
       case DigPageName.signIn:
         return _materialPage(const LoginPage(), settings);
       case DigPageName.home:
@@ -46,8 +47,12 @@ class DigRoute {
               param: NameAccountPageParam(mnemonic: mnemonic),
             ),
             settings);
-       case DigPageName.pin:
+      case DigPageName.pin:
         return _materialPage(const PinPage(), settings);
+      case DigPageName.confirmPin:
+        final param = (args as ConfirmPinPageParam?) ??
+            const ConfirmPinPageParam(pin: '');
+        return _materialPage(ConfirmPinPage(param: param), settings);
       default:
         return _materialPage(const SizedBox.shrink(), settings);
     }

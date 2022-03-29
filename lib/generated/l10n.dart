@@ -460,11 +460,11 @@ class S {
     );
   }
 
-  /// `Enter your password`
-  String get enter_your_password {
+  /// `Enter your passcode`
+  String get enter_your_passcode {
     return Intl.message(
-      'Enter your password',
-      name: 'enter_your_password',
+      'Enter your passcode',
+      name: 'enter_your_passcode',
       desc: '',
       args: [],
     );
@@ -475,6 +475,26 @@ class S {
     return Intl.message(
       'Cancel',
       name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm your passcode`
+  String get confirm_your_passcode {
+    return Intl.message(
+      'Confirm your passcode',
+      name: 'confirm_your_passcode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passcode do not match`
+  String get passcode_do_not_match {
+    return Intl.message(
+      'Passcode do not match',
+      name: 'passcode_do_not_match',
       desc: '',
       args: [],
     );

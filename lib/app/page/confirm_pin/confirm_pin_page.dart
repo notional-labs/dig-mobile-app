@@ -1,9 +1,11 @@
-import 'package:dig_mobile_app/app/cubit/pin/pin_cubit.dart';
+import 'package:dig_mobile_app/app/cubit/confirm_pin/confirm_pin_cubit.dart';
+import 'package:dig_mobile_app/app/cubit/confirm_pin/confirm_pin_state.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_number_keyboard.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_pin_input.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_appbar.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/di/di.dart';
@@ -12,15 +14,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PinPage extends StatefulWidget {
-  const PinPage({Key? key}) : super(key: key);
-
-  @override
-  State<PinPage> createState() => _PinPageState();
+class ConfirmPinPageParam {
+  final String pin;
+  const ConfirmPinPageParam({required this.pin});
 }
 
-class _PinPageState extends State<PinPage> with WidgetUtil {
-  final PinCubit _cubit = di();
+class ConfirmPinPage extends StatefulWidget {
+  final ConfirmPinPageParam param;
+  const ConfirmPinPage({required this.param, Key? key}) : super(key: key);
+
+  @override
+  State<ConfirmPinPage> createState() => _ConfirmPinPageState();
+}
+
+class _ConfirmPinPageState extends State<ConfirmPinPage> with WidgetUtil {
+  final ConfirmPinCubit _cubit = di();
+
+  void _blocListener(context, state) {
+    if (state is ConfirmPinErrorState) {
+      showGlobalDSSnackBar(
+          message: state.exception.message, type: DSSnackBarType.error);
+      return;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _cubit.init(widget.param.pin);
+    });
+  }
 
   @override
   Widget build(BuildContext context) => DSBackground(
@@ -28,19 +52,23 @@ class _PinPageState extends State<PinPage> with WidgetUtil {
           value: SystemUiOverlayStyle.light,
           child: BlocProvider(
             create: (_) => _cubit,
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
-              body: SafeArea(
-                child: Column(
-                  children: [
-                    if (checkLandscape(context)) const SizedBox(height: 30),
-                    const _HeaderWidget(),
-                    const Expanded(
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 30),
-                          child: _BodyWidget()),
-                    )
-                  ],
+            child: BlocListener(
+              bloc: _cubit,
+              listener: _blocListener,
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                body: SafeArea(
+                  child: Column(
+                    children: [
+                      if (checkLandscape(context)) const SizedBox(height: 30),
+                      const _HeaderWidget(),
+                      const Expanded(
+                        child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30),
+                            child: _BodyWidget()),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -59,7 +87,7 @@ class _HeaderWidget extends StatelessWidget {
         children: [
           DSPrimaryAppBar.normal(
             onBackButtonPressed: () {
-              BlocProvider.of<PinCubit>(context).backEvent();
+              BlocProvider.of<ConfirmPinCubit>(context).backEvent();
             },
           ),
           const SizedBox(height: 38),
@@ -67,7 +95,7 @@ class _HeaderWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text(S.current.enter_your_passcode,
+              child: Text(S.current.confirm_your_passcode,
                   style: DSTextStyle.tsMontserratT20B
                       .copyWith(color: DSColors.tulipTree)),
             ),
@@ -98,11 +126,13 @@ class _BodyWidgetState extends State<_BodyWidget> with WidgetUtil {
                 child: DSPinInput(
                   controller: _controller,
                   onChange: (String pin) {
-                    BlocProvider.of<PinCubit>(context).changePinEvent(pin);
+                    BlocProvider.of<ConfirmPinCubit>(context)
+                        .changeConfirmPinEvent(pin);
                   },
                   onPINFit: (_) {
-                    BlocProvider.of<PinCubit>(context).continueEvent();
-                    return Future.value(true);
+                    final result = BlocProvider.of<ConfirmPinCubit>(context)
+                        .continueEvent();
+                    return Future.value(result);
                   },
                 ),
               ),

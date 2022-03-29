@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "I have backed up my recovery phrase, I understand that if I lose my recovery phrase, I will lose my fund"),
         "confirm_recovery_phrase":
             MessageLookupByLibrary.simpleMessage("Confirm recovery phrase"),
+        "confirm_your_passcode":
+            MessageLookupByLibrary.simpleMessage("Confirm your passcode"),
         "continue_text": MessageLookupByLibrary.simpleMessage("Continue"),
         "copied_to_clipboard":
             MessageLookupByLibrary.simpleMessage("Copied to clipboard"),
@@ -56,8 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dont_have_account_create":
             MessageLookupByLibrary.simpleMessage("Don’t have account? Create"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
-        "enter_your_password":
-            MessageLookupByLibrary.simpleMessage("Enter your password"),
+        "enter_your_passcode":
+            MessageLookupByLibrary.simpleMessage("Enter your passcode"),
         "enter_your_recovery_phrase":
             MessageLookupByLibrary.simpleMessage("Enter your recovery phrase"),
         "exchange": MessageLookupByLibrary.simpleMessage("Exchange"),
@@ -72,6 +74,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "name_account": MessageLookupByLibrary.simpleMessage("Name account"),
         "or_sign_in_with":
             MessageLookupByLibrary.simpleMessage("Or sign in with"),
+        "passcode_do_not_match":
+            MessageLookupByLibrary.simpleMessage("Passcode do not match"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "real_estate": MessageLookupByLibrary.simpleMessage("Real estate"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
