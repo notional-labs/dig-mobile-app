@@ -15,15 +15,17 @@ import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class DigRoute {
+  static String currentPage = DigPageName.root;
   PageRoute generateRoute(RouteSettings settings) {
     final name = settings.name;
     // ignore: unused_local_variable
     final args = settings.arguments;
+    currentPage = name ?? DigPageName.root;
 
     switch (name) {
       case DigPageName.root:
       case DigPageName.splash:
-        return _materialPage(const PinPage(), settings);
+        return _materialPage(const SplashPage(), settings);
       case DigPageName.signIn:
         return _materialPage(const LoginPage(), settings);
       case DigPageName.home:
@@ -48,7 +50,8 @@ class DigRoute {
             ),
             settings);
       case DigPageName.pin:
-        return _materialPage(const PinPage(), settings);
+        final type = (args as PinPageType?) ?? PinPageType.create;
+        return _materialPage(PinPage(type: type), settings);
       case DigPageName.confirmPin:
         final param = (args as ConfirmPinPageParam?) ??
             const ConfirmPinPageParam(pin: '');

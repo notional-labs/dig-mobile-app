@@ -1,4 +1,5 @@
 import 'package:dig_core/dig_core.dart';
+import 'package:dig_core/src/data/datasource/local/pin_local_datasource.dart';
 import 'package:dig_core/src/domain/model/create_mnemonic.dart';
 import 'package:dig_core/src/domain/repository/auth_repository.dart';
 import 'package:injectable/injectable.dart';
@@ -9,6 +10,8 @@ import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 @Injectable(as: AuthRepository)
 class AuthRepositoryImplement extends AuthRepository {
+  final PinLocalDatasource _pinLocalDatasource;
+  AuthRepositoryImplement(this._pinLocalDatasource);
   ChainENV? _chain;
   TransactionSigningGateway? _transactionSigningGateway;
 
@@ -102,4 +105,19 @@ class AuthRepositoryImplement extends AuthRepository {
       throw fail;
     }, (success) => success);
   }
+
+  @override
+  Future createPin(String pin) => _pinLocalDatasource.createPin(pin);
+
+  @override
+  Future<bool> checkHasPin() => _pinLocalDatasource.checkHasPin();
+
+  @override
+  Future<bool> matchPin(String pin) => _pinLocalDatasource.matchPin(pin);
+
+  @override
+  Future changePin(String pin) => _pinLocalDatasource.changePin(pin);
+
+  @override
+  Future deletePin() => _pinLocalDatasource.deletePin();
 }

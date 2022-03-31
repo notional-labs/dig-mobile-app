@@ -36,6 +36,10 @@ class _ConfirmPinPageState extends State<ConfirmPinPage> with WidgetUtil {
           message: state.exception.message, type: DSSnackBarType.error);
       return;
     }
+    if (state is ConfirmPinSuccessState) {
+      _cubit.goToHomeEvent();
+      return;
+    }
   }
 
   @override
@@ -131,7 +135,7 @@ class _BodyWidgetState extends State<_BodyWidget> with WidgetUtil {
                   },
                   onPINFit: (_) {
                     final result = BlocProvider.of<ConfirmPinCubit>(context)
-                        .continueEvent();
+                        .createPinEvent();
                     return Future.value(result);
                   },
                 ),

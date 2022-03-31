@@ -1,15 +1,19 @@
+import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
+import 'package:dig_mobile_app/app/page/pin/pin_page.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 
-OverlaySupportEntry? _overlayEntry;
+OverlaySupportEntry? _loadingOverlayEntry;
+OverlaySupportEntry? _pinOverlayEntry;
 DSSnackBar? _snackBar;
+bool _isPinOverlayShowing = false;
 
 mixin WidgetUtil {
   void showGlobalLoadingOverlay() {
     dismissGlobalLoadingOverlay();
-    _overlayEntry = showOverlay(
+    _loadingOverlayEntry = showOverlay(
         (_, __) => Container(
             width: double.infinity,
             height: double.infinity,
@@ -21,7 +25,7 @@ mixin WidgetUtil {
   }
 
   void dismissGlobalLoadingOverlay() {
-    _overlayEntry?.dismiss(animate: false);
+    _loadingOverlayEntry?.dismiss(animate: false);
   }
 
   void closeGlobalKeyboard() {
@@ -43,6 +47,32 @@ mixin WidgetUtil {
   void dismissGlobalSnackBar() {
     _snackBar?.dismiss(true);
   }
+
+  void showEnterPINOverlay() {
+    if (_isPinOverlayShowing ||
+        DigRoute.currentPage == DigPageName.pin ||
+        DigRoute.currentPage == DigPageName.splash) {
+      return;
+    }
+
+    _isPinOverlayShowing = true;
+    _loadingOverlayEntry = showOverlay(
+        (_, __) => Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: Colors.red,
+            child: const PinPage(
+              type: PinPageType.authAfterAppPaused,
+            )),
+        duration: const Duration(hours: 10000));
+  }
+
+  void dismissPINOverlay() {
+    _loadingOverlayEntry?.dismiss(animate: false);
+    _isPinOverlayShowing = false;
+  }
+
+  bool canPop(BuildContext context) => Navigator.of(context).canPop();
 }
 
 mixin ImageUtil {

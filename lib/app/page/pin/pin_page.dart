@@ -1,9 +1,11 @@
 import 'package:dig_mobile_app/app/cubit/pin/pin_cubit.dart';
+import 'package:dig_mobile_app/app/cubit/pin/pin_state.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_number_keyboard.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_pin_input.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_appbar.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/di/di.dart';
@@ -12,8 +14,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+enum PinPageType { create, authWhenLauchApp, authAfterAppPaused }
+
 class PinPage extends StatefulWidget {
-  const PinPage({Key? key}) : super(key: key);
+  final PinPageType type;
+  const PinPage({required this.type, Key? key}) : super(key: key);
 
   @override
   State<PinPage> createState() => _PinPageState();
@@ -22,25 +27,44 @@ class PinPage extends StatefulWidget {
 class _PinPageState extends State<PinPage> with WidgetUtil {
   final PinCubit _cubit = di();
 
+  void _blocListener(_, state) {
+    if (state is PinErrorState) {
+      showGlobalDSSnackBar(
+          message: state.exception.message, type: DSSnackBarType.error);
+      return;
+    }
+    if (state is PinMatchedState) {
+      dismissPINOverlay();
+      if (widget.type == PinPageType.authWhenLauchApp) {
+        _cubit.goToHomeEvent();
+      }
+      return;
+    }
+  }
+
   @override
   Widget build(BuildContext context) => DSBackground(
         child: AnnotatedRegion(
           value: SystemUiOverlayStyle.light,
           child: BlocProvider(
             create: (_) => _cubit,
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
-              body: SafeArea(
-                child: Column(
-                  children: [
-                    if (checkLandscape(context)) const SizedBox(height: 30),
-                    const _HeaderWidget(),
-                    const Expanded(
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 30),
-                          child: _BodyWidget()),
-                    )
-                  ],
+            child: BlocListener(
+              bloc: _cubit,
+              listener: _blocListener,
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                body: SafeArea(
+                  child: Column(
+                    children: [
+                      if (checkLandscape(context)) const SizedBox(height: 30),
+                      _HeaderWidget(type: widget.type),
+                      Expanded(
+                        child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            child: _BodyWidget(type: widget.type)),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -49,19 +73,22 @@ class _PinPageState extends State<PinPage> with WidgetUtil {
       );
 }
 
-class _HeaderWidget extends StatelessWidget {
+class _HeaderWidget extends StatelessWidget with WidgetUtil {
+  final PinPageType type;
   const _HeaderWidget({
+    required this.type,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          DSPrimaryAppBar.normal(
-            onBackButtonPressed: () {
-              BlocProvider.of<PinCubit>(context).backEvent();
-            },
-          ),
+          if (canPop(context) && type != PinPageType.authAfterAppPaused)
+            DSPrimaryAppBar.normal(
+              onBackButtonPressed: () {
+                BlocProvider.of<PinCubit>(context).backEvent();
+              },
+            ),
           const SizedBox(height: 38),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -77,7 +104,8 @@ class _HeaderWidget extends StatelessWidget {
 }
 
 class _BodyWidget extends StatefulWidget {
-  const _BodyWidget({Key? key}) : super(key: key);
+  final PinPageType type;
+  const _BodyWidget({required this.type, Key? key}) : super(key: key);
 
   @override
   State<_BodyWidget> createState() => _BodyWidgetState();
@@ -85,6 +113,21 @@ class _BodyWidget extends StatefulWidget {
 
 class _BodyWidgetState extends State<_BodyWidget> with WidgetUtil {
   final DSPinInputController _controller = DSPinInputController();
+
+  void _resolveAction() {
+    switch (widget.type) {
+      case PinPageType.authWhenLauchApp:
+      case PinPageType.authAfterAppPaused:
+        BlocProvider.of<PinCubit>(context).matchPinEvent();
+        break;
+      case PinPageType.create:
+        BlocProvider.of<PinCubit>(context).goToConfirmPinEvent();
+        break;
+      default:
+        BlocProvider.of<PinCubit>(context).matchPinEvent();
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) => Column(
@@ -101,7 +144,7 @@ class _BodyWidgetState extends State<_BodyWidget> with WidgetUtil {
                     BlocProvider.of<PinCubit>(context).changePinEvent(pin);
                   },
                   onPINFit: (_) {
-                    BlocProvider.of<PinCubit>(context).continueEvent();
+                    _resolveAction();
                     return Future.value(true);
                   },
                 ),
