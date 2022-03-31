@@ -38,7 +38,7 @@ class _NameAccountPageState extends State<NameAccountPage> with WidgetUtil {
 
     dismissGlobalLoadingOverlay();
     if (state is NameAccountSuccessState) {
-      _cubit.goToHome(state.accountPublicInfo);
+      _cubit.checkShouldCreatePINEvent(state.accountPublicInfo);
       return;
     }
     if (state is NameAccountErrorState) {

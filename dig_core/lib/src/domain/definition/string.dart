@@ -10,3 +10,7 @@ abstract class FirestoreCollection {
 abstract class ErrorMessage {
   static const String defaultLoginError = 'Login error, please try again!';
 }
+
+abstract class DigKey {
+  static const String pin = 'DIG_PIN';
+}

@@ -14,4 +14,14 @@ abstract class AuthRepository {
   Future<AccountPublicInfo> importAccount(ImportAccount param);
 
   Future<List<AccountPublicInfo>> getAccountList();
+
+  Future createPin(String pin);
+
+  Future<bool> matchPin(String pin);
+
+  Future<bool> checkHasPin();
+
+  Future changePin(String pin);
+  
+  Future deletePin();
 }

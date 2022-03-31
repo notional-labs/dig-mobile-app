@@ -2,10 +2,9 @@ import 'package:dig_core/src/data/network/env.dart';
 import 'package:dig_core/src/data/network/intercepter/dig_intecepter.dart';
 import 'package:dig_core/src/di/di.config.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.dart';
-import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 @injectableInit
 void initDI(GetIt di, ENV env) {
@@ -22,7 +21,6 @@ void initDI(GetIt di, ENV env) {
   dio.interceptors.add(di<DigIntercepter>());
 
   di.registerLazySingleton<Dio>(() => dio);
-
+  di.registerFactory<FlutterSecureStorage>(() => const FlutterSecureStorage());
   $initGetIt(di);
 }
-

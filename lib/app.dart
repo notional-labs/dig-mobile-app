@@ -1,6 +1,9 @@
+import 'package:dig_mobile_app/app/cubit/app/app_cubit.dart';
 import 'package:dig_mobile_app/app/definition/locale.dart';
 import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
+import 'package:dig_mobile_app/app/util/util.dart';
+import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -13,7 +16,14 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver, WidgetUtil {
+  final AppCubit _cubit = di();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addObserver(this);
+  }
+
   @override
   Widget build(BuildContext context) {
     return OverlaySupport.global(
@@ -23,6 +33,7 @@ class _MyAppState extends State<MyApp> {
         navigatorKey: navigatorKey,
         onGenerateRoute: (settings) => DigRoute().generateRoute(settings),
         supportedLocales: DigLocale.supportedLocale,
+
         /// TODO: Uncomment after setup Firebase
         // navigatorObservers: <NavigatorObserver>[
         //   FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)
@@ -34,8 +45,8 @@ class _MyAppState extends State<MyApp> {
           GlobalCupertinoLocalizations.delegate,
         ],
         localeResolutionCallback: (locale, supportedLocales) {
-          final hasSupported = supportedLocales
-              .any((element) => element == locale);
+          final hasSupported =
+              supportedLocales.any((element) => element == locale);
           if (hasSupported) {
             return locale;
           }
@@ -43,5 +54,23 @@ class _MyAppState extends State<MyApp> {
         },
       ),
     );
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.paused) {
+      _cubit.shouldEnterPIN().then((value) {
+        if (value) {
+          showEnterPINOverlay();
+        }
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance?.removeObserver(this);
+    super.dispose();
   }
 }

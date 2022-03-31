@@ -1,6 +1,8 @@
+import 'package:dartz/dartz.dart';
 import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/cubit/name_account/import_account/name_account_state.dart';
 import 'package:dig_mobile_app/app/definition/string.dart';
+import 'package:dig_mobile_app/app/page/pin/pin_page.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +15,7 @@ class NameAccountCubit extends Cubit<NameAccountState> {
 
   final ImportAccountUseCase _importAccountUseCase = di();
   final ChainENV _chain = di<ENV>().digChain;
+  final CheckHasPinUseCase _checkHasPinUseCase = di();
 
   void init(String mnemonic) {
     emit(NameAccountPrimaryState(
@@ -43,6 +46,20 @@ class NameAccountCubit extends Cubit<NameAccountState> {
       emit(NameAccountSuccessState(
           accountPublicInfo: account, viewmodel: state.viewmodel.copyWith()));
     });
+  }
+
+  void checkShouldCreatePINEvent(AccountPublicInfo accountPublicInfo) async {
+    final result = await _checkHasPinUseCase.call(const None());
+    final exist = result.getOrElse(() => false);
+
+    if (!exist) {
+      navigatorKey.currentState!.pushNamedAndRemoveUntil(
+          DigPageName.pin, (route) => false,
+          arguments: PinPageType.create);
+      return;
+    }
+
+    goToHome(accountPublicInfo);
   }
 
   void goToHome(AccountPublicInfo accountPublicInfo) =>
