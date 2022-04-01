@@ -1,4 +1,4 @@
-package com.example.dig_mobile_app
+package com.notional.lab.dig
 
 import io.flutter.embedding.android.FlutterActivity
 
