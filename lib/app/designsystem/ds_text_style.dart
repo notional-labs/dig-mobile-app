@@ -7,8 +7,14 @@ class DSTextStyle {
   static TextStyle get tsMontserratT10R =>
       GoogleFonts.montserrat(fontSize: 10, fontWeight: FontWeight.normal);
 
+  static TextStyle get tsMontserratT10B =>
+      GoogleFonts.montserrat(fontSize: 10, fontWeight: FontWeight.w700);
+
   static TextStyle get tsMontserratT12R =>
       GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.normal);
+
+  static TextStyle get tsMontserratT16R =>
+      GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w400);
 
   static TextStyle get tsMontserratT16M =>
       GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w500);

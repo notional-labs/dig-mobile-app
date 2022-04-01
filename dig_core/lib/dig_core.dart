@@ -26,6 +26,7 @@ export 'package:dig_core/src/domain/usecase/check_fist_time_run_app_usecase.dart
 export 'package:dig_core/src/domain/model/import_account.dart';
 export 'package:dig_core/src/domain/model/import_account_form_data.dart';
 export 'package:dig_core/src/domain/model/account_additional_data.dart';
+export 'package:dig_core/src/domain/enum/enum.dart';
 
 export 'package:dig_core/src/domain/util/util.dart';
 
