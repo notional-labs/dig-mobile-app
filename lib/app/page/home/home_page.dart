@@ -24,25 +24,17 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
           drawer: const HomeDrawer(),
           body: DSBackground(
-            child: Stack(
-              children: [
-                Positioned.directional(
-                  textDirection: TextDirection.ltr,
-                  child: const HomeAppBar(),
-                  top: 50,
-                  start: 0,
-                  end: 0,
-                ),
-                Positioned.directional(
-                    top: 80,
-                    start: 0,
-                    end: 0,
-                    bottom: 0,
-                    textDirection: TextDirection.ltr,
+            child: SafeArea(
+              child: Column(
+                children: [
+                  const HomeAppBar(),
+                  Expanded(
                     child: ActiveAccountPage(
                       accountPublicInfo: widget.accountPublicInfo,
-                    ))
-              ],
+                    ),
+                  )
+                ],
+              ),
             ),
           )),
     );

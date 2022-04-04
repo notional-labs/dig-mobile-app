@@ -74,7 +74,6 @@ class _NameAccountPageState extends State<NameAccountPage> with WidgetUtil {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (checkLandscape(context)) const SizedBox(height: 30),
                       const _Header(),
                       const SizedBox(height: 15),
                       Expanded(
@@ -89,6 +88,7 @@ class _NameAccountPageState extends State<NameAccountPage> with WidgetUtil {
                         ),
                       ),
                       if (!checkKeyboardOpening(context)) const _FooterWidget(),
+                      const SizedBox(height: 15),
                     ]),
               ),
             ),

@@ -63,10 +63,9 @@ class _ConfirmPinPageState extends State<ConfirmPinPage> with WidgetUtil {
                 backgroundColor: Colors.transparent,
                 body: SafeArea(
                   child: Column(
-                    children: [
-                      if (checkLandscape(context)) const SizedBox(height: 30),
-                      const _HeaderWidget(),
-                      const Expanded(
+                    children: const [
+                      _HeaderWidget(),
+                      Expanded(
                         child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 30),
                             child: _BodyWidget()),

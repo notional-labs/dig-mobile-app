@@ -42,84 +42,87 @@ class _RecoveryPhrasePageState extends State<RecoveryPhrasePage> {
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
           body: DSBackground(
-        child: Stack(
-          children: [
-            Positioned.directional(
-              textDirection: TextDirection.ltr,
-              child: DSPrimaryAppBar.normal(
+        child: SafeArea(
+          child: Column(
+            children: [
+              DSPrimaryAppBar.normal(
                 onBackButtonPressed: () => Navigator.of(context).pop(),
               ),
-              top: 50,
-              start: 0,
-              end: 0,
-            ),
-            Positioned.directional(
-                top: 80,
-                start: 0,
-                end: 0,
-                bottom: 0,
-                textDirection: TextDirection.ltr,
+              const SizedBox(height: 30),
+              Expanded(
                 child: BlocConsumer<RecoveryPhraseCubit, RecoveryPhraseState>(
                   bloc: _cubit,
                   listener: _cubitListener,
                   builder: (context, state) => _buildBody(state.model),
-                ))
-          ],
+                ),
+              )
+            ],
+          ),
         ),
       )),
     );
   }
 
-  void _cubitListener(_, RecoveryPhraseState state) {
-
-  }
+  void _cubitListener(_, RecoveryPhraseState state) {}
 
   Widget _buildBody(RecoveryPhraseViewModel model) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
+      margin: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            S.current.your_recovery_phrase,
-            style: DSTextStyle.tsMontserratT20B
-                .copyWith(color: DSColors.tulipTree),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: Text(S.current.your_recovery_phrase_description,
-                style:
-                    DSTextStyle.tsMontserratT12R.copyWith(color: Colors.white)),
-          ),
-          Expanded(child: _buildRecoveryPhraseGrid(model)),
-          const SizedBox(
-            height: 20,
-          ),
-          _CopyToClipBoard(
-            onTap: () => _cubit.copyToClipboard(widget.mnemonic),
-            isCopied: model.isCopiedToClipboard,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DSCheckBox(
-                  onChanged: (isChecked) => _cubit.onCheckBoxClicked(isChecked),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: Text(
-                    S.current.confirm_backup_recovery_phrase,
-                    style: DSTextStyle.tsMontserratT12R
-                        .copyWith(color: Colors.white),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    S.current.your_recovery_phrase,
+                    style: DSTextStyle.tsMontserratT20B
+                        .copyWith(color: DSColors.tulipTree),
                   ),
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Text(S.current.your_recovery_phrase_description,
+                        style: DSTextStyle.tsMontserratT12R
+                            .copyWith(color: Colors.white)),
+                  ),
+                  _buildRecoveryPhraseGrid(model),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _CopyToClipBoard(
+                    onTap: () => _cubit.copyToClipboard(widget.mnemonic),
+                    isCopied: model.isCopiedToClipboard,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        DSCheckBox(
+                          onChanged: (isChecked) =>
+                              _cubit.onCheckBoxClicked(isChecked),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: Text(
+                            S.current.confirm_backup_recovery_phrase,
+                            
+                            style: DSTextStyle.tsMontserratT12R
+                                .copyWith(color: Colors.white),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
+          const SizedBox(height: 15),
           DSPrimaryButton(
               title: S.current.continue_text,
               enable: model.canContinue,
@@ -127,28 +130,34 @@ class _RecoveryPhrasePageState extends State<RecoveryPhrasePage> {
                 Navigator.of(context).pushNamed(
                     DigPageName.confirmRecoveryPhrase,
                     arguments: widget.mnemonic);
-              })
+              }),
+          const SizedBox(height: 15),
         ],
       ),
     );
   }
 
   Widget _buildRecoveryPhraseGrid(RecoveryPhraseViewModel model) {
-    return GridView.builder(
-      itemCount: model.mnemonics.length,
-      padding: EdgeInsets.zero,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 14,
-        childAspectRatio: 1 / .4,
+    return SizedBox(
+      width: double.infinity,
+      child: GridView.builder(
+        itemCount: model.mnemonics.length,
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        padding: EdgeInsets.zero,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 14,
+          childAspectRatio: 1 / .4,
+        ),
+        itemBuilder: (BuildContext context, int index) {
+          return _PhraseGridItem(
+            index: index + 1,
+            text: model.mnemonics[index],
+          );
+        },
       ),
-      itemBuilder: (BuildContext context, int index) {
-        return _PhraseGridItem(
-          index: index + 1,
-          text: model.mnemonics[index],
-        );
-      },
     );
   }
 }

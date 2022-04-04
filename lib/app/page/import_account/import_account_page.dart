@@ -53,7 +53,6 @@ class _ImportAccountPageState extends State<ImportAccountPage> with WidgetUtil {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (checkLandscape(context)) const SizedBox(height: 30),
                       const _Header(),
                       const SizedBox(height: 15),
                       Expanded(
@@ -159,7 +158,7 @@ class _FooterWidget extends StatelessWidget {
   Widget build(BuildContext context) =>
       BlocBuilder<ImportAccountCubit, ImportAccountState>(
           builder: (_, state) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 child: DSPrimaryButton(
                     enable: state.viewmodel.isValid,
                     title: S.current.import,

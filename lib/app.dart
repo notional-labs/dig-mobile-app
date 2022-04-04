@@ -6,6 +6,7 @@ import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -21,6 +22,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver, WidgetUtil {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+  ]);
     WidgetsBinding.instance?.addObserver(this);
   }
 
@@ -28,6 +32,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver, WidgetUtil {
   Widget build(BuildContext context) {
     return OverlaySupport.global(
       child: MaterialApp(
+        builder: ((context, child) => MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: child!)),
         debugShowCheckedModeBanner: false,
         initialRoute: DigPageName.splash,
         navigatorKey: navigatorKey,
