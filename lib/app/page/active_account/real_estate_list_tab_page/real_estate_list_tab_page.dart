@@ -5,6 +5,6 @@ class RealEstateListTabPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Icon(Icons.directions_transit);
+    return SizedBox(height: 200, child: const Icon(Icons.directions_transit));
   }
 }

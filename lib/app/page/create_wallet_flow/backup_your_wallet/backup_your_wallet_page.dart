@@ -26,25 +26,16 @@ class _BackUpYourWalletPageState extends State<BackUpYourWalletPage> {
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
           body: DSBackground(
-        child: Stack(
-          children: [
-            Positioned.directional(
-              textDirection: TextDirection.ltr,
-              child: DSPrimaryAppBar.normal(
+        child: SafeArea(
+          child: Column(
+            children: [
+              DSPrimaryAppBar.normal(
                 onBackButtonPressed: () => Navigator.of(context).pop(),
               ),
-              top: 50,
-              start: 0,
-              end: 0,
-            ),
-            Positioned.directional(
-                top: 80,
-                start: 0,
-                end: 0,
-                bottom: 0,
-                textDirection: TextDirection.ltr,
-                child: _buildBody())
-          ],
+              const SizedBox(height: 38),
+              Expanded(child: SingleChildScrollView(child: _buildBody()))
+            ],
+          ),
         ),
       )),
     );
@@ -52,7 +43,7 @@ class _BackUpYourWalletPageState extends State<BackUpYourWalletPage> {
 
   Widget _buildBody() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
+      margin: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -92,7 +83,8 @@ class _BackUpYourWalletPageState extends State<BackUpYourWalletPage> {
           const SizedBox(
             height: 16,
           ),
-          DSPlainButton(title: S.current.back_up_later, onTap: () {})
+          DSPlainButton(title: S.current.back_up_later, onTap: () {}),
+          const SizedBox(height: 15),
         ],
       ),
     );

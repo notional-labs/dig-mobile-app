@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> with WidgetUtil {
                   ),
                   if (!checkKeyboardOpening(context))
                     const Padding(
-                        padding: EdgeInsets.only(top: 10),
+                        padding: EdgeInsets.only(top: 10, bottom: 15),
                         child: _BottomWidget())
                 ],
               ),
