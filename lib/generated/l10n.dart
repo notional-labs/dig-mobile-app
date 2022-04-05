@@ -499,6 +499,16 @@ class S {
       args: [],
     );
   }
+
+  /// `No account found`
+  String get no_account_found {
+    return Intl.message(
+      'No account found',
+      name: 'no_account_found',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

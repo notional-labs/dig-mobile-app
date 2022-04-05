@@ -11,7 +11,6 @@ import 'package:injectable/injectable.dart';
 @injectable
 class SplashCubit extends Cubit<SplashState> {
   final GetSelectedAccountUseCase _getAccountListUseCase = di();
-  final ChainENV _chain = di<ENV>().digChain;
   final CheckHasPinUseCase _checkHasPinUseCase = di();
   final CheckFirstTimeRunAppUseCase _checkFirstRunUseCase = di();
   final DeletePinUseCase _deletePinUseCase = di();
@@ -22,7 +21,7 @@ class SplashCubit extends Cubit<SplashState> {
     Future.delayed(const Duration(seconds: 2), () async {
       await cleanOldData();
       final result = await _getAccountListUseCase
-          .call(GetSelectedAccountUseCaseParam(chain: _chain));
+          .call(const GetSelectedAccountUseCaseParam());
       result.fold((failure) {
         navigatorKey.currentState
             ?.pushNamedAndRemoveUntil(DigPageName.signIn, (route) => false);

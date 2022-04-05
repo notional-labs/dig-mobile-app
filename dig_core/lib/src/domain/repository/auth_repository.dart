@@ -22,6 +22,10 @@ abstract class AuthRepository {
   Future<bool> checkHasPin();
 
   Future changePin(String pin);
-  
+
   Future deletePin();
+
+  Future<String?> getLastSelectedAccountId();
+  
+  Future selectAccount(String accountId);
 }

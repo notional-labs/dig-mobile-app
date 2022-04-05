@@ -1,4 +1,5 @@
 import 'package:dig_core/src/data/network/chain/chain_env.dart';
+import 'package:dig_core/src/data/network/env.dart';
 import 'package:dig_core/src/domain/exception/dig_exception.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dig_core/src/domain/model/import_account.dart';
@@ -12,14 +13,15 @@ import 'package:transaction_signing_gateway/model/account_public_info.dart';
 class ImportAccountUseCase
     extends UseCase<AccountPublicInfo, ImportAccountUseCaseParam> {
   final AuthRepository _repository;
+  final ENV _env;
 
-  ImportAccountUseCase(this._repository);
+  ImportAccountUseCase(this._repository, this._env);
 
   @override
   Future<Either<BaseDigException, AccountPublicInfo>> call(
       ImportAccountUseCaseParam params) async {
     try {
-      _repository.createChainENV(params.chain);
+      _repository.createChainENV(params.chain ?? _env.digChain);
       final result = await _repository.importAccount(params.importAccount);
       return Right(result);
     } catch (e, trace) {
@@ -31,8 +33,7 @@ class ImportAccountUseCase
 
 class ImportAccountUseCaseParam {
   final ImportAccount importAccount;
-  final ChainENV chain;
+  final ChainENV? chain;
 
-  const ImportAccountUseCaseParam(
-      {required this.importAccount, required this.chain});
+  const ImportAccountUseCaseParam({required this.importAccount, this.chain});
 }

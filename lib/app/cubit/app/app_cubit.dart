@@ -11,13 +11,12 @@ class AppCubit extends Cubit<AppState> {
   AppCubit() : super(const AppPrimaryState());
   final GetSelectedAccountUseCase _getSelectedAccountUseCase = di();
   final CheckHasPinUseCase _checkHasPinUseCase = di();
-  final ChainENV _chain = di<ENV>().digChain;
 
   Future<bool> shouldEnterPIN() async {
     AccountPublicInfo? account;
     bool hasPin = false;
     final getSelectedAccountUseCaseResult = await _getSelectedAccountUseCase
-        .call(GetSelectedAccountUseCaseParam(chain: _chain));
+        .call(const GetSelectedAccountUseCaseParam());
 
     getSelectedAccountUseCaseResult.fold((l) {}, (r) {
       account = r;

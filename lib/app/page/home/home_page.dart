@@ -1,22 +1,32 @@
+import 'package:dig_mobile_app/app/cubit/home/home_cubit.dart';
+import 'package:dig_mobile_app/app/cubit/home/home_state.dart';
 import 'package:dig_mobile_app/app/definition/app_assets.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/page/active_account/active_account_page.dart';
 import 'package:dig_mobile_app/app/page/home/home_drawer.dart';
+import 'package:dig_mobile_app/app/viewmodel/home_viewmodel.dart';
+import 'package:dig_mobile_app/di/di.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
-  final AccountPublicInfo? accountPublicInfo;
-
-  const HomePage({this.accountPublicInfo, Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  final HomeCubit _cubit = di();
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit.init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
@@ -25,20 +35,33 @@ class _HomePageState extends State<HomePage> {
           drawer: const HomeDrawer(),
           body: DSBackground(
             child: SafeArea(
-              child: Column(
-                children: [
-                  const HomeAppBar(),
-                  Expanded(
-                    child: ActiveAccountPage(
-                      accountPublicInfo: widget.accountPublicInfo,
-                    ),
-                  )
-                ],
-              ),
+              child: BlocProvider(
+                  create: (_) => _cubit,
+                  child: BlocBuilder<HomeCubit, HomeState>(
+                    bloc: _cubit,
+                    builder: (BuildContext context, state) {
+                      if (state is HomeUninitSate) {
+                        return const SizedBox.shrink();
+                      }
+
+                      return _bodyWidget(state.viewmodel);
+                    },
+                  )),
             ),
           )),
     );
   }
+
+  Widget _bodyWidget(HomeViewmodel viewmodel) => Column(
+        children: [
+          const HomeAppBar(),
+          Expanded(
+            child: ActiveAccountPage(
+              accountPublicInfo: viewmodel.getAccount,
+            ),
+          )
+        ],
+      );
 }
 
 class HomeAppBar extends StatelessWidget {
