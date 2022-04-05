@@ -43,5 +43,6 @@
     "enter_your_passcode": "Enter your passcode",
     "cancel": "Cancel",
     "confirm_your_passcode": "Confirm your passcode",
-    "passcode_do_not_match": "Passcode do not match"
+    "passcode_do_not_match": "Passcode do not match",
+    "no_account_found": "No account found"
 }

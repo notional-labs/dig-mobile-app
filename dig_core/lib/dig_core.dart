@@ -14,13 +14,16 @@ export 'package:dig_core/src/data/network/chain/chain_env.dart';
 export 'package:dig_core/src/domain/usecase/auth/import_account_usecase.dart';
 export 'package:dig_core/src/domain/usecase/auth/create_mnemonic_usecase.dart';
 export 'package:dig_core/src/domain/usecase/auth/check_mnemonic_valid_usecase.dart';
-export 'package:dig_core/src/domain/usecase/auth/get_selected_account_usecase.dart';
+export 'package:dig_core/src/domain/usecase/account/get_selected_account_usecase.dart';
 export 'package:dig_core/src/domain/usecase/auth/check_has_pin_usecase.dart';
 export 'package:dig_core/src/domain/usecase/auth/create_pin_usecase.dart';
 export 'package:dig_core/src/domain/usecase/auth/match_pin_usecase.dart';
 export 'package:dig_core/src/domain/usecase/auth/change_pin_usecase.dart';
 export 'package:dig_core/src/domain/usecase/auth/delete_pin_usecase.dart';
 export 'package:dig_core/src/domain/usecase/check_fist_time_run_app_usecase.dart';
+export 'package:dig_core/src/domain/usecase/account/get_list_account_usecase.dart';
+export 'package:dig_core/src/domain/usecase/account/get_selected_account_usecase.dart';
+export 'package:dig_core/src/domain/usecase/account/select_account_usecase.dart';
 
 // domain - model
 export 'package:dig_core/src/domain/model/import_account.dart';

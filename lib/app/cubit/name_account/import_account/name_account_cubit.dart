@@ -14,7 +14,6 @@ class NameAccountCubit extends Cubit<NameAccountState> {
   NameAccountCubit() : super(const NameAccountUninitState());
 
   final ImportAccountUseCase _importAccountUseCase = di();
-  final ChainENV _chain = di<ENV>().digChain;
   final CheckHasPinUseCase _checkHasPinUseCase = di();
 
   void init(String mnemonic) {
@@ -37,8 +36,7 @@ class NameAccountCubit extends Cubit<NameAccountState> {
                 password: '',
                 mnemonic: state.viewmodel.mnemonic,
                 additionalData:
-                    const AccountAdditionalData(isBackedUp: false))),
-        chain: _chain));
+                    const AccountAdditionalData(isBackedUp: false)))));
     result.fold((l) {
       emit(NameAccountErrorState(
           exception: l, viewmodel: state.viewmodel.copyWith()));

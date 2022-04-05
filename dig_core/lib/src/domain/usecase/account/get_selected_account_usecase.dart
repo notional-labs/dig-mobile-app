@@ -5,25 +5,34 @@ import 'package:dig_core/src/domain/usecase/usecase.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:transaction_signing_gateway/model/account_public_info.dart';
+import 'package:collection/collection.dart';
 
-@Injectable()
+@injectable
 class GetSelectedAccountUseCase
     extends UseCase<AccountPublicInfo, GetSelectedAccountUseCaseParam> {
   final AuthRepository _repository;
-
-  GetSelectedAccountUseCase(this._repository);
+  final ENV _env;
+  GetSelectedAccountUseCase(this._repository, this._env);
 
   @override
   Future<Either<BaseDigException, AccountPublicInfo>> call(
       GetSelectedAccountUseCaseParam params) async {
     try {
-      _repository.createChainENV(params.chain);
+      _repository.createChainENV(params.chain ?? _env.digChain);
       final accounts = await _repository.getAccountList();
+      final accountIdSelected = await _repository.getLastSelectedAccountId();
+
       if (accounts.isEmpty) {
-        return Left(exceptionHandler.handler(Exception('No account found')));
+        throw Exception('No account found');
       }
-      // todo get selected account from cache
-      return Right(accounts.first);
+
+      final account = accounts.firstWhereOrNull(
+          (element) => element.accountId == accountIdSelected);
+
+      if (account == null) {
+        return Right(accounts.first);
+      }
+      return Right(account);
     } catch (e, trace) {
       Logger().e('GetSelectedAccountUseCase ERROR', e, trace);
       return Left(exceptionHandler.handler(e));
@@ -32,7 +41,7 @@ class GetSelectedAccountUseCase
 }
 
 class GetSelectedAccountUseCaseParam {
-  final ChainENV chain;
+  final ChainENV? chain;
 
-  const GetSelectedAccountUseCaseParam({required this.chain});
+  const GetSelectedAccountUseCaseParam({this.chain});
 }

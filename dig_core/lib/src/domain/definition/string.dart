@@ -13,4 +13,5 @@ abstract class ErrorMessage {
 
 abstract class DigKey {
   static const String pin = 'DIG_PIN';
+  static const String accountId = 'ACCOUNT_ID';
 }

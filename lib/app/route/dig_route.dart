@@ -30,7 +30,7 @@ class DigRoute {
         return _materialPage(const LoginPage(), settings);
       case DigPageName.home:
         final account = args as AccountPublicInfo?;
-        return _materialPage(HomePage(accountPublicInfo: account), settings);
+        return _materialPage(const HomePage(), settings);
       case DigPageName.backUpYourWallet:
         return _materialPage(const BackUpYourWalletPage(), settings);
       case DigPageName.recoveryPhrase:
