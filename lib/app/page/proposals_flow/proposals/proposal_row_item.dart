@@ -5,7 +5,9 @@ import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:flutter/material.dart';
 
 class ProposalRowItem extends StatelessWidget {
-  const ProposalRowItem({Key? key}) : super(key: key);
+  final Function? onDetailTap;
+
+  const ProposalRowItem({this.onDetailTap, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,7 @@ class ProposalRowItem extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                const DSProposalStatus(),
+                const DSProposalStatus(withOpacity: 0.3,),
                 const SizedBox(
                   height: 8,
                 ),
@@ -94,7 +96,7 @@ class ProposalRowItem extends StatelessWidget {
                 ),
                 DSSmallButton(
                   title: 'Detail',
-                  onTap: () {},
+                  onTap: () => onDetailTap?.call(),
                 )
               ],
             ),

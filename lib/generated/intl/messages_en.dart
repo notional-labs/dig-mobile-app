@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_account":
             MessageLookupByLibrary.simpleMessage("Create account"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
         "dont_have_account_create":
             MessageLookupByLibrary.simpleMessage("Don’t have account? Create"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -79,6 +80,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "passcode_do_not_match":
             MessageLookupByLibrary.simpleMessage("Passcode do not match"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "proposal_detail_page_title":
+            MessageLookupByLibrary.simpleMessage("Detail"),
+        "proposal_id": MessageLookupByLibrary.simpleMessage("Proposal ID"),
+        "proposal_type": MessageLookupByLibrary.simpleMessage("Proposal Type"),
+        "proposer": MessageLookupByLibrary.simpleMessage("Proposer"),
         "real_estate": MessageLookupByLibrary.simpleMessage("Real estate"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign In"),
@@ -86,8 +92,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sign in on your account"),
         "sign_up_form_hint_invalid_email":
             MessageLookupByLibrary.simpleMessage("Invalid Email"),
+        "submitted_time":
+            MessageLookupByLibrary.simpleMessage("Submitted Time"),
+        "title": MessageLookupByLibrary.simpleMessage("Title"),
         "to_digchain": MessageLookupByLibrary.simpleMessage("To Digchain"),
         "token": MessageLookupByLibrary.simpleMessage("Token"),
+        "total_deposit": MessageLookupByLibrary.simpleMessage("Total Deposit"),
+        "voting_time": MessageLookupByLibrary.simpleMessage("Voting Time"),
         "wellcome": MessageLookupByLibrary.simpleMessage("WELCOME"),
         "your_recovery_phrase":
             MessageLookupByLibrary.simpleMessage("Your recovery phrase"),
