@@ -1,5 +1,8 @@
 import 'package:dig_mobile_app/app/definition/string.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_small_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/app/page/pin/pin_page.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +59,7 @@ mixin WidgetUtil {
     }
 
     _isPinOverlayShowing = true;
-    _loadingOverlayEntry = showOverlay(
+    _pinOverlayEntry = showOverlay(
         (_, __) => Container(
             width: double.infinity,
             height: double.infinity,
@@ -68,11 +71,83 @@ mixin WidgetUtil {
   }
 
   void dismissPINOverlay() {
-    _loadingOverlayEntry?.dismiss(animate: false);
+    _pinOverlayEntry?.dismiss(animate: false);
     _isPinOverlayShowing = false;
   }
 
   bool canPop(BuildContext context) => Navigator.of(context).canPop();
+
+  Future<dynamic> showDigDialog(
+      {required BuildContext context, required Widget child}) {
+    return showDialog(
+        context: context,
+        builder: (_) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                child,
+              ],
+            ),
+        useRootNavigator: true);
+  }
+
+  Future<dynamic> showActionDialog(
+          {required BuildContext context,
+          required String title,
+          required String message,
+          required String leftActTitle,
+          required String rightActTitle,
+          required VoidCallback onLeftTap,
+          required VoidCallback onRightTap}) =>
+      showDigDialog(
+          context: context,
+          child: Container(
+            padding: const EdgeInsets.all(15),
+            margin: const EdgeInsets.symmetric(horizontal: 15),
+            decoration: BoxDecoration(
+                color: DSColors.tundora,
+                borderRadius: BorderRadius.circular(10)),
+            alignment: Alignment.center,
+            child: Align(
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: DSTextStyle.tsMontserratT20B
+                        .copyWith(color: DSColors.tulipTree),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(message,
+                      textAlign: TextAlign.center,
+                      style: DSTextStyle.tsMontserratT12R
+                          .copyWith(color: Colors.white)),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      DSSmallButton(
+                        title: leftActTitle,
+                        onTap: () {
+                          onLeftTap();
+                        },
+                        backgroundColor: DSColors.silver2,
+                      ),
+                      DSSmallButton(
+                        title: rightActTitle,
+                        onTap: () {
+                          onRightTap();
+                        },
+                        backgroundColor: DSColors.tulipTree,
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ));
 }
 
 mixin ImageUtil {
