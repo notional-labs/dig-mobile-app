@@ -26,6 +26,8 @@ abstract class AuthRepository {
   Future deletePin();
 
   Future<String?> getLastSelectedAccountId();
-  
+
   Future selectAccount(String accountId);
+
+  Future removeAccount(AccountPublicInfo accountPublicInfo);
 }

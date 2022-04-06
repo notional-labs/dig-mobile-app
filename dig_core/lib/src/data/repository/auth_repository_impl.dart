@@ -131,4 +131,9 @@ class AuthRepositoryImplement extends AuthRepository {
   @override
   Future selectAccount(String accountId) =>
       _accountLocalDatasource.selectAccount(accountId);
+
+  @override
+  Future removeAccount(AccountPublicInfo accountPublicInfo) =>
+      createTransactionSigningGateway()
+          .deleteAccountCredentials(publicInfo: accountPublicInfo);
 }

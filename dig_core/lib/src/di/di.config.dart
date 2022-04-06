@@ -17,7 +17,7 @@ import '../data/repository/auth_repository_impl.dart' as _i11;
 import '../domain/repository/auth_repository.dart' as _i10;
 import '../domain/usecase/account/get_list_account_usecase.dart' as _i17;
 import '../domain/usecase/account/get_selected_account_usecase.dart' as _i19;
-import '../domain/usecase/account/select_account_usecase.dart' as _i23;
+import '../domain/usecase/account/select_account_usecase.dart' as _i24;
 import '../domain/usecase/auth/change_pin_usecase.dart' as _i12;
 import '../domain/usecase/auth/check_has_pin_usecase.dart' as _i13;
 import '../domain/usecase/auth/check_mnemonic_valid_usecase.dart' as _i5;
@@ -26,6 +26,7 @@ import '../domain/usecase/auth/create_pin_usecase.dart' as _i15;
 import '../domain/usecase/auth/delete_pin_usecase.dart' as _i16;
 import '../domain/usecase/auth/import_account_usecase.dart' as _i20;
 import '../domain/usecase/auth/match_pin_usecase.dart' as _i22;
+import '../domain/usecase/auth/remove_account_usecase.dart' as _i23;
 import '../domain/usecase/check_fist_time_run_app_usecase.dart' as _i4;
 import '../domain/util/util.dart'
     as _i7; // ignore_for_file: unnecessary_lambdas
@@ -66,7 +67,9 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       _i20.ImportAccountUseCase(get<_i10.AuthRepository>(), get<_i21.ENV>()));
   gh.factory<_i22.MatchPinUseCase>(
       () => _i22.MatchPinUseCase(get<_i10.AuthRepository>()));
-  gh.factory<_i23.SelectAccountUseCase>(
-      () => _i23.SelectAccountUseCase(get<_i10.AuthRepository>()));
+  gh.factory<_i23.RemoveAccountUseCase>(() =>
+      _i23.RemoveAccountUseCase(get<_i10.AuthRepository>(), get<_i21.ENV>()));
+  gh.factory<_i24.SelectAccountUseCase>(
+      () => _i24.SelectAccountUseCase(get<_i10.AuthRepository>()));
   return get;
 }
