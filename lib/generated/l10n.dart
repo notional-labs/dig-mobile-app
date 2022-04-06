@@ -600,21 +600,31 @@ class S {
     );
   }
 
-  /// `Delete Account`
-  String get delete_account {
+  /// `Remove Account`
+  String get remove_account {
     return Intl.message(
-      'Delete Account',
-      name: 'delete_account',
+      'Remove Account',
+      name: 'remove_account',
       desc: '',
       args: [],
     );
   }
 
-  /// `Are you sure you want to delete this Account?`
-  String get are_you_sure_you_want_to_delete_this_account {
+  /// `Are you sure you want to remove this Account?`
+  String get are_you_sure_you_want_to_remove_this_account {
     return Intl.message(
-      'Are you sure you want to delete this Account?',
-      name: 'are_you_sure_you_want_to_delete_this_account',
+      'Are you sure you want to remove this Account?',
+      name: 'are_you_sure_you_want_to_remove_this_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove`
+  String get remove {
+    return Intl.message(
+      'Remove',
+      name: 'remove',
       desc: '',
       args: [],
     );

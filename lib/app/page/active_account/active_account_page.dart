@@ -95,15 +95,15 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
                   actionType: DSRoundedButtonActionType.exchange,
                 ),
                 DSRoundedButton(
-                  actionType: DSRoundedButtonActionType.delete,
+                  actionType: DSRoundedButtonActionType.remove,
                   onTap: () {
                     showActionDialog(
                         context: context,
-                        title: S.current.delete_account,
+                        title: S.current.remove_account,
                         message: S.current
-                            .are_you_sure_you_want_to_delete_this_account,
+                            .are_you_sure_you_want_to_remove_this_account,
                         leftActTitle: S.current.cancel,
-                        rightActTitle: S.current.delete,
+                        rightActTitle: S.current.remove,
                         onLeftTap: () {
                           Navigator.of(context).pop();
                         },
