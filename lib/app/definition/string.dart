@@ -10,4 +10,5 @@ abstract class DigPageName {
   static const String nameAccount = '/name_account';
   static const String pin = '/pin';
   static const String confirmPin = '/confirm_pin';
+  static const String proposalDetail = '/proposal_detail';
 }

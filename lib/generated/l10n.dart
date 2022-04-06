@@ -509,6 +509,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Detail`
+  String get proposal_detail_page_title {
+    return Intl.message(
+      'Detail',
+      name: 'proposal_detail_page_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Proposal ID`
+  String get proposal_id {
+    return Intl.message(
+      'Proposal ID',
+      name: 'proposal_id',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Proposer`
+  String get proposer {
+    return Intl.message(
+      'Proposer',
+      name: 'proposer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Deposit`
+  String get total_deposit {
+    return Intl.message(
+      'Total Deposit',
+      name: 'total_deposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submitted Time`
+  String get submitted_time {
+    return Intl.message(
+      'Submitted Time',
+      name: 'submitted_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Voting Time`
+  String get voting_time {
+    return Intl.message(
+      'Voting Time',
+      name: 'voting_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Proposal Type`
+  String get proposal_type {
+    return Intl.message(
+      'Proposal Type',
+      name: 'proposal_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title`
+  String get title {
+    return Intl.message(
+      'Title',
+      name: 'title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

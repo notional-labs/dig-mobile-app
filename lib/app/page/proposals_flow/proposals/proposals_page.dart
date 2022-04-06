@@ -1,6 +1,8 @@
+import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/app/page/proposals_flow/proposals/proposal_row_item.dart';
+import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:flutter/material.dart';
 
 class ProposalsPage extends StatefulWidget {
@@ -28,7 +30,10 @@ class _ProposalsPageState extends State<ProposalsPage> {
               height: 25,
             ),
             itemCount: 10,
-            itemBuilder: (_, index) => const ProposalRowItem(),
+            itemBuilder: (_, index) => ProposalRowItem(
+              onDetailTap: () => navigatorKey.currentState!
+                  .pushNamed(DigPageName.proposalDetail),
+            ),
           )),
           const SizedBox(
             height: 10,

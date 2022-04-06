@@ -44,5 +44,14 @@
     "cancel": "Cancel",
     "confirm_your_passcode": "Confirm your passcode",
     "passcode_do_not_match": "Passcode do not match",
-    "no_account_found": "No account found"
+    "no_account_found": "No account found",
+    "proposal_detail_page_title": "Detail",
+    "proposal_id": "Proposal ID",
+    "proposer": "Proposer",
+    "total_deposit": "Total Deposit",
+    "submitted_time": "Submitted Time",
+    "voting_time": "Voting Time",
+    "proposal_type": "Proposal Type",
+    "title": "Title",
+    "description": "Description"
 }

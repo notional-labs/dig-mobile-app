@@ -78,7 +78,7 @@ class _Normal extends StatelessWidget {
         ),
         if (onBackButtonPressed != null)
           const SizedBox(
-            width: 50,
+            width: 84,
           )
       ],
     );

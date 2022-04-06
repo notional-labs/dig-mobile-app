@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 
 class DSProposalStatus extends StatelessWidget {
   final ProposalStatusType type;
+  final double? withOpacity;
 
   const DSProposalStatus(
-      {this.type = ProposalStatusType.unrecognized, Key? key})
+      {this.type = ProposalStatusType.unrecognized, this.withOpacity, Key? key})
       : super(key: key);
 
   @override
@@ -16,11 +17,11 @@ class DSProposalStatus extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: DSColors.jungleGreen.withOpacity(0.3)),
+          color: DSColors.jungleGreen.withOpacity(withOpacity ?? 1.0)),
       child: Text(
         'Passed',
-        style:
-            DSTextStyle.tsMontserratT16R.copyWith(color: DSColors.jungleGreen),
+        style: DSTextStyle.tsMontserratT16R.copyWith(
+            color: withOpacity == null ? Colors.white : DSColors.jungleGreen),
       ),
     );
   }
