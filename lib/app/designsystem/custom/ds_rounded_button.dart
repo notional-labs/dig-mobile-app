@@ -10,34 +10,41 @@ class DSRoundedButton extends StatelessWidget {
   final DSRoundedButtonActionType actionType;
   final String? text;
   final String? icon;
+  final VoidCallback? onTap;
 
   const DSRoundedButton(
       {this.actionType = DSRoundedButtonActionType.none,
       this.text,
       this.icon,
+      this.onTap,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 35,
-          height: 35,
-          decoration: const BoxDecoration(
-              color: DSColors.tulipTree, shape: BoxShape.circle),
-          child: Image.asset(icon ?? _getIconByType()),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        Text(
-          text ?? _getTextByType(),
-          style: DSTextStyle.tsMontserrat.copyWith(
-              fontSize: 12, fontWeight: FontWeight.w400, color: Colors.white),
-        )
-      ],
+    return GestureDetector(
+      onTap: () {
+        onTap?.call();
+      },
+      child: Column(
+        children: [
+          Container(
+            width: 35,
+            height: 35,
+            decoration: const BoxDecoration(
+                color: DSColors.tulipTree, shape: BoxShape.circle),
+            child: Image.asset(icon ?? _getIconByType()),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(
+            text ?? _getTextByType(),
+            style: DSTextStyle.tsMontserrat.copyWith(
+                fontSize: 12, fontWeight: FontWeight.w400, color: Colors.white),
+          )
+        ],
+      ),
     );
   }
 
