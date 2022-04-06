@@ -4,10 +4,12 @@ import 'package:dig_mobile_app/app/designsystem/custom/ds_avatar.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_rounded_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_expandable_page_view.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_small_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/app/extension/extension.dart';
 import 'package:dig_mobile_app/app/page/active_account/real_estate_list_tab_page/real_estate_list_tab_page.dart';
 import 'package:dig_mobile_app/app/page/active_account/tokens_holding_list_tab_page/tokens_holding_list_tab_page.dart';
+import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/active_account_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
@@ -16,16 +18,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 class ActiveAccountPage extends StatefulWidget {
-  final AccountPublicInfo? accountPublicInfo;
+  final AccountPublicInfo accountPublicInfo;
 
-  const ActiveAccountPage({this.accountPublicInfo, Key? key}) : super(key: key);
+  const ActiveAccountPage({required this.accountPublicInfo, Key? key})
+      : super(key: key);
 
   @override
   State<ActiveAccountPage> createState() => _ActiveAccountPageState();
 }
 
 class _ActiveAccountPageState extends State<ActiveAccountPage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetUtil {
   final ActiveAccountCubit _cubit = di();
   final PageController _pageController = PageController();
   late TabController _tabController;
@@ -58,7 +61,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
             ),
           ),
           Text(
-            widget.accountPublicInfo?.name ?? '',
+            widget.accountPublicInfo.name,
             style: DSTextStyle.tsMontserrat.copyWith(
                 color: DSColors.tulipTree,
                 fontSize: 20,
@@ -75,24 +78,39 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
           const SizedBox(
             height: 12,
           ),
-          _WalletAddress(address: widget.accountPublicInfo?.publicAddress ?? ''),
+          _WalletAddress(address: widget.accountPublicInfo.publicAddress),
           Padding(
             padding:
                 const EdgeInsets.only(top: 20, left: 54, right: 54, bottom: 34),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                DSRoundedButton(
+              children: [
+                const DSRoundedButton(
                   actionType: DSRoundedButtonActionType.buy,
                 ),
-                DSRoundedButton(
+                const DSRoundedButton(
                   actionType: DSRoundedButtonActionType.send,
                 ),
-                DSRoundedButton(
+                const DSRoundedButton(
                   actionType: DSRoundedButtonActionType.exchange,
                 ),
                 DSRoundedButton(
                   actionType: DSRoundedButtonActionType.delete,
+                  onTap: () {
+                    showActionDialog(
+                        context: context,
+                        title: S.current.delete_account,
+                        message: S.current
+                            .are_you_sure_you_want_to_delete_this_account,
+                        leftActTitle: S.current.cancel,
+                        rightActTitle: S.current.delete,
+                        onLeftTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        onRightTap: () {
+                          _cubit.removeAccount(widget.accountPublicInfo);
+                        });
+                  },
                 )
               ],
             ),

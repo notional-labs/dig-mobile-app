@@ -24,6 +24,7 @@ export 'package:dig_core/src/domain/usecase/check_fist_time_run_app_usecase.dart
 export 'package:dig_core/src/domain/usecase/account/get_list_account_usecase.dart';
 export 'package:dig_core/src/domain/usecase/account/get_selected_account_usecase.dart';
 export 'package:dig_core/src/domain/usecase/account/select_account_usecase.dart';
+export 'package:dig_core/src/domain/usecase/auth/remove_account_usecase.dart';
 
 // domain - model
 export 'package:dig_core/src/domain/model/import_account.dart';
