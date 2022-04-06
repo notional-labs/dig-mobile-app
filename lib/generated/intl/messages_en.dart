@@ -25,9 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
-        "are_you_sure_you_want_to_delete_this_account":
+        "are_you_sure_you_want_to_remove_this_account":
             MessageLookupByLibrary.simpleMessage(
-                "Are you sure you want to delete this Account?"),
+                "Are you sure you want to remove this Account?"),
         "back_up_later": MessageLookupByLibrary.simpleMessage("Back up later"),
         "back_up_now": MessageLookupByLibrary.simpleMessage("Back up now"),
         "back_up_your_wallet":
@@ -58,8 +58,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_account":
             MessageLookupByLibrary.simpleMessage("Create account"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
-        "delete_account":
-            MessageLookupByLibrary.simpleMessage("Delete Account"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "dont_have_account_create":
             MessageLookupByLibrary.simpleMessage("Don’t have account? Create"),
@@ -91,6 +89,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "proposal_type": MessageLookupByLibrary.simpleMessage("Proposal Type"),
         "proposer": MessageLookupByLibrary.simpleMessage("Proposer"),
         "real_estate": MessageLookupByLibrary.simpleMessage("Real estate"),
+        "remove": MessageLookupByLibrary.simpleMessage("Remove"),
+        "remove_account":
+            MessageLookupByLibrary.simpleMessage("Remove Account"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign In"),
         "sign_in_on_your_account":

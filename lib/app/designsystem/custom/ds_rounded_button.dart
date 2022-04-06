@@ -4,7 +4,7 @@ import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
-enum DSRoundedButtonActionType { buy, send, exchange, delete, none }
+enum DSRoundedButtonActionType { buy, send, exchange, remove, none }
 
 class DSRoundedButton extends StatelessWidget {
   final DSRoundedButtonActionType actionType;
@@ -56,7 +56,7 @@ class DSRoundedButton extends StatelessWidget {
         return AppAssets.icArrowUpRight;
       case DSRoundedButtonActionType.exchange:
         return AppAssets.icArrowExchange;
-      case DSRoundedButtonActionType.delete:
+      case DSRoundedButtonActionType.remove:
         return AppAssets.icDelete;
       case DSRoundedButtonActionType.none:
         return '';
@@ -71,8 +71,8 @@ class DSRoundedButton extends StatelessWidget {
         return S.current.send;
       case DSRoundedButtonActionType.exchange:
         return S.current.exchange;
-      case DSRoundedButtonActionType.delete:
-        return S.current.delete;
+      case DSRoundedButtonActionType.remove:
+        return S.current.remove;
       case DSRoundedButtonActionType.none:
         return '';
     }
