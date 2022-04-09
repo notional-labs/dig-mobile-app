@@ -1,4 +1,6 @@
+import 'package:dig_core/src/data/definition/definition.dart';
 import 'package:dig_core/src/data/exception/dig_exception_impl.dart';
+import 'package:dig_core/src/domain/definition/definition.dart';
 import 'package:dig_core/src/domain/exception/dig_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,6 +29,9 @@ class DigExceptionHandler implements BaseDigExceptionHandler {
   }
 
   BaseDigException _handleDioError(DioError any) {
+    if (any.error is DigNetworkException) {
+      return const DigNetworkException(message: DataErrorMessage.networkError);
+    }
     if (any.error is BaseDigException) {
       return any.error;
     }
@@ -42,11 +47,11 @@ class DigExceptionHandler implements BaseDigExceptionHandler {
       AccountDerivationFailure any) {
     switch (any.type) {
       case AccountDerivationFailType.invalidMnemonic:
-        return const DigException(message: 'Invalid Mnemonic');
+        return const DigException(message: DomainErrorMessage.invalidMnemonic);
       case AccountDerivationFailType.derivatorNotFound:
-        return const DigException(message: 'Derivator Not Found');
+        return const DigException(message: DataErrorMessage.derivatorNotFound);
       default:
-        return const DigException(message: 'Unknow Error');
+        return const DigException(message: DataErrorMessage.unknowError);
     }
   }
 }

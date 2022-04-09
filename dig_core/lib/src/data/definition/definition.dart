@@ -15,3 +15,9 @@ abstract class EndPoint {
 abstract class GetItInstanceName {
   static const String restClientDigChain = 'REST_CLIENT_DIG_CHAIN';
 }
+
+abstract class DataErrorMessage {
+  static const String networkError = 'Please check your connect';
+  static const String derivatorNotFound = 'Derivator Not Found';
+  static const String unknowError = 'Unknow Error';
+}
