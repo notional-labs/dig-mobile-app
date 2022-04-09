@@ -1,5 +1,5 @@
 import 'package:alan/wallet/network_info.dart';
-import 'package:dig_core/src/data/network/chain/chain_env.dart';
+import 'package:dig_core/src/domain/env/env.dart';
 import 'package:grpc/grpc.dart';
 
 class DigChainTestNet implements ChainENV {

@@ -1,7 +1,8 @@
 import 'package:dig_core/dig_core.dart';
 import 'package:dig_core/src/data/datasource/local/account_local_datasource.dart';
 import 'package:dig_core/src/data/datasource/local/pin_local_datasource.dart';
-import 'package:dig_core/src/domain/model/create_mnemonic.dart';
+import 'package:dig_core/src/domain/entity/create_mnemonic.dart';
+import 'package:dig_core/src/domain/env/env.dart';
 import 'package:dig_core/src/domain/repository/auth_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package:transaction_signing_gateway/alan/alan_account_derivation_info.dart';

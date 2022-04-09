@@ -1,5 +1,13 @@
 import 'package:alan/wallet/network_info.dart';
 
+abstract class ENV {
+  ChainENV get digChain;
+
+  /// TODO: Define other chain here
+  /// Example:
+  ///    ChainENV get cosmosChain;
+}
+
 abstract class ChainENV {
   String get lcdUrl;
   int get lcdPort;

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dig_core/src/domain/exception/dig_exception.dart';
-import 'package:dig_core/src/domain/model/create_mnemonic.dart';
+import 'package:dig_core/src/domain/entity/create_mnemonic.dart';
 import 'package:dig_core/src/domain/repository/auth_repository.dart';
 import 'package:dig_core/src/domain/usecase/usecase.dart';
 import 'package:injectable/injectable.dart';

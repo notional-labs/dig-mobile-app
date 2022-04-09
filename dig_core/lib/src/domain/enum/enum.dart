@@ -1,1 +1,8 @@
-export 'proposal_status_type.dart';
+enum ProposalStatusType {
+  depositPeriod,
+  votingPeriod,
+  passed,
+  rejected,
+  failed,
+  unrecognized
+}

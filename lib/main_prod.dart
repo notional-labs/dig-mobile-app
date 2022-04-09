@@ -9,7 +9,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   runZonedGuarded(() async {
-    initDI(core.DevENV());
+    initDI(core.ProdENV());
 
     /// TODO: Uncomment after setup Firebase
     // await initFirebase();

@@ -1,8 +1,7 @@
-import 'package:dig_core/src/data/network/chain/chain_env.dart';
-import 'package:dig_core/src/data/network/env.dart';
+import 'package:dig_core/src/domain/entity/import_account.dart';
+import 'package:dig_core/src/domain/env/env.dart';
 import 'package:dig_core/src/domain/exception/dig_exception.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dig_core/src/domain/model/import_account.dart';
 import 'package:dig_core/src/domain/repository/auth_repository.dart';
 import 'package:dig_core/src/domain/usecase/usecase.dart';
 import 'package:injectable/injectable.dart';
