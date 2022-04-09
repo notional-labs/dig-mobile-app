@@ -4,7 +4,7 @@ import 'package:grpc/grpc.dart';
 
 class DigChainTestNet implements ChainENV {
   @override
-  String get lcdUrl => 'https://api-1-dig.notional.ventures';
+  String get lcdUrl => 'https://api-1-dig.notional.ventures/';
 
   @override
   int get lcdPort => 443;
@@ -16,7 +16,7 @@ class DigChainTestNet implements ChainENV {
   int get grpcPort => 2222;
 
   @override
-  String get baseApiUrl => '$lcdUrl:$lcdPort';
+  String get baseApiUrl => lcdUrl;
 
   @override
   String get bech32Hrp => 'dig';
@@ -43,7 +43,7 @@ class DigChainTestNet implements ChainENV {
 
 class DigChainMainNet implements ChainENV {
   @override
-  String get lcdUrl => 'https://api-1-dig.notional.ventures';
+  String get lcdUrl => 'https://api-1-dig.notional.ventures/';
 
   @override
   int get lcdPort => 443;
@@ -55,7 +55,7 @@ class DigChainMainNet implements ChainENV {
   int get grpcPort => 2222;
 
   @override
-  String get baseApiUrl => '$lcdUrl:$lcdPort';
+  String get baseApiUrl => lcdUrl;
 
   @override
   String get bech32Hrp => 'dig';

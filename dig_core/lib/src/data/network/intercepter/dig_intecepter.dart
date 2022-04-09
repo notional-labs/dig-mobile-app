@@ -1,5 +1,6 @@
 import 'package:dig_core/src/data/definition/definition.dart';
 import 'package:dig_core/src/data/exception/dig_exception_impl.dart';
+import 'package:dig_core/src/domain/entity/error_response.dart';
 import 'package:dig_core/src/domain/exception/dig_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:dig_core/src/domain/extension/extension.dart';
@@ -9,7 +10,7 @@ class DigIntercepter extends InterceptorsWrapper {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     /// TODO: Attach token here
-    options.headers['Authorization'] = 'Token';
+    // options.headers['Authorization'] = 'Token';
     options.headers['contentType'] = 'application/json';
 
     /// Log CURL
@@ -41,7 +42,7 @@ class DigIntercepter extends InterceptorsWrapper {
           .reject(DioError(requestOptions: err.requestOptions, error: err));
     }
 
-    /// Not receive response from server, throw [BeanstalNetworkException]
+    /// Not receive response from server, throw [DigNetworkException]
     if (err.type != DioErrorType.response) {
       return handler.reject(DioError(
           requestOptions: err.requestOptions,
@@ -49,9 +50,11 @@ class DigIntercepter extends InterceptorsWrapper {
     }
 
     /// Continue with a response
-    ///TODO: Impl [message]
-    const message = '';
+    final ErrorResponse errorResponse =
+        ErrorResponse.fromJson(err.response!.data ?? {});
+
     final statusCode = err.response!.statusCode!;
+    final message = errorResponse.message ?? '';
 
     /// TODO: Impl expired token
     if (statusCode == HttpCode.expiredToken) {
@@ -62,6 +65,9 @@ class DigIntercepter extends InterceptorsWrapper {
 
     handler.reject(DioError(
         requestOptions: err.requestOptions,
-        error: DigServerException(message: message, code: statusCode)));
+        error: DigServerException(
+            message: message,
+            statusCode: statusCode,
+            errorResponse: errorResponse)));
   }
 }
