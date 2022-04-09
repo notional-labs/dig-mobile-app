@@ -1,6 +1,6 @@
-import 'package:dig_core/src/data/network/chain/chain_env.dart';
-import 'package:dig_core/src/domain/model/create_mnemonic.dart';
-import 'package:dig_core/src/domain/model/import_account.dart';
+import 'package:dig_core/src/domain/entity/create_mnemonic.dart';
+import 'package:dig_core/src/domain/entity/import_account.dart';
+import 'package:dig_core/src/domain/env/env.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 /// Support authencation for multichain

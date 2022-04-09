@@ -1,4 +1,4 @@
-import 'package:dig_core/src/domain/definition/string.dart';
+import 'package:dig_core/src/data/definition/definition.dart';
 import 'package:dig_core/src/domain/util/util.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';

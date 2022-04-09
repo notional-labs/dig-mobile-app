@@ -1,5 +1,5 @@
+import 'package:dig_core/src/data/definition/definition.dart';
 import 'package:dig_core/src/data/exception/dig_exception_impl.dart';
-import 'package:dig_core/src/domain/definition/string.dart';
 import 'package:dig_core/src/domain/exception/dig_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:dig_core/src/domain/extension/extension.dart';

@@ -1,4 +1,4 @@
-import 'package:dig_core/src/domain/definition/string.dart';
+import 'package:dig_core/src/data/definition/definition.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

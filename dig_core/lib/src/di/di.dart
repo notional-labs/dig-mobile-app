@@ -1,16 +1,23 @@
-import 'package:dig_core/src/data/network/env.dart';
+import 'package:dig_core/src/data/definition/definition.dart';
 import 'package:dig_core/src/data/network/intercepter/dig_intecepter.dart';
+import 'package:dig_core/src/data/network/rest_client.dart';
 import 'package:dig_core/src/di/di.config.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:dig_core/src/domain/env/env.dart';
+
+late final GetIt digCoreDI;
 
 @injectableInit
-void initDI(GetIt di, ENV env) {
-  di
+void initDI(GetIt _di, ENV env) {
+  digCoreDI = _di;
+  digCoreDI
     ..registerLazySingleton<ENV>(() => env)
     ..registerLazySingleton<DigIntercepter>(() => DigIntercepter());
+  digCoreDI.registerFactory<FlutterSecureStorage>(
+      () => const FlutterSecureStorage());
 
   final Dio dio = Dio()
     ..options = BaseOptions(
@@ -18,9 +25,17 @@ void initDI(GetIt di, ENV env) {
       connectTimeout: 30000,
       sendTimeout: 30000,
     );
-  dio.interceptors.add(di<DigIntercepter>());
+  dio.interceptors.add(digCoreDI<DigIntercepter>());
 
-  di.registerLazySingleton<Dio>(() => dio);
-  di.registerFactory<FlutterSecureStorage>(() => const FlutterSecureStorage());
-  $initGetIt(di);
+  digCoreDI.registerLazySingleton<Dio>(() => dio);
+
+  /// Register [RestClient] for DigChain
+  digCoreDI.registerFactory(
+      () => RestClient.from(digCoreDI<Dio>(), digCoreDI<ENV>().digChain),
+      instanceName: GetItInstanceName.restClientDigChain);
+
+  /// TODO: Register [RestClient] for other chain here...
+  ///      ....
+
+  $initGetIt(digCoreDI);
 }

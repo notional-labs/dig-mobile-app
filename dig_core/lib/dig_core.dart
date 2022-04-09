@@ -2,13 +2,12 @@ library dig_core;
 
 export 'package:dig_core/src/domain/extension/extension.dart';
 export 'package:dig_core/src/di/di.dart';
-export 'package:dig_core/src/data/network/env.dart';
+export 'package:dig_core/src/data/network/env/env_impl.dart';
 export 'package:dig_core/src/domain/exception/dig_exception.dart';
 export 'package:dig_core/src/data/exception/dig_exception_handler_impl.dart';
 export 'package:dig_core/src/data/exception/dig_exception_impl.dart';
+export 'package:dig_core/src/domain/env/env.dart';
 
-// cosmos
-export 'package:dig_core/src/data/network/chain/chain_env.dart';
 
 // domain - use cases
 export 'package:dig_core/src/domain/usecase/auth/import_account_usecase.dart';
@@ -27,10 +26,13 @@ export 'package:dig_core/src/domain/usecase/account/select_account_usecase.dart'
 export 'package:dig_core/src/domain/usecase/auth/remove_account_usecase.dart';
 
 // domain - model
-export 'package:dig_core/src/domain/model/import_account.dart';
-export 'package:dig_core/src/domain/model/import_account_form_data.dart';
-export 'package:dig_core/src/domain/model/account_additional_data.dart';
+export 'package:dig_core/src/domain/entity/import_account.dart';
+export 'package:dig_core/src/domain/entity/import_account_form_data.dart';
+export 'package:dig_core/src/domain/entity/account_additional_data.dart';
 export 'package:dig_core/src/domain/enum/enum.dart';
+export 'package:alan/proto/cosmos/bank/v1beta1/genesis.pb.dart';
+export 'package:dig_core/src/domain/entity/balance_response.dart';
+export 'package:dig_core/src/domain/entity/pagination.dart';
 
 export 'package:dig_core/src/domain/util/util.dart';
 
