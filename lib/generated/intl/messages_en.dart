@@ -22,6 +22,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(year) => "Copyright © ${year} Digchain.";
 
+  static String m1(token) => "${token} DIG";
+
+  static String m2(money) => "\$${money}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
@@ -59,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create account"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "dig_token_format": m1,
         "dont_have_account_create":
             MessageLookupByLibrary.simpleMessage("Don’t have account? Create"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -98,12 +103,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sign in on your account"),
         "sign_up_form_hint_invalid_email":
             MessageLookupByLibrary.simpleMessage("Invalid Email"),
+        "some_thing_wrong":
+            MessageLookupByLibrary.simpleMessage("Some thing wrong"),
         "submitted_time":
             MessageLookupByLibrary.simpleMessage("Submitted Time"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "to_digchain": MessageLookupByLibrary.simpleMessage("To Digchain"),
         "token": MessageLookupByLibrary.simpleMessage("Token"),
         "total_deposit": MessageLookupByLibrary.simpleMessage("Total Deposit"),
+        "usd_money_format": m2,
         "voting_time": MessageLookupByLibrary.simpleMessage("Voting Time"),
         "wellcome": MessageLookupByLibrary.simpleMessage("WELCOME"),
         "your_recovery_phrase":

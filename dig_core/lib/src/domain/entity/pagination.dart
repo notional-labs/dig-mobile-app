@@ -6,7 +6,7 @@ part 'pagination.g.dart';
 @JsonSerializable()
 class Pagination extends Equatable {
   final String? nextKey;
-  final int? total;
+  final String? total;
   const Pagination({
     this.nextKey,
     this.total,
@@ -19,7 +19,7 @@ class Pagination extends Equatable {
 
   Pagination copyWith({
     String? nextKey,
-    int? total,
+    String? total,
   }) {
     return Pagination(
       nextKey: nextKey ?? this.nextKey,

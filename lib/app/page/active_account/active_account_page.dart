@@ -1,21 +1,23 @@
+import 'package:dig_core/dig_core.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:dig_mobile_app/app/cubit/active_account/active_account_cubit.dart';
 import 'package:dig_mobile_app/app/definition/app_assets.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_avatar.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_rounded_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_expandable_page_view.dart';
-import 'package:dig_mobile_app/app/designsystem/ds_small_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/app/extension/extension.dart';
 import 'package:dig_mobile_app/app/page/active_account/real_estate_list_tab_page/real_estate_list_tab_page.dart';
 import 'package:dig_mobile_app/app/page/active_account/tokens_holding_list_tab_page/tokens_holding_list_tab_page.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/active_account_viewmodel.dart';
+import 'package:dig_mobile_app/app/viewmodel/home_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 class ActiveAccountPage extends StatefulWidget {
   final AccountPublicInfo accountPublicInfo;
@@ -37,6 +39,9 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      _cubit.fetchData(widget.accountPublicInfo);
+    });
   }
 
   @override
@@ -44,13 +49,25 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
     return BlocConsumer<ActiveAccountCubit, ActiveAccountState>(
       bloc: _cubit,
       listener: _cubitListener,
-      builder: (context, state) => _buildBody(state.model),
+      builder: (context, state) => _buildBody(state.viewmodel),
     );
   }
 
-  void _cubitListener(_, state) {}
+  void _cubitListener(_, state) {
+    if (state is ActiveAccountLoadingState) {
+      showGlobalLoadingOverlay();
+      return;
+    }
 
-  Widget _buildBody(ActiveAccountViewModel model) {
+    dismissGlobalLoadingOverlay();
+    if (state is ActiveAccountErrorState) {
+      showGlobalDSSnackBar(
+          message: state.exception.message, type: DSSnackBarType.error);
+      return;
+    }
+  }
+
+  Widget _buildBody(ActiveAccountViewModel viewModel) {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -71,7 +88,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
             height: 12,
           ),
           Text(
-            '\$000',
+            S.current.dig_token_format(viewModel.getDigBalance()),
             style: DSTextStyle.tsMontserrat.copyWith(
                 color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400),
           ),
@@ -115,7 +132,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
               ],
             ),
           ),
-          _buildTab(model)
+          _buildTab(viewModel)
         ],
       ),
     );

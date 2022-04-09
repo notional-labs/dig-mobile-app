@@ -12,3 +12,11 @@ abstract class DigPageName {
   static const String confirmPin = '/confirm_pin';
   static const String proposalDetail = '/proposal_detail';
 }
+
+abstract class Denom {
+  static const String udig = 'udig';
+}
+
+abstract class TokenBalanceRatio {
+  static const double ratio = 1000000;
+}

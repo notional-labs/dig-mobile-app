@@ -56,5 +56,8 @@
     "description": "Description",
     "remove_account": "Remove Account",
     "are_you_sure_you_want_to_remove_this_account": "Are you sure you want to remove this Account?",
-    "remove": "Remove"
+    "remove": "Remove",
+    "some_thing_wrong": "Some thing wrong",
+    "usd_money_format": "${money}",
+    "dig_token_format": "{token} DIG"
 }

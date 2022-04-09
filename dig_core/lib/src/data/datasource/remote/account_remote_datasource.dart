@@ -20,9 +20,9 @@ class AccountRemoteDatasourceImplement implements AccountRemoteDatasource {
   }
 
   @override
-  Future<BalanceResponse?> getBalances(BalanceRequest param) async {
+  Future<BalanceResponse?> getBalances(BalanceRequest param) {
     assert(_chain != null,
-        '`_chain` must be not null. Ensure called `createChainENV` first');
+        '`_chain` must be not null. Ensure called `createChain` first');
     final restClient = _chain!.getRestClient();
     return restClient.getBalances(
         address: param.address,

@@ -3,8 +3,11 @@ import 'package:dig_mobile_app/app/cubit/home/home_state.dart';
 import 'package:dig_mobile_app/app/definition/app_assets.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/app/page/active_account/active_account_page.dart';
 import 'package:dig_mobile_app/app/page/home/home_drawer.dart';
+import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/home_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +21,23 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WidgetUtil {
   final HomeCubit _cubit = di();
+
+  void _cubitLisener(context, state) {
+    if (state is HomeErrorState) {
+      showGlobalDSSnackBar(
+          message: state.exception.message, type: DSSnackBarType.error);
+      return;
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    _cubit.init();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      _cubit.init();
+    });
   }
 
   @override
@@ -37,20 +50,32 @@ class _HomePageState extends State<HomePage> {
             child: SafeArea(
               child: BlocProvider(
                   create: (_) => _cubit,
-                  child: BlocBuilder<HomeCubit, HomeState>(
+                  child: BlocConsumer<HomeCubit, HomeState>(
+                    listener: _cubitLisener,
                     bloc: _cubit,
                     builder: (BuildContext context, state) {
-                      if (state is HomeUninitSate) {
-                        return const SizedBox.shrink();
+                      if (state is HomePrimaryState) {
+                        return _bodyWidget(state.viewmodel);
+                      }
+                      if (state is HomeErrorState) {
+                        return _errorWidge(state);
                       }
 
-                      return _bodyWidget(state.viewmodel);
+                      return const SizedBox.shrink();
                     },
                   )),
             ),
           )),
     );
   }
+
+  Widget _errorWidge(HomeErrorState state) => Center(
+        child: Text(
+          state.exception.message,
+          textAlign: TextAlign.center,
+          style: DSTextStyle.tsMontserratT16M.copyWith(color: Colors.white),
+        ),
+      );
 
   Widget _bodyWidget(HomeViewmodel viewmodel) => Column(
         children: [
