@@ -6,8 +6,10 @@ import 'package:dig_core/src/domain/env/env.dart';
 import 'package:dig_core/src/domain/exception/dig_exception.dart';
 import 'package:dig_core/src/domain/repository/account_repository.dart';
 import 'package:dig_core/src/domain/usecase/usecase.dart';
+import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 
+@injectable
 class GetListBalanceUseCase
     extends UseCase<List<Balance>, GetListBalanceUseCaseParam> {
   final AccountRepository _repository;

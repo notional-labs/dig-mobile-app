@@ -1,3 +1,4 @@
+import 'package:dig_core/dig_core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:transaction_signing_gateway/model/account_public_info.dart';
 

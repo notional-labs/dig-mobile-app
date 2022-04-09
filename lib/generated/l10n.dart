@@ -629,6 +629,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Some thing wrong`
+  String get some_thing_wrong {
+    return Intl.message(
+      'Some thing wrong',
+      name: 'some_thing_wrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `${money}`
+  String usd_money_format(Object money) {
+    return Intl.message(
+      '\$$money',
+      name: 'usd_money_format',
+      desc: '',
+      args: [money],
+    );
+  }
+
+  /// `{token} DIG`
+  String dig_token_format(Object token) {
+    return Intl.message(
+      '$token DIG',
+      name: 'dig_token_format',
+      desc: '',
+      args: [token],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -5,21 +5,35 @@ import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:dig_mobile_app/app/viewmodel/active_account_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
+import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
-import 'package:transaction_signing_gateway/model/account_public_info.dart';
 
 part 'active_account_state.dart';
 
 @Injectable()
 class ActiveAccountCubit extends Cubit<ActiveAccountState> {
-  ActiveAccountCubit() : super(ActiveAccountInitial());
+  ActiveAccountCubit() : super(const ActiveAccountUninitState());
 
   final RemoveAccountUseCase _removeAccountUseCase = di();
   final DeletePinUseCase _deletePinUseCase = di();
+  final GetListBalanceUseCase _getListBalanceUseCase = di();
+
+  Future fetchData(AccountPublicInfo account) async {
+    emit(ActiveAccountLoadingState(viewmodel: state.viewmodel.copyWith()));
+    final result = await _getListBalanceUseCase.call(GetListBalanceUseCaseParam(
+        request: BalanceRequest(address: account.publicAddress)));
+    result.fold((l) {
+      emit(ActiveAccountErrorState(
+          viewmodel: state.viewmodel.copyWith(), exception: l));
+    }, (r) {
+      emit(ActiveAccountPrimaryState(
+          viewmodel: state.viewmodel.copyWith(balances: r)));
+    });
+  }
 
   void onSelectTab(int index) {
     emit(ActiveAccountPrimaryState(
-        model: state.model.copyWith(selectedTab: index)));
+        viewmodel: state.viewmodel.copyWith(selectedTab: index)));
   }
 
   Future removeAccount(AccountPublicInfo accountPublicInfo) async {

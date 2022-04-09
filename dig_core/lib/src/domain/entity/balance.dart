@@ -13,9 +13,9 @@ class Balance extends Equatable {
   });
 
   factory Balance.fromJson(Map<String, dynamic> json) =>
-      _$BlanceFromJson(json);
+      _$BalanceFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BlanceToJson(this);
+  Map<String, dynamic> toJson() => _$BalanceToJson(this);
 
   Balance copyWith({
     String? denom,

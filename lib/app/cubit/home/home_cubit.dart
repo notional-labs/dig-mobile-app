@@ -4,7 +4,6 @@ import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:transaction_signing_gateway/model/account_public_info.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {
@@ -33,15 +32,15 @@ class HomeCubit extends Cubit<HomeState> {
       });
     }
 
+    final viewmodel = state.viewmodel.copyWith(account: account);
+
     if (accounts.isNotEmpty && account != null) {
-      emit(HomePrimaryState(
-          viewmodel:
-              state.viewmodel.copyWith(account: account, accounts: accounts)));
+      emit(HomePrimaryState(viewmodel: viewmodel));
       return;
     }
 
     emit(HomeErrorState(
         viewmodel: state.viewmodel.copyWith(),
-        exception: DigException(message: S.current.no_account_found)));
+        exception: DigException(message: S.current.some_thing_wrong)));
   }
 }

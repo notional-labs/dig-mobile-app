@@ -6,12 +6,12 @@ part of 'balance.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Balance _$BlanceFromJson(Map<String, dynamic> json) => Balance(
+Balance _$BalanceFromJson(Map<String, dynamic> json) => Balance(
       denom: json['denom'] as String?,
       amount: json['amount'] as String?,
     );
 
-Map<String, dynamic> _$BlanceToJson(Balance instance) => <String, dynamic>{
+Map<String, dynamic> _$BalanceToJson(Balance instance) => <String, dynamic>{
       'denom': instance.denom,
       'amount': instance.amount,
     };
