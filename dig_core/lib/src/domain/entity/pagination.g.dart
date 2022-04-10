@@ -7,12 +7,12 @@ part of 'pagination.dart';
 // **************************************************************************
 
 Pagination _$PaginationFromJson(Map<String, dynamic> json) => Pagination(
-      nextKey: json['nextKey'] as String?,
+      nextKey: json['next_key'] as String?,
       total: json['total'] as String?,
     );
 
 Map<String, dynamic> _$PaginationToJson(Pagination instance) =>
     <String, dynamic>{
-      'nextKey': instance.nextKey,
+      'next_key': instance.nextKey,
       'total': instance.total,
     };
