@@ -6,6 +6,7 @@ import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:dig_mobile_app/app/viewmodel/active_account_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 
 part 'active_account_state.dart';
@@ -29,6 +30,10 @@ class ActiveAccountCubit extends Cubit<ActiveAccountState> {
       emit(ActiveAccountPrimaryState(
           viewmodel: state.viewmodel.copyWith(balances: r)));
     });
+  }
+
+  void copyAddressToClipboard(String address) {
+    Clipboard.setData(ClipboardData(text: address));
   }
 
   void onSelectTab(int index) {
