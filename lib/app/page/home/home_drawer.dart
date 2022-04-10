@@ -5,7 +5,9 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({Key? key}) : super(key: key);
+  final Function? onProposalsTap;
+
+  const HomeDrawer({this.onProposalsTap, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +79,7 @@ class HomeDrawer extends StatelessWidget {
             ),
             GestureDetector(
               behavior: HitTestBehavior.opaque,
+              onTap: () => onProposalsTap?.call(),
               child: Row(
                 children: [
                   Text(

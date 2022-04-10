@@ -4,29 +4,29 @@ import 'package:equatable/equatable.dart';
 import 'package:dig_mobile_app/app/viewmodel/home_viewmodel.dart';
 
 abstract class HomeState extends Equatable {
-  final HomeViewmodel viewmodel;
-  const HomeState({this.viewmodel = const HomeViewmodel()});
+  final HomeViewModel viewModel;
+  const HomeState({this.viewModel = const HomeViewModel()});
 
   @override
-  List<Object> get props => [viewmodel];
+  List<Object> get props => [viewModel];
 }
 
-class HomeUninitSate extends HomeState {
-  const HomeUninitSate() : super(viewmodel: const HomeViewmodel());
+class HomeInitialSate extends HomeState {
+  const HomeInitialSate() : super(viewModel: const HomeViewModel());
 }
 
 class HomePrimaryState extends HomeState {
-  const HomePrimaryState({HomeViewmodel viewmodel = const HomeViewmodel()})
-      : super(viewmodel: viewmodel);
+  const HomePrimaryState({HomeViewModel viewModel = const HomeViewModel()})
+      : super(viewModel: viewModel);
 }
 
 class HomeErrorState extends HomeState {
   final BaseDigException exception;
   const HomeErrorState(
-      {HomeViewmodel viewmodel = const HomeViewmodel(),
+      {HomeViewModel viewModel = const HomeViewModel(),
       this.exception = const DigException()})
-      : super(viewmodel: viewmodel);
+      : super(viewModel: viewModel);
 
   @override
-  List<Object> get props => [viewmodel, exception];
+  List<Object> get props => [viewModel, exception];
 }
