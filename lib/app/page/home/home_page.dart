@@ -7,6 +7,7 @@ import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/app/page/active_account/active_account_page.dart';
 import 'package:dig_mobile_app/app/page/home/home_drawer.dart';
+import 'package:dig_mobile_app/app/page/proposals_flow/proposals/proposals_page.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/home_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
@@ -24,7 +25,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with WidgetUtil {
   final HomeCubit _cubit = di();
 
-  void _cubitLisener(context, state) {
+  void _cubitListener(context, state) {
     if (state is HomeErrorState) {
       showGlobalDSSnackBar(
           message: state.exception.message, type: DSSnackBarType.error);
@@ -45,20 +46,23 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
     return AnnotatedRegion(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
-          drawer: const HomeDrawer(),
+          drawer: HomeDrawer(
+            onProposalsTap: () =>
+                _cubit.changeHomePage(CurrentHomePage.proposals),
+          ),
           body: DSBackground(
             child: SafeArea(
               child: BlocProvider(
                   create: (_) => _cubit,
                   child: BlocConsumer<HomeCubit, HomeState>(
-                    listener: _cubitLisener,
+                    listener: _cubitListener,
                     bloc: _cubit,
                     builder: (BuildContext context, state) {
                       if (state is HomePrimaryState) {
-                        return _bodyWidget(state.viewmodel);
+                        return _bodyWidget(state.viewModel);
                       }
                       if (state is HomeErrorState) {
-                        return _errorWidge(state);
+                        return _errorWidget(state);
                       }
 
                       return const SizedBox.shrink();
@@ -69,7 +73,7 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
     );
   }
 
-  Widget _errorWidge(HomeErrorState state) => Center(
+  Widget _errorWidget(HomeErrorState state) => Center(
         child: Text(
           state.exception.message,
           textAlign: TextAlign.center,
@@ -77,16 +81,27 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
         ),
       );
 
-  Widget _bodyWidget(HomeViewmodel viewmodel) => Column(
+  Widget _bodyWidget(HomeViewModel viewModel) => Column(
         children: [
           const HomeAppBar(),
           Expanded(
-            child: ActiveAccountPage(
-              accountPublicInfo: viewmodel.getAccount,
-            ),
+            child: _mapCurrentHomePage(viewModel),
           )
         ],
       );
+
+  Widget _mapCurrentHomePage(HomeViewModel viewModel) {
+    switch (viewModel.currentHomePage) {
+      case CurrentHomePage.activeAccount :
+        return ActiveAccountPage(
+          accountPublicInfo: viewModel.getAccount,
+        );
+      case CurrentHomePage.staking:
+        return const SizedBox.shrink();
+      case CurrentHomePage.proposals :
+        return const ProposalsPage();
+    }
+  }
 }
 
 class HomeAppBar extends StatelessWidget {

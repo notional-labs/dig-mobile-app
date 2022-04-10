@@ -24,6 +24,7 @@ class _ProposalsPageState extends State<ProposalsPage> {
             style: DSTextStyle.tsMontserratT32B
                 .copyWith(color: DSColors.tulipTree),
           ),
+          const SizedBox(height: 20,),
           Expanded(
               child: ListView.separated(
             separatorBuilder: (_, __) => const SizedBox(
