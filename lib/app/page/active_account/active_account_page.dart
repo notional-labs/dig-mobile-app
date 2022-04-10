@@ -15,7 +15,6 @@ import 'package:dig_mobile_app/app/page/active_account/real_estate_list_tab_page
 import 'package:dig_mobile_app/app/page/active_account/tokens_holding_list_tab_page/tokens_holding_list_tab_page.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/active_account_viewmodel.dart';
-import 'package:dig_mobile_app/app/viewmodel/home_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 
@@ -95,7 +94,11 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
           const SizedBox(
             height: 12,
           ),
-          _WalletAddress(address: widget.accountPublicInfo.publicAddress),
+          _WalletAddress(
+            address: widget.accountPublicInfo.publicAddress,
+            onCopyToClipboardTap: (address) =>
+                _cubit.copyAddressToClipboard(address),
+          ),
           Padding(
             padding:
                 const EdgeInsets.only(top: 20, left: 54, right: 54, bottom: 34),
@@ -214,9 +217,12 @@ class _TabItem extends StatelessWidget {
 }
 
 class _WalletAddress extends StatelessWidget {
+  final Function(String)? onCopyToClipboardTap;
   final String address;
 
-  const _WalletAddress({required this.address, Key? key}) : super(key: key);
+  const _WalletAddress(
+      {required this.address, this.onCopyToClipboardTap, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -242,10 +248,14 @@ class _WalletAddress extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Image.asset(
-            AppAssets.icCopy,
-            width: 18,
-            height: 18,
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => onCopyToClipboardTap?.call(address),
+            child: Image.asset(
+              AppAssets.icCopy,
+              width: 18,
+              height: 18,
+            ),
           )
         ],
       ),
