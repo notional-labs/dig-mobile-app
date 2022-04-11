@@ -10,6 +10,7 @@ abstract class HttpCode {
 
 abstract class EndPoint {
   static const String getBalancePath = 'cosmos/bank/v1beta1/balances/{address}';
+  static const String getProposals = 'cosmos/gov/v1beta1/proposals';
 }
 
 abstract class GetItInstanceName {
