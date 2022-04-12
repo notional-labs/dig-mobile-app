@@ -17,7 +17,7 @@ class Content with EquatableMixin {
   final List<Change> changes;
   final Plan? plan;
 
-  Content({
+  const Content({
     this.type = '',
     this.title = '',
     this.description = '',

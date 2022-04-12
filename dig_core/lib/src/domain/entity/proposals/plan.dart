@@ -10,7 +10,7 @@ class Plan with EquatableMixin {
   final String height;
   final String info;
 
-  Plan({
+  const Plan({
     this.name = '',
     this.time = '',
     this.height = '',

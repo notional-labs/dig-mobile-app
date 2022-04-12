@@ -26,7 +26,7 @@ class GetListBalanceUseCase
       if (result == null) {
         throw const DigException(message: DomainErrorMessage.noBalanceFound);
       }
-      return Right(result.balances!);
+      return Right(result.balances);
     } catch (e, trace) {
       Logger().e('GetListBalanceUseCase ERROR', e, trace);
       return Left(exceptionHandler.handler(e));

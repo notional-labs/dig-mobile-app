@@ -5,11 +5,11 @@ part 'balance.g.dart';
 
 @JsonSerializable()
 class Balance extends Equatable {
-  final String? denom;
-  final String? amount;
+  final String denom;
+  final String amount;
   const Balance({
-    this.denom,
-    this.amount,
+    this.denom = '',
+    this.amount = '',
   });
 
   factory Balance.fromJson(Map<String, dynamic> json) =>
