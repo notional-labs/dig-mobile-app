@@ -7,11 +7,11 @@ part 'balance_response.g.dart';
 
 @JsonSerializable()
 class BalanceResponse extends Equatable {
-  final List<Balance>? balances;
-  final Pagination? pagination;
+  final List<Balance> balances;
+  final Pagination pagination;
   const BalanceResponse({
-    this.balances,
-    this.pagination,
+    this.balances = const [],
+    this.pagination = const Pagination(),
   });
 
   factory BalanceResponse.fromJson(Map<String, dynamic> json) =>

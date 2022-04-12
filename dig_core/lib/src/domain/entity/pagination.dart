@@ -5,11 +5,11 @@ part 'pagination.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Pagination extends Equatable {
-  final String? nextKey;
-  final String? total;
+  final String nextKey;
+  final String total;
   const Pagination({
-    this.nextKey,
-    this.total,
+    this.nextKey = '',
+    this.total = '',
   });
 
   factory Pagination.fromJson(Map<String, dynamic> json) =>

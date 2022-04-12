@@ -7,8 +7,8 @@ part of 'balance.dart';
 // **************************************************************************
 
 Balance _$BalanceFromJson(Map<String, dynamic> json) => Balance(
-      denom: json['denom'] as String?,
-      amount: json['amount'] as String?,
+      denom: json['denom'] as String? ?? '',
+      amount: json['amount'] as String? ?? '',
     );
 
 Map<String, dynamic> _$BalanceToJson(Balance instance) => <String, dynamic>{

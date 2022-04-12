@@ -9,10 +9,11 @@ part of 'balance_response.dart';
 BalanceResponse _$BalanceResponseFromJson(Map<String, dynamic> json) =>
     BalanceResponse(
       balances: (json['balances'] as List<dynamic>?)
-          ?.map((e) => Balance.fromJson(e as Map<String, dynamic>))
-          .toList(),
+              ?.map((e) => Balance.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
       pagination: json['pagination'] == null
-          ? null
+          ? const Pagination()
           : Pagination.fromJson(json['pagination'] as Map<String, dynamic>),
     );
 

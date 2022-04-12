@@ -10,7 +10,7 @@ class FinalTallyResult with EquatableMixin {
   final String no;
   final String noWithVeto;
 
-  FinalTallyResult({
+  const FinalTallyResult({
     this.yes = '',
     this.abstain = '',
     this.no = '',

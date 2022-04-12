@@ -9,7 +9,7 @@ class Change with EquatableMixin {
   final String key;
   final String value;
 
-  Change({
+  const Change({
     this.subspace = '',
     this.key = '',
     this.value = '',
