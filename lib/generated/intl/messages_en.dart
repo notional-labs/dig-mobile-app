@@ -68,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dont_have_account_create":
             MessageLookupByLibrary.simpleMessage("Don’t have account? Create"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "end_date": MessageLookupByLibrary.simpleMessage("End Date"),
         "enter_your_passcode":
             MessageLookupByLibrary.simpleMessage("Enter your passcode"),
         "enter_your_recovery_phrase":
@@ -92,8 +93,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "proposal_detail_page_title":
             MessageLookupByLibrary.simpleMessage("Detail"),
         "proposal_id": MessageLookupByLibrary.simpleMessage("Proposal ID"),
+        "proposal_status_deposit":
+            MessageLookupByLibrary.simpleMessage("Deposit"),
+        "proposal_status_failed":
+            MessageLookupByLibrary.simpleMessage("Failed"),
+        "proposal_status_passed":
+            MessageLookupByLibrary.simpleMessage("Passed"),
+        "proposal_status_rejected":
+            MessageLookupByLibrary.simpleMessage("Rejected"),
+        "proposal_status_unrecognized":
+            MessageLookupByLibrary.simpleMessage("Unrecognized"),
+        "proposal_status_voting":
+            MessageLookupByLibrary.simpleMessage("Voting"),
         "proposal_type": MessageLookupByLibrary.simpleMessage("Proposal Type"),
-        "proposals": MessageLookupByLibrary.simpleMessage("PROPOSALS"),
+        "proposals": MessageLookupByLibrary.simpleMessage("proposals"),
+        "proposals_item_detail_text":
+            MessageLookupByLibrary.simpleMessage("Detail"),
         "proposer": MessageLookupByLibrary.simpleMessage("Proposer"),
         "real_estate": MessageLookupByLibrary.simpleMessage("Real estate"),
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
@@ -108,6 +123,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "some_thing_wrong":
             MessageLookupByLibrary.simpleMessage("Some thing wrong"),
         "staking": MessageLookupByLibrary.simpleMessage("STAKING"),
+        "start_date": MessageLookupByLibrary.simpleMessage("Start Date"),
+        "submit_date": MessageLookupByLibrary.simpleMessage("Submit Date"),
         "submitted_time":
             MessageLookupByLibrary.simpleMessage("Submitted Time"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),

@@ -26,6 +26,7 @@ export 'package:dig_core/src/domain/usecase/auth/remove_account_usecase.dart';
 export 'package:dig_core/src/domain/usecase/account/get_list_balance_usecase.dart';
 export 'package:dig_core/src/domain/entity/balance.dart';
 export 'package:dig_core/src/domain/entity/balance_resquest.dart';
+export 'package:dig_core/src/domain/usecase/proposals/get_proposals_usecase.dart';
 
 // domain - model
 export 'package:dig_core/src/domain/entity/import_account.dart';
@@ -34,6 +35,8 @@ export 'package:dig_core/src/domain/entity/account_additional_data.dart';
 export 'package:dig_core/src/domain/enum/enum.dart';
 export 'package:dig_core/src/domain/entity/balance_response.dart';
 export 'package:dig_core/src/domain/entity/pagination.dart';
+export 'package:dig_core/src/domain/entity/proposals/proposal.dart';
+export 'package:dig_core/src/domain/entity/proposals/proposals_request.dart';
 
 export 'package:dig_core/src/domain/util/util.dart';
 

@@ -74,7 +74,7 @@ class HomeDrawer extends StatelessWidget {
               const SizedBox(height: 50),
               _MenuItem(
                 isSelected: lastSelected == DrawerMenu.proposals,
-                title: S.current.proposals,
+                title: S.current.proposals.toUpperCase(),
                 onTap: () {
                   onMenuChange(DrawerMenu.proposals);
                 },
