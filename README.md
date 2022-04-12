@@ -8,7 +8,7 @@
 
 
 ### Generate code
-`bash scripts/codegen_all.sh`
+`bash scripts/gen_code_all.sh`
 
 
 
