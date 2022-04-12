@@ -13,4 +13,8 @@ extension StringExtension on String {
       return this;
     }
   }
+
+  DateTime? toDateTime() {
+    return DateTime.tryParse(this);
+  }
 }

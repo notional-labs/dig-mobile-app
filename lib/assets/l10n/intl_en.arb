@@ -60,8 +60,17 @@
     "some_thing_wrong": "Some thing wrong",
     "usd_money_format": "${money}",
     "dig_token_format": "{token} DIG",
+    "proposals": "proposals",
+    "proposals_item_detail_text": "Detail",
+    "proposal_status_deposit": "Deposit",
+    "proposal_status_voting": "Voting",
+    "proposal_status_passed": "Passed",
+    "proposal_status_rejected": "Rejected",
+    "proposal_status_failed": "Failed",
+    "proposal_status_unrecognized": "Unrecognized",
+    "submit_date": "Submit Date",
+    "start_date": "Start Date",
+    "end_date": "End Date",
     "staking": "STAKING",
-    "proposals": "PROPOSALS",
     "account": "ACCOUNT"
-
 }

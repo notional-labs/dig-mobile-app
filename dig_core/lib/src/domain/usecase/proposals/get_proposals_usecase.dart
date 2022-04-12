@@ -1,6 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:dig_core/src/data/exception/dig_exception_impl.dart';
-import 'package:dig_core/src/domain/definition/definition.dart';
 import 'package:dig_core/src/domain/entity/proposals/proposal.dart';
 import 'package:dig_core/src/domain/entity/proposals/proposals_request.dart';
 import 'package:dig_core/src/domain/env/env.dart';
@@ -24,10 +22,7 @@ class GetProposalsUseCase
     try {
       _repository.createChainENV(params.chain ?? _env.digChain);
       final result = await _repository.getProposals(params.request);
-      if (result == null) {
-        throw const DigException(message: DomainErrorMessage.noBalanceFound);
-      }
-      return Right(result.proposals);
+      return Right(result?.proposals ?? <Proposal>[]);
     } catch (e, trace) {
       Logger().e('GetProposalsUseCase ERROR', e, trace);
       return Left(exceptionHandler.handler(e));

@@ -42,4 +42,5 @@ class DSColors {
   static const Color tundora = Color(0xff4D4D4D);
   static const Color yellowOrange = Color(0xffFFAC38);
   static const Color jungleGreen = Color(0xff2A9D8F);
+  static const Color burntSienna = Color(0xffE76F51);
 }

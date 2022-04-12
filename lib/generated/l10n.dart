@@ -660,21 +660,121 @@ class S {
     );
   }
 
-  /// `STAKING`
-  String get staking {
+  /// `proposals`
+  String get proposals {
     return Intl.message(
-      'STAKING',
-      name: 'staking',
+      'proposals',
+      name: 'proposals',
       desc: '',
       args: [],
     );
   }
 
-  /// `PROPOSALS`
-  String get proposals {
+  /// `Detail`
+  String get proposals_item_detail_text {
     return Intl.message(
-      'PROPOSALS',
-      name: 'proposals',
+      'Detail',
+      name: 'proposals_item_detail_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit`
+  String get proposal_status_deposit {
+    return Intl.message(
+      'Deposit',
+      name: 'proposal_status_deposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Voting`
+  String get proposal_status_voting {
+    return Intl.message(
+      'Voting',
+      name: 'proposal_status_voting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passed`
+  String get proposal_status_passed {
+    return Intl.message(
+      'Passed',
+      name: 'proposal_status_passed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rejected`
+  String get proposal_status_rejected {
+    return Intl.message(
+      'Rejected',
+      name: 'proposal_status_rejected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed`
+  String get proposal_status_failed {
+    return Intl.message(
+      'Failed',
+      name: 'proposal_status_failed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unrecognized`
+  String get proposal_status_unrecognized {
+    return Intl.message(
+      'Unrecognized',
+      name: 'proposal_status_unrecognized',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit Date`
+  String get submit_date {
+    return Intl.message(
+      'Submit Date',
+      name: 'submit_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Date`
+  String get start_date {
+    return Intl.message(
+      'Start Date',
+      name: 'start_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End Date`
+  String get end_date {
+    return Intl.message(
+      'End Date',
+      name: 'end_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `STAKING`
+  String get staking {
+    return Intl.message(
+      'STAKING',
+      name: 'staking',
       desc: '',
       args: [],
     );

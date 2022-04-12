@@ -1,13 +1,19 @@
+import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_proposal_status.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_small_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
+import 'package:dig_mobile_app/app/extension/datetime_extensions.dart';
+import 'package:dig_mobile_app/app/extension/extension.dart';
+import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class ProposalRowItem extends StatelessWidget {
   final Function? onDetailTap;
+  final Proposal proposal;
 
-  const ProposalRowItem({this.onDetailTap, Key? key}) : super(key: key);
+  const ProposalRowItem({required this.proposal, this.onDetailTap, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +34,7 @@ class ProposalRowItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '#6',
+                      '#${proposal.proposalId}',
                       style: DSTextStyle.tsMontserratT20B
                           .copyWith(color: Colors.black),
                     ),
@@ -37,7 +43,9 @@ class ProposalRowItem extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 8.0, right: 8.0, top: 2),
                         child: Text(
-                          'DIG Chain Growth Initiative',
+                          proposal.content?.title ?? '',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: DSTextStyle.tsMontserratT16R
                               .copyWith(color: Colors.black),
                         ),
@@ -48,28 +56,43 @@ class ProposalRowItem extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                const DSProposalStatus(withOpacity: 0.3,),
+                DSProposalStatus(
+                  type: proposal.proposalStatusType,
+                  withOpacity: 0.3,
+                ),
                 const SizedBox(
                   height: 8,
                 ),
                 Text(
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                  proposal.content?.description ?? '',
                   style: DSTextStyle.tsMontserratT12R,
                 ),
                 const SizedBox(
                   height: 22,
                 ),
                 Row(
-                  children: const [
-                    Expanded(child: _ProposalDate()),
-                    SizedBox(
+                  children: [
+                    Expanded(
+                        child: _ProposalDate(
+                      title: S.current.submit_date,
+                      date: proposal.submitTime,
+                    )),
+                    const SizedBox(
                       width: 15,
                     ),
-                    Expanded(child: _ProposalDate()),
-                    SizedBox(
+                    Expanded(
+                        child: _ProposalDate(
+                      title: S.current.start_date,
+                      date: proposal.votingStartTime,
+                    )),
+                    const SizedBox(
                       width: 15,
                     ),
-                    Expanded(child: _ProposalDate()),
+                    Expanded(
+                        child: _ProposalDate(
+                      title: S.current.end_date,
+                      date: proposal.votingEndTime,
+                    )),
                   ],
                 ),
                 const SizedBox(
@@ -95,7 +118,7 @@ class ProposalRowItem extends StatelessWidget {
                   width: 14,
                 ),
                 DSSmallButton(
-                  title: 'Detail',
+                  title: S.current.proposals_item_detail_text,
                   onTap: () => onDetailTap?.call(),
                 )
               ],
@@ -108,7 +131,11 @@ class ProposalRowItem extends StatelessWidget {
 }
 
 class _ProposalDate extends StatelessWidget {
-  const _ProposalDate({Key? key}) : super(key: key);
+  final String title;
+  final String date;
+
+  const _ProposalDate({required this.title, required this.date, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -119,14 +146,14 @@ class _ProposalDate extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'Submit Date',
+            title,
             style: DSTextStyle.tsMontserratT10R,
           ),
           const SizedBox(
             height: 8,
           ),
           Text(
-            '2022-01-07',
+            date.toDateTime()?.toYYYYMMdd() ?? '',
             style: DSTextStyle.tsMontserratT10B,
           ),
         ],
