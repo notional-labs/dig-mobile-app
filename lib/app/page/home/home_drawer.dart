@@ -41,7 +41,7 @@ class HomeDrawer extends StatelessWidget {
                 child: SizedBox(
                     width: 68,
                     height: 50,
-                    child: Image.asset(AppAssets.icDigLogo)),
+                    child: Image.asset(AppAssets.icDigLogoWithText)),
               ),
               const SizedBox(height: 22),
               const Divider(
