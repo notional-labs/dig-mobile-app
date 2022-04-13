@@ -659,6 +659,36 @@ class S {
       args: [token],
     );
   }
+
+  /// `STAKING`
+  String get staking {
+    return Intl.message(
+      'STAKING',
+      name: 'staking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PROPOSALS`
+  String get proposals {
+    return Intl.message(
+      'PROPOSALS',
+      name: 'proposals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ACCOUNT`
+  String get account {
+    return Intl.message(
+      'ACCOUNT',
+      name: 'account',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

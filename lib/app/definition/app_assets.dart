@@ -29,6 +29,7 @@ class AppAssets {
   static final String icClear = _generateImagePath('ic_clear.png');
   static final String icDeleteKeyboard =
       _generateImagePath('ic_delete_keyboard.png');
+  static final String icAvatarEmpty = _generateImagePath('ic_avatar_empty.png');
 
   // -------- SVG --------
   static final String icCopied = _generateImagePath('ic_copied.svg');

@@ -1,109 +1,246 @@
-import 'package:dig_mobile_app/app/designsystem/custom/ds_avatar.dart';
+import 'package:dig_core/dig_core.dart';
+import 'package:dig_mobile_app/app/definition/app_assets.dart';
+import 'package:dig_mobile_app/app/designsystem/custom/ds_second_avatar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:dig_mobile_app/generated/l10n.dart';
+
+enum DrawerMenu { account, staking, proposals }
+
+typedef OnMenuChange = Function(DrawerMenu drawerMenu);
+typedef OnAccountChange = Function(AccountPublicInfo account);
 
 class HomeDrawer extends StatelessWidget {
-  final Function? onProposalsTap;
+  final List<AccountPublicInfo> accounts;
+  final AccountPublicInfo? lastAccountSelected;
+  final DrawerMenu? lastSelected;
+  final OnMenuChange onMenuChange;
+  final OnAccountChange onAccountChange;
 
-  const HomeDrawer({this.onProposalsTap, Key? key}) : super(key: key);
+  const HomeDrawer(
+      {required this.accounts,
+      required this.onMenuChange,
+      required this.onAccountChange,
+      this.lastAccountSelected,
+      this.lastSelected,
+      Key? key})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      backgroundColor: DSColors.tundora,
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(32.0, 40.0, 32.0, 8.0),
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                DSAvatar(),
-                Expanded(child: SizedBox.shrink()),
-                Icon(
-                  Icons.settings_outlined,
-                  color: DSColors.tulipTree,
-                  size: 25,
-                )
-              ],
-            ),
-            Text(
-              'Janne Copper',
-              style: DSTextStyle.tsMontserrat.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
+  Widget build(BuildContext context) => Drawer(
+        backgroundColor: DSColors.tundora,
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(32.0, 60.0, 32.0, 8.0),
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: SizedBox(
+                    width: 68,
+                    height: 50,
+                    child: Image.asset(AppAssets.icDigLogo)),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 18.0),
-              child: Divider(
+              const SizedBox(height: 22),
+              const Divider(
                 height: 1,
                 color: DSColors.tulipTree,
                 thickness: 1,
               ),
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            const _CreateAccountButton(),
-            const SizedBox(
-              height: 60,
-            ),
-            GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              child: Row(
-                children: [
-                  Text(
-                    'STAKING',
-                    style: DSTextStyle.tsMontserrat.copyWith(
-                      color: DSColors.tulipTree,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
-                    ),
-                  ),
-                  const Expanded(child: SizedBox.shrink()),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    color: DSColors.tulipTree,
-                    size: 22,
-                  )
-                ],
+              const SizedBox(height: 50),
+              _AccountMenu(
+                isSelected: () {
+                  if (lastSelected == null) {
+                    return true;
+                  }
+                  return lastSelected == DrawerMenu.account;
+                }(),
+                accounts: accounts,
+                lastAccountSelected: lastAccountSelected,
+                onAccountChange: (AccountPublicInfo accountPublicInfo) {
+                  onAccountChange(accountPublicInfo);
+                },
               ),
-            ),
-            const SizedBox(
-              height: 60,
-            ),
-            GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: () => onProposalsTap?.call(),
-              child: Row(
-                children: [
-                  Text(
-                    'PROPOSALS',
-                    style: DSTextStyle.tsMontserrat.copyWith(
-                      color: DSColors.tulipTree,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
-                    ),
-                  ),
-                  const Expanded(child: SizedBox.shrink()),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    color: DSColors.tulipTree,
-                    size: 22,
-                  )
-                ],
+              const SizedBox(height: 50),
+              _MenuItem(
+                isSelected: lastSelected == DrawerMenu.staking,
+                title: S.current.staking,
+                onTap: () {
+                  onMenuChange(DrawerMenu.staking);
+                },
               ),
-            )
-          ],
+              const SizedBox(height: 50),
+              _MenuItem(
+                isSelected: lastSelected == DrawerMenu.proposals,
+                title: S.current.proposals,
+                onTap: () {
+                  onMenuChange(DrawerMenu.proposals);
+                },
+              )
+            ],
+          ),
         ),
-      ),
-    );
+      );
+}
+
+class _AccountMenu extends StatelessWidget {
+  final bool isSelected;
+  final List<AccountPublicInfo> accounts;
+  final AccountPublicInfo? lastAccountSelected;
+  final OnAccountChange onAccountChange;
+
+  const _AccountMenu(
+      {required this.accounts,
+      required this.onAccountChange,
+      this.lastAccountSelected,
+      this.isSelected = false,
+      Key? key})
+      : super(key: key);
+
+  Color _resolveBackgroudColor() {
+    if (isSelected) {
+      return DSColors.tulipTree;
+    }
+    return Colors.white.withOpacity(0.5);
   }
+
+  @override
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _MenuItem(
+            title: S.current.account,
+            onTap: () {},
+            isSelected: isSelected,
+          ),
+          const SizedBox(height: 20),
+          ListView.builder(
+            shrinkWrap: true,
+            padding: EdgeInsets.zero,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: accounts.length,
+            itemBuilder: (BuildContext context, int index) {
+              final account = accounts[index];
+              bool isSlectedAccount = false;
+              DSAvatarType avatarType = DSAvatarType.none;
+              _PrimaryDotType dotType = _PrimaryDotType.none;
+              if (lastAccountSelected == account) {
+                isSlectedAccount = true;
+              } else {
+                isSlectedAccount = index == 0;
+              }
+
+              if (isSelected) {
+                avatarType = DSAvatarType.active;
+              }
+
+              if (isSelected && isSlectedAccount) {
+                dotType = _PrimaryDotType.selectedAndActive;
+              } else if (isSlectedAccount) {
+                dotType = _PrimaryDotType.selectedAndNone;
+              }
+
+              return _accoutItem(account, avatarType, dotType);
+            },
+          )
+        ],
+      );
+
+  Widget _accoutItem(AccountPublicInfo account, DSAvatarType avatarType,
+          _PrimaryDotType dotType) =>
+      GestureDetector(
+        onTap: () {
+          onAccountChange(account);
+        },
+        child: Container(
+          color: Colors.transparent,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(width: 35),
+              DSSecondAvatar(
+                type: avatarType,
+              ),
+              const SizedBox(width: 5),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      account.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: DSTextStyle.tsMontserratT16R
+                          .copyWith(color: _resolveBackgroudColor()),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      account.publicAddress,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: DSTextStyle.tsMontserratT10R
+                          .copyWith(color: _resolveBackgroudColor()),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 5),
+              _PrimaryDot(type: dotType)
+            ],
+          ),
+        ),
+      );
+}
+
+class _MenuItem extends StatelessWidget {
+  final bool isSelected;
+  final String title;
+  final VoidCallback onTap;
+  const _MenuItem({
+    required this.title,
+    required this.onTap,
+    this.isSelected = false,
+    Key? key,
+  }) : super(key: key);
+
+  Color _resolveTextColor() {
+    if (isSelected) {
+      return DSColors.tulipTree;
+    }
+
+    return Colors.white;
+  }
+
+  @override
+  Widget build(BuildContext context) => GestureDetector(
+        onTap: onTap,
+        child: Container(
+          color: Colors.transparent,
+          child: Row(
+            children: [
+              if (isSelected)
+                const Padding(
+                    padding: EdgeInsets.only(right: 15), child: _SecondDot())
+              else
+                const SizedBox(width: 23),
+              Expanded(
+                child: Text(
+                  title,
+                  style: DSTextStyle.tsMontserrat.copyWith(
+                    color: _resolveTextColor(),
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
 }
 
 class _CreateAccountButton extends StatelessWidget {
@@ -140,6 +277,62 @@ class _CreateAccountButton extends StatelessWidget {
               )
             ],
           )),
+    );
+  }
+}
+
+enum _PrimaryDotType { selectedAndActive, selectedAndNone, none }
+
+class _PrimaryDot extends StatelessWidget {
+  final _PrimaryDotType type;
+  const _PrimaryDot({this.type = _PrimaryDotType.none, Key? key})
+      : super(key: key);
+
+  Color _resolveBackgroudColor() {
+    switch (type) {
+      case _PrimaryDotType.selectedAndActive:
+        return DSColors.tulipTree;
+      default:
+        return Colors.white.withOpacity(0.5);
+    }
+  }
+
+  Widget _resolveInnerDot() {
+    if (type != _PrimaryDotType.none) {
+      return Container(
+        padding: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+            color: _resolveBackgroudColor(), shape: BoxShape.circle),
+      );
+    }
+
+    return const SizedBox.shrink();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 25,
+      height: 25,
+      padding: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+          border: Border.all(color: _resolveBackgroudColor()),
+          shape: BoxShape.circle),
+      child: _resolveInnerDot(),
+    );
+  }
+}
+
+class _SecondDot extends StatelessWidget {
+  const _SecondDot({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 8,
+      height: 8,
+      decoration: const BoxDecoration(
+          color: DSColors.tulipTree, shape: BoxShape.circle),
     );
   }
 }

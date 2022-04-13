@@ -12,7 +12,8 @@ class ProposalsPage extends StatefulWidget {
   State<ProposalsPage> createState() => _ProposalsPageState();
 }
 
-class _ProposalsPageState extends State<ProposalsPage> {
+class _ProposalsPageState extends State<ProposalsPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +25,9 @@ class _ProposalsPageState extends State<ProposalsPage> {
             style: DSTextStyle.tsMontserratT32B
                 .copyWith(color: DSColors.tulipTree),
           ),
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
           Expanded(
               child: ListView.separated(
             separatorBuilder: (_, __) => const SizedBox(
@@ -43,4 +46,7 @@ class _ProposalsPageState extends State<ProposalsPage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
