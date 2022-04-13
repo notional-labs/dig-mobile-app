@@ -6,10 +6,10 @@ enum DSAvatarType { active, none }
 
 class DSSecondAvatar extends StatelessWidget {
   final DSAvatarType type;
-  final String? imageNetwordUrl;
+  final String? imageNetworkUrl;
 
   const DSSecondAvatar(
-      {this.imageNetwordUrl, this.type = DSAvatarType.none, Key? key})
+      {this.imageNetworkUrl, this.type = DSAvatarType.none, Key? key})
       : super(key: key);
 
   Color _resolveBackgroudColor() {
@@ -22,7 +22,7 @@ class DSSecondAvatar extends StatelessWidget {
   }
 
   Widget _resolveImage() {
-    if (imageNetwordUrl == null) {
+    if (imageNetworkUrl == null) {
       return Image.asset(
         AppAssets.icAvatarEmpty,
         color: _resolveBackgroudColor(),
@@ -30,7 +30,7 @@ class DSSecondAvatar extends StatelessWidget {
       );
     }
 
-    return Image.network(imageNetwordUrl!, fit: BoxFit.cover);
+    return Image.network(imageNetworkUrl!, fit: BoxFit.cover);
   }
 
   @override
