@@ -5,6 +5,6 @@ class TokensHoldingListTabPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(height: 200, child: const Icon(Icons.directions_car));
+    return const SizedBox(height: 200);
   }
 }
