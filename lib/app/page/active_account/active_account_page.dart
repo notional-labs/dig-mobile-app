@@ -1,11 +1,11 @@
 import 'package:dig_core/dig_core.dart';
+import 'package:dig_mobile_app/app/designsystem/custom/ds_primary_avatar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:dig_mobile_app/app/cubit/active_account/active_account_cubit.dart';
 import 'package:dig_mobile_app/app/definition/app_assets.dart';
-import 'package:dig_mobile_app/app/designsystem/custom/ds_avatar.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_rounded_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_expandable_page_view.dart';
@@ -29,7 +29,10 @@ class ActiveAccountPage extends StatefulWidget {
 }
 
 class _ActiveAccountPageState extends State<ActiveAccountPage>
-    with SingleTickerProviderStateMixin, WidgetUtil {
+    with
+        SingleTickerProviderStateMixin,
+        WidgetUtil,
+        AutomaticKeepAliveClientMixin {
   final ActiveAccountCubit _cubit = di();
   final PageController _pageController = PageController();
   late TabController _tabController;
@@ -72,7 +75,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
         children: [
           const Padding(
             padding: EdgeInsets.only(top: 40, bottom: 20),
-            child: DSAvatar(
+            child: DSPrimaryAvatar(
               backgroundColor: DSColors.silver2,
             ),
           ),
@@ -188,6 +191,9 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class _TabItem extends StatelessWidget {

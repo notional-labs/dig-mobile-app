@@ -59,5 +59,9 @@
     "remove": "Remove",
     "some_thing_wrong": "Some thing wrong",
     "usd_money_format": "${money}",
-    "dig_token_format": "{token} DIG"
+    "dig_token_format": "{token} DIG",
+    "staking": "STAKING",
+    "proposals": "PROPOSALS",
+    "account": "ACCOUNT"
+
 }

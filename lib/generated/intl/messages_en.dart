@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "account": MessageLookupByLibrary.simpleMessage("ACCOUNT"),
         "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
         "are_you_sure_you_want_to_remove_this_account":
             MessageLookupByLibrary.simpleMessage(
@@ -92,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Detail"),
         "proposal_id": MessageLookupByLibrary.simpleMessage("Proposal ID"),
         "proposal_type": MessageLookupByLibrary.simpleMessage("Proposal Type"),
+        "proposals": MessageLookupByLibrary.simpleMessage("PROPOSALS"),
         "proposer": MessageLookupByLibrary.simpleMessage("Proposer"),
         "real_estate": MessageLookupByLibrary.simpleMessage("Real estate"),
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
@@ -105,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid Email"),
         "some_thing_wrong":
             MessageLookupByLibrary.simpleMessage("Some thing wrong"),
+        "staking": MessageLookupByLibrary.simpleMessage("STAKING"),
         "submitted_time":
             MessageLookupByLibrary.simpleMessage("Submitted Time"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),

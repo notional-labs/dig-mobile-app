@@ -1,3 +1,4 @@
+import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/cubit/home/home_cubit.dart';
 import 'package:dig_mobile_app/app/cubit/home/home_state.dart';
 import 'package:dig_mobile_app/app/definition/app_assets.dart';
@@ -24,8 +25,31 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with WidgetUtil {
   final HomeCubit _cubit = di();
+  final PageController _pageController = PageController();
 
-  void _cubitListener(context, state) {
+  void _navigate(DrawerMenu drawerMenu) {
+    if(!_pageController.hasClients){
+      return;
+    }
+    switch (drawerMenu) {
+      case DrawerMenu.account:
+        _pageController.jumpToPage(0);
+        break;
+      case DrawerMenu.staking:
+        _pageController.jumpToPage(1);
+        break;
+      case DrawerMenu.proposals:
+        _pageController.jumpToPage(2);
+        break;
+
+      default:
+        _pageController.jumpToPage(0);
+        break;
+    }
+  }
+
+  void _cubitListener(BuildContext context, HomeState state) {
+    _navigate(state.viewModel.currentDrawerMenu);
     if (state is HomeErrorState) {
       showGlobalDSSnackBar(
           message: state.exception.message, type: DSSnackBarType.error);
@@ -42,19 +66,29 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return AnnotatedRegion(
-      value: SystemUiOverlayStyle.light,
-      child: Scaffold(
-          drawer: HomeDrawer(
-            onProposalsTap: () =>
-                _cubit.changeHomePage(CurrentHomePage.proposals),
-          ),
-          body: DSBackground(
-            child: SafeArea(
-              child: BlocProvider(
-                  create: (_) => _cubit,
-                  child: BlocConsumer<HomeCubit, HomeState>(
+  Widget build(BuildContext context) => BlocProvider(
+        create: (_) => _cubit,
+        child: AnnotatedRegion(
+          value: SystemUiOverlayStyle.light,
+          child: BlocProvider(
+              create: (_) => _cubit,
+              child: Scaffold(
+                drawer: BlocBuilder<HomeCubit, HomeState>(
+                    bloc: _cubit,
+                    builder: (context, state) => HomeDrawer(
+                          accounts: state.viewModel.accounts,
+                          lastAccountSelected: state.viewModel.account,
+                          lastSelected: state.viewModel.currentDrawerMenu,
+                          onAccountChange: (AccountPublicInfo account) {
+                            _cubit.changeHomePage(DrawerMenu.account);
+                          },
+                          onMenuChange: (DrawerMenu drawerMenu) {
+                            _cubit.changeHomePage(drawerMenu);
+                          },
+                        )),
+                body: DSBackground(
+                  child: SafeArea(
+                      child: BlocConsumer<HomeCubit, HomeState>(
                     listener: _cubitListener,
                     bloc: _cubit,
                     builder: (BuildContext context, state) {
@@ -68,10 +102,10 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
                       return const SizedBox.shrink();
                     },
                   )),
-            ),
-          )),
-    );
-  }
+                ),
+              )),
+        ),
+      );
 
   Widget _errorWidget(HomeErrorState state) => Center(
         child: Text(
@@ -85,23 +119,18 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
         children: [
           const HomeAppBar(),
           Expanded(
-            child: _mapCurrentHomePage(viewModel),
+            child: PageView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: _pageController,
+              children: [
+                ActiveAccountPage(accountPublicInfo: viewModel.getAccount),
+                const SizedBox.shrink(),
+                const ProposalsPage()
+              ],
+            ),
           )
         ],
       );
-
-  Widget _mapCurrentHomePage(HomeViewModel viewModel) {
-    switch (viewModel.currentHomePage) {
-      case CurrentHomePage.activeAccount :
-        return ActiveAccountPage(
-          accountPublicInfo: viewModel.getAccount,
-        );
-      case CurrentHomePage.staking:
-        return const SizedBox.shrink();
-      case CurrentHomePage.proposals :
-        return const ProposalsPage();
-    }
-  }
 }
 
 class HomeAppBar extends StatelessWidget {

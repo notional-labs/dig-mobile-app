@@ -1,7 +1,7 @@
 import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/cubit/home/home_state.dart';
+import 'package:dig_mobile_app/app/page/home/home_drawer.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
-import 'package:dig_mobile_app/app/viewmodel/home_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +34,8 @@ class HomeCubit extends Cubit<HomeState> {
       });
     }
 
-    final viewModel = state.viewModel.copyWith(account: account);
+    final viewModel =
+        state.viewModel.copyWith(account: account, accounts: accounts);
 
     if (accounts.isNotEmpty && account != null) {
       emit(HomePrimaryState(viewModel: viewModel));
@@ -46,12 +47,12 @@ class HomeCubit extends Cubit<HomeState> {
         exception: DigException(message: S.current.some_thing_wrong)));
   }
 
-  void changeHomePage(CurrentHomePage currentHomePage) {
+  void changeHomePage(DrawerMenu drawerMenu) {
     navigatorKey.currentState!.pop();
-    if (currentHomePage == state.viewModel.currentHomePage) {
+    if (drawerMenu == state.viewModel.currentDrawerMenu) {
       return;
     }
     emit(HomePrimaryState(
-        viewModel: state.viewModel.copyWith(currentHomePage: currentHomePage)));
+        viewModel: state.viewModel.copyWith(currentHomePage: drawerMenu)));
   }
 }
