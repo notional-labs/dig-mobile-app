@@ -99,13 +99,6 @@ class _AccountMenu extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  Color _resolveBackgroudColor() {
-    if (isSelected) {
-      return DSColors.tulipTree;
-    }
-    return Colors.white.withOpacity(0.5);
-  }
-
   @override
   Widget build(BuildContext context) => Column(
         mainAxisSize: MainAxisSize.min,
@@ -117,83 +110,90 @@ class _AccountMenu extends StatelessWidget {
             isSelected: isSelected,
           ),
           const SizedBox(height: 20),
-          ListView.builder(
+          ListView.separated(
             shrinkWrap: true,
             padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: accounts.length,
             itemBuilder: (BuildContext context, int index) {
               final account = accounts[index];
-              bool isSlectedAccount = false;
+              bool isSelectedAccount = false;
               DSAvatarType avatarType = DSAvatarType.none;
               _PrimaryDotType dotType = _PrimaryDotType.none;
               if (lastAccountSelected == account) {
-                isSlectedAccount = true;
+                isSelectedAccount = true;
               } else {
-                isSlectedAccount = index == 0;
+                isSelectedAccount = index == 0;
               }
 
-              if (isSelected) {
+              if (isSelectedAccount) {
                 avatarType = DSAvatarType.active;
               }
 
-              if (isSelected && isSlectedAccount) {
+              if (isSelected && isSelectedAccount) {
                 dotType = _PrimaryDotType.selectedAndActive;
-              } else if (isSlectedAccount) {
+              } else if (isSelectedAccount) {
                 dotType = _PrimaryDotType.selectedAndNone;
               }
 
-              return _accoutItem(account, avatarType, dotType);
+              return _accoutItem(
+                  account, avatarType, dotType, isSelectedAccount);
             },
+            separatorBuilder: (BuildContext context, int index) =>
+                const SizedBox(height: 20),
           )
         ],
       );
 
   Widget _accoutItem(AccountPublicInfo account, DSAvatarType avatarType,
-          _PrimaryDotType dotType) =>
-      GestureDetector(
-        onTap: () {
-          onAccountChange(account);
-        },
-        child: Container(
-          color: Colors.transparent,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(width: 35),
-              DSSecondAvatar(
-                type: avatarType,
+      _PrimaryDotType dotType, bool isSelectedAccount) {
+    Color color =
+        isSelectedAccount ? DSColors.tulipTree : Colors.white.withOpacity(0.5);
+
+    return GestureDetector(
+      onTap: () {
+        onAccountChange(account);
+      },
+      child: Container(
+        color: Colors.transparent,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(width: 35),
+            DSSecondAvatar(
+              type: avatarType,
+            ),
+            const SizedBox(width: 5),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    account.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: DSTextStyle.tsMontserratT16R
+                        .copyWith(color: color),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    account.publicAddress,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: DSTextStyle.tsMontserratT10R
+                        .copyWith(color: color),
+                  ),
+                ],
               ),
-              const SizedBox(width: 5),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      account.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: DSTextStyle.tsMontserratT16R
-                          .copyWith(color: _resolveBackgroudColor()),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      account.publicAddress,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: DSTextStyle.tsMontserratT10R
-                          .copyWith(color: _resolveBackgroudColor()),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 5),
-              _PrimaryDot(type: dotType)
-            ],
-          ),
+            ),
+            const SizedBox(width: 5),
+            _PrimaryDot(type: dotType)
+          ],
         ),
-      );
+      ),
+    );
+  }
 }
 
 class _MenuItem extends StatelessWidget {
