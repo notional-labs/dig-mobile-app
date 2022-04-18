@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
   final PageController _pageController = PageController();
 
   void _navigate(DrawerMenu drawerMenu) {
-    if(!_pageController.hasClients){
+    if (!_pageController.hasClients) {
       return;
     }
     switch (drawerMenu) {
@@ -80,10 +80,14 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
                           lastAccountSelected: state.viewModel.account,
                           lastSelected: state.viewModel.currentDrawerMenu,
                           onAccountChange: (AccountPublicInfo account) {
-                            _cubit.changeHomePage(DrawerMenu.account);
+                            _cubit.changeAccount(account);
+                            Navigator.of(context).pop();
                           },
                           onMenuChange: (DrawerMenu drawerMenu) {
                             _cubit.changeHomePage(drawerMenu);
+                          },
+                          onNewAccountTap: () {
+                            _cubit.goToSignInPage();
                           },
                         )),
                 body: DSBackground(
@@ -123,7 +127,12 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
               physics: const NeverScrollableScrollPhysics(),
               controller: _pageController,
               children: [
-                ActiveAccountPage(accountPublicInfo: viewModel.getAccount),
+                ActiveAccountPage(
+                  accountPublicInfo: viewModel.getAccount,
+                  onRemoveAccount: (AccountPublicInfo account) {
+                    _cubit.removeAccount(account);
+                  },
+                ),
                 const SizedBox.shrink(),
                 const ProposalsPage()
               ],

@@ -20,6 +20,12 @@ class HomePrimaryState extends HomeState {
       : super(viewModel: viewModel);
 }
 
+class HomeChangedAccountState extends HomeState {
+  const HomeChangedAccountState(
+      {HomeViewModel viewModel = const HomeViewModel()})
+      : super(viewModel: viewModel);
+}
+
 class HomeErrorState extends HomeState {
   final BaseDigException exception;
   const HomeErrorState(

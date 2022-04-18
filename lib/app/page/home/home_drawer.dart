@@ -18,11 +18,13 @@ class HomeDrawer extends StatelessWidget {
   final DrawerMenu? lastSelected;
   final OnMenuChange onMenuChange;
   final OnAccountChange onAccountChange;
+  final VoidCallback onNewAccountTap;
 
   const HomeDrawer(
       {required this.accounts,
       required this.onMenuChange,
       required this.onAccountChange,
+      required this.onNewAccountTap,
       this.lastAccountSelected,
       this.lastSelected,
       Key? key})
@@ -62,6 +64,7 @@ class HomeDrawer extends StatelessWidget {
                 onAccountChange: (AccountPublicInfo accountPublicInfo) {
                   onAccountChange(accountPublicInfo);
                 },
+                onNewAccountTap: onNewAccountTap,
               ),
               const SizedBox(height: 50),
               _MenuItem(
@@ -90,10 +93,12 @@ class _AccountMenu extends StatelessWidget {
   final List<AccountPublicInfo> accounts;
   final AccountPublicInfo? lastAccountSelected;
   final OnAccountChange onAccountChange;
+  final VoidCallback onNewAccountTap;
 
   const _AccountMenu(
       {required this.accounts,
       required this.onAccountChange,
+      required this.onNewAccountTap,
       this.lastAccountSelected,
       this.isSelected = false,
       Key? key})
@@ -120,10 +125,10 @@ class _AccountMenu extends StatelessWidget {
               bool isSelectedAccount = false;
               DSAvatarType avatarType = DSAvatarType.none;
               _PrimaryDotType dotType = _PrimaryDotType.none;
-              if (lastAccountSelected == account) {
-                isSelectedAccount = true;
-              } else {
+              if (lastAccountSelected == null) {
                 isSelectedAccount = index == 0;
+              } else if (lastAccountSelected!.accountId == account.accountId) {
+                isSelectedAccount = true;
               }
 
               if (isSelectedAccount) {
@@ -141,13 +146,20 @@ class _AccountMenu extends StatelessWidget {
             },
             separatorBuilder: (BuildContext context, int index) =>
                 const SizedBox(height: 20),
+          ),
+          const SizedBox(height: 24),
+          Padding(
+            padding: const EdgeInsets.only(left: 35),
+            child: _CreateAccountButton(
+              onTap: onNewAccountTap,
+            ),
           )
         ],
       );
 
   Widget _accoutItem(AccountPublicInfo account, DSAvatarType avatarType,
       _PrimaryDotType dotType, bool isSelectedAccount) {
-    Color color =
+    final color =
         isSelectedAccount ? DSColors.tulipTree : Colors.white.withOpacity(0.5);
 
     return GestureDetector(
@@ -173,16 +185,14 @@ class _AccountMenu extends StatelessWidget {
                     account.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: DSTextStyle.tsMontserratT16R
-                        .copyWith(color: color),
+                    style: DSTextStyle.tsMontserratT16R.copyWith(color: color),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     account.publicAddress,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: DSTextStyle.tsMontserratT10R
-                        .copyWith(color: color),
+                    style: DSTextStyle.tsMontserratT10R.copyWith(color: color),
                   ),
                 ],
               ),
@@ -244,39 +254,43 @@ class _MenuItem extends StatelessWidget {
 }
 
 class _CreateAccountButton extends StatelessWidget {
-  const _CreateAccountButton({Key? key}) : super(key: key);
+  final VoidCallback onTap;
+  const _CreateAccountButton({required this.onTap, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return DottedBorder(
-      borderType: BorderType.RRect,
-      dashPattern: const [6, 6],
-      radius: const Radius.circular(5),
-      color: DSColors.tulipTree,
-      child: SizedBox(
-          width: double.infinity,
-          height: 38,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(6.0),
-                child: Icon(
-                  Icons.add,
-                  color: DSColors.tulipTree,
-                  size: 22,
+    return GestureDetector(
+      onTap: onTap,
+      child: DottedBorder(
+        borderType: BorderType.RRect,
+        dashPattern: const [6, 6],
+        radius: const Radius.circular(5),
+        color: DSColors.tulipTree,
+        child: SizedBox(
+            width: double.infinity,
+            height: 38,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(6.0),
+                  child: Icon(
+                    Icons.add,
+                    color: DSColors.tulipTree,
+                    size: 22,
+                  ),
                 ),
-              ),
-              Text(
-                'New account',
-                style: DSTextStyle.tsMontserrat.copyWith(
-                  color: DSColors.tulipTree,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-                ),
-              )
-            ],
-          )),
+                Text(
+                  'New account',
+                  style: DSTextStyle.tsMontserrat.copyWith(
+                    color: DSColors.tulipTree,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                  ),
+                )
+              ],
+            )),
+      ),
     );
   }
 }

@@ -18,10 +18,16 @@ import 'package:dig_mobile_app/app/viewmodel/active_account_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 
+typedef OnRemoteAccount = Function(AccountPublicInfo account);
+
 class ActiveAccountPage extends StatefulWidget {
+  final OnRemoteAccount onRemoveAccount;
   final AccountPublicInfo accountPublicInfo;
 
-  const ActiveAccountPage({required this.accountPublicInfo, Key? key})
+  const ActiveAccountPage(
+      {required this.accountPublicInfo,
+      required this.onRemoveAccount,
+      Key? key})
       : super(key: key);
 
   @override
@@ -36,14 +42,30 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
   final ActiveAccountCubit _cubit = di();
   final PageController _pageController = PageController();
   late TabController _tabController;
+  AccountPublicInfo? _lastAccountPublicInfo;
+
+  void _fetchData(){
+     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      if (_lastAccountPublicInfo?.accountId != widget.accountPublicInfo.accountId) {
+        _cubit.fetchData(widget.accountPublicInfo);
+        _lastAccountPublicInfo = widget.accountPublicInfo;
+      }
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      _cubit.fetchData(widget.accountPublicInfo);
-    });
+    _fetchData();
+  }
+
+  @override
+  void didUpdateWidget(covariant ActiveAccountPage oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    _fetchData();
+   
   }
 
   @override
@@ -131,7 +153,8 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
                           Navigator.of(context).pop();
                         },
                         onRightTap: () {
-                          _cubit.removeAccount(widget.accountPublicInfo);
+                          widget.onRemoveAccount(widget.accountPublicInfo);
+                          Navigator.of(context).pop();
                         });
                   },
                 )

@@ -7,7 +7,6 @@ import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 @injectable
 class NameAccountCubit extends Cubit<NameAccountState> {
@@ -15,6 +14,7 @@ class NameAccountCubit extends Cubit<NameAccountState> {
 
   final ImportAccountUseCase _importAccountUseCase = di();
   final CheckHasPinUseCase _checkHasPinUseCase = di();
+  final SelectAccountUseCase _selectAccountUseCase = di();
 
   void init(String mnemonic) {
     emit(NameAccountPrimaryState(
@@ -41,6 +41,8 @@ class NameAccountCubit extends Cubit<NameAccountState> {
       emit(NameAccountErrorState(
           exception: l, viewmodel: state.viewmodel.copyWith()));
     }, (account) {
+      _selectAccountUseCase
+          .call(SelectAccountUseCaseParam(accountPublicInfo: account));
       emit(NameAccountSuccessState(
           accountPublicInfo: account, viewmodel: state.viewmodel.copyWith()));
     });
