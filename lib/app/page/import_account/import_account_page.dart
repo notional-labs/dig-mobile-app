@@ -30,6 +30,7 @@ class _ImportAccountPageState extends State<ImportAccountPage> with WidgetUtil {
     }
     dismissGlobalLoadingOverlay();
     if (state is ImportAccountSuccessState) {
+      
       BlocProvider.of<ImportAccountCubit>(context).goToNameAccountEvent();
       return;
     }
