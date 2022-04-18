@@ -58,7 +58,12 @@ class DigRoute {
             const ConfirmPinPageParam(pin: '');
         return _materialPage(ConfirmPinPage(param: param), settings);
       case DigPageName.proposalDetail:
-        return _materialPage(const ProposalDetailPage(), settings);
+        final params = args as ProposalDetailPageParams?;
+        return _materialPage(
+            ProposalDetailPage(
+              params: params,
+            ),
+            settings);
       default:
         return _materialPage(const SizedBox.shrink(), settings);
     }

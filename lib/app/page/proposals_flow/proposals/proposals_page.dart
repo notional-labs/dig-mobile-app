@@ -1,10 +1,8 @@
 import 'package:dig_mobile_app/app/cubit/proposals/proposals_cubit.dart';
-import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/app/page/proposals_flow/proposals/proposal_row_item.dart';
-import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/proposals_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
@@ -74,8 +72,7 @@ class _ProposalsPageState extends State<ProposalsPage>
             itemCount: model.proposals.length,
             itemBuilder: (_, index) => ProposalRowItem(
               proposal: model.proposals[index],
-              onDetailTap: () => navigatorKey.currentState!
-                  .pushNamed(DigPageName.proposalDetail),
+              onDetailTap: () => _cubit.onDetailTap(model.proposals[index]),
             ),
           )),
           const SizedBox(

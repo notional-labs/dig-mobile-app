@@ -1,5 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:dig_core/dig_core.dart';
+import 'package:dig_mobile_app/app/definition/string.dart';
+import 'package:dig_mobile_app/app/page/proposals_flow/proposal_detail/proposal_detail_page.dart';
+import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:dig_mobile_app/app/viewmodel/proposals_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:equatable/equatable.dart';
@@ -27,5 +30,10 @@ class ProposalsCubit extends Cubit<ProposalsState> {
 
   void _handleGetProposalsFailure(BaseDigException exception) {
     emit(ProposalsErrorState(exception: exception, model: state.model));
+  }
+
+  void onDetailTap(Proposal proposal) {
+    navigatorKey.currentState!.pushNamed(DigPageName.proposalDetail,
+        arguments: ProposalDetailPageParams(proposal));
   }
 }

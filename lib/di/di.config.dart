@@ -19,11 +19,12 @@ import '../app/cubit/import_account/import_account_cubit.dart' as _i10;
 import '../app/cubit/name_account/import_account/name_account_cubit.dart'
     as _i11;
 import '../app/cubit/pin/pin_cubit.dart' as _i12;
-import '../app/cubit/proposals/proposals_cubit.dart' as _i13;
-import '../app/cubit/recovery_phrase/recovery_phrase_cubit.dart' as _i14;
-import '../app/cubit/sign_in/sign_in_cubit.dart' as _i15;
+import '../app/cubit/proposal_detail/proposal_detail_cubit.dart' as _i13;
+import '../app/cubit/proposals/proposals_cubit.dart' as _i14;
+import '../app/cubit/recovery_phrase/recovery_phrase_cubit.dart' as _i15;
+import '../app/cubit/sign_in/sign_in_cubit.dart' as _i16;
 import '../app/cubit/splash/splash_cubit.dart'
-    as _i16; // ignore_for_file: unnecessary_lambdas
+    as _i17; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -41,9 +42,10 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i10.ImportAccountCubit>(() => _i10.ImportAccountCubit());
   gh.factory<_i11.NameAccountCubit>(() => _i11.NameAccountCubit());
   gh.factory<_i12.PinCubit>(() => _i12.PinCubit());
-  gh.factory<_i13.ProposalsCubit>(() => _i13.ProposalsCubit());
-  gh.factory<_i14.RecoveryPhraseCubit>(() => _i14.RecoveryPhraseCubit());
-  gh.factory<_i15.SignInCubit>(() => _i15.SignInCubit());
-  gh.factory<_i16.SplashCubit>(() => _i16.SplashCubit());
+  gh.factory<_i13.ProposalDetailCubit>(() => _i13.ProposalDetailCubit());
+  gh.factory<_i14.ProposalsCubit>(() => _i14.ProposalsCubit());
+  gh.factory<_i15.RecoveryPhraseCubit>(() => _i15.RecoveryPhraseCubit());
+  gh.factory<_i16.SignInCubit>(() => _i16.SignInCubit());
+  gh.factory<_i17.SplashCubit>(() => _i17.SplashCubit());
   return get;
 }
