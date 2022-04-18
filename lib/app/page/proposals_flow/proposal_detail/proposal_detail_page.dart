@@ -1,20 +1,45 @@
+import 'package:dig_core/dig_core.dart';
+import 'package:dig_mobile_app/app/cubit/proposal_detail/proposal_detail_cubit.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_proposal_status.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_appbar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
+import 'package:dig_mobile_app/app/extension/datetime_extensions.dart';
+import 'package:dig_mobile_app/app/extension/string_extension.dart';
+import 'package:dig_mobile_app/app/viewmodel/proposal_detail_viewmodel.dart';
+import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class ProposalDetailPageParams {
+  final Proposal proposal;
+
+  const ProposalDetailPageParams(this.proposal);
+}
 
 class ProposalDetailPage extends StatefulWidget {
-  const ProposalDetailPage({Key? key}) : super(key: key);
+  final ProposalDetailPageParams? params;
+
+  const ProposalDetailPage({this.params, Key? key}) : super(key: key);
 
   @override
   State<ProposalDetailPage> createState() => _ProposalDetailPageState();
 }
 
 class _ProposalDetailPageState extends State<ProposalDetailPage> {
+  final ProposalDetailCubit _cubit = di();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _cubit.init(widget.params?.proposal);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
@@ -29,7 +54,14 @@ class _ProposalDetailPageState extends State<ProposalDetailPage> {
                 onBackButtonPressed: () => Navigator.of(context).pop(),
               ),
               const SizedBox(height: 38),
-              Expanded(child: SingleChildScrollView(child: _buildBody()))
+              Expanded(
+                  child: SingleChildScrollView(
+                      child: BlocConsumer<ProposalDetailCubit,
+                          ProposalDetailState>(
+                bloc: _cubit,
+                listener: _listener,
+                builder: (_, state) => _buildBody(state.model),
+              )))
             ],
           ),
         ),
@@ -37,7 +69,9 @@ class _ProposalDetailPageState extends State<ProposalDetailPage> {
     );
   }
 
-  Widget _buildBody() {
+  void _listener(_, currentState) {}
+
+  Widget _buildBody(ProposalDetailViewModel model) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
@@ -47,7 +81,7 @@ class _ProposalDetailPageState extends State<ProposalDetailPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '#8',
+                '#${model.proposal.proposalId}',
                 style: DSTextStyle.tsMontserratT20B
                     .copyWith(color: DSColors.tulipTree),
               ),
@@ -58,7 +92,7 @@ class _ProposalDetailPageState extends State<ProposalDetailPage> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 2.0),
                   child: Text(
-                    'Dig Chain British Virgin Islands IBC and Financial Services Regulatory Sandbox Implementation',
+                    model.proposal.content?.title ?? '',
                     style: DSTextStyle.tsMontserratT16M
                         .copyWith(color: DSColors.tulipTree),
                   ),
@@ -69,48 +103,53 @@ class _ProposalDetailPageState extends State<ProposalDetailPage> {
           const SizedBox(
             height: 25,
           ),
-          const DSProposalStatus(),
+          DSProposalStatus(
+            type: model.proposal.proposalStatusType,
+          ),
           const SizedBox(
             height: 25,
           ),
           _InfoRowItem(
             name: S.current.proposal_id,
-            value: '34',
+            value: model.proposal.proposalId,
           ),
-          _InfoRowItem(
-            name: S.current.proposer,
-            value: 'dig14h2p084nt0u4m35ry6wu8et3wf6hv5kqyz2ktw',
-            valueColor: DSColors.tulipTree,
-          ),
+          // _InfoRowItem(
+          //   name: S.current.proposer,
+          //   value: 'dig14h2p084nt0u4m35ry6wu8et3wf6hv5kqyz2ktw',
+          //   valueColor: DSColors.tulipTree,
+          // ), // todo later
           _InfoRowItem(
             name: S.current.total_deposit,
-            value: '10000',
+            value: model.totalDeposit.toString(),
           ),
           _InfoRowItem(
             name: S.current.submitted_time,
-            value: '2022-03-22 22:47:23',
+            value: _toDisplayDateFormat(model.proposal.submitTime),
           ),
           _InfoRowItem(
             name: S.current.voting_time,
-            value: '2022-03-22 22:47:23 - 2022-03-24 22:47:23',
+            value:
+                '${_toDisplayDateFormat(model.proposal.votingStartTime)} - ${_toDisplayDateFormat(model.proposal.votingEndTime)}',
           ),
           _InfoRowItem(
             name: S.current.proposal_type,
-            value: 'cosmos-sdk/TextProposal',
+            value: model.proposal.content?.type ?? '',
           ),
           _InfoRowItem(
             name: S.current.title,
-            value:
-                'Dig Chain British Virgin Islands IBC and Financial Services Regulatory Sandbox Implementation',
+            value: model.proposal.content?.title ?? '',
           ),
           _InfoRowItem(
             name: S.current.description,
-            value:
-                "Please Visit https://commonwealth.im/dig-chain/discussion/4004-dig-chain-british-virgin-islands-ibc-financial-services-regulatory-sandbox-implementation for full text Proposal. Dig Chain proposes following through with recent team business development actions to incorporate a legal entity as an International Business Corporation (IBC) in the British Virgin Islands (BVI). ",
+            value: model.proposal.content?.description ?? '',
           )
         ],
       ),
     );
+  }
+
+  String _toDisplayDateFormat(String dateString) {
+    return dateString.toDateTime()?.toYYYYMMdd() ?? '';
   }
 }
 
