@@ -66,6 +66,8 @@ class ProposalRowItem extends StatelessWidget {
                 Text(
                   proposal.content?.description ?? '',
                   style: DSTextStyle.tsMontserratT12R,
+                  maxLines: 15,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(
                   height: 22,

@@ -7,6 +7,7 @@ import 'package:dig_mobile_app/app/designsystem/ds_primary_appbar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/app/extension/datetime_extensions.dart';
 import 'package:dig_mobile_app/app/extension/string_extension.dart';
+import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/proposal_detail_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
@@ -29,7 +30,7 @@ class ProposalDetailPage extends StatefulWidget {
   State<ProposalDetailPage> createState() => _ProposalDetailPageState();
 }
 
-class _ProposalDetailPageState extends State<ProposalDetailPage> {
+class _ProposalDetailPageState extends State<ProposalDetailPage> with WidgetUtil {
   final ProposalDetailCubit _cubit = di();
 
   @override
@@ -69,7 +70,13 @@ class _ProposalDetailPageState extends State<ProposalDetailPage> {
     );
   }
 
-  void _listener(_, currentState) {}
+  void _listener(_, currentState) {
+    if (currentState is ProposalDetailLoadingState) {
+      showGlobalLoadingOverlay();
+      return;
+    }
+    dismissGlobalLoadingOverlay();
+  }
 
   Widget _buildBody(ProposalDetailViewModel model) {
     return Container(
@@ -113,11 +120,11 @@ class _ProposalDetailPageState extends State<ProposalDetailPage> {
             name: S.current.proposal_id,
             value: model.proposal.proposalId,
           ),
-          // _InfoRowItem(
-          //   name: S.current.proposer,
-          //   value: 'dig14h2p084nt0u4m35ry6wu8et3wf6hv5kqyz2ktw',
-          //   valueColor: DSColors.tulipTree,
-          // ), // todo later
+          _InfoRowItem(
+            name: S.current.proposer,
+            value: model.proposer,
+            valueColor: DSColors.tulipTree,
+          ),
           _InfoRowItem(
             name: S.current.total_deposit,
             value: model.totalDeposit.toString(),
@@ -149,7 +156,7 @@ class _ProposalDetailPageState extends State<ProposalDetailPage> {
   }
 
   String _toDisplayDateFormat(String dateString) {
-    return dateString.toDateTime()?.toYYYYMMdd() ?? '';
+    return dateString.toDateTime()?.toLocal().toYYYYMMddHHmmSS() ?? '';
   }
 }
 
@@ -173,7 +180,7 @@ class _InfoRowItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 140,
+            width: 120,
             child: Text(
               name,
               style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.white),
