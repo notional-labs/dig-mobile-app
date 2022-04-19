@@ -11,6 +11,7 @@ abstract class HttpCode {
 abstract class EndPoint {
   static const String getBalancePath = 'cosmos/bank/v1beta1/balances/{address}';
   static const String getProposals = 'cosmos/gov/v1beta1/proposals';
+  static const String proposer = 'gov/proposals/{proposerId}/proposer';
 }
 
 abstract class GetItInstanceName {
@@ -20,5 +21,5 @@ abstract class GetItInstanceName {
 abstract class DataErrorMessage {
   static const String networkError = 'Please check your connect';
   static const String derivatorNotFound = 'Derivator Not Found';
-  static const String unknowError = 'Unknow Error';
+  static const String unknownError = 'Unknown Error';
 }

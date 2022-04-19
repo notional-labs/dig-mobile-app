@@ -51,7 +51,7 @@ class DigExceptionHandler implements BaseDigExceptionHandler {
       case AccountDerivationFailType.derivatorNotFound:
         return const DigException(message: DataErrorMessage.derivatorNotFound);
       default:
-        return const DigException(message: DataErrorMessage.unknowError);
+        return const DigException(message: DataErrorMessage.unknownError);
     }
   }
 }

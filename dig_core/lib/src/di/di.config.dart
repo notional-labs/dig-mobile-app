@@ -23,19 +23,20 @@ import '../domain/repository/auth_repository.dart' as _i18;
 import '../domain/repository/proposals_repository.dart' as _i16;
 import '../domain/usecase/account/get_list_account_usecase.dart' as _i25;
 import '../domain/usecase/account/get_list_balance_usecase.dart' as _i11;
-import '../domain/usecase/account/get_selected_account_usecase.dart' as _i28;
-import '../domain/usecase/account/select_account_usecase.dart' as _i32;
+import '../domain/usecase/account/get_selected_account_usecase.dart' as _i29;
+import '../domain/usecase/account/select_account_usecase.dart' as _i33;
 import '../domain/usecase/auth/change_pin_usecase.dart' as _i20;
 import '../domain/usecase/auth/check_has_pin_usecase.dart' as _i21;
 import '../domain/usecase/auth/check_mnemonic_valid_usecase.dart' as _i8;
 import '../domain/usecase/auth/create_mnemonic_usecase.dart' as _i22;
 import '../domain/usecase/auth/create_pin_usecase.dart' as _i23;
 import '../domain/usecase/auth/delete_pin_usecase.dart' as _i24;
-import '../domain/usecase/auth/import_account_usecase.dart' as _i29;
-import '../domain/usecase/auth/match_pin_usecase.dart' as _i30;
-import '../domain/usecase/auth/remove_account_usecase.dart' as _i31;
+import '../domain/usecase/auth/import_account_usecase.dart' as _i30;
+import '../domain/usecase/auth/match_pin_usecase.dart' as _i31;
+import '../domain/usecase/auth/remove_account_usecase.dart' as _i32;
 import '../domain/usecase/check_fist_time_run_app_usecase.dart' as _i7;
 import '../domain/usecase/proposals/get_proposals_usecase.dart' as _i27;
+import '../domain/usecase/proposals/get_proposer_usecase.dart' as _i28;
 import '../domain/util/util.dart'
     as _i10; // ignore_for_file: unnecessary_lambdas
 
@@ -80,16 +81,18 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       _i25.GetListAccountUseCase(get<_i18.AuthRepository>(), get<_i26.ENV>()));
   gh.factory<_i27.GetProposalsUseCase>(() => _i27.GetProposalsUseCase(
       get<_i16.ProposalsRepository>(), get<_i12.ENV>()));
-  gh.factory<_i28.GetSelectedAccountUseCase>(() =>
-      _i28.GetSelectedAccountUseCase(
+  gh.factory<_i28.GetProposerUseCase>(() => _i28.GetProposerUseCase(
+      get<_i16.ProposalsRepository>(), get<_i26.ENV>()));
+  gh.factory<_i29.GetSelectedAccountUseCase>(() =>
+      _i29.GetSelectedAccountUseCase(
           get<_i18.AuthRepository>(), get<_i26.ENV>()));
-  gh.factory<_i29.ImportAccountUseCase>(() =>
-      _i29.ImportAccountUseCase(get<_i18.AuthRepository>(), get<_i12.ENV>()));
-  gh.factory<_i30.MatchPinUseCase>(
-      () => _i30.MatchPinUseCase(get<_i18.AuthRepository>()));
-  gh.factory<_i31.RemoveAccountUseCase>(() =>
-      _i31.RemoveAccountUseCase(get<_i18.AuthRepository>(), get<_i12.ENV>()));
-  gh.factory<_i32.SelectAccountUseCase>(
-      () => _i32.SelectAccountUseCase(get<_i18.AuthRepository>()));
+  gh.factory<_i30.ImportAccountUseCase>(() =>
+      _i30.ImportAccountUseCase(get<_i18.AuthRepository>(), get<_i12.ENV>()));
+  gh.factory<_i31.MatchPinUseCase>(
+      () => _i31.MatchPinUseCase(get<_i18.AuthRepository>()));
+  gh.factory<_i32.RemoveAccountUseCase>(() =>
+      _i32.RemoveAccountUseCase(get<_i18.AuthRepository>(), get<_i12.ENV>()));
+  gh.factory<_i33.SelectAccountUseCase>(
+      () => _i33.SelectAccountUseCase(get<_i18.AuthRepository>()));
   return get;
 }
