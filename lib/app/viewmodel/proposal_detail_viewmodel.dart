@@ -5,11 +5,15 @@ import 'package:collection/collection.dart';
 
 class ProposalDetailViewModel with EquatableMixin {
   final Proposal proposal;
+  final String proposer;
 
-  const ProposalDetailViewModel({this.proposal = const Proposal()});
+  const ProposalDetailViewModel(
+      {this.proposal = const Proposal(), this.proposer = ''});
 
-  ProposalDetailViewModel copyWith({Proposal? proposal}) =>
-      ProposalDetailViewModel(proposal: proposal ?? this.proposal);
+  ProposalDetailViewModel copyWith({Proposal? proposal, String? proposer}) =>
+      ProposalDetailViewModel(
+          proposal: proposal ?? this.proposal,
+          proposer: proposer ?? this.proposer);
 
   int get totalDeposit {
     final balance = proposal.totalDeposit
@@ -19,5 +23,5 @@ class ProposalDetailViewModel with EquatableMixin {
   }
 
   @override
-  List<Object?> get props => [proposal];
+  List<Object?> get props => [proposal, proposer];
 }
