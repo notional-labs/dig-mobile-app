@@ -72,5 +72,6 @@
     "start_date": "Start Date",
     "end_date": "End Date",
     "staking": "STAKING",
-    "account": "ACCOUNT"
+    "account": "ACCOUNT",
+    "vote": "vote"
 }

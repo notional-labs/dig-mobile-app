@@ -132,6 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "token": MessageLookupByLibrary.simpleMessage("Token"),
         "total_deposit": MessageLookupByLibrary.simpleMessage("Total Deposit"),
         "usd_money_format": m2,
+        "vote": MessageLookupByLibrary.simpleMessage("vote"),
         "voting_time": MessageLookupByLibrary.simpleMessage("Voting Time"),
         "wellcome": MessageLookupByLibrary.simpleMessage("WELCOME"),
         "your_recovery_phrase":

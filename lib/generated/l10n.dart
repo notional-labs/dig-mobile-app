@@ -789,6 +789,16 @@ class S {
       args: [],
     );
   }
+
+  /// `vote`
+  String get vote {
+    return Intl.message(
+      'vote',
+      name: 'vote',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

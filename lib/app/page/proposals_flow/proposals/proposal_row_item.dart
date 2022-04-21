@@ -1,4 +1,5 @@
 import 'package:dig_core/dig_core.dart';
+import 'package:dig_mobile_app/app/designsystem/custom/ds_proposal_percentage_bar.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_proposal_status.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_small_button.dart';
@@ -100,9 +101,11 @@ class ProposalRowItem extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                Container(
-                  color: DSColors.silver2,
-                  height: 20,
+                DSProposalPercentageBar(
+                  yes: proposal.votingYesPercent,
+                  abstain: proposal.votingAbstainPercent,
+                  no: proposal.votingNoPercent,
+                  noWithVeto: proposal.votingNoWithVetoPercent,
                 )
               ],
             ),
