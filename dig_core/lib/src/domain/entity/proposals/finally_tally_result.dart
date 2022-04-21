@@ -25,3 +25,13 @@ class FinalTallyResult with EquatableMixin {
   @override
   List<Object?> get props => [yes, abstain, no, noWithVeto];
 }
+
+extension FinalTallyResultExtension on FinalTallyResult {
+  int get yesByInt => int.tryParse(yes) ?? 0;
+
+  int get abstainByInt => int.tryParse(abstain) ?? 0;
+
+  int get noByInt => int.tryParse(no) ?? 0;
+
+  int get noWithVetoByInt => int.tryParse(noWithVeto) ?? 0;
+}
