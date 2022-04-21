@@ -9,6 +9,7 @@ import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/app/page/active_account/active_account_page.dart';
 import 'package:dig_mobile_app/app/page/home/home_drawer.dart';
 import 'package:dig_mobile_app/app/page/proposals_flow/proposals/proposals_page.dart';
+import 'package:dig_mobile_app/app/page/staking/staking_page.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/home_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
@@ -133,7 +134,7 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
                     _cubit.removeAccount(account);
                   },
                 ),
-                const SizedBox.shrink(),
+                const StakingPage(),
                 const ProposalsPage()
               ],
             ),

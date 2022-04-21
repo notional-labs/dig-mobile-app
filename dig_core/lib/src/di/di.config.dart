@@ -8,7 +8,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i14;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../../dig_core.dart' as _i26;
+import '../../dig_core.dart' as _i28;
 import '../data/datasource/local/account_local_datasource.dart' as _i3;
 import '../data/datasource/local/create_db_datasource.dart' as _i9;
 import '../data/datasource/local/pin_local_datasource.dart' as _i13;
@@ -35,8 +35,8 @@ import '../domain/usecase/auth/import_account_usecase.dart' as _i30;
 import '../domain/usecase/auth/match_pin_usecase.dart' as _i31;
 import '../domain/usecase/auth/remove_account_usecase.dart' as _i32;
 import '../domain/usecase/check_fist_time_run_app_usecase.dart' as _i7;
-import '../domain/usecase/proposals/get_proposals_usecase.dart' as _i27;
-import '../domain/usecase/proposals/get_proposer_usecase.dart' as _i28;
+import '../domain/usecase/proposals/get_proposals_usecase.dart' as _i26;
+import '../domain/usecase/proposals/get_proposer_usecase.dart' as _i27;
 import '../domain/util/util.dart'
     as _i10; // ignore_for_file: unnecessary_lambdas
 
@@ -78,14 +78,14 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i24.DeletePinUseCase>(
       () => _i24.DeletePinUseCase(get<_i18.AuthRepository>()));
   gh.factory<_i25.GetListAccountUseCase>(() =>
-      _i25.GetListAccountUseCase(get<_i18.AuthRepository>(), get<_i26.ENV>()));
-  gh.factory<_i27.GetProposalsUseCase>(() => _i27.GetProposalsUseCase(
+      _i25.GetListAccountUseCase(get<_i18.AuthRepository>(), get<_i12.ENV>()));
+  gh.factory<_i26.GetProposalsUseCase>(() => _i26.GetProposalsUseCase(
       get<_i16.ProposalsRepository>(), get<_i12.ENV>()));
-  gh.factory<_i28.GetProposerUseCase>(() => _i28.GetProposerUseCase(
-      get<_i16.ProposalsRepository>(), get<_i26.ENV>()));
+  gh.factory<_i27.GetProposerUseCase>(() => _i27.GetProposerUseCase(
+      get<_i16.ProposalsRepository>(), get<_i28.ENV>()));
   gh.factory<_i29.GetSelectedAccountUseCase>(() =>
       _i29.GetSelectedAccountUseCase(
-          get<_i18.AuthRepository>(), get<_i26.ENV>()));
+          get<_i18.AuthRepository>(), get<_i28.ENV>()));
   gh.factory<_i30.ImportAccountUseCase>(() =>
       _i30.ImportAccountUseCase(get<_i18.AuthRepository>(), get<_i12.ENV>()));
   gh.factory<_i31.MatchPinUseCase>(
