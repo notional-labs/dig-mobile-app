@@ -1,5 +1,6 @@
 import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/cubit/proposal_detail/proposal_detail_cubit.dart';
+import 'package:dig_mobile_app/app/designsystem/custom/ds_proposal_percentage_bar.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_proposal_status.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
@@ -30,7 +31,8 @@ class ProposalDetailPage extends StatefulWidget {
   State<ProposalDetailPage> createState() => _ProposalDetailPageState();
 }
 
-class _ProposalDetailPageState extends State<ProposalDetailPage> with WidgetUtil {
+class _ProposalDetailPageState extends State<ProposalDetailPage>
+    with WidgetUtil {
   final ProposalDetailCubit _cubit = di();
 
   @override
@@ -47,26 +49,26 @@ class _ProposalDetailPageState extends State<ProposalDetailPage> with WidgetUtil
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
           body: DSBackground(
-        child: SafeArea(
-          child: Column(
-            children: [
-              DSPrimaryAppBar.normal(
-                title: S.current.proposal_detail_page_title,
-                onBackButtonPressed: () => Navigator.of(context).pop(),
+            child: SafeArea(
+              child: Column(
+                children: [
+                  DSPrimaryAppBar.normal(
+                    title: S.current.proposal_detail_page_title,
+                    onBackButtonPressed: () => Navigator.of(context).pop(),
+                  ),
+                  const SizedBox(height: 38),
+                  Expanded(
+                      child: SingleChildScrollView(
+                          child: BlocConsumer<ProposalDetailCubit,
+                              ProposalDetailState>(
+                            bloc: _cubit,
+                            listener: _listener,
+                            builder: (_, state) => _buildBody(state.model),
+                          )))
+                ],
               ),
-              const SizedBox(height: 38),
-              Expanded(
-                  child: SingleChildScrollView(
-                      child: BlocConsumer<ProposalDetailCubit,
-                          ProposalDetailState>(
-                bloc: _cubit,
-                listener: _listener,
-                builder: (_, state) => _buildBody(state.model),
-              )))
-            ],
-          ),
-        ),
-      )),
+            ),
+          )),
     );
   }
 
@@ -136,7 +138,9 @@ class _ProposalDetailPageState extends State<ProposalDetailPage> with WidgetUtil
           _InfoRowItem(
             name: S.current.voting_time,
             value:
-                '${_toDisplayDateFormat(model.proposal.votingStartTime)} - ${_toDisplayDateFormat(model.proposal.votingEndTime)}',
+            '${_toDisplayDateFormat(
+                model.proposal.votingStartTime)} - ${_toDisplayDateFormat(
+                model.proposal.votingEndTime)}',
           ),
           _InfoRowItem(
             name: S.current.proposal_type,
@@ -149,6 +153,20 @@ class _ProposalDetailPageState extends State<ProposalDetailPage> with WidgetUtil
           _InfoRowItem(
             name: S.current.description,
             value: model.proposal.content?.description ?? '',
+          ),
+          const SizedBox(height: 75,),
+          Text(S.current.vote.toUpperCase(),
+            style: DSTextStyle.tsMontserratT20B
+                .copyWith(color: DSColors.tulipTree),
+          ),
+          const SizedBox(
+            height: 22,
+          ),
+          DSProposalPercentageBar(
+            yes: model.proposal.votingYesPercent,
+            abstain: model.proposal.votingAbstainPercent,
+            no: model.proposal.votingNoPercent,
+            noWithVeto: model.proposal.votingNoWithVetoPercent,
           )
         ],
       ),

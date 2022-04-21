@@ -43,4 +43,6 @@ class DSColors {
   static const Color yellowOrange = Color(0xffFFAC38);
   static const Color jungleGreen = Color(0xff2A9D8F);
   static const Color burntSienna = Color(0xffE76F51);
+  static const Color rockBlue = Color(0xff9CB7D3);
+  static const Color robRoy = Color(0xffE9C46A);
 }
