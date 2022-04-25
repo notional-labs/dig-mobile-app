@@ -111,10 +111,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Detail"),
         "proposer": MessageLookupByLibrary.simpleMessage("Proposer"),
         "real_estate": MessageLookupByLibrary.simpleMessage("Real estate"),
+        "receive": MessageLookupByLibrary.simpleMessage("Receive"),
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
         "remove_account":
             MessageLookupByLibrary.simpleMessage("Remove Account"),
+        "scan": MessageLookupByLibrary.simpleMessage("Scan"),
+        "scan_qr_code": MessageLookupByLibrary.simpleMessage("Scan QR code"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
+        "share_address": MessageLookupByLibrary.simpleMessage("Share Address"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign In"),
         "sign_in_on_your_account":
             MessageLookupByLibrary.simpleMessage("Sign in on your account"),

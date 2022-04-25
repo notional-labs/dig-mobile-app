@@ -1,16 +1,16 @@
 import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_primary_avatar.dart';
+import 'package:dig_mobile_app/app/designsystem/custom/ds_wallet_address.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
+import 'package:dig_mobile_app/app/page/receive_token/receive_token_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:dig_mobile_app/app/cubit/active_account/active_account_cubit.dart';
-import 'package:dig_mobile_app/app/definition/app_assets.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_rounded_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_expandable_page_view.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
-import 'package:dig_mobile_app/app/extension/extension.dart';
 import 'package:dig_mobile_app/app/page/active_account/real_estate_list_tab_page/real_estate_list_tab_page.dart';
 import 'package:dig_mobile_app/app/page/active_account/tokens_holding_list_tab_page/tokens_holding_list_tab_page.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
@@ -44,9 +44,10 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
   late TabController _tabController;
   AccountPublicInfo? _lastAccountPublicInfo;
 
-  void _fetchData(){
-     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      if (_lastAccountPublicInfo?.accountId != widget.accountPublicInfo.accountId) {
+  void _fetchData() {
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      if (_lastAccountPublicInfo?.accountId !=
+          widget.accountPublicInfo.accountId) {
         _cubit.fetchData(widget.accountPublicInfo);
         _lastAccountPublicInfo = widget.accountPublicInfo;
       }
@@ -65,7 +66,6 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
     // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
     _fetchData();
-   
   }
 
   @override
@@ -119,10 +119,13 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
           const SizedBox(
             height: 12,
           ),
-          _WalletAddress(
-            address: widget.accountPublicInfo.publicAddress,
-            onCopyToClipboardTap: (address) =>
-                _cubit.copyAddressToClipboard(address),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 86),
+            child: DSWalletAddress(
+              address: widget.accountPublicInfo.publicAddress,
+              onCopyToClipboardTap: (address) =>
+                  _cubit.copyAddressToClipboard(address),
+            ),
           ),
           Padding(
             padding:
@@ -130,8 +133,19 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const DSRoundedButton(
-                  actionType: DSRoundedButtonActionType.buy,
+                DSRoundedButton(
+                  actionType: DSRoundedButtonActionType.receive,
+                  onTap: () {
+                    showDigDialog(
+                        context: context,
+                        child: ReceiveTokenDialog(
+                          address: widget.accountPublicInfo.publicAddress,
+                          onCopyToClipboardTap: (address) =>
+                              _cubit.copyAddressToClipboard(address),
+                          onShareAddressTap: (address) =>
+                              _cubit.onShareAddress(address),
+                        ));
+                  },
                 ),
                 const DSRoundedButton(
                   actionType: DSRoundedButtonActionType.send,
@@ -241,53 +255,6 @@ class _TabItem extends StatelessWidget {
         style: DSTextStyle.tsMontserrat.copyWith(
             fontSize: 12, color: Colors.white, fontWeight: FontWeight.w400),
       )),
-    );
-  }
-}
-
-class _WalletAddress extends StatelessWidget {
-  final Function(String)? onCopyToClipboardTap;
-  final String address;
-
-  const _WalletAddress(
-      {required this.address, this.onCopyToClipboardTap, Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 86),
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5), color: DSColors.silver2),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              address.length > 20 ? address.trimMiddleWithDot(20) : address,
-              textAlign: TextAlign.center,
-              maxLines: 1,
-              style: DSTextStyle.tsMontserrat.copyWith(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: DSColors.tundora,
-                  overflow: TextOverflow.clip),
-            ),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () => onCopyToClipboardTap?.call(address),
-            child: Image.asset(
-              AppAssets.icCopy,
-              width: 18,
-              height: 18,
-            ),
-          )
-        ],
-      ),
     );
   }
 }

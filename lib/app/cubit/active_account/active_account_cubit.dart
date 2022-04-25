@@ -5,6 +5,7 @@ import 'package:dig_mobile_app/di/di.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
+import 'package:share_plus/share_plus.dart';
 
 part 'active_account_state.dart';
 
@@ -33,5 +34,18 @@ class ActiveAccountCubit extends Cubit<ActiveAccountState> {
   void onSelectTab(int index) {
     emit(ActiveAccountPrimaryState(
         viewmodel: state.viewmodel.copyWith(selectedTab: index)));
+  }
+
+  void onShareAddress(String content) {
+    if (content.trim().isEmpty) {
+      return;
+    }
+    Share.share(content).catchError(_handleShareAddressFailure);
+  }
+
+  void _handleShareAddressFailure(exception) {
+    emit(ActiveAccountErrorState(
+        viewmodel: state.viewmodel.copyWith(),
+        exception: DigException(message: exception)));
   }
 }

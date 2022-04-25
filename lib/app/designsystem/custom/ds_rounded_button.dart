@@ -4,7 +4,7 @@ import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
-enum DSRoundedButtonActionType { buy, send, exchange, remove, none }
+enum DSRoundedButtonActionType { receive, buy, send, exchange, remove, none }
 
 class DSRoundedButton extends StatelessWidget {
   final DSRoundedButtonActionType actionType;
@@ -50,6 +50,8 @@ class DSRoundedButton extends StatelessWidget {
 
   String _getIconByType() {
     switch (actionType) {
+      case DSRoundedButtonActionType.receive:
+        return AppAssets.icSolidCoins;
       case DSRoundedButtonActionType.buy:
         return AppAssets.icSolidCoins;
       case DSRoundedButtonActionType.send:
@@ -65,6 +67,8 @@ class DSRoundedButton extends StatelessWidget {
 
   String _getTextByType() {
     switch (actionType) {
+      case DSRoundedButtonActionType.receive:
+        return S.current.receive;
       case DSRoundedButtonActionType.buy:
         return S.current.buy;
       case DSRoundedButtonActionType.send:
