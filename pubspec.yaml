@@ -43,6 +43,8 @@ dependencies:
   dotted_border: ^2.0.0+2
   dartz: ^0.10.1
   pedantic: ^1.8.0
+  qr_flutter: ^4.0.0
+  share_plus: ^4.0.4
 
   dig_core:
     path: dig_core

@@ -799,6 +799,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Receive`
+  String get receive {
+    return Intl.message(
+      'Receive',
+      name: 'receive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan QR code`
+  String get scan_qr_code {
+    return Intl.message(
+      'Scan QR code',
+      name: 'scan_qr_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share Address`
+  String get share_address {
+    return Intl.message(
+      'Share Address',
+      name: 'share_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan`
+  String get scan {
+    return Intl.message(
+      'Scan',
+      name: 'scan',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

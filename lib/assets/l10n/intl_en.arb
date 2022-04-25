@@ -73,5 +73,9 @@
     "end_date": "End Date",
     "staking": "STAKING",
     "account": "ACCOUNT",
-    "vote": "vote"
+    "vote": "vote",
+    "receive": "Receive",
+    "scan_qr_code": "Scan QR code",
+    "share_address": "Share Address",
+    "scan": "Scan"
 }

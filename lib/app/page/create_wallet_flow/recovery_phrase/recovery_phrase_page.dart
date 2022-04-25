@@ -218,17 +218,18 @@ class _CopyToClipBoard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          isCopied
-              ? SvgPicture.asset(
-                  AppAssets.icCopied,
-                  width: 16,
-                  height: 16,
-                )
-              : const Icon(
-                  Icons.copy,
-                  size: 16,
-                  color: DSColors.tulipTree,
-                ),
+          if (isCopied)
+            SvgPicture.asset(
+              AppAssets.icCopied,
+              width: 16,
+              height: 16,
+            )
+          else
+            const Icon(
+              Icons.copy,
+              size: 16,
+              color: DSColors.tulipTree,
+            ),
           const SizedBox(
             width: 6,
           ),
