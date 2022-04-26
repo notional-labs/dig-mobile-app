@@ -12,6 +12,9 @@ abstract class EndPoint {
   static const String getBalancePath = 'cosmos/bank/v1beta1/balances/{address}';
   static const String getProposals = 'cosmos/gov/v1beta1/proposals';
   static const String proposer = 'gov/proposals/{proposerId}/proposer';
+  static const String validators = 'staking/validators';
+  static const String validatorLogo =
+      'https://keybase.io/_/api/1.0/user/lookup.json?key_suffix={identity}&fields=pictures';
 }
 
 abstract class GetItInstanceName {

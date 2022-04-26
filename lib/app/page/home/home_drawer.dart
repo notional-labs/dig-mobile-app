@@ -1,6 +1,6 @@
 import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/definition/app_assets.dart';
-import 'package:dig_mobile_app/app/designsystem/custom/ds_second_avatar.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_second_avatar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dotted_border/dotted_border.dart';

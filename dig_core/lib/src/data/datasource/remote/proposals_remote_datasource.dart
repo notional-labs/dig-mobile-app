@@ -9,7 +9,7 @@ import 'package:injectable/injectable.dart';
 abstract class ProposalsRemoteDatasource {
   ChainENV createChain(ChainENV chain);
 
-  Future<ProposalsResponse?> getProposals(ProposalsRequest param);
+  Future<ProposalsResponse> getProposals(ProposalsRequest param);
 
   Future<ProposerResponse> getProposer(ProposerRequest param);
 }
@@ -25,7 +25,7 @@ class ProposalsRemoteDatasourceImplement implements ProposalsRemoteDatasource {
   }
 
   @override
-  Future<ProposalsResponse?> getProposals(ProposalsRequest param) {
+  Future<ProposalsResponse> getProposals(ProposalsRequest param) {
     assert(_chain != null,
         '`_chain` must be not null. Ensure called `createChain` first');
     final restClient = _chain!.getRestClient();

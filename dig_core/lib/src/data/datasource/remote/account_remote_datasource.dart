@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 
 abstract class AccountRemoteDatasource {
   ChainENV createChain(ChainENV chain);
-  Future<BalanceResponse?> getBalances(BalanceRequest param);
+  Future<BalanceResponse> getBalances(BalanceRequest param);
 }
 
 @Injectable(as: AccountRemoteDatasource)
@@ -20,7 +20,7 @@ class AccountRemoteDatasourceImplement implements AccountRemoteDatasource {
   }
 
   @override
-  Future<BalanceResponse?> getBalances(BalanceRequest param) {
+  Future<BalanceResponse> getBalances(BalanceRequest param) {
     assert(_chain != null,
         '`_chain` must be not null. Ensure called `createChain` first');
     final restClient = _chain!.getRestClient();

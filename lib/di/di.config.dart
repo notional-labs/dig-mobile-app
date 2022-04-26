@@ -24,8 +24,9 @@ import '../app/cubit/proposals/proposals_cubit.dart' as _i14;
 import '../app/cubit/recovery_phrase/recovery_phrase_cubit.dart' as _i15;
 import '../app/cubit/sign_in/sign_in_cubit.dart' as _i16;
 import '../app/cubit/splash/splash_cubit.dart' as _i17;
-import '../app/cubit/staking/staking_cubit.dart'
-    as _i18; // ignore_for_file: unnecessary_lambdas
+import '../app/cubit/staking/staking_cubit.dart' as _i18;
+import '../app/cubit/staking/staking_item/staking_item_cubit.dart'
+    as _i19; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -48,6 +49,9 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i15.RecoveryPhraseCubit>(() => _i15.RecoveryPhraseCubit());
   gh.factory<_i16.SignInCubit>(() => _i16.SignInCubit());
   gh.factory<_i17.SplashCubit>(() => _i17.SplashCubit());
-  gh.factory<_i18.StakingCubit>(() => _i18.StakingCubit());
+  gh.factory<_i18.StakingCubit>(
+      () => _i18.StakingCubit(get<_i6.GetValidatorUseCase>()));
+  gh.factory<_i19.StakingItemCubit>(
+      () => _i19.StakingItemCubit(get<_i6.GetValidatorLogoUseCase>()));
   return get;
 }
