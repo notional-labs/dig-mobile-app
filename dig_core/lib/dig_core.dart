@@ -28,6 +28,8 @@ export 'package:dig_core/src/domain/entity/balance.dart';
 export 'package:dig_core/src/domain/entity/balance_resquest.dart';
 export 'package:dig_core/src/domain/usecase/proposals/get_proposals_usecase.dart';
 export 'package:dig_core/src/domain/usecase/proposals/get_proposer_usecase.dart';
+export 'package:dig_core/src/domain/usecase/validator/get_validator_usecase.dart';
+export 'package:dig_core/src/domain/usecase/validator/get_validator_logo_usecase.dart';
 
 // domain - model
 export 'package:dig_core/src/domain/entity/import_account.dart';
@@ -39,6 +41,8 @@ export 'package:dig_core/src/domain/entity/pagination.dart';
 export 'package:dig_core/src/domain/entity/proposals/proposal.dart';
 export 'package:dig_core/src/domain/entity/proposals/proposals_request.dart';
 export 'package:dig_core/src/domain/entity/proposals/proposer_request.dart';
+export 'package:dig_core/src/domain/entity/staking/validator_response.dart';
+export 'package:dig_core/src/domain/entity/staking/result.dart';
 
 export 'package:dig_core/src/domain/util/util.dart';
 

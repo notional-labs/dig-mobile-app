@@ -2,6 +2,8 @@ import 'package:dig_core/src/data/definition/definition.dart';
 import 'package:dig_core/src/domain/entity/balance_response.dart';
 import 'package:dig_core/src/domain/entity/proposals/proposals_response.dart';
 import 'package:dig_core/src/domain/entity/proposals/proposer_response.dart';
+import 'package:dig_core/src/domain/entity/staking/logo_response.dart';
+import 'package:dig_core/src/domain/entity/staking/validator_response.dart';
 import 'package:dig_core/src/domain/env/env.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -27,4 +29,11 @@ abstract class RestClient {
   @GET(EndPoint.proposer)
   Future<ProposerResponse> getProposer(
       {@Path('proposerId') required String proposerId});
+
+  @GET(EndPoint.validators)
+  Future<ValidatorResponse> getValidators();
+
+  @GET(EndPoint.validatorLogo)
+  Future<LogoResponse> getValidatorLogo(
+      {@Path('identity') required String identity});
 }
