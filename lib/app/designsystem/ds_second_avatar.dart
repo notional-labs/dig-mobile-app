@@ -22,7 +22,7 @@ class DSSecondAvatar extends StatelessWidget {
   }
 
   Widget _resolveImage() {
-    if (imageNetworkUrl == null) {
+    if (imageNetworkUrl == null || imageNetworkUrl!.isEmpty) {
       return Image.asset(
         AppAssets.icAvatarEmpty,
         color: _resolveBackgroudColor(),
