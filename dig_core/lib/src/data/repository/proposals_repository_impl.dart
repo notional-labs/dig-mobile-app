@@ -17,7 +17,7 @@ class ProposalsRepositoryImplement implements ProposalsRepository {
   ChainENV createChainENV(ChainENV chain) => _datasource.createChain(chain);
 
   @override
-  Future<ProposalsResponse?> getProposals(ProposalsRequest param) =>
+  Future<ProposalsResponse> getProposals(ProposalsRequest param) =>
       _datasource.getProposals(param);
 
   @override

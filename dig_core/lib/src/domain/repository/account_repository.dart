@@ -5,5 +5,5 @@ import 'package:dig_core/src/domain/env/env.dart';
 
 abstract class AccountRepository {
   ChainENV createChainENV(ChainENV chain);
-  Future<BalanceResponse?> getBalances(BalanceRequest param);
+  Future<BalanceResponse> getBalances(BalanceRequest param);
 }
