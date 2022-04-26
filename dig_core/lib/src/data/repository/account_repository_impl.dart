@@ -14,6 +14,6 @@ class AccountRepositoryImplement implements AccountRepository {
   ChainENV createChainENV(ChainENV chain) => _datasource.createChain(chain);
 
   @override
-  Future<BalanceResponse?> getBalances(BalanceRequest param) =>
+  Future<BalanceResponse> getBalances(BalanceRequest param) =>
       _datasource.getBalances(param);
 }

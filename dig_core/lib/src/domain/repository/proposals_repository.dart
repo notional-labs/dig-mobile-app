@@ -6,6 +6,6 @@ import 'package:dig_core/src/domain/env/env.dart';
 
 abstract class ProposalsRepository {
   ChainENV createChainENV(ChainENV chain);
-  Future<ProposalsResponse?> getProposals(ProposalsRequest param);
+  Future<ProposalsResponse> getProposals(ProposalsRequest param);
   Future<ProposerResponse> getProposer(ProposerRequest param);
 }

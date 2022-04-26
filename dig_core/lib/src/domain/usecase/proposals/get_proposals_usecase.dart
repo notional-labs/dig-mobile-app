@@ -22,7 +22,7 @@ class GetProposalsUseCase
     try {
       _repository.createChainENV(params.chain ?? _env.digChain);
       final result = await _repository.getProposals(params.request);
-      return Right(result?.proposals ?? <Proposal>[]);
+      return Right(result.proposals);
     } catch (e, trace) {
       Logger().e('GetProposalsUseCase ERROR', e, trace);
       return Left(exceptionHandler.handler(e));
