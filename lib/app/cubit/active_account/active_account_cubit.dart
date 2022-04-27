@@ -14,8 +14,11 @@ class ActiveAccountCubit extends Cubit<ActiveAccountState> {
   ActiveAccountCubit() : super(const ActiveAccountUninitState());
   final GetListBalanceUseCase _getListBalanceUseCase = di();
 
-  Future fetchData(AccountPublicInfo account) async {
-    emit(ActiveAccountLoadingState(viewmodel: state.viewmodel.copyWith()));
+  Future fetchData(
+      {required AccountPublicInfo account, bool isRefresh = false}) async {
+    emit(ActiveAccountLoadingState(
+        viewmodel: state.viewmodel.copyWith(), isRefresh: isRefresh));
+
     final result = await _getListBalanceUseCase.call(GetListBalanceUseCaseParam(
         request: BalanceRequest(address: account.publicAddress)));
     result.fold((l) {
@@ -26,6 +29,9 @@ class ActiveAccountCubit extends Cubit<ActiveAccountState> {
           viewmodel: state.viewmodel.copyWith(balances: r)));
     });
   }
+
+  Future refreshEvent(AccountPublicInfo account) =>
+      fetchData(account: account, isRefresh: true);
 
   void copyAddressToClipboard(String address) {
     Clipboard.setData(ClipboardData(text: address));
