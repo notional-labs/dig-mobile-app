@@ -1,8 +1,10 @@
 import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_primary_avatar.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_wallet_address.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_refresh_cupertino_sliver.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/page/receive_token/receive_token_dialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -48,7 +50,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       if (_lastAccountPublicInfo?.accountId !=
           widget.accountPublicInfo.accountId) {
-        _cubit.fetchData(widget.accountPublicInfo);
+        _cubit.fetchData(account: widget.accountPublicInfo);
         _lastAccountPublicInfo = widget.accountPublicInfo;
       }
     });
@@ -73,12 +75,12 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
     return BlocConsumer<ActiveAccountCubit, ActiveAccountState>(
       bloc: _cubit,
       listener: _cubitListener,
-      builder: (context, state) => _buildBody(state.viewmodel),
+      builder: (context, state) => _buildRefreshableWidget(state.viewmodel),
     );
   }
 
   void _cubitListener(_, state) {
-    if (state is ActiveAccountLoadingState) {
+    if (state is ActiveAccountLoadingState && !state.isRefresh) {
       showGlobalLoadingOverlay();
       return;
     }
@@ -91,93 +93,118 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
     }
   }
 
-  Widget _buildBody(ActiveAccountViewModel viewModel) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 40, bottom: 20),
-            child: DSPrimaryAvatar(
-              backgroundColor: DSColors.silver2,
-            ),
+  Widget _buildRefreshableWidget(ActiveAccountViewModel viewModel) =>
+      CustomScrollView(
+        slivers: [
+          CupertinoSliverRefreshControl(
+            onRefresh: () {
+              return _cubit.refreshEvent(widget.accountPublicInfo);
+            },
+            builder: (
+              BuildContext context,
+              RefreshIndicatorMode refreshState,
+              double pulledExtent,
+              double refreshTriggerPullDistance,
+              double refreshIndicatorExtent,
+            ) =>
+                buildDSRefreshCupertinoSliver(
+                    context,
+                    refreshState,
+                    pulledExtent,
+                    refreshTriggerPullDistance,
+                    refreshIndicatorExtent),
           ),
-          Text(
-            widget.accountPublicInfo.name,
-            style: DSTextStyle.tsMontserrat.copyWith(
-                color: DSColors.tulipTree,
-                fontSize: 20,
-                fontWeight: FontWeight.w400),
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          Text(
-            S.current.dig_token_format(viewModel.getDigBalance()),
-            style: DSTextStyle.tsMontserrat.copyWith(
-                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400),
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 86),
-            child: DSWalletAddress(
-              address: widget.accountPublicInfo.publicAddress,
-              onCopyToClipboardTap: (address) =>
-                  _cubit.copyAddressToClipboard(address),
-            ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.only(top: 20, left: 54, right: 54, bottom: 34),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                DSRoundedButton(
-                  actionType: DSRoundedButtonActionType.receive,
-                  onTap: () {
-                    showDigDialog(
-                        context: context,
-                        child: ReceiveTokenDialog(
-                          address: widget.accountPublicInfo.publicAddress,
-                          onCopyToClipboardTap: (address) =>
-                              _cubit.copyAddressToClipboard(address),
-                          onShareAddressTap: (address) =>
-                              _cubit.onShareAddress(address),
-                        ));
-                  },
-                ),
-                const DSRoundedButton(
-                  actionType: DSRoundedButtonActionType.send,
-                ),
-                const DSRoundedButton(
-                  actionType: DSRoundedButtonActionType.exchange,
-                ),
-                DSRoundedButton(
-                  actionType: DSRoundedButtonActionType.remove,
-                  onTap: () {
-                    showActionDialog(
-                        context: context,
-                        title: S.current.remove_account,
-                        message: S.current
-                            .are_you_sure_you_want_to_remove_this_account,
-                        leftActTitle: S.current.cancel,
-                        rightActTitle: S.current.remove,
-                        onLeftTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        onRightTap: () {
-                          widget.onRemoveAccount(widget.accountPublicInfo);
-                          Navigator.of(context).pop();
-                        });
-                  },
-                )
-              ],
-            ),
-          ),
-          _buildTab(viewModel)
+          SliverToBoxAdapter(
+            child: _buildBody(viewModel),
+          )
         ],
-      ),
+      );
+
+  Widget _buildBody(ActiveAccountViewModel viewModel) {
+    return Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(top: 40, bottom: 20),
+          child: DSPrimaryAvatar(
+            backgroundColor: DSColors.silver2,
+          ),
+        ),
+        Text(
+          widget.accountPublicInfo.name,
+          style: DSTextStyle.tsMontserrat.copyWith(
+              color: DSColors.tulipTree,
+              fontSize: 20,
+              fontWeight: FontWeight.w400),
+        ),
+        const SizedBox(
+          height: 12,
+        ),
+        Text(
+          S.current.dig_token_format(viewModel.getDigBalance()),
+          style: DSTextStyle.tsMontserrat.copyWith(
+              color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400),
+        ),
+        const SizedBox(
+          height: 12,
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 86),
+          child: DSWalletAddress(
+            address: widget.accountPublicInfo.publicAddress,
+            onCopyToClipboardTap: (address) =>
+                _cubit.copyAddressToClipboard(address),
+          ),
+        ),
+        Padding(
+          padding:
+              const EdgeInsets.only(top: 20, left: 54, right: 54, bottom: 34),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              DSRoundedButton(
+                actionType: DSRoundedButtonActionType.receive,
+                onTap: () {
+                  showDigDialog(
+                      context: context,
+                      child: ReceiveTokenDialog(
+                        address: widget.accountPublicInfo.publicAddress,
+                        onCopyToClipboardTap: (address) =>
+                            _cubit.copyAddressToClipboard(address),
+                        onShareAddressTap: (address) =>
+                            _cubit.onShareAddress(address),
+                      ));
+                },
+              ),
+              const DSRoundedButton(
+                actionType: DSRoundedButtonActionType.send,
+              ),
+              const DSRoundedButton(
+                actionType: DSRoundedButtonActionType.exchange,
+              ),
+              DSRoundedButton(
+                actionType: DSRoundedButtonActionType.remove,
+                onTap: () {
+                  showActionDialog(
+                      context: context,
+                      title: S.current.remove_account,
+                      message: S
+                          .current.are_you_sure_you_want_to_remove_this_account,
+                      leftActTitle: S.current.cancel,
+                      rightActTitle: S.current.remove,
+                      onLeftTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      onRightTap: () {
+                        widget.onRemoveAccount(widget.accountPublicInfo);
+                        Navigator.of(context).pop();
+                      });
+                },
+              )
+            ],
+          ),
+        ),
+        _buildTab(viewModel)
+      ],
     );
   }
 
