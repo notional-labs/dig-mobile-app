@@ -9,6 +9,8 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
 import '../app/cubit/active_account/active_account_cubit.dart' as _i3;
+import '../app/cubit/active_account/transfer_token/transfer_token_cubit.dart'
+    as _i20;
 import '../app/cubit/app/app_cubit.dart' as _i4;
 import '../app/cubit/backup_your_wallet/backup_your_wallet_cubit.dart' as _i5;
 import '../app/cubit/confirm_pin/confirm_pin_cubit.dart' as _i7;
@@ -53,5 +55,6 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i18.StakingCubit(get<_i6.GetValidatorUseCase>()));
   gh.factory<_i19.StakingItemCubit>(
       () => _i19.StakingItemCubit(get<_i6.GetValidatorLogoUseCase>()));
+  gh.factory<_i20.TransferTokenCubit>(() => _i20.TransferTokenCubit());
   return get;
 }

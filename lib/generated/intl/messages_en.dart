@@ -29,7 +29,12 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "account": MessageLookupByLibrary.simpleMessage("ACCOUNT"),
+        "advance": MessageLookupByLibrary.simpleMessage("Advance"),
         "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
+        "amount_avaliable":
+            MessageLookupByLibrary.simpleMessage("Amount Avaliable"),
+        "amount_to_send":
+            MessageLookupByLibrary.simpleMessage("Amount To Send"),
         "are_you_sure_you_want_to_remove_this_account":
             MessageLookupByLibrary.simpleMessage(
                 "Are you sure you want to remove this Account?"),
@@ -76,15 +81,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "exchange": MessageLookupByLibrary.simpleMessage("Exchange"),
         "forgot_you_password":
             MessageLookupByLibrary.simpleMessage("Forgot you Password ?"),
+        "from": MessageLookupByLibrary.simpleMessage("From"),
         "ig": MessageLookupByLibrary.simpleMessage("ig"),
         "ig_chain": MessageLookupByLibrary.simpleMessage("ig CHAIN"),
         "import": MessageLookupByLibrary.simpleMessage("Import"),
         "import_account":
             MessageLookupByLibrary.simpleMessage("Import account"),
+        "input_a_number":
+            MessageLookupByLibrary.simpleMessage("Input a number"),
         "into_the_mine": MessageLookupByLibrary.simpleMessage("into the mine"),
         "name_account": MessageLookupByLibrary.simpleMessage("Name account"),
         "no_account_found":
             MessageLookupByLibrary.simpleMessage("No account found"),
+        "not_enough_token":
+            MessageLookupByLibrary.simpleMessage("Not enough token"),
         "or_sign_in_with":
             MessageLookupByLibrary.simpleMessage("Or sign in with"),
         "passcode_do_not_match":
@@ -112,12 +122,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "proposer": MessageLookupByLibrary.simpleMessage("Proposer"),
         "real_estate": MessageLookupByLibrary.simpleMessage("Real estate"),
         "receive": MessageLookupByLibrary.simpleMessage("Receive"),
+        "recipent_address":
+            MessageLookupByLibrary.simpleMessage("Recipent address"),
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
         "remove_account":
             MessageLookupByLibrary.simpleMessage("Remove Account"),
         "scan": MessageLookupByLibrary.simpleMessage("Scan"),
         "scan_qr_code": MessageLookupByLibrary.simpleMessage("Scan QR code"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
+        "set_gas": MessageLookupByLibrary.simpleMessage("Set Gas"),
         "share_address": MessageLookupByLibrary.simpleMessage("Share Address"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign In"),
         "sign_in_on_your_account":
@@ -132,9 +145,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "submitted_time":
             MessageLookupByLibrary.simpleMessage("Submitted Time"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
+        "to": MessageLookupByLibrary.simpleMessage("To"),
         "to_digchain": MessageLookupByLibrary.simpleMessage("To Digchain"),
         "token": MessageLookupByLibrary.simpleMessage("Token"),
         "total_deposit": MessageLookupByLibrary.simpleMessage("Total Deposit"),
+        "transfer_token":
+            MessageLookupByLibrary.simpleMessage("Transfer Token"),
         "usd_money_format": m2,
         "vote": MessageLookupByLibrary.simpleMessage("vote"),
         "voting_time": MessageLookupByLibrary.simpleMessage("Voting Time"),

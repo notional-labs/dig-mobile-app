@@ -77,5 +77,15 @@
     "receive": "Receive",
     "scan_qr_code": "Scan QR code",
     "share_address": "Share Address",
-    "scan": "Scan"
+    "scan": "Scan",
+    "transfer_token": "Transfer Token",
+    "from": "From",
+    "to": "To",
+    "amount_avaliable": "Amount Avaliable",
+    "amount_to_send": "Amount To Send",
+    "advance": "Advance",
+    "set_gas": "Set Gas",
+    "recipent_address": "Recipent address",
+    "input_a_number": "Input a number",
+    "not_enough_token": "Not enough token"
 }

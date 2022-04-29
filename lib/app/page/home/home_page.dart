@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
               controller: _pageController,
               children: [
                 ActiveAccountPage(
-                  accountPublicInfo: viewModel.getAccount,
+                  account: viewModel.getAccount,
                   onRemoveAccount: (AccountPublicInfo account) {
                     _cubit.removeAccount(account);
                   },
