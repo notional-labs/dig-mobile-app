@@ -2,27 +2,34 @@ import 'package:dig_mobile_app/app/definition/app_assets.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DSTextField extends StatefulWidget {
   final ValueChanged<String> onChange;
   final TextInputAction? textInputAction;
   final TextInputType? textInputType;
+  final List<TextInputFormatter>? inputFormatters;
   final TextCapitalization? textCapitalization;
   final String hintText;
   final bool obscureText;
   final bool enableSuggestions;
   final bool autocorrect;
   final FormFieldValidator<String>? validator;
+  final bool disable;
+  final TextEditingController? controller;
   const DSTextField(
       {required this.onChange,
       this.textInputAction,
       this.textInputType,
+      this.inputFormatters,
       this.textCapitalization,
       this.hintText = '',
       this.obscureText = false,
       this.enableSuggestions = true,
       this.autocorrect = true,
       this.validator,
+      this.disable = false,
+      this.controller,
       Key? key})
       : super(key: key);
 
@@ -35,11 +42,26 @@ class _DSTextFieldState extends State<DSTextField> {
   String errorText = '';
   bool _enableBorder = false;
   bool _obscureText = false;
+  TextEditingController _controller = TextEditingController();
 
   bool get _shouldShowErrorMessage => errorText.isNotEmpty;
 
-  BoxBorder? get _resolveBorder =>
-      _enableBorder ? Border.all(color: DSColors.tulipTree) : null;
+  BoxBorder? get _resolveBorder => _enableBorder
+      ? Border.all(color: DSColors.tulipTree)
+      : Border.all(color: Colors.white);
+
+  Color get _resolveBackgroundColor =>
+      widget.disable ? DSColors.silver2 : Colors.transparent;
+
+  TextStyle get _resolveHintTextStyle {
+    if (widget.disable) {
+      return DSTextStyle.tsMontserratT10R
+          .copyWith(color: Colors.black.withOpacity(0.5));
+    }
+
+    return DSTextStyle.tsMontserratT10R
+        .copyWith(color: Colors.white.withOpacity(0.5));
+  }
 
   void _onFocus() {
     _focusNode.addListener(() {
@@ -65,6 +87,9 @@ class _DSTextFieldState extends State<DSTextField> {
 
   @override
   void initState() {
+    if (widget.controller != null) {
+      _controller = widget.controller!;
+    }
     super.initState();
     _setData();
     _onFocus();
@@ -83,14 +108,16 @@ class _DSTextFieldState extends State<DSTextField> {
               height: 50,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: _resolveBackgroundColor,
                   border: _resolveBorder,
                   borderRadius: const BorderRadius.all(Radius.circular(5))),
               child: Row(
                 children: [
                   Expanded(
                     child: TextFormField(
+                      controller: _controller,
                       focusNode: _focusNode,
+                      enabled: !widget.disable,
                       onChanged: (value) {
                         widget.onChange.call(value);
                         setState(() {
@@ -98,11 +125,10 @@ class _DSTextFieldState extends State<DSTextField> {
                         });
                       },
                       textInputAction: widget.textInputAction,
-                      style: DSTextStyle.tsMontserrat.copyWith(
-                          fontSize: 12,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black),
+                      keyboardType: widget.textInputType,
+                      inputFormatters: widget.inputFormatters,
+                      style: DSTextStyle.tsMontserratT10R
+                          .copyWith(color: Colors.white),
                       obscureText: _obscureText,
                       enableSuggestions: widget.enableSuggestions,
                       autocorrect: widget.autocorrect,
@@ -111,11 +137,7 @@ class _DSTextFieldState extends State<DSTextField> {
                           isCollapsed: true,
                           border: InputBorder.none,
                           hintText: widget.hintText,
-                          hintStyle: DSTextStyle.tsMontserrat.copyWith(
-                              fontSize: 12,
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black.withOpacity(0.5))),
+                          hintStyle: _resolveHintTextStyle),
                     ),
                   ),
                   const SizedBox(width: 5),

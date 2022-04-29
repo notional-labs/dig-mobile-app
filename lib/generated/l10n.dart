@@ -839,6 +839,106 @@ class S {
       args: [],
     );
   }
+
+  /// `Transfer Token`
+  String get transfer_token {
+    return Intl.message(
+      'Transfer Token',
+      name: 'transfer_token',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From`
+  String get from {
+    return Intl.message(
+      'From',
+      name: 'from',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To`
+  String get to {
+    return Intl.message(
+      'To',
+      name: 'to',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amount Avaliable`
+  String get amount_avaliable {
+    return Intl.message(
+      'Amount Avaliable',
+      name: 'amount_avaliable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amount To Send`
+  String get amount_to_send {
+    return Intl.message(
+      'Amount To Send',
+      name: 'amount_to_send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Advance`
+  String get advance {
+    return Intl.message(
+      'Advance',
+      name: 'advance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Gas`
+  String get set_gas {
+    return Intl.message(
+      'Set Gas',
+      name: 'set_gas',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recipent address`
+  String get recipent_address {
+    return Intl.message(
+      'Recipent address',
+      name: 'recipent_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input a number`
+  String get input_a_number {
+    return Intl.message(
+      'Input a number',
+      name: 'input_a_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not enough token`
+  String get not_enough_token {
+    return Intl.message(
+      'Not enough token',
+      name: 'not_enough_token',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

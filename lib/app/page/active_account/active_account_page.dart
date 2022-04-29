@@ -3,6 +3,7 @@ import 'package:dig_mobile_app/app/designsystem/custom/ds_primary_avatar.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_wallet_address.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_refresh_cupertino_sliver.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
+import 'package:dig_mobile_app/app/page/active_account/widgets/transfer_token_widget.dart';
 import 'package:dig_mobile_app/app/page/receive_token/receive_token_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,8 @@ import 'package:dig_mobile_app/app/designsystem/custom/ds_rounded_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_expandable_page_view.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
-import 'package:dig_mobile_app/app/page/active_account/real_estate_list_tab_page/real_estate_list_tab_page.dart';
-import 'package:dig_mobile_app/app/page/active_account/tokens_holding_list_tab_page/tokens_holding_list_tab_page.dart';
+import 'package:dig_mobile_app/app/page/active_account/widgets/real_estate_list_tab_page.dart';
+import 'package:dig_mobile_app/app/page/active_account/widgets/tokens_holding_list_tab_page.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/active_account_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
@@ -24,12 +25,10 @@ typedef OnRemoteAccount = Function(AccountPublicInfo account);
 
 class ActiveAccountPage extends StatefulWidget {
   final OnRemoteAccount onRemoveAccount;
-  final AccountPublicInfo accountPublicInfo;
+  final AccountPublicInfo account;
 
   const ActiveAccountPage(
-      {required this.accountPublicInfo,
-      required this.onRemoveAccount,
-      Key? key})
+      {required this.account, required this.onRemoveAccount, Key? key})
       : super(key: key);
 
   @override
@@ -48,10 +47,9 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
 
   void _fetchData() {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      if (_lastAccountPublicInfo?.accountId !=
-          widget.accountPublicInfo.accountId) {
-        _cubit.fetchData(account: widget.accountPublicInfo);
-        _lastAccountPublicInfo = widget.accountPublicInfo;
+      if (_lastAccountPublicInfo?.accountId != widget.account.accountId) {
+        _cubit.fetchData(account: widget.account);
+        _lastAccountPublicInfo = widget.account;
       }
     });
   }
@@ -98,7 +96,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
         slivers: [
           CupertinoSliverRefreshControl(
             onRefresh: () {
-              return _cubit.refreshEvent(widget.accountPublicInfo);
+              return _cubit.refreshEvent(widget.account);
             },
             builder: (
               BuildContext context,
@@ -130,7 +128,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
           ),
         ),
         Text(
-          widget.accountPublicInfo.name,
+          widget.account.name,
           style: DSTextStyle.tsMontserrat.copyWith(
               color: DSColors.tulipTree,
               fontSize: 20,
@@ -150,7 +148,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 86),
           child: DSWalletAddress(
-            address: widget.accountPublicInfo.publicAddress,
+            address: widget.account.publicAddress,
             onCopyToClipboardTap: (address) =>
                 _cubit.copyAddressToClipboard(address),
           ),
@@ -164,10 +162,10 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
               DSRoundedButton(
                 actionType: DSRoundedButtonActionType.receive,
                 onTap: () {
-                  showDigDialog(
+                  showCenterDialog(
                       context: context,
                       child: ReceiveTokenDialog(
-                        address: widget.accountPublicInfo.publicAddress,
+                        address: widget.account.publicAddress,
                         onCopyToClipboardTap: (address) =>
                             _cubit.copyAddressToClipboard(address),
                         onShareAddressTap: (address) =>
@@ -175,8 +173,17 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
                       ));
                 },
               ),
-              const DSRoundedButton(
+              DSRoundedButton(
                 actionType: DSRoundedButtonActionType.send,
+                onTap: () {
+                  showFullScreenDialog(
+                      context: context,
+                      child: TransferTokenWidget(
+                        param: TransferTokenWidgetParam(
+                            account: widget.account,
+                            tokenAvailable: viewModel.getDigBalance()),
+                      ));
+                },
               ),
               const DSRoundedButton(
                 actionType: DSRoundedButtonActionType.exchange,
@@ -195,7 +202,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
                         Navigator.of(context).pop();
                       },
                       onRightTap: () {
-                        widget.onRemoveAccount(widget.accountPublicInfo);
+                        widget.onRemoveAccount(widget.account);
                         Navigator.of(context).pop();
                       });
                 },
