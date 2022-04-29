@@ -8,6 +8,7 @@ import 'package:dig_mobile_app/app/page/import_account/import_account_page.dart'
 import 'package:dig_mobile_app/app/page/name_account/name_account_page.dart';
 import 'package:dig_mobile_app/app/page/pin/pin_page.dart';
 import 'package:dig_mobile_app/app/page/proposals_flow/proposal_detail/proposal_detail_page.dart';
+import 'package:dig_mobile_app/app/page/scan_qr_code/scan_qr_code_page.dart';
 import 'package:dig_mobile_app/app/page/sign_in/sign_in_page.dart';
 import 'package:dig_mobile_app/app/page/splash/splash.dart';
 import 'package:dig_mobile_app/app/page/staking/staking_page.dart';
@@ -67,6 +68,8 @@ class DigRoute {
             settings);
       case DigPageName.staking:
         return _materialPage(const StakingPage(), settings);
+      case DigPageName.scanQrCode:
+        return _materialPage(const ScanQrCodePage(), settings);
       default:
         return _materialPage(const SizedBox.shrink(), settings);
     }

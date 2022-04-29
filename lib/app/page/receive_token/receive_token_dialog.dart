@@ -11,11 +11,13 @@ class ReceiveTokenDialog extends StatelessWidget {
   final String address;
   final Function(String)? onCopyToClipboardTap;
   final Function(String)? onShareAddressTap;
+  final Function()? onScanQrCodeTap;
 
   const ReceiveTokenDialog(
       {required this.address,
       this.onCopyToClipboardTap,
       this.onShareAddressTap,
+      this.onScanQrCodeTap,
       Key? key})
       : super(key: key);
 
@@ -76,6 +78,7 @@ class ReceiveTokenDialog extends StatelessWidget {
   Widget _scanButton() {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
+      onTap: () => onScanQrCodeTap?.call(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
