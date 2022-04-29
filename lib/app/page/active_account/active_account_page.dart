@@ -170,6 +170,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
                             _cubit.copyAddressToClipboard(address),
                         onShareAddressTap: (address) =>
                             _cubit.onShareAddress(address),
+                        onScanQrCodeTap: () => _cubit.onScanQrCodeTap(),
                       ));
                 },
               ),

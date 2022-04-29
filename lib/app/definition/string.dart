@@ -12,6 +12,7 @@ abstract class DigPageName {
   static const String confirmPin = '/confirm_pin';
   static const String proposalDetail = '/proposal_detail';
   static const String staking = '/staking';
+  static const String scanQrCode = '/scan_qr_code';
 }
 
 abstract class Denom {

@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dig_core/dig_core.dart';
+import 'package:dig_mobile_app/app/definition/string.dart';
+import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:dig_mobile_app/app/viewmodel/active_account_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:equatable/equatable.dart';
@@ -47,6 +49,11 @@ class ActiveAccountCubit extends Cubit<ActiveAccountState> {
       return;
     }
     Share.share(content).catchError(_handleShareAddressFailure);
+  }
+
+  void onScanQrCodeTap() {
+    navigatorKey.currentState?.pop();
+    navigatorKey.currentState?.pushNamed(DigPageName.scanQrCode);
   }
 
   void _handleShareAddressFailure(exception) {
