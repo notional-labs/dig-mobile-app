@@ -129,6 +129,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Remove Account"),
         "scan": MessageLookupByLibrary.simpleMessage("Scan"),
         "scan_qr_code": MessageLookupByLibrary.simpleMessage("Scan QR code"),
+        "scan_qr_code_page_title":
+            MessageLookupByLibrary.simpleMessage("Scan QR code"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "set_gas": MessageLookupByLibrary.simpleMessage("Set Gas"),
         "share_address": MessageLookupByLibrary.simpleMessage("Share Address"),

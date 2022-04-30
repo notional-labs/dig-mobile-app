@@ -939,6 +939,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Scan QR code`
+  String get scan_qr_code_page_title {
+    return Intl.message(
+      'Scan QR code',
+      name: 'scan_qr_code_page_title',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

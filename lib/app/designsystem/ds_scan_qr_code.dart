@@ -30,12 +30,10 @@ class _DSScanQrCodeState extends State<DSScanQrCode> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildQrView(context),
-    );
+    return _buildQrView();
   }
 
-  Widget _buildQrView(BuildContext context) {
+  Widget _buildQrView() {
     final scanArea = 300.0;
     // To ensure the Scanner view is properly sizes after rotation
     // we need to listen for Flutter SizeChanged notification and update controller
