@@ -42,7 +42,7 @@ class _DSTextFieldState extends State<DSTextField> {
   String errorText = '';
   bool _enableBorder = false;
   bool _obscureText = false;
-  TextEditingController _controller = TextEditingController();
+  TextEditingController? _controller;
 
   bool get _shouldShowErrorMessage => errorText.isNotEmpty;
 
@@ -87,12 +87,12 @@ class _DSTextFieldState extends State<DSTextField> {
 
   @override
   void initState() {
-    if (widget.controller != null) {
-      _controller = widget.controller!;
-    }
     super.initState();
-    _setData();
-    _onFocus();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _controller = widget.controller ?? TextEditingController();
+      _setData();
+      _onFocus();
+    });
   }
 
   @override
