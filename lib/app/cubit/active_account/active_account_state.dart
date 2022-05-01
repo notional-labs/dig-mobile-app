@@ -1,41 +1,54 @@
-
 part of 'active_account_cubit.dart';
 
 abstract class ActiveAccountState extends Equatable {
-  final ActiveAccountViewModel viewmodel;
+  final ActiveAccountViewModel viewModel;
 
-  const ActiveAccountState({this.viewmodel = const ActiveAccountViewModel()});
+  const ActiveAccountState({this.viewModel = const ActiveAccountViewModel()});
 
   @override
-  List<Object> get props => [viewmodel];
+  List<Object> get props => [viewModel];
 }
 
-class ActiveAccountUninitState extends ActiveAccountState {
-  const ActiveAccountUninitState()
-      : super(viewmodel: const ActiveAccountViewModel());
+class ActiveAccountInitialState extends ActiveAccountState {
+  const ActiveAccountInitialState()
+      : super(viewModel: const ActiveAccountViewModel());
 }
 
 class ActiveAccountPrimaryState extends ActiveAccountState {
   const ActiveAccountPrimaryState(
-      {ActiveAccountViewModel viewmodel = const ActiveAccountViewModel()})
-      : super(viewmodel: viewmodel);
+      {ActiveAccountViewModel viewModel = const ActiveAccountViewModel()})
+      : super(viewModel: viewModel);
 }
 
-class ActiveAccountLoadingState extends ActiveAccountState   {
+class ActiveAccountLoadingState extends ActiveAccountState {
   final bool isRefresh;
+
   const ActiveAccountLoadingState(
-      {ActiveAccountViewModel viewmodel = const ActiveAccountViewModel(),
+      {ActiveAccountViewModel viewModel = const ActiveAccountViewModel(),
       this.isRefresh = false})
-      : super(viewmodel: viewmodel);
+      : super(viewModel: viewModel);
 
   @override
-  List<Object> get props => [isRefresh, viewmodel];
+  List<Object> get props => [isRefresh, viewModel];
+}
+
+class ActiveAccountScannedBarcodeState extends ActiveAccountState {
+  final String barCode;
+
+  const ActiveAccountScannedBarcodeState({
+    required this.barCode,
+    ActiveAccountViewModel viewModel = const ActiveAccountViewModel(),
+  }) : super(viewModel: viewModel);
+
+  @override
+  List<Object> get props => [barCode, viewModel];
 }
 
 class ActiveAccountErrorState extends ActiveAccountState {
   final BaseDigException exception;
+
   const ActiveAccountErrorState(
-      {ActiveAccountViewModel viewmodel = const ActiveAccountViewModel(),
+      {ActiveAccountViewModel viewModel = const ActiveAccountViewModel(),
       this.exception = const DigException()})
-      : super(viewmodel: viewmodel);
+      : super(viewModel: viewModel);
 }

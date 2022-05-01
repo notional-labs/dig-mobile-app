@@ -7,10 +7,15 @@ import 'package:injectable/injectable.dart';
 class TransferTokenCubit extends Cubit<TransferTokenState> {
   TransferTokenCubit() : super(const TransferTokenPrimaryState());
 
-  void init({required String senderAddress, required double tokenAvailable}) {
+  void init(
+      {required String senderAddress,
+      required double tokenAvailable,
+      String? recipient}) {
     emit(TransferTokenPrimaryState(
         viewmodel: state.viewmodel.copyWith(
-            tokenAvailable: tokenAvailable, senderAddress: senderAddress)));
+            tokenAvailable: tokenAvailable,
+            senderAddress: senderAddress,
+            recipient: recipient)));
   }
 
   /// TODO: Impl [transferToken]
@@ -25,7 +30,7 @@ class TransferTokenCubit extends Cubit<TransferTokenState> {
   void changeRecipientAddressEvent(String recipient) {
     emit(TransferTokenChangedFormState(
         viewmodel: state.viewmodel.copyWith(recipient: recipient)));
-    emit(TransferTokenPrimaryState(viewmodel: state.viewmodel.copyWith()));
+    emit(TransferTokenPrimaryState(viewmodel: state.viewmodel));
   }
 
   void changeTokenToSendEvent(double tokenToSend) {

@@ -73,7 +73,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
     return BlocConsumer<ActiveAccountCubit, ActiveAccountState>(
       bloc: _cubit,
       listener: _cubitListener,
-      builder: (context, state) => _buildRefreshableWidget(state.viewmodel),
+      builder: (context, state) => _buildRefreshableWidget(state.viewModel),
     );
   }
 
@@ -82,11 +82,16 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
       showGlobalLoadingOverlay();
       return;
     }
-
     dismissGlobalLoadingOverlay();
     if (state is ActiveAccountErrorState) {
       showGlobalDSSnackBar(
           message: state.exception.message, type: DSSnackBarType.error);
+      return;
+    }
+    if (state is ActiveAccountScannedBarcodeState) {
+      _showTransferTokenDialog(
+          digBalance: state.viewModel.getDigBalance(),
+          toAddress: state.barCode);
       return;
     }
   }
@@ -176,15 +181,8 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
               ),
               DSRoundedButton(
                 actionType: DSRoundedButtonActionType.send,
-                onTap: () {
-                  showFullScreenDialog(
-                      context: context,
-                      child: TransferTokenWidget(
-                        param: TransferTokenWidgetParam(
-                            account: widget.account,
-                            tokenAvailable: viewModel.getDigBalance()),
-                      ));
-                },
+                onTap: () => _showTransferTokenDialog(
+                    digBalance: viewModel.getDigBalance()),
               ),
               const DSRoundedButton(
                 actionType: DSRoundedButtonActionType.exchange,
@@ -262,6 +260,18 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
         ],
       ),
     );
+  }
+
+  void _showTransferTokenDialog(
+      {required double digBalance, String? toAddress}) {
+    showFullScreenDialog(
+        context: context,
+        child: TransferTokenWidget(
+          param: TransferTokenWidgetParam(
+              account: widget.account,
+              tokenAvailable: digBalance,
+              toAddress: toAddress),
+        ));
   }
 
   @override

@@ -7,28 +7,29 @@ import 'package:dig_mobile_app/di/di.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:share_plus/share_plus.dart';
 
 part 'active_account_state.dart';
 
 @Injectable()
 class ActiveAccountCubit extends Cubit<ActiveAccountState> {
-  ActiveAccountCubit() : super(const ActiveAccountUninitState());
+  ActiveAccountCubit() : super(const ActiveAccountInitialState());
   final GetListBalanceUseCase _getListBalanceUseCase = di();
 
   Future fetchData(
       {required AccountPublicInfo account, bool isRefresh = false}) async {
     emit(ActiveAccountLoadingState(
-        viewmodel: state.viewmodel.copyWith(), isRefresh: isRefresh));
+        viewModel: state.viewModel.copyWith(), isRefresh: isRefresh));
 
     final result = await _getListBalanceUseCase.call(GetListBalanceUseCaseParam(
         request: BalanceRequest(address: account.publicAddress)));
     result.fold((l) {
       emit(ActiveAccountErrorState(
-          viewmodel: state.viewmodel.copyWith(), exception: l));
+          viewModel: state.viewModel.copyWith(), exception: l));
     }, (r) {
       emit(ActiveAccountPrimaryState(
-          viewmodel: state.viewmodel.copyWith(balances: r)));
+          viewModel: state.viewModel.copyWith(balances: r)));
     });
   }
 
@@ -41,7 +42,7 @@ class ActiveAccountCubit extends Cubit<ActiveAccountState> {
 
   void onSelectTab(int index) {
     emit(ActiveAccountPrimaryState(
-        viewmodel: state.viewmodel.copyWith(selectedTab: index)));
+        viewModel: state.viewModel.copyWith(selectedTab: index)));
   }
 
   void onShareAddress(String content) {
@@ -51,14 +52,21 @@ class ActiveAccountCubit extends Cubit<ActiveAccountState> {
     Share.share(content).catchError(_handleShareAddressFailure);
   }
 
-  void onScanQrCodeTap() {
+  Future onScanQrCodeTap() async {
     navigatorKey.currentState?.pop();
-    navigatorKey.currentState?.pushNamed(DigPageName.scanQrCode);
+    final barCode = (await navigatorKey.currentState
+        ?.pushNamed(DigPageName.scanQrCode)) as Barcode?;
+    if (barCode != null && (barCode.code?.isNotEmpty ?? true)) {
+      // todo check valid address later
+      emit(ActiveAccountScannedBarcodeState(
+          barCode: barCode.code ?? '', viewModel: state.viewModel));
+      emit(ActiveAccountPrimaryState(viewModel: state.viewModel));
+    }
   }
 
   void _handleShareAddressFailure(exception) {
     emit(ActiveAccountErrorState(
-        viewmodel: state.viewmodel.copyWith(),
+        viewModel: state.viewModel.copyWith(),
         exception: DigException(message: exception)));
   }
 }
