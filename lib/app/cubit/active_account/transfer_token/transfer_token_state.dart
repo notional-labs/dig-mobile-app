@@ -3,9 +3,9 @@ import 'package:dig_mobile_app/app/viewmodel/transfer_token_viewmodel.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class TransferTokenState extends Equatable {
-  final TransferTokenViewmodel viewmodel;
+  final TransferTokenViewModel viewmodel;
   const TransferTokenState({
-    this.viewmodel = const TransferTokenViewmodel(),
+    this.viewmodel = const TransferTokenViewModel(),
   });
 
   @override
@@ -14,32 +14,32 @@ abstract class TransferTokenState extends Equatable {
 
 class TransferTokenPrimaryState extends TransferTokenState {
   const TransferTokenPrimaryState(
-      {TransferTokenViewmodel viewmodel = const TransferTokenViewmodel()})
+      {TransferTokenViewModel viewmodel = const TransferTokenViewModel()})
       : super(viewmodel: viewmodel);
 }
 
 class TransferTokenSendingState extends TransferTokenState {
   const TransferTokenSendingState(
-      {TransferTokenViewmodel viewmodel = const TransferTokenViewmodel()})
+      {TransferTokenViewModel viewmodel = const TransferTokenViewModel()})
       : super(viewmodel: viewmodel);
 }
 
 class TransferTokenSuccessState extends TransferTokenState {
   const TransferTokenSuccessState(
-      {TransferTokenViewmodel viewmodel = const TransferTokenViewmodel()})
+      {TransferTokenViewModel viewmodel = const TransferTokenViewModel()})
       : super(viewmodel: viewmodel);
 }
 
 class TransferTokenChangedFormState extends TransferTokenState {
   const TransferTokenChangedFormState(
-      {TransferTokenViewmodel viewmodel = const TransferTokenViewmodel()})
+      {TransferTokenViewModel viewmodel = const TransferTokenViewModel()})
       : super(viewmodel: viewmodel);
 }
 
 class TransferTokenErrorState extends TransferTokenState {
   final BaseDigException exception;
   const TransferTokenErrorState(
-      {TransferTokenViewmodel viewmodel = const TransferTokenViewmodel(),
+      {TransferTokenViewModel viewmodel = const TransferTokenViewModel(),
       this.exception = const DigException()})
       : super(viewmodel: viewmodel);
 

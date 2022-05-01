@@ -1,6 +1,7 @@
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_appbar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_scan_qr_code.dart';
+import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,12 +25,16 @@ class _ScanQrCodePageState extends State<ScanQrCodePage> {
               children: [
                 DSPrimaryAppBar.normal(
                   title: S.current.scan_qr_code_page_title,
-                  onBackButtonPressed: () => Navigator.of(context).pop(),
+                  onBackButtonPressed: () => navigatorKey.currentState?.pop(),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const Expanded(child: DSScanQrCode())
+                Expanded(child: DSScanQrCode(
+                  onQRCodeDetected: (barCode) {
+                    navigatorKey.currentState?.pop(barCode);
+                  },
+                ))
               ],
             ),
           ),

@@ -17,14 +17,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class TransferTokenWidgetParam {
   final AccountPublicInfo account;
   final double tokenAvailable;
-  const TransferTokenWidgetParam({
-    required this.account,
-    required this.tokenAvailable,
-  });
+  final String? toAddress;
+
+  const TransferTokenWidgetParam(
+      {required this.account, required this.tokenAvailable, this.toAddress});
 }
 
 class TransferTokenWidget extends StatefulWidget {
   final TransferTokenWidgetParam param;
+
   const TransferTokenWidget({required this.param, Key? key}) : super(key: key);
 
   @override
@@ -34,16 +35,19 @@ class TransferTokenWidget extends StatefulWidget {
 class _TransferTokenWidgetState extends State<TransferTokenWidget>
     with WidgetUtil {
   final TransferTokenCubit _cubit = di();
+  final TextEditingController _toRecipientController = TextEditingController();
 
-  void _onBlocLisenter(BuildContext context, TransferTokenState state) {}
+  void _onBlocListener(BuildContext context, TransferTokenState state) {}
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _toRecipientController.text = widget.param.toAddress ?? '';
       _cubit.init(
           senderAddress: widget.param.account.publicAddress,
-          tokenAvailable: widget.param.tokenAvailable);
+          tokenAvailable: widget.param.tokenAvailable,
+          recipient: widget.param.toAddress);
     });
   }
 
@@ -52,12 +56,12 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
         color: Colors.transparent,
         child: BlocConsumer<TransferTokenCubit, TransferTokenState>(
             bloc: _cubit,
-            listener: _onBlocLisenter,
+            listener: _onBlocListener,
             builder: (BuildContext context, TransferTokenState state) =>
                 _buildScrollableWidget(state.viewmodel)),
       );
 
-  Widget _buildScrollableWidget(TransferTokenViewmodel viewmodel) =>
+  Widget _buildScrollableWidget(TransferTokenViewModel viewmodel) =>
       GestureDetector(
         onTap: () {
           _cubit.closeEvent();
@@ -81,7 +85,7 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
         ),
       );
 
-  Widget _buildBodyWidget(TransferTokenViewmodel viewmodel) => GestureDetector(
+  Widget _buildBodyWidget(TransferTokenViewModel viewmodel) => GestureDetector(
         onTap: () {
           closeGlobalKeyboard();
         },
@@ -124,10 +128,10 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
                   /// Recipent address
                   DSTextField(
                     hintText: S.current.recipent_address,
+                    controller: _toRecipientController,
                     onChange: (String value) {
                       _cubit.changeRecipientAddressEvent(value);
                     },
-                    validator: (String? value) {},
                     textInputAction: TextInputAction.next,
                   ),
                   const SizedBox(height: 10),
@@ -228,7 +232,7 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
         ),
       );
 
-  Row _buildActionButtonWidget(TransferTokenViewmodel viewmodel) => Row(
+  Row _buildActionButtonWidget(TransferTokenViewModel viewmodel) => Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [

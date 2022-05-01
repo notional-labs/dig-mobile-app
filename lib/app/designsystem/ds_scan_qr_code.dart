@@ -57,6 +57,7 @@ class _DSScanQrCodeState extends State<DSScanQrCode> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        controller.pauseCamera();
         widget.onQRCodeDetected?.call(scanData);
       });
     });

@@ -1,7 +1,7 @@
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:equatable/equatable.dart';
 
-class TransferTokenViewmodel extends Equatable {
+class TransferTokenViewModel extends Equatable {
   final String senderAddress;
   final String recipient;
   final double tokenToSend;
@@ -9,7 +9,7 @@ class TransferTokenViewmodel extends Equatable {
   final double gas;
   final bool advance;
 
-  const TransferTokenViewmodel({
+  const TransferTokenViewModel({
     this.senderAddress = '',
     this.recipient = '',
     this.tokenToSend = 0,
@@ -33,7 +33,7 @@ class TransferTokenViewmodel extends Equatable {
 
   bool get isAllValid => isTokenToSendValid && isRecipientValid;
 
-  TransferTokenViewmodel copyWith({
+  TransferTokenViewModel copyWith({
     String? senderAddress,
     String? recipient,
     double? tokenToSend,
@@ -41,7 +41,7 @@ class TransferTokenViewmodel extends Equatable {
     double? gas,
     bool? advance,
   }) {
-    return TransferTokenViewmodel(
+    return TransferTokenViewModel(
       senderAddress: senderAddress ?? this.senderAddress,
       recipient: recipient ?? this.recipient,
       tokenToSend: tokenToSend ?? this.tokenToSend,
