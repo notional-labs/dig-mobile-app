@@ -14,8 +14,13 @@ class ProposalsInitial extends ProposalsState {
 }
 
 class ProposalsLoadingState extends ProposalsState {
-  ProposalsLoadingState({required ProposalsViewModel model})
+  final bool isRefresh;
+  ProposalsLoadingState(
+      {required ProposalsViewModel model, this.isRefresh = false})
       : super(model: model);
+
+  @override
+  List<Object?> get props => [isRefresh, model];
 }
 
 class ProposalsPrimaryState extends ProposalsState {

@@ -16,12 +16,14 @@ class ProposalsCubit extends Cubit<ProposalsState> {
 
   ProposalsCubit() : super(ProposalsInitial());
 
-  Future getProposals() async {
-    emit(ProposalsLoadingState(model: state.model));
+  Future getProposals([bool isRefresh = false]) async {
+    emit(ProposalsLoadingState(model: state.model, isRefresh: isRefresh));
     final result = await _getProposalsUseCase
         .call(const GetProposalsUseCaseParam(request: ProposalsRequest()));
     result.fold(_handleGetProposalsFailure, _handleGetProposalsSuccess);
   }
+
+  Future refreshEvent() => getProposals(true);
 
   void _handleGetProposalsSuccess(List<Proposal> proposals) {
     emit(ProposalsPrimaryState(

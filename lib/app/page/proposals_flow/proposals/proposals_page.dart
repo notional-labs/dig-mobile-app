@@ -1,5 +1,6 @@
 import 'package:dig_mobile_app/app/cubit/proposals/proposals_cubit.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_refresh_cupertino_sliver.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/app/page/proposals_flow/proposals/proposal_row_item.dart';
@@ -7,6 +8,7 @@ import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/proposals_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,7 +41,7 @@ class _ProposalsPageState extends State<ProposalsPage>
   }
 
   void _listener(_, currentState) {
-    if (currentState is ProposalsLoadingState) {
+    if (currentState is ProposalsLoadingState && !currentState.isRefresh) {
       showGlobalLoadingOverlay();
       return;
     }
@@ -64,17 +66,7 @@ class _ProposalsPageState extends State<ProposalsPage>
           const SizedBox(
             height: 20,
           ),
-          Expanded(
-              child: ListView.separated(
-            separatorBuilder: (_, __) => const SizedBox(
-              height: 25,
-            ),
-            itemCount: model.proposals.length,
-            itemBuilder: (_, index) => ProposalRowItem(
-              proposal: model.proposals[index],
-              onDetailTap: () => _cubit.onDetailTap(model.proposals[index]),
-            ),
-          )),
+          Expanded(child: _buildScrollWidget(model)),
           const SizedBox(
             height: 10,
           )
@@ -82,6 +74,45 @@ class _ProposalsPageState extends State<ProposalsPage>
       ),
     );
   }
+
+  Widget _buildScrollWidget(ProposalsViewModel model) => CustomScrollView(
+        slivers: [
+          CupertinoSliverRefreshControl(
+            onRefresh: () {
+              return _cubit.refreshEvent();
+            },
+            builder: (
+              BuildContext context,
+              RefreshIndicatorMode refreshState,
+              double pulledExtent,
+              double refreshTriggerPullDistance,
+              double refreshIndicatorExtent,
+            ) =>
+                buildDSRefreshCupertinoSliver(
+                    context,
+                    refreshState,
+                    pulledExtent,
+                    refreshTriggerPullDistance,
+                    refreshIndicatorExtent),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+                ((context, index) => Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ProposalRowItem(
+                          proposal: model.proposals[index],
+                          onDetailTap: () =>
+                              _cubit.onDetailTap(model.proposals[index]),
+                        ),
+                        if (index != model.proposals.length - 1)
+                          const SizedBox(height: 25)
+                      ],
+                    )),
+                childCount: model.proposals.length),
+          ),
+        ],
+      );
 
   @override
   bool get wantKeepAlive => true;
