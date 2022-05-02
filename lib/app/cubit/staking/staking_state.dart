@@ -1,6 +1,7 @@
 import 'package:dig_core/dig_core.dart';
-import 'package:dig_mobile_app/app/viewmodel/staking_viewmodel.dart';
 import 'package:equatable/equatable.dart';
+
+import 'package:dig_mobile_app/app/viewmodel/staking_viewmodel.dart';
 
 abstract class StakingState extends Equatable {
   final StakingViewmodel viewmodel;
@@ -11,9 +12,14 @@ abstract class StakingState extends Equatable {
 }
 
 class StakingLoadingState extends StakingState {
+  final bool isRefresh;
   const StakingLoadingState(
-      {StakingViewmodel viewmodel = const StakingViewmodel()})
+      {StakingViewmodel viewmodel = const StakingViewmodel(),
+      this.isRefresh = false})
       : super(viewmodel: viewmodel);
+
+  @override
+  List<Object> get props => [isRefresh, viewmodel];
 }
 
 class StakingPrimaryState extends StakingState {

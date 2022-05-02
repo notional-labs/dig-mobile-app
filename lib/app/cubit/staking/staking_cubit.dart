@@ -16,8 +16,9 @@ class StakingCubit extends Cubit<StakingState> {
   final GetValidatorUseCase _getValidatorUseCase;
   StakingCubit(this._getValidatorUseCase) : super(const StakingPrimaryState());
 
-  Future fetchData() async {
-    emit(StakingLoadingState(viewmodel: state.viewmodel.copyWith()));
+  Future fetchData([bool isRefresh = false]) async {
+    emit(StakingLoadingState(
+        viewmodel: state.viewmodel.copyWith(), isRefresh: isRefresh));
     final result =
         await _getValidatorUseCase.call(const GetValidatorUseCaseParam());
 
@@ -83,4 +84,6 @@ class StakingCubit extends Cubit<StakingState> {
           viewmodel: state.viewmodel.copyWith(items: stakingItemViewModel)));
     });
   }
+
+  Future refreshEvent() => fetchData(true);
 }
