@@ -1,10 +1,12 @@
 import 'package:dig_mobile_app/app/cubit/staking/staking_cubit.dart';
 import 'package:dig_mobile_app/app/cubit/staking/staking_state.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_refresh_cupertino_sliver.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/page/staking/staking_tem.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/staking_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +23,7 @@ class _StakingPageState extends State<StakingPage>
   final StakingCubit _cubit = di();
 
   void _onBlocListener(context, state) {
-    if (state is StakingLoadingState) {
+    if (state is StakingLoadingState && !state.isRefresh) {
       showGlobalLoadingOverlay();
       return;
     }
@@ -53,29 +55,41 @@ class _StakingPageState extends State<StakingPage>
             child: SafeArea(
                 child: BlocConsumer<StakingCubit, StakingState>(
                     builder: (context, state) {
-                      if (state is StakingPrimaryState) {
-                        return _buildPrimaryWidget(state.viewmodel);
-                      }
-
-                      return _buildEmptyWidget();
+                      return _buildRefreshWidget(state.viewmodel);
                     },
                     listener: _onBlocListener)),
           ),
         ),
       );
 
-  Widget _buildPrimaryWidget(StakingViewmodel viewmodel) => Padding(
-    padding: const EdgeInsets.only(top: 23),
-    child: ListView.builder(
-          itemCount: viewmodel.items.length,
-          addAutomaticKeepAlives: true,
-          itemBuilder: (context, index) => StakingItem(
-              viewModel: viewmodel.items[index],
-              isLast: index == viewmodel.items.length - 1),
-        ),
-  );
-
-  Widget _buildEmptyWidget() => const SizedBox.shrink();
+  Widget _buildRefreshWidget(StakingViewmodel viewmodel) => CustomScrollView(
+        slivers: [
+          CupertinoSliverRefreshControl(
+            onRefresh: () {
+              return _cubit.refreshEvent();
+            },
+            builder: (
+              BuildContext context,
+              RefreshIndicatorMode refreshState,
+              double pulledExtent,
+              double refreshTriggerPullDistance,
+              double refreshIndicatorExtent,
+            ) =>
+                buildDSRefreshCupertinoSliver(
+                    context,
+                    refreshState,
+                    pulledExtent,
+                    refreshTriggerPullDistance,
+                    refreshIndicatorExtent),
+          ),
+          SliverList(
+              delegate: SliverChildBuilderDelegate(
+                  ((context, index) => StakingItem(
+                      viewModel: viewmodel.items[index],
+                      isLast: index == viewmodel.items.length - 1)),
+                  childCount: viewmodel.items.length))
+        ],
+      );
 
   @override
   bool get wantKeepAlive => true;
