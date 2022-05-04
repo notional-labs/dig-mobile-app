@@ -28,6 +28,12 @@ class StakingPrimaryState extends StakingState {
       : super(viewmodel: viewmodel);
 }
 
+class StakingShowDelegateDialogState extends StakingState {
+  const StakingShowDelegateDialogState(
+      {StakingViewmodel viewmodel = const StakingViewmodel()})
+      : super(viewmodel: viewmodel);
+}
+
 class StakingErrorState extends StakingState {
   final BaseDigException exception;
   const StakingErrorState(

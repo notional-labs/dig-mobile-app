@@ -1,19 +1,37 @@
+import 'package:dig_core/dig_core.dart';
 import 'package:equatable/equatable.dart';
 
+import 'package:dig_mobile_app/app/viewmodel/delegate_validator_item_viewmodel.dart';
 import 'package:dig_mobile_app/app/viewmodel/staking_item_viewmodel.dart';
 
 class StakingViewmodel extends Equatable {
-  final List<StakingItemViewModel> items;
-  const StakingViewmodel({this.items = const []});
+  final AccountPublicInfo? account;
+  final num balance;
+  final List<StakingItemViewModel> stakingItems;
+  final List<DelegateValidatorItemViewmodel> validatorItems;
+  const StakingViewmodel({
+    this.account,
+    this.balance = 0,
+    this.stakingItems = const [],
+    this.validatorItems = const [],
+  });
+
+  AccountPublicInfo get getAccount => account!;
 
   StakingViewmodel copyWith({
-    List<StakingItemViewModel>? items,
+    AccountPublicInfo? account,
+    num? balance,
+    List<StakingItemViewModel>? stakingItems,
+    List<DelegateValidatorItemViewmodel>? validatorItems,
   }) {
     return StakingViewmodel(
-      items: items ?? this.items,
+      account: account ?? this.account,
+      balance: balance ?? this.balance,
+      stakingItems: stakingItems ?? this.stakingItems,
+      validatorItems: validatorItems ?? this.validatorItems,
     );
   }
 
   @override
-  List<Object?> get props => [items];
+  List<Object?> get props => [account, balance, stakingItems, validatorItems];
 }

@@ -2,6 +2,7 @@ import 'package:dig_mobile_app/app/cubit/staking/staking_cubit.dart';
 import 'package:dig_mobile_app/app/cubit/staking/staking_state.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_refresh_cupertino_sliver.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
+import 'package:dig_mobile_app/app/page/staking/delegate/delegate_widget.dart';
 import 'package:dig_mobile_app/app/page/staking/staking_tem.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/staking_viewmodel.dart';
@@ -33,6 +34,17 @@ class _StakingPageState extends State<StakingPage>
     if (state is StakingErrorState) {
       showGlobalDSSnackBar(
           message: state.exception.message, type: DSSnackBarType.error);
+      return;
+    }
+
+    if (state is StakingShowDelegateDialogState) {
+      showFullScreenDialog(
+          context: context,
+          child: DelegateWidget(
+              param: DelegateWidgetParam(
+                  account: state.viewmodel.getAccount,
+                  tokenAvailable: state.viewmodel.balance,
+                  validators: state.viewmodel.validatorItems)));
       return;
     }
   }
@@ -85,9 +97,12 @@ class _StakingPageState extends State<StakingPage>
           SliverList(
               delegate: SliverChildBuilderDelegate(
                   ((context, index) => StakingItem(
-                      viewModel: viewmodel.items[index],
-                      isLast: index == viewmodel.items.length - 1)),
-                  childCount: viewmodel.items.length))
+                      viewModel: viewmodel.stakingItems[index],
+                      isLast: index == viewmodel.stakingItems.length - 1,
+                      onTap: () {
+                        _cubit.updateSelectedAccountEvent();
+                      })),
+                  childCount: viewmodel.stakingItems.length))
         ],
       );
 

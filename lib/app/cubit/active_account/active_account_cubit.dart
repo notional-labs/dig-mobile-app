@@ -14,8 +14,10 @@ part 'active_account_state.dart';
 
 @Injectable()
 class ActiveAccountCubit extends Cubit<ActiveAccountState> {
-  ActiveAccountCubit() : super(const ActiveAccountInitialState());
-  final GetListBalanceUseCase _getListBalanceUseCase = di();
+  final GetListBalanceUseCase _getListBalanceUseCase;
+
+  ActiveAccountCubit(this._getListBalanceUseCase)
+      : super(const ActiveAccountInitialState());
 
   void init(List<Balance> balances) {
     emit(ActiveAccountPrimaryState(

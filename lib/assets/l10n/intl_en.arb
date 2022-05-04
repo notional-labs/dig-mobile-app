@@ -88,5 +88,9 @@
     "recipent_address": "Recipent address",
     "input_a_number": "Input a number",
     "not_enough_token": "Not enough token",
-    "scan_qr_code_page_title": "Scan QR code"
+    "scan_qr_code_page_title": "Scan QR code",
+    "delegate_token": "Delegate Token",
+    "validator": "Validator",
+    "delegator": "Delegator",
+    "amount_to_stack": "Amount To Stake"
 }
