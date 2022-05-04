@@ -13,6 +13,7 @@ import 'package:dig_mobile_app/app/designsystem/ds_text_field.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dig_mobile_app/app/extension/extension.dart';
 
 class TransferTokenWidgetParam {
   final AccountPublicInfo account;
@@ -114,18 +115,19 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
                   const SizedBox(height: 4),
                   DSTextField(
                     disable: true,
-                    hintText: widget.param.account.publicAddress,
+                    hintText: widget.param.account.publicAddress
+                        .trimMiddleWithDot(20),
                     onChange: (String value) {},
                   ),
                   const SizedBox(height: 10),
+
+                  /// Recipent address
                   Text(
                     '${S.current.to}:',
                     style: DSTextStyle.tsMontserratT12R
                         .copyWith(color: Colors.white),
                   ),
                   const SizedBox(height: 4),
-
-                  /// Recipent address
                   DSTextField(
                     hintText: S.current.recipent_address,
                     controller: _toRecipientController,
@@ -135,14 +137,14 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
                     textInputAction: TextInputAction.next,
                   ),
                   const SizedBox(height: 10),
+
+                  /// Token available
                   Text(
                     '${S.current.amount_avaliable}:',
                     style: DSTextStyle.tsMontserratT12R
                         .copyWith(color: Colors.white),
                   ),
                   const SizedBox(height: 4),
-
-                  /// Token available
                   DSTextField(
                     disable: true,
                     hintText:

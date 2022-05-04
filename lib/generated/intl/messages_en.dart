@@ -35,6 +35,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Amount Avaliable"),
         "amount_to_send":
             MessageLookupByLibrary.simpleMessage("Amount To Send"),
+        "amount_to_stack":
+            MessageLookupByLibrary.simpleMessage("Amount To Stake"),
         "are_you_sure_you_want_to_remove_this_account":
             MessageLookupByLibrary.simpleMessage(
                 "Are you sure you want to remove this Account?"),
@@ -67,6 +69,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "create": MessageLookupByLibrary.simpleMessage("Create"),
         "create_account":
             MessageLookupByLibrary.simpleMessage("Create account"),
+        "delegate_token":
+            MessageLookupByLibrary.simpleMessage("Delegate Token"),
+        "delegator": MessageLookupByLibrary.simpleMessage("Delegator"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "dig_token_format": m1,
@@ -154,6 +159,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transfer_token":
             MessageLookupByLibrary.simpleMessage("Transfer Token"),
         "usd_money_format": m2,
+        "validator": MessageLookupByLibrary.simpleMessage("Validator"),
         "vote": MessageLookupByLibrary.simpleMessage("vote"),
         "voting_time": MessageLookupByLibrary.simpleMessage("Voting Time"),
         "wellcome": MessageLookupByLibrary.simpleMessage("WELCOME"),

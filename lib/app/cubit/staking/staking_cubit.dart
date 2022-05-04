@@ -1,5 +1,8 @@
+import 'package:dartz/dartz.dart';
 import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/cubit/staking/staking_state.dart';
+import 'package:dig_mobile_app/app/definition/string.dart';
+import 'package:dig_mobile_app/app/viewmodel/delegate_validator_item_viewmodel.dart';
 import 'package:dig_mobile_app/app/viewmodel/staking_item_viewmodel.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -14,11 +17,19 @@ const List<String> _priorityValidatorAddresses = [
 @injectable
 class StakingCubit extends Cubit<StakingState> {
   final GetValidatorUseCase _getValidatorUseCase;
-  StakingCubit(this._getValidatorUseCase) : super(const StakingPrimaryState());
+  final GetSelectedAccountUseCase _getSelectedAccountUseCase;
+  final GetListBalanceUseCase _getListBalanceUseCase;
+  StakingCubit(this._getValidatorUseCase, this._getSelectedAccountUseCase,
+      this._getListBalanceUseCase)
+      : super(const StakingPrimaryState());
 
   Future fetchData([bool isRefresh = false]) async {
     emit(StakingLoadingState(
         viewmodel: state.viewmodel.copyWith(), isRefresh: isRefresh));
+
+    final List<StakingItemViewModel> stakingItemViewModels = [];
+    final List<DelegateValidatorItemViewmodel> validatorItemViewModels = [];
+
     final result =
         await _getValidatorUseCase.call(const GetValidatorUseCaseParam());
 
@@ -58,8 +69,7 @@ class StakingCubit extends Cubit<StakingState> {
           .map((element) => element.description.identity)
           .toList();
 
-      final List<StakingItemViewModel> stakingItemViewModel =
-          validatorResponse.result.map((element) {
+      for (final element in validatorResponse.result) {
         /// Compute commsion
         final commsion =
             (double.tryParse(element.commission.commissionRates.rate) ?? 0) *
@@ -71,7 +81,7 @@ class StakingCubit extends Cubit<StakingState> {
           power = ((double.tryParse(element.delegatorShares) ?? 0) * 100) /
               totalSupply;
         }
-        return StakingItemViewModel(
+        final StakingItemViewModel stakingItemViewModel = StakingItemViewModel(
           identity: element.description.identity,
           name: element.description.moniker,
           website: element.description.website,
@@ -79,10 +89,73 @@ class StakingCubit extends Cubit<StakingState> {
           power: power,
           commsion: commsion,
         );
-      }).toList();
+
+        final DelegateValidatorItemViewmodel delegateValidatorItemViewmodel =
+            DelegateValidatorItemViewmodel(
+          address: element.operatorAddress,
+          name: element.description.moniker,
+          commsion: commsion,
+        );
+
+        stakingItemViewModels.add(stakingItemViewModel);
+        validatorItemViewModels.add(delegateValidatorItemViewmodel);
+      }
+
       emit(StakingPrimaryState(
-          viewmodel: state.viewmodel.copyWith(items: stakingItemViewModel)));
+          viewmodel: state.viewmodel.copyWith(
+              stakingItems: stakingItemViewModels,
+              validatorItems: validatorItemViewModels)));
     });
+  }
+
+  Future updateSelectedAccountEvent() async {
+    emit(StakingLoadingState(
+        viewmodel: state.viewmodel.copyWith(), isRefresh: false));
+
+    BaseDigException? exception;
+    AccountPublicInfo? account;
+    num balance = 0;
+
+    final result = await _getSelectedAccountUseCase
+        .call(const GetSelectedAccountUseCaseParam());
+    result.fold((l) {
+      exception = l;
+    }, (r) {
+      account = r;
+    });
+
+    if (exception != null) {
+      emit(StakingErrorState(
+          exception: exception!, viewmodel: state.viewmodel.copyWith()));
+      return;
+    }
+
+    final _getListBalanceUseCaseResult = await _getListBalanceUseCase.call(
+        GetListBalanceUseCaseParam(
+            request: BalanceRequest(address: account!.publicAddress)));
+
+    _getListBalanceUseCaseResult.fold((l) {
+      exception = l;
+    }, (r) {
+      balance = (double.tryParse(r
+                      .firstWhereOrNull(
+                          (element) => Denom.udig == element.denom)
+                      ?.amount ??
+                  '') ??
+              0) /
+          TokenBalanceRatio.ratio;
+    });
+
+    if (exception != null) {
+      emit(StakingErrorState(
+          exception: exception!, viewmodel: state.viewmodel.copyWith()));
+      return;
+    }
+
+    emit(StakingShowDelegateDialogState(
+        viewmodel:
+            state.viewmodel.copyWith(account: account!, balance: balance)));
+    emit(StakingPrimaryState(viewmodel: state.viewmodel.copyWith()));
   }
 
   Future refreshEvent() => fetchData(true);

@@ -13,7 +13,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class StakingItem extends StatefulWidget {
   final StakingItemViewModel viewModel;
   final bool isLast;
-  const StakingItem({required this.viewModel, this.isLast = false, Key? key})
+  final VoidCallback onTap;
+  const StakingItem(
+      {required this.viewModel,
+      required this.onTap,
+      this.isLast = false,
+      Key? key})
       : super(key: key);
 
   @override
@@ -96,7 +101,7 @@ class _StakingItemState extends State<StakingItem>
             ),
           ),
           const SizedBox(width: 20),
-          DSSmallButton(title: 'Delegate', onTap: () {})
+          DSSmallButton(title: 'Delegate', onTap: widget.onTap)
         ],
       );
 

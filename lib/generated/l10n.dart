@@ -949,6 +949,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Delegate Token`
+  String get delegate_token {
+    return Intl.message(
+      'Delegate Token',
+      name: 'delegate_token',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Validator`
+  String get validator {
+    return Intl.message(
+      'Validator',
+      name: 'validator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delegator`
+  String get delegator {
+    return Intl.message(
+      'Delegator',
+      name: 'delegator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Amount To Stake`
+  String get amount_to_stack {
+    return Intl.message(
+      'Amount To Stake',
+      name: 'amount_to_stack',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
