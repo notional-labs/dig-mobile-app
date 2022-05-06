@@ -17,6 +17,11 @@ class ActiveAccountCubit extends Cubit<ActiveAccountState> {
   ActiveAccountCubit() : super(const ActiveAccountInitialState());
   final GetListBalanceUseCase _getListBalanceUseCase = di();
 
+  void init(List<Balance> balances) {
+    emit(ActiveAccountPrimaryState(
+        viewModel: state.viewModel.copyWith(balances: balances)));
+  }
+
   Future fetchData(
       {required AccountPublicInfo account, bool isRefresh = false}) async {
     emit(ActiveAccountLoadingState(

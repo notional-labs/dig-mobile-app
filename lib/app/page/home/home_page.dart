@@ -50,6 +50,12 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
   }
 
   void _cubitListener(BuildContext context, HomeState state) {
+    if (state is HomeLoadingState) {
+      showGlobalLoadingOverlay();
+      return;
+    }
+    dismissGlobalLoadingOverlay();
+
     _navigate(state.viewModel.currentDrawerMenu);
     if (state is HomeErrorState) {
       showGlobalDSSnackBar(
@@ -122,7 +128,9 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
 
   Widget _bodyWidget(HomeViewModel viewModel) => Column(
         children: [
-          const HomeAppBar(),
+          HomeAppBar(
+            onScanQrTap: () => _cubit.onScanQrCodeTap(),
+          ),
           Expanded(
             child: PageView(
               physics: const NeverScrollableScrollPhysics(),
@@ -130,6 +138,7 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
               children: [
                 ActiveAccountPage(
                   account: viewModel.getAccount,
+                  balances: viewModel.balances,
                   onRemoveAccount: (AccountPublicInfo account) {
                     _cubit.removeAccount(account);
                   },
@@ -144,7 +153,9 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
 }
 
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({Key? key}) : super(key: key);
+  final Function? onScanQrTap;
+
+  const HomeAppBar({this.onScanQrTap, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -174,10 +185,14 @@ class HomeAppBar extends StatelessWidget {
               const SizedBox(
                 width: 20,
               ),
-              Image.asset(
-                AppAssets.icScanQr,
-                width: 18,
-                height: 18,
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => onScanQrTap?.call(),
+                child: Image.asset(
+                  AppAssets.icScanQr,
+                  width: 18,
+                  height: 18,
+                ),
               ),
               const SizedBox(
                 width: 32,
