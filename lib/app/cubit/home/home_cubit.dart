@@ -8,6 +8,7 @@ import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {
@@ -18,6 +19,7 @@ class HomeCubit extends Cubit<HomeState> {
   final SelectAccountUseCase _selectAccountUseCase = di();
   final RemoveAccountUseCase _removeAccountUseCase = di();
   final DeletePinUseCase _deletePinUseCase = di();
+  final GetListBalanceUseCase _getListBalanceUseCase = di();
 
   Future init() async {
     AccountPublicInfo? account;
@@ -44,6 +46,21 @@ class HomeCubit extends Cubit<HomeState> {
 
     if (accounts.isNotEmpty && account != null) {
       emit(HomePrimaryState(viewModel: viewModel));
+
+      emit(HomeLoadingState(viewModel: state.viewModel));
+
+      final getListBalanceUseCaseResult = await _getListBalanceUseCase.call(
+          GetListBalanceUseCaseParam(
+              request: BalanceRequest(address: account?.publicAddress ?? '')));
+
+      getListBalanceUseCaseResult.fold((exception) {
+        emit(HomeErrorState(
+            viewModel: state.viewModel.copyWith(), exception: exception));
+      }, (balances) {
+        emit(HomePrimaryState(
+            viewModel: state.viewModel.copyWith(balances: balances)));
+      });
+
       return;
     }
 
@@ -103,4 +120,12 @@ class HomeCubit extends Cubit<HomeState> {
 
   void goToSignInPage() =>
       navigatorKey.currentState?.pushNamed(DigPageName.signIn);
+
+  Future onScanQrCodeTap() async {
+    final barCode = (await navigatorKey.currentState
+        ?.pushNamed(DigPageName.scanQrCode)) as Barcode?;
+    if (barCode != null && (barCode.code?.isNotEmpty ?? true)) {
+      // todo check valid address later
+    }
+  }
 }

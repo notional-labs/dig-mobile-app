@@ -3,6 +3,7 @@ import 'package:dig_mobile_app/app/designsystem/custom/ds_primary_avatar.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_wallet_address.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_refresh_cupertino_sliver.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
+import 'package:dig_mobile_app/app/extension/extension.dart';
 import 'package:dig_mobile_app/app/page/active_account/widgets/transfer_token_widget.dart';
 import 'package:dig_mobile_app/app/page/receive_token/receive_token_dialog.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,9 +27,13 @@ typedef OnRemoteAccount = Function(AccountPublicInfo account);
 class ActiveAccountPage extends StatefulWidget {
   final OnRemoteAccount onRemoveAccount;
   final AccountPublicInfo account;
+  final List<Balance> balances;
 
   const ActiveAccountPage(
-      {required this.account, required this.onRemoveAccount, Key? key})
+      {required this.account,
+      required this.onRemoveAccount,
+      this.balances = const [],
+      Key? key})
       : super(key: key);
 
   @override
@@ -58,7 +63,9 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    _fetchData();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      _cubit.init(widget.balances);
+    });
   }
 
   @override
@@ -90,7 +97,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
     }
     if (state is ActiveAccountScannedBarcodeState) {
       _showTransferTokenDialog(
-          digBalance: state.viewModel.getDigBalance(),
+          digBalance: state.viewModel.balances.getDigBalance(),
           toAddress: state.barCode);
       return;
     }
@@ -143,7 +150,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
           height: 12,
         ),
         Text(
-          S.current.dig_token_format(viewModel.getDigBalance()),
+          S.current.dig_token_format(viewModel.balances.getDigBalance()),
           style: DSTextStyle.tsMontserrat.copyWith(
               color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400),
         ),
@@ -182,7 +189,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
               DSRoundedButton(
                 actionType: DSRoundedButtonActionType.send,
                 onTap: () => _showTransferTokenDialog(
-                    digBalance: viewModel.getDigBalance()),
+                    digBalance: viewModel.balances.getDigBalance()),
               ),
               const DSRoundedButton(
                 actionType: DSRoundedButtonActionType.exchange,
