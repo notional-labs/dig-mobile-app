@@ -17,6 +17,7 @@ class DSTextField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final bool disable;
   final TextEditingController? controller;
+  final VoidCallback? onTap;
   const DSTextField(
       {required this.onChange,
       this.textInputAction,
@@ -30,6 +31,7 @@ class DSTextField extends StatefulWidget {
       this.validator,
       this.disable = false,
       this.controller,
+      this.onTap,
       Key? key})
       : super(key: key);
 
@@ -101,6 +103,7 @@ class _DSTextFieldState extends State<DSTextField> {
         children: [
           GestureDetector(
             onTap: () {
+              widget.onTap?.call();
               FocusScope.of(context).requestFocus(_focusNode);
             },
             child: Container(
