@@ -92,5 +92,6 @@
     "delegate_token": "Delegate Token",
     "validator": "Validator",
     "delegator": "Delegator",
-    "amount_to_stack": "Amount To Stake"
+    "amount_to_stack": "Amount To Stake",
+    "n_percent": "{n}%"
 }

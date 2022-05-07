@@ -24,7 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(token) => "${token} DIG";
 
-  static String m2(money) => "\$${money}";
+  static String m2(n) => "${n}%";
+
+  static String m3(money) => "\$${money}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -95,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "input_a_number":
             MessageLookupByLibrary.simpleMessage("Input a number"),
         "into_the_mine": MessageLookupByLibrary.simpleMessage("into the mine"),
+        "n_percent": m2,
         "name_account": MessageLookupByLibrary.simpleMessage("Name account"),
         "no_account_found":
             MessageLookupByLibrary.simpleMessage("No account found"),
@@ -158,7 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "total_deposit": MessageLookupByLibrary.simpleMessage("Total Deposit"),
         "transfer_token":
             MessageLookupByLibrary.simpleMessage("Transfer Token"),
-        "usd_money_format": m2,
+        "usd_money_format": m3,
         "validator": MessageLookupByLibrary.simpleMessage("Validator"),
         "vote": MessageLookupByLibrary.simpleMessage("vote"),
         "voting_time": MessageLookupByLibrary.simpleMessage("Voting Time"),

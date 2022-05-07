@@ -989,6 +989,16 @@ class S {
       args: [],
     );
   }
+
+  /// `{n}%`
+  String n_percent(Object n) {
+    return Intl.message(
+      '$n%',
+      name: 'n_percent',
+      desc: '',
+      args: [n],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
