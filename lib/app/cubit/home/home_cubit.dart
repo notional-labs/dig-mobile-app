@@ -126,6 +126,9 @@ class HomeCubit extends Cubit<HomeState> {
         ?.pushNamed(DigPageName.scanQrCode)) as Barcode?;
     if (barCode != null && (barCode.code?.isNotEmpty ?? true)) {
       // todo check valid address later
+      emit(HomeScannerBarcodeState(
+          barCode: barCode.code ?? '', viewModel: state.viewModel));
+      emit(HomePrimaryState(viewModel: state.viewModel));
     }
   }
 }

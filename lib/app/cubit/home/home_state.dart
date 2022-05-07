@@ -31,6 +31,17 @@ class HomeChangedAccountState extends HomeState {
       : super(viewModel: viewModel);
 }
 
+class HomeScannerBarcodeState extends HomeState {
+  final String barCode;
+
+  const HomeScannerBarcodeState(
+      {required this.barCode, HomeViewModel viewModel = const HomeViewModel()})
+      : super(viewModel: viewModel);
+
+  @override
+  List<Object> get props => [...super.props, barCode];
+}
+
 class HomeErrorState extends HomeState {
   final BaseDigException exception;
   const HomeErrorState(
