@@ -47,5 +47,6 @@ export 'package:dig_core/src/domain/entity/staking/result.dart';
 export 'package:dig_core/src/domain/util/util.dart';
 
 export 'package:transaction_signing_gateway/model/account_public_info.dart';
+export 'package:dig_core/src/domain/usecase/account/get_balance_usecase.dart';
 
 class DigCore {}
