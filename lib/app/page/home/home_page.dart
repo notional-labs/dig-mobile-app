@@ -6,7 +6,9 @@ import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
+import 'package:dig_mobile_app/app/extension/extension.dart';
 import 'package:dig_mobile_app/app/page/active_account/active_account_page.dart';
+import 'package:dig_mobile_app/app/page/active_account/widgets/transfer_token_widget.dart';
 import 'package:dig_mobile_app/app/page/home/home_drawer.dart';
 import 'package:dig_mobile_app/app/page/proposals_flow/proposals/proposals_page.dart';
 import 'package:dig_mobile_app/app/page/staking/staking_page.dart';
@@ -60,6 +62,13 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
     if (state is HomeErrorState) {
       showGlobalDSSnackBar(
           message: state.exception.message, type: DSSnackBarType.error);
+      return;
+    }
+    if (state is HomeScannerBarcodeState) {
+      _showTransferTokenDialog(
+          digBalance: state.viewModel.balances.getDigBalance(),
+          accountPublicInfo: state.viewModel.getAccount,
+          toAddress: state.barCode);
       return;
     }
   }
@@ -150,6 +159,20 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
           )
         ],
       );
+
+  void _showTransferTokenDialog(
+      {required double digBalance,
+      required AccountPublicInfo accountPublicInfo,
+      String? toAddress}) {
+    showFullScreenDialog(
+        context: context,
+        child: TransferTokenWidget(
+          param: TransferTokenWidgetParam(
+              account: accountPublicInfo,
+              tokenAvailable: digBalance,
+              toAddress: toAddress),
+        ));
+  }
 }
 
 class HomeAppBar extends StatelessWidget {
