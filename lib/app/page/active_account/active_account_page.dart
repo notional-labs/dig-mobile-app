@@ -9,7 +9,6 @@ import 'package:dig_mobile_app/app/page/receive_token/receive_token_dialog.dart'
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:dig_mobile_app/app/cubit/active_account/active_account_cubit.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_rounded_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
