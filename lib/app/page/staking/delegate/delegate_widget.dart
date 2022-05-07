@@ -2,6 +2,7 @@ import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/cubit/staking/delegate/delegate_cubit.dart';
 import 'package:dig_mobile_app/app/cubit/staking/delegate/delegate_state.dart';
 import 'package:dig_mobile_app/app/definition/regex.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_textfield_dropdown_widget.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/delegate_validator_item_viewmodel.dart';
 import 'package:dig_mobile_app/app/viewmodel/delegate_viewmodel.dart';
@@ -38,6 +39,8 @@ class DelegateWidget extends StatefulWidget {
 
 class _DelegateWidgetState extends State<DelegateWidget> with WidgetUtil {
   final DelegateCubit _cubit = di();
+  final DSTextFieldDropdownController _dropdownController =
+      DSTextFieldDropdownController();
 
   void _onBlocListener(BuildContext context, DelegateState state) {}
 
@@ -127,11 +130,44 @@ class _DelegateWidgetState extends State<DelegateWidget> with WidgetUtil {
                         .copyWith(color: Colors.white),
                   ),
                   const SizedBox(height: 4),
-                  DSTextField(
-                    hintText: S.current.recipent_address,
-                    onChange: (String value) {},
-                    textInputAction: TextInputAction.next,
-                  ),
+                  DSTextFieldDropdownWidget(
+                      controller: _dropdownController,
+                      hintText:
+                          '${viewmodel.validator.name} (${S.current.n_percent(viewmodel.validator.commsion)})',
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: DSColors.tundora,
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(color: DSColors.tundora),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.white.withOpacity(0.3),
+                                  offset: Offset(-1, 1),
+                                  blurRadius: 5,
+                                  blurStyle: BlurStyle.normal)
+                            ]),
+                        margin: const EdgeInsets.symmetric(horizontal: 49),
+                        height: 200,
+                        child: ListView.builder(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: GestureDetector(
+                              onTap: () {
+                                _cubit.changeValidatorEvent(
+                                    widget.param.validators[index]);
+                                _dropdownController.close();
+                              },
+                              child: Text(
+                                '${widget.param.validators[index].name} (${S.current.n_percent(widget.param.validators[index].commsion)})',
+                                style: DSTextStyle.tsMontserratT12R
+                                    .copyWith(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          itemCount: widget.param.validators.length,
+                        ),
+                      )),
                   const SizedBox(height: 10),
 
                   /// Token available
