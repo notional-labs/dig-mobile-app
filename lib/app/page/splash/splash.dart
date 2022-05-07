@@ -8,7 +8,9 @@ import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-const Duration _animateDuration = Duration(milliseconds: 500);
+const Duration _animateDurationTitle = Duration(milliseconds: 500);
+const Duration _animateDurationDescription = Duration(milliseconds: 450);
+
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -84,7 +86,7 @@ class _SplashPageState extends State<SplashPage> {
                     AnimatedContainer(
                       width: _widthOfContainerTitle,
                       color: Colors.transparent,
-                      duration: _animateDuration,
+                      duration: _animateDurationTitle,
                       child: Text(
                         S.current.ig_chain,
                         softWrap: false,
@@ -107,7 +109,7 @@ class _SplashPageState extends State<SplashPage> {
                     alignment: Alignment.centerLeft,
                     child: AnimatedContainer(
                       width: _widthOfContainerUnderTitle,
-                      duration: _animateDuration,
+                      duration: _animateDurationDescription,
                       onEnd: () {
                         setState(() {
                           _showArrowIcon = true;
