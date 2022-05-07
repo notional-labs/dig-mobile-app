@@ -2,7 +2,7 @@ import 'package:dig_core/src/domain/entity/balance.dart';
 import 'package:dig_core/src/domain/entity/proposals/content.dart';
 import 'package:dig_core/src/domain/entity/proposals/finally_tally_result.dart';
 import 'package:dig_core/src/domain/enum/enum.dart';
-import 'package:dig_core/src/domain/extension/double_extension.dart';
+import 'package:dig_core/src/domain/extension/extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 

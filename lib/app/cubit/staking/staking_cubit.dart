@@ -18,9 +18,9 @@ const List<String> _priorityValidatorAddresses = [
 class StakingCubit extends Cubit<StakingState> {
   final GetValidatorUseCase _getValidatorUseCase;
   final GetSelectedAccountUseCase _getSelectedAccountUseCase;
-  final GetListBalanceUseCase _getListBalanceUseCase;
+  final GetBalanceUseCase _getBalanceUseCase;
   StakingCubit(this._getValidatorUseCase, this._getSelectedAccountUseCase,
-      this._getListBalanceUseCase)
+      this._getBalanceUseCase)
       : super(const StakingPrimaryState());
 
   Future fetchData([bool isRefresh = false]) async {
@@ -130,20 +130,15 @@ class StakingCubit extends Cubit<StakingState> {
       return;
     }
 
-    final _getListBalanceUseCaseResult = await _getListBalanceUseCase.call(
-        GetListBalanceUseCaseParam(
-            request: BalanceRequest(address: account!.publicAddress)));
+    final _getBalanceUseCaseResult = await _getBalanceUseCase.call(
+        GetBalanceUseCaseParam(
+            request: BalanceRequest(address: account!.publicAddress),
+            denom: Denom.udig));
 
-    _getListBalanceUseCaseResult.fold((l) {
+    _getBalanceUseCaseResult.fold((l) {
       exception = l;
     }, (r) {
-      balance = (double.tryParse(r
-                      .firstWhereOrNull(
-                          (element) => Denom.udig == element.denom)
-                      ?.amount ??
-                  '') ??
-              0) /
-          TokenBalanceRatio.ratio;
+      balance = r.getToken();
     });
 
     if (exception != null) {
