@@ -12,9 +12,13 @@ class DelegateCubit extends Cubit<DelegateState> {
   void init(
       {required delegatorAddress,
       required num tokenAvailable,
+      required DelegateValidatorItemViewmodel validatorSelected,
       required List<DelegateValidatorItemViewmodel> validators}) {
-    final DelegateValidatorItemViewmodel validator =
-        validators.firstOrNull ?? DelegateValidatorItemViewmodel();
+    DelegateValidatorItemViewmodel? validator = validators.firstWhereOrNull(
+            (element) => element.address == validatorSelected.address) ??
+        validators.firstOrNull;
+    validator ??= const DelegateValidatorItemViewmodel();
+
     emit(DelegatePrimaryState(
         viewmodel: state.viewmodel.copyWith(
             delegatorAddress: delegatorAddress,

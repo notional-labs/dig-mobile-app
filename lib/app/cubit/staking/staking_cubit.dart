@@ -108,7 +108,7 @@ class StakingCubit extends Cubit<StakingState> {
     });
   }
 
-  Future updateSelectedAccountEvent() async {
+  Future tapDelegateEvent(DelegateValidatorItemViewmodel validator) async {
     emit(StakingLoadingState(
         viewmodel: state.viewmodel.copyWith(), isRefresh: false));
 
@@ -148,6 +148,7 @@ class StakingCubit extends Cubit<StakingState> {
     }
 
     emit(StakingShowDelegateDialogState(
+        validatorSelected: validator,
         viewmodel:
             state.viewmodel.copyWith(account: account!, balance: balance)));
     emit(StakingPrimaryState(viewmodel: state.viewmodel.copyWith()));

@@ -20,11 +20,13 @@ import 'package:dig_mobile_app/app/extension/extension.dart';
 class DelegateWidgetParam {
   final AccountPublicInfo account;
   final num tokenAvailable;
+  final DelegateValidatorItemViewmodel validatorSelected;
   final List<DelegateValidatorItemViewmodel> validators;
 
   const DelegateWidgetParam(
       {required this.account,
       required this.tokenAvailable,
+      required this.validatorSelected,
       required this.validators});
 }
 
@@ -51,6 +53,7 @@ class _DelegateWidgetState extends State<DelegateWidget> with WidgetUtil {
       _cubit.init(
           delegatorAddress: widget.param.account.publicAddress,
           tokenAvailable: widget.param.tokenAvailable,
+          validatorSelected: widget.param.validatorSelected,
           validators: widget.param.validators);
     });
   }

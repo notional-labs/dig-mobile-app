@@ -44,6 +44,7 @@ class _StakingPageState extends State<StakingPage>
               param: DelegateWidgetParam(
                   account: state.viewmodel.getAccount,
                   tokenAvailable: state.viewmodel.balance,
+                  validatorSelected: state.validatorSelected,
                   validators: state.viewmodel.validatorItems)));
       return;
     }
@@ -100,7 +101,8 @@ class _StakingPageState extends State<StakingPage>
                       viewModel: viewmodel.stakingItems[index],
                       isLast: index == viewmodel.stakingItems.length - 1,
                       onTap: () {
-                        _cubit.updateSelectedAccountEvent();
+                        _cubit
+                            .tapDelegateEvent(viewmodel.validatorItems[index]);
                       })),
                   childCount: viewmodel.stakingItems.length))
         ],

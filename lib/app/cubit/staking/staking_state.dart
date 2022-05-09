@@ -1,4 +1,5 @@
 import 'package:dig_core/dig_core.dart';
+import 'package:dig_mobile_app/app/viewmodel/delegate_validator_item_viewmodel.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:dig_mobile_app/app/viewmodel/staking_viewmodel.dart';
@@ -29,9 +30,15 @@ class StakingPrimaryState extends StakingState {
 }
 
 class StakingShowDelegateDialogState extends StakingState {
+  final DelegateValidatorItemViewmodel validatorSelected;
+
   const StakingShowDelegateDialogState(
-      {StakingViewmodel viewmodel = const StakingViewmodel()})
+      {StakingViewmodel viewmodel = const StakingViewmodel(),
+      this.validatorSelected = const DelegateValidatorItemViewmodel()})
       : super(viewmodel: viewmodel);
+
+  @override
+  List<Object?> get props => [validatorSelected,viewmodel];
 }
 
 class StakingErrorState extends StakingState {
