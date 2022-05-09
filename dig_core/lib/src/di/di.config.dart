@@ -8,7 +8,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i15;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../../dig_core.dart' as _i32;
+import '../../dig_core.dart' as _i30;
 import '../data/datasource/local/account_local_datasource.dart' as _i3;
 import '../data/datasource/local/create_db_datasource.dart' as _i9;
 import '../data/datasource/local/pin_local_datasource.dart' as _i14;
@@ -39,8 +39,8 @@ import '../domain/usecase/auth/import_account_usecase.dart' as _i36;
 import '../domain/usecase/auth/match_pin_usecase.dart' as _i37;
 import '../domain/usecase/auth/remove_account_usecase.dart' as _i38;
 import '../domain/usecase/check_fist_time_run_app_usecase.dart' as _i7;
-import '../domain/usecase/proposals/get_proposals_usecase.dart' as _i30;
-import '../domain/usecase/proposals/get_proposer_usecase.dart' as _i31;
+import '../domain/usecase/proposals/get_proposals_usecase.dart' as _i31;
+import '../domain/usecase/proposals/get_proposer_usecase.dart' as _i32;
 import '../domain/usecase/validator/get_validator_logo_usecase.dart' as _i34;
 import '../domain/usecase/validator/get_validator_usecase.dart' as _i35;
 import '../domain/util/util.dart'
@@ -90,14 +90,14 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i28.DeletePinUseCase>(
       () => _i28.DeletePinUseCase(get<_i22.AuthRepository>()));
   gh.factory<_i29.GetListAccountUseCase>(() =>
-      _i29.GetListAccountUseCase(get<_i22.AuthRepository>(), get<_i12.ENV>()));
-  gh.factory<_i30.GetProposalsUseCase>(() => _i30.GetProposalsUseCase(
+      _i29.GetListAccountUseCase(get<_i22.AuthRepository>(), get<_i30.ENV>()));
+  gh.factory<_i31.GetProposalsUseCase>(() => _i31.GetProposalsUseCase(
       get<_i17.ProposalsRepository>(), get<_i12.ENV>()));
-  gh.factory<_i31.GetProposerUseCase>(() => _i31.GetProposerUseCase(
-      get<_i17.ProposalsRepository>(), get<_i32.ENV>()));
+  gh.factory<_i32.GetProposerUseCase>(() => _i32.GetProposerUseCase(
+      get<_i17.ProposalsRepository>(), get<_i30.ENV>()));
   gh.factory<_i33.GetSelectedAccountUseCase>(() =>
       _i33.GetSelectedAccountUseCase(
-          get<_i22.AuthRepository>(), get<_i32.ENV>()));
+          get<_i22.AuthRepository>(), get<_i30.ENV>()));
   gh.factory<_i34.GetValidatorLogoUseCase>(() => _i34.GetValidatorLogoUseCase(
       get<_i20.ValidatorRepository>(), get<_i12.ENV>()));
   gh.factory<_i35.GetValidatorUseCase>(() => _i35.GetValidatorUseCase(
