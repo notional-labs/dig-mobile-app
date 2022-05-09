@@ -57,7 +57,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i19.StakingCubit>(() => _i19.StakingCubit(
       get<_i4.GetValidatorUseCase>(),
       get<_i4.GetSelectedAccountUseCase>(),
-      get<_i4.GetListBalanceUseCase>()));
+      get<_i4.GetBalanceUseCase>()));
   gh.factory<_i20.StakingItemCubit>(
       () => _i20.StakingItemCubit(get<_i4.GetValidatorLogoUseCase>()));
   gh.factory<_i21.TransferTokenCubit>(() => _i21.TransferTokenCubit());
