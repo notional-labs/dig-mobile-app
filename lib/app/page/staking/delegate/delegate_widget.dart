@@ -14,6 +14,7 @@ import 'package:dig_mobile_app/app/designsystem/ds_small_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_field.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dig_mobile_app/app/extension/extension.dart';
 
@@ -182,8 +183,8 @@ class _DelegateWidgetState extends State<DelegateWidget> with WidgetUtil {
                   const SizedBox(height: 4),
                   DSTextField(
                     disable: true,
-                    hintText:
-                        S.current.dig_token_format(widget.param.tokenAvailable),
+                    hintText: S.current.dig_token_format(
+                        widget.param.tokenAvailable.toDigTokenDisplay()),
                     onChange: (String value) {},
                   ),
                   const SizedBox(height: 10),
@@ -198,18 +199,17 @@ class _DelegateWidgetState extends State<DelegateWidget> with WidgetUtil {
                   DSTextField(
                     hintText: S.current.input_a_number,
                     textInputAction: TextInputAction.next,
-                    textInputType:
-                        const TextInputType.numberWithOptions(decimal: true),
+                    textInputType: TextInputType.number,
                     inputFormatters: [
-                      RegExInputFormatter.withRegex(RegexPatternString.decimal),
-                      DecimalTextInputFormatter(decimalRange: 100)
+                      FilteringTextInputFormatter.allow(
+                          RegExp(RegexPatternString.number)),
                     ],
                     onChange: (String value) {
                       _cubit
                           .changeTokenToStakeEvent(double.tryParse(value) ?? 0);
                     },
                   ),
-                  _errorMesasge(viewmodel.tokenToStakeValidMessage),
+                  _errorMessage(viewmodel.tokenToStakeValidMessage),
                   const SizedBox(height: 10),
 
                   /// Advance
@@ -248,18 +248,16 @@ class _DelegateWidgetState extends State<DelegateWidget> with WidgetUtil {
                         DSTextField(
                           hintText: S.current.input_a_number,
                           textInputAction: TextInputAction.done,
-                          textInputType: const TextInputType.numberWithOptions(
-                              decimal: true),
+                          textInputType: TextInputType.number,
                           inputFormatters: [
-                            RegExInputFormatter.withRegex(
-                                RegexPatternString.decimal),
-                            DecimalTextInputFormatter(decimalRange: 100)
+                            FilteringTextInputFormatter.allow(
+                                RegExp(RegexPatternString.number)),
                           ],
                           onChange: (String value) {
                             _cubit.changeGasEvent(double.tryParse(value) ?? 0);
                           },
                         ),
-                        _errorMesasge(viewmodel.tokenToStakeValidMessage)
+                        _errorMessage(viewmodel.gasValidMessage)
                       ],
                     ),
                   const SizedBox(height: 17),
@@ -285,7 +283,7 @@ class _DelegateWidgetState extends State<DelegateWidget> with WidgetUtil {
         ],
       );
 
-  Widget _errorMesasge(String text) => Padding(
+  Widget _errorMessage(String text) => Padding(
         padding: EdgeInsets.only(top: text.isEmpty ? 0 : 2),
         child: Text(
           text,

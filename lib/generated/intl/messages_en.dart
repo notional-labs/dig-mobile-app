@@ -158,6 +158,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("To"),
         "to_digchain": MessageLookupByLibrary.simpleMessage("To Digchain"),
         "token": MessageLookupByLibrary.simpleMessage("Token"),
+        "token_sent": MessageLookupByLibrary.simpleMessage("Token sent"),
         "total_deposit": MessageLookupByLibrary.simpleMessage("Total Deposit"),
         "transfer_token":
             MessageLookupByLibrary.simpleMessage("Transfer Token"),

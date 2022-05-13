@@ -1,25 +1,49 @@
+import 'dart:ffi';
+
+import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/cubit/active_account/transfer_token/transfer_token_state.dart';
+import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class TransferTokenCubit extends Cubit<TransferTokenState> {
-  TransferTokenCubit() : super(const TransferTokenPrimaryState());
+  TransferTokenCubit(this._sendTokenUsecase)
+      : super(const TransferTokenPrimaryState());
+
+  final SendTokenUsecase _sendTokenUsecase;
 
   void init(
       {required String senderAddress,
       required double tokenAvailable,
-      String? recipient}) {
+      String? recipientAddress}) {
     emit(TransferTokenPrimaryState(
         viewmodel: state.viewmodel.copyWith(
             tokenAvailable: tokenAvailable,
             senderAddress: senderAddress,
-            recipient: recipient)));
+            recipientAddress: recipientAddress)));
   }
 
-  /// TODO: Impl [transferToken]
-  Future transferToken() async {}
+  Future transferToken(AccountPublicInfo account) async {
+    emit(TransferTokenSendingState(viewmodel: state.viewmodel.copyWith()));
+    final amount = state.viewmodel.tokenToSend * TokenBalanceRatio.ratio;
+    final result = await _sendTokenUsecase.call(SendTokenUsecaseParam(
+        request: SendTokenRequest(
+            info: account,
+            balance:
+                Balance(amount: amount.toStringAsFixed(0), denom: Denom.udig),
+            fee: Balance(amount: Fee.defaultFee.toString(), denom: Denom.udig),
+            toAddress: state.viewmodel.recipientAddress,
+            password: '')));
+
+    result.fold((l) {
+      emit(TransferTokenErrorState(
+          exception: l, viewmodel: state.viewmodel.copyWith()));
+    }, (r) {
+      emit(TransferTokenSuccessState(viewmodel: state.viewmodel.copyWith()));
+    });
+  }
 
   void changeAdvanceEvent(bool value) {
     emit(TransferTokenChangedFormState(
@@ -27,9 +51,10 @@ class TransferTokenCubit extends Cubit<TransferTokenState> {
     emit(TransferTokenPrimaryState(viewmodel: state.viewmodel.copyWith()));
   }
 
-  void changeRecipientAddressEvent(String recipient) {
+  void changeRecipientAddressEvent(String recipientAddress) {
     emit(TransferTokenChangedFormState(
-        viewmodel: state.viewmodel.copyWith(recipient: recipient)));
+        viewmodel:
+            state.viewmodel.copyWith(recipientAddress: recipientAddress)));
     emit(TransferTokenPrimaryState(viewmodel: state.viewmodel));
   }
 
@@ -45,5 +70,6 @@ class TransferTokenCubit extends Cubit<TransferTokenState> {
     emit(TransferTokenPrimaryState(viewmodel: state.viewmodel.copyWith()));
   }
 
-  void closeEvent() => navigatorKey.currentState!.pop();
+  void closeEvent([bool result = false]) =>
+      navigatorKey.currentState!.pop(result);
 }

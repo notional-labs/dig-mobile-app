@@ -5,4 +5,5 @@ abstract class DomainErrorMessage {
   static const String invalidCharacter = 'Invalid character';
   static const String invalidMnemonic = 'Invalid Mnemonic';
   static const String noValidatorLogoFound = 'No validator logo found';
+  static const String cannotSendToken = "Can't send token";
 }
