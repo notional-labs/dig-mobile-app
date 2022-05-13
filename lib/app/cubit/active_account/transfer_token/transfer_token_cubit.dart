@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/cubit/active_account/transfer_token/transfer_token_state.dart';
 import 'package:dig_mobile_app/app/definition/string.dart';

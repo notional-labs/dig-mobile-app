@@ -1,5 +1,5 @@
+import 'package:dig_mobile_app/app/extension/extension.dart';
 import 'package:equatable/equatable.dart';
-
 import 'package:dig_mobile_app/app/viewmodel/delegate_validator_item_viewmodel.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 
@@ -25,10 +25,12 @@ class DelegateViewModel extends Equatable {
   bool get isTokenToStakeValid =>
       tokenAvailable > 0 &&
       tokenToStake > 0 &&
-      (tokenToStake + gas) <= tokenAvailable;
+      (tokenToStake + gas) <= tokenAvailable.toDigTokenDisplay();
 
   bool get isGasValid =>
-      tokenAvailable > 0 && gas > 0 && (tokenToStake + gas) <= tokenAvailable;
+      tokenAvailable > 0 &&
+      gas > 0 &&
+      (tokenToStake + gas) <= tokenAvailable.toDigTokenDisplay();
 
   String get tokenToStakeValidMessage {
     if (tokenToStake == 0 || isTokenToStakeValid) {

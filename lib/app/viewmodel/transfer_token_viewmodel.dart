@@ -1,3 +1,4 @@
+import 'package:dig_mobile_app/app/extension/extension.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:equatable/equatable.dart';
 
@@ -21,10 +22,12 @@ class TransferTokenViewModel extends Equatable {
   bool get isTokenToSendValid =>
       tokenAvailable > 0 &&
       tokenToSend > 0 &&
-      (tokenToSend + gas) <= tokenAvailable;
+      (tokenToSend + gas) <= tokenAvailable.toDigTokenDisplay();
 
   bool get isGasValid =>
-      tokenAvailable > 0 && gas > 0 && (tokenToSend + gas) <= tokenAvailable;
+      tokenAvailable > 0 &&
+      gas > 0 &&
+      (tokenToSend + gas) <= tokenAvailable.toDigTokenDisplay();
 
   String get tokenToSendValidMessage {
     if (tokenToSend == 0 || isTokenToSendValid) {
