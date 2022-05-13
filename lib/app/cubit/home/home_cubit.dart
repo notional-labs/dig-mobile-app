@@ -4,7 +4,6 @@ import 'package:dig_mobile_app/app/cubit/home/home_state.dart';
 import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/page/home/home_drawer.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
-import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -12,14 +11,21 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(const HomeInitialSate());
+  HomeCubit(
+      this._getSelectedAccountUseCase,
+      this._getListAccountUseCase,
+      this._selectAccountUseCase,
+      this._removeAccountUseCase,
+      this._deletePinUseCase,
+      this._getListBalanceUseCase)
+      : super(const HomeInitialSate());
 
-  final GetSelectedAccountUseCase _getSelectedAccountUseCase = di();
-  final GetListAccountUseCase _getListAccountUseCase = di();
-  final SelectAccountUseCase _selectAccountUseCase = di();
-  final RemoveAccountUseCase _removeAccountUseCase = di();
-  final DeletePinUseCase _deletePinUseCase = di();
-  final GetListBalanceUseCase _getListBalanceUseCase = di();
+  final GetSelectedAccountUseCase _getSelectedAccountUseCase;
+  final GetListAccountUseCase _getListAccountUseCase;
+  final SelectAccountUseCase _selectAccountUseCase;
+  final RemoveAccountUseCase _removeAccountUseCase;
+  final DeletePinUseCase _deletePinUseCase;
+  final GetListBalanceUseCase _getListBalanceUseCase;
 
   Future init() async {
     AccountPublicInfo? account;

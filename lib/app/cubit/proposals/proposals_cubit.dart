@@ -4,7 +4,6 @@ import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/page/proposals_flow/proposal_detail/proposal_detail_page.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:dig_mobile_app/app/viewmodel/proposals_viewmodel.dart';
-import 'package:dig_mobile_app/di/di.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,9 +11,8 @@ part 'proposals_state.dart';
 
 @injectable
 class ProposalsCubit extends Cubit<ProposalsState> {
-  final GetProposalsUseCase _getProposalsUseCase = di();
-
-  ProposalsCubit() : super(ProposalsInitial());
+  ProposalsCubit(this._getProposalsUseCase) : super(ProposalsInitial());
+  final GetProposalsUseCase _getProposalsUseCase;
 
   Future getProposals([bool isRefresh = false]) async {
     emit(ProposalsLoadingState(model: state.model, isRefresh: isRefresh));

@@ -4,17 +4,18 @@ import 'package:dig_mobile_app/app/cubit/name_account/import_account/name_accoun
 import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/page/pin/pin_page.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
-import 'package:dig_mobile_app/di/di.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class NameAccountCubit extends Cubit<NameAccountState> {
-  NameAccountCubit() : super(const NameAccountUninitState());
+  NameAccountCubit(this._importAccountUseCase, this._checkHasPinUseCase,
+      this._selectAccountUseCase)
+      : super(const NameAccountUninitState());
 
-  final ImportAccountUseCase _importAccountUseCase = di();
-  final CheckHasPinUseCase _checkHasPinUseCase = di();
-  final SelectAccountUseCase _selectAccountUseCase = di();
+  final ImportAccountUseCase _importAccountUseCase;
+  final CheckHasPinUseCase _checkHasPinUseCase;
+  final SelectAccountUseCase _selectAccountUseCase;
 
   void init(String mnemonic) {
     emit(NameAccountPrimaryState(
