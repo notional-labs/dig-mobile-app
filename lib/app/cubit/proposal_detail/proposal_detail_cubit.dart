@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/viewmodel/proposal_detail_viewmodel.dart';
-import 'package:dig_mobile_app/di/di.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
@@ -10,10 +9,11 @@ part 'proposal_detail_state.dart';
 
 @Injectable()
 class ProposalDetailCubit extends Cubit<ProposalDetailState> {
-  final GetProposerUseCase _getProposerUseCase = di();
-  late final Proposal _proposal;
+  ProposalDetailCubit(this._getProposerUseCase)
+      : super(ProposalDetailInitial());
 
-  ProposalDetailCubit() : super(ProposalDetailInitial());
+  final GetProposerUseCase _getProposerUseCase;
+  late final Proposal _proposal;
 
   void init(Proposal? proposal) {
     _proposal = proposal ?? const Proposal();

@@ -2,16 +2,15 @@ import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/cubit/confirm_pin/confirm_pin_state.dart';
 import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
-import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class ConfirmPinCubit extends Cubit<ConfirmPinState> {
-  ConfirmPinCubit() : super(const ConfirmPinPrimaryState());
+  ConfirmPinCubit(this._createPinUseCase) : super(const ConfirmPinPrimaryState());
 
-  final CreatePinUseCase _createPinUseCase = di();
+  final CreatePinUseCase _createPinUseCase;
 
   void init(String pin) {
     emit(ConfirmPinPrimaryState(viewmodel: state.viewmodel.copyWith(pin: pin)));
