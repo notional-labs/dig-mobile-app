@@ -22,3 +22,7 @@ abstract class Denom {
 abstract class TokenBalanceRatio {
   static const double ratio = 1000000;
 }
+
+abstract class Fee {
+  static const defaultFee = 42949673;
+}

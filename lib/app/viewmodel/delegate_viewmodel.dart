@@ -22,11 +22,24 @@ class DelegateViewModel extends Equatable {
     this.validators = const [],
   });
 
-  bool get istokenToStakeValid =>
-      tokenAvailable > 0 && (tokenToStake + gas) <= tokenAvailable;
+  bool get isTokenToStakeValid =>
+      tokenAvailable > 0 &&
+      tokenToStake > 0 &&
+      (tokenToStake + gas) <= tokenAvailable;
+
+  bool get isGasValid =>
+      tokenAvailable > 0 && gas > 0 && (tokenToStake + gas) <= tokenAvailable;
 
   String get tokenToStakeValidMessage {
-    if (istokenToStakeValid) {
+    if (tokenToStake == 0 || isTokenToStakeValid) {
+      return '';
+    }
+
+    return S.current.not_enough_token;
+  }
+
+  String get gasValidMessage {
+    if (gas == 0 || isGasValid) {
       return '';
     }
 
@@ -35,7 +48,7 @@ class DelegateViewModel extends Equatable {
 
   bool get isValidatorAddressValid => validator.address.isNotEmpty;
 
-  bool get isAllValid => istokenToStakeValid && isValidatorAddressValid;
+  bool get isAllValid => isTokenToStakeValid && isValidatorAddressValid;
 
   DelegateViewModel copyWith({
     String? delegatorAddress,

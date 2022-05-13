@@ -999,6 +999,16 @@ class S {
       args: [n],
     );
   }
+
+  /// `Token sent`
+  String get token_sent {
+    return Intl.message(
+      'Token sent',
+      name: 'token_sent',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -2,6 +2,7 @@ import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/cubit/active_account/transfer_token/transfer_token_cubit.dart';
 import 'package:dig_mobile_app/app/cubit/active_account/transfer_token/transfer_token_state.dart';
 import 'package:dig_mobile_app/app/definition/regex.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/transfer_token_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
@@ -12,8 +13,12 @@ import 'package:dig_mobile_app/app/designsystem/ds_small_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_field.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dig_mobile_app/app/extension/extension.dart';
+
+/// After token has sent success,
+/// [TransferTokenWidget] close and return [true] value.
 
 class TransferTokenWidgetParam {
   final AccountPublicInfo account;
@@ -38,7 +43,27 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
   final TransferTokenCubit _cubit = di();
   final TextEditingController _toRecipientController = TextEditingController();
 
-  void _onBlocListener(BuildContext context, TransferTokenState state) {}
+  void _onBlocListener(BuildContext context, TransferTokenState state) {
+    if (state is TransferTokenSendingState) {
+      showGlobalLoadingOverlay();
+      return;
+    }
+
+    dismissGlobalLoadingOverlay();
+
+    if (state is TransferTokenErrorState) {
+      showGlobalDSSnackBar(
+          message: state.exception.message, type: DSSnackBarType.error);
+      return;
+    }
+
+    if (state is TransferTokenSuccessState) {
+      showGlobalDSSnackBar(
+          message: S.current.token_sent, type: DSSnackBarType.success);
+      _cubit.closeEvent(true);
+      return;
+    }
+  }
 
   @override
   void initState() {
@@ -48,7 +73,7 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
       _cubit.init(
           senderAddress: widget.param.account.publicAddress,
           tokenAvailable: widget.param.tokenAvailable,
-          recipient: widget.param.toAddress);
+          recipientAddress: widget.param.toAddress);
     });
   }
 
@@ -148,7 +173,7 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
                   DSTextField(
                     disable: true,
                     hintText:
-                        S.current.dig_token_format(widget.param.tokenAvailable),
+                        S.current.dig_token_format(widget.param.tokenAvailable.toDigTokenDisplay()),
                     onChange: (String value) {},
                   ),
                   const SizedBox(height: 10),
@@ -163,18 +188,17 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
                   DSTextField(
                     hintText: S.current.input_a_number,
                     textInputAction: TextInputAction.next,
-                    textInputType:
-                        const TextInputType.numberWithOptions(decimal: true),
+                    textInputType: TextInputType.number,
                     inputFormatters: [
-                      RegExInputFormatter.withRegex(RegexPatternString.decimal),
-                      DecimalTextInputFormatter(decimalRange: 100)
+                      FilteringTextInputFormatter.allow(
+                          RegExp(RegexPatternString.number)),
                     ],
                     onChange: (String value) {
                       _cubit
                           .changeTokenToSendEvent(double.tryParse(value) ?? 0);
                     },
                   ),
-                  _errorMesasge(viewmodel.tokenToSendValidMessage),
+                  _errorMessage(viewmodel.tokenToSendValidMessage),
                   const SizedBox(height: 10),
 
                   /// Advance
@@ -213,18 +237,16 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
                         DSTextField(
                           hintText: S.current.input_a_number,
                           textInputAction: TextInputAction.done,
-                          textInputType: const TextInputType.numberWithOptions(
-                              decimal: true),
+                          textInputType: TextInputType.number,
                           inputFormatters: [
-                            RegExInputFormatter.withRegex(
-                                RegexPatternString.decimal),
-                            DecimalTextInputFormatter(decimalRange: 100)
+                            FilteringTextInputFormatter.allow(
+                                RegExp(RegexPatternString.number)),
                           ],
                           onChange: (String value) {
                             _cubit.changeGasEvent(double.tryParse(value) ?? 0);
                           },
                         ),
-                        _errorMesasge(viewmodel.tokenToSendValidMessage)
+                        _errorMessage(viewmodel.gasValidMessage)
                       ],
                     ),
                   const SizedBox(height: 17),
@@ -249,12 +271,12 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
               title: S.current.send,
               enable: viewmodel.isAllValid,
               onTap: () {
-                _cubit.transferToken();
+                _cubit.transferToken(widget.param.account);
               })
         ],
       );
 
-  Widget _errorMesasge(String text) => Padding(
+  Widget _errorMessage(String text) => Padding(
         padding: EdgeInsets.only(top: text.isEmpty ? 0 : 2),
         child: Text(
           text,

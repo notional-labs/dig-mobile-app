@@ -38,28 +38,47 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   gh.factory<_i3.ActiveAccountCubit>(
       () => _i3.ActiveAccountCubit(get<_i4.GetListBalanceUseCase>()));
-  gh.factory<_i5.AppCubit>(() => _i5.AppCubit());
+  gh.factory<_i5.AppCubit>(() => _i5.AppCubit(
+      get<_i4.GetSelectedAccountUseCase>(), get<_i4.CheckHasPinUseCase>()));
   gh.factory<_i6.BackupYourWalletCubit>(
       () => _i6.BackupYourWalletCubit(get<_i4.CreateMnemonicUseCase>()));
-  gh.factory<_i7.ConfirmPinCubit>(() => _i7.ConfirmPinCubit());
+  gh.factory<_i7.ConfirmPinCubit>(
+      () => _i7.ConfirmPinCubit(get<_i4.CreatePinUseCase>()));
   gh.factory<_i8.ConfirmRecoveryPhraseCubit>(
       () => _i8.ConfirmRecoveryPhraseCubit());
   gh.factory<_i9.DelegateCubit>(() => _i9.DelegateCubit());
-  gh.factory<_i10.HomeCubit>(() => _i10.HomeCubit());
-  gh.factory<_i11.ImportAccountCubit>(() => _i11.ImportAccountCubit());
-  gh.factory<_i12.NameAccountCubit>(() => _i12.NameAccountCubit());
-  gh.factory<_i13.PinCubit>(() => _i13.PinCubit());
-  gh.factory<_i14.ProposalDetailCubit>(() => _i14.ProposalDetailCubit());
-  gh.factory<_i15.ProposalsCubit>(() => _i15.ProposalsCubit());
+  gh.factory<_i10.HomeCubit>(() => _i10.HomeCubit(
+      get<_i4.GetSelectedAccountUseCase>(),
+      get<_i4.GetListAccountUseCase>(),
+      get<_i4.SelectAccountUseCase>(),
+      get<_i4.RemoveAccountUseCase>(),
+      get<_i4.DeletePinUseCase>(),
+      get<_i4.GetListBalanceUseCase>()));
+  gh.factory<_i11.ImportAccountCubit>(
+      () => _i11.ImportAccountCubit(get<_i4.CheckMnemonicValidUseCase>()));
+  gh.factory<_i12.NameAccountCubit>(() => _i12.NameAccountCubit(
+      get<_i4.ImportAccountUseCase>(),
+      get<_i4.CheckHasPinUseCase>(),
+      get<_i4.SelectAccountUseCase>()));
+  gh.factory<_i13.PinCubit>(() => _i13.PinCubit(get<_i4.MatchPinUseCase>()));
+  gh.factory<_i14.ProposalDetailCubit>(
+      () => _i14.ProposalDetailCubit(get<_i4.GetProposerUseCase>()));
+  gh.factory<_i15.ProposalsCubit>(
+      () => _i15.ProposalsCubit(get<_i4.GetProposalsUseCase>()));
   gh.factory<_i16.RecoveryPhraseCubit>(() => _i16.RecoveryPhraseCubit());
   gh.factory<_i17.SignInCubit>(() => _i17.SignInCubit());
-  gh.factory<_i18.SplashCubit>(() => _i18.SplashCubit());
+  gh.factory<_i18.SplashCubit>(() => _i18.SplashCubit(
+      get<_i4.GetSelectedAccountUseCase>(),
+      get<_i4.CheckHasPinUseCase>(),
+      get<_i4.CheckFirstTimeRunAppUseCase>(),
+      get<_i4.DeletePinUseCase>()));
   gh.factory<_i19.StakingCubit>(() => _i19.StakingCubit(
       get<_i4.GetValidatorUseCase>(),
       get<_i4.GetSelectedAccountUseCase>(),
       get<_i4.GetBalanceUseCase>()));
   gh.factory<_i20.StakingItemCubit>(
       () => _i20.StakingItemCubit(get<_i4.GetValidatorLogoUseCase>()));
-  gh.factory<_i21.TransferTokenCubit>(() => _i21.TransferTokenCubit());
+  gh.factory<_i21.TransferTokenCubit>(
+      () => _i21.TransferTokenCubit(get<_i4.SendTokenUsecase>()));
   return get;
 }

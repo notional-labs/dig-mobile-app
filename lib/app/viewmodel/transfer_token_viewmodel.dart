@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 
 class TransferTokenViewModel extends Equatable {
   final String senderAddress;
-  final String recipient;
+  final String recipientAddress;
   final double tokenToSend;
   final double tokenAvailable;
   final double gas;
@@ -11,7 +11,7 @@ class TransferTokenViewModel extends Equatable {
 
   const TransferTokenViewModel({
     this.senderAddress = '',
-    this.recipient = '',
+    this.recipientAddress = '',
     this.tokenToSend = 0,
     this.tokenAvailable = 0,
     this.gas = 0,
@@ -19,23 +19,36 @@ class TransferTokenViewModel extends Equatable {
   });
 
   bool get isTokenToSendValid =>
-      tokenAvailable > 0 && (tokenToSend + gas) <= tokenAvailable;
+      tokenAvailable > 0 &&
+      tokenToSend > 0 &&
+      (tokenToSend + gas) <= tokenAvailable;
+
+  bool get isGasValid =>
+      tokenAvailable > 0 && gas > 0 && (tokenToSend + gas) <= tokenAvailable;
 
   String get tokenToSendValidMessage {
-    if (isTokenToSendValid) {
+    if (tokenToSend == 0 || isTokenToSendValid) {
       return '';
     }
 
     return S.current.not_enough_token;
   }
 
-  bool get isRecipientValid => recipient.isNotEmpty;
+  String get gasValidMessage {
+    if (gas == 0 || isGasValid) {
+      return '';
+    }
+
+    return S.current.not_enough_token;
+  }
+
+  bool get isRecipientValid => recipientAddress.isNotEmpty;
 
   bool get isAllValid => isTokenToSendValid && isRecipientValid;
 
   TransferTokenViewModel copyWith({
     String? senderAddress,
-    String? recipient,
+    String? recipientAddress,
     double? tokenToSend,
     double? tokenAvailable,
     double? gas,
@@ -43,7 +56,7 @@ class TransferTokenViewModel extends Equatable {
   }) {
     return TransferTokenViewModel(
       senderAddress: senderAddress ?? this.senderAddress,
-      recipient: recipient ?? this.recipient,
+      recipientAddress: recipientAddress ?? this.recipientAddress,
       tokenToSend: tokenToSend ?? this.tokenToSend,
       tokenAvailable: tokenAvailable ?? this.tokenAvailable,
       gas: gas ?? this.gas,
@@ -55,7 +68,7 @@ class TransferTokenViewModel extends Equatable {
   List<Object> get props {
     return [
       senderAddress,
-      recipient,
+      recipientAddress,
       tokenToSend,
       tokenAvailable,
       gas,

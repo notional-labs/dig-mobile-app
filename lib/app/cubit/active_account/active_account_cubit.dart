@@ -3,7 +3,6 @@ import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/route/dig_route.dart';
 import 'package:dig_mobile_app/app/viewmodel/active_account_viewmodel.dart';
-import 'package:dig_mobile_app/di/di.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';

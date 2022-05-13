@@ -149,7 +149,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
           height: 12,
         ),
         Text(
-          S.current.dig_token_format(viewModel.balances.getDigBalance()),
+          S.current.dig_token_format(viewModel.balances.getDigBalance().toDigTokenDisplay()),
           style: DSTextStyle.tsMontserrat.copyWith(
               color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400),
         ),
@@ -268,9 +268,9 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
     );
   }
 
-  void _showTransferTokenDialog(
-      {required double digBalance, String? toAddress}) {
-    showFullScreenDialog(
+  Future _showTransferTokenDialog(
+      {required double digBalance, String? toAddress}) async {
+    final transferResult = await showFullScreenDialog(
         context: context,
         child: TransferTokenWidget(
           param: TransferTokenWidgetParam(
@@ -278,6 +278,10 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
               tokenAvailable: digBalance,
               toAddress: toAddress),
         ));
+
+    if (transferResult) {
+      _cubit.refreshEvent(widget.account);
+    }
   }
 
   @override

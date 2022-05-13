@@ -24,12 +24,12 @@ export 'package:dig_core/src/domain/usecase/account/get_selected_account_usecase
 export 'package:dig_core/src/domain/usecase/account/select_account_usecase.dart';
 export 'package:dig_core/src/domain/usecase/auth/remove_account_usecase.dart';
 export 'package:dig_core/src/domain/usecase/account/get_list_balance_usecase.dart';
-export 'package:dig_core/src/domain/entity/balance.dart';
-export 'package:dig_core/src/domain/entity/balance_resquest.dart';
 export 'package:dig_core/src/domain/usecase/proposals/get_proposals_usecase.dart';
 export 'package:dig_core/src/domain/usecase/proposals/get_proposer_usecase.dart';
 export 'package:dig_core/src/domain/usecase/validator/get_validator_usecase.dart';
 export 'package:dig_core/src/domain/usecase/validator/get_validator_logo_usecase.dart';
+export 'package:dig_core/src/domain/usecase/transaction/send_token_use_case.dart';
+export 'package:dig_core/src/domain/usecase/account/get_balance_usecase.dart';
 
 // domain - model
 export 'package:dig_core/src/domain/entity/import_account.dart';
@@ -43,10 +43,12 @@ export 'package:dig_core/src/domain/entity/proposals/proposals_request.dart';
 export 'package:dig_core/src/domain/entity/proposals/proposer_request.dart';
 export 'package:dig_core/src/domain/entity/staking/validator_response.dart';
 export 'package:dig_core/src/domain/entity/staking/result.dart';
+export 'package:dig_core/src/domain/entity/balance.dart';
+export 'package:dig_core/src/domain/entity/balance_resquest.dart';
+export 'package:dig_core/src/domain/entity/send_token_request.dart';
 
 export 'package:dig_core/src/domain/util/util.dart';
 
 export 'package:transaction_signing_gateway/model/account_public_info.dart';
-export 'package:dig_core/src/domain/usecase/account/get_balance_usecase.dart';
 
 class DigCore {}

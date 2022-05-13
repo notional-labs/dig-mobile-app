@@ -5,7 +5,6 @@ import 'package:dig_mobile_app/app/definition/string.dart';
 extension ListBalanceExtension on List<Balance> {
   double getDigBalance() {
     final balance = firstWhereOrNull((element) => Denom.udig == element.denom);
-    return (double.tryParse(balance?.amount ?? '') ?? 0) /
-        TokenBalanceRatio.ratio;
+    return (double.tryParse(balance?.amount ?? '') ?? 0);
   }
 }
