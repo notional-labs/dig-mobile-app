@@ -197,7 +197,7 @@ class _DelegateWidgetState extends State<DelegateWidget> with WidgetUtil {
                   ),
                   const SizedBox(height: 4),
                   DSTextField(
-                    hintText: S.current.input_a_number,
+                    hintText: S.current.dig_token_format(0),
                     textInputAction: TextInputAction.next,
                     textInputType: TextInputType.number,
                     inputFormatters: [
@@ -246,7 +246,8 @@ class _DelegateWidgetState extends State<DelegateWidget> with WidgetUtil {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         DSTextField(
-                          hintText: S.current.input_a_number,
+                          hintText:
+                              '${S.current.minimum}: ${S.current.dig_token_format(0)}',
                           textInputAction: TextInputAction.done,
                           textInputType: TextInputType.number,
                           inputFormatters: [

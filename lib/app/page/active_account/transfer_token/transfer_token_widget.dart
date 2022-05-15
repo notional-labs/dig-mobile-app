@@ -187,7 +187,7 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
                   ),
                   const SizedBox(height: 4),
                   DSTextField(
-                    hintText: S.current.input_a_number,
+                    hintText: S.current.dig_token_format(0),
                     textInputAction: TextInputAction.next,
                     textInputType: TextInputType.number,
                     inputFormatters: [
@@ -236,7 +236,7 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         DSTextField(
-                          hintText: S.current.dig_token_format(Fee.defaultFee),
+                          hintText: '${S.current.minimum}: ${S.current.dig_token_format(Fee.defaultFeeDisplay)}',
                           textInputAction: TextInputAction.done,
                           textInputType: TextInputType.number,
                           inputFormatters: [

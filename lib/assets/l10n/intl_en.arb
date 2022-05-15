@@ -94,5 +94,6 @@
     "delegator": "Delegator",
     "amount_to_stack": "Amount To Stake",
     "n_percent": "{n}%",
-    "token_sent": "Token sent"
+    "token_sent": "Token sent",
+    "minimum": "Minimum"
 }
