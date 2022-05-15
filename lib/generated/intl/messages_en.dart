@@ -97,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "input_a_number":
             MessageLookupByLibrary.simpleMessage("Input a number"),
         "into_the_mine": MessageLookupByLibrary.simpleMessage("into the mine"),
+        "minimum": MessageLookupByLibrary.simpleMessage("Minimum"),
         "n_percent": m2,
         "name_account": MessageLookupByLibrary.simpleMessage("Name account"),
         "no_account_found":

@@ -25,4 +25,5 @@ abstract class TokenBalanceRatio {
 
 abstract class Fee {
   static const double defaultFee = 42949673;
+  static double defaultFeeDisplay = defaultFee / TokenBalanceRatio.ratio;
 }

@@ -1009,6 +1009,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Minimum`
+  String get minimum {
+    return Intl.message(
+      'Minimum',
+      name: 'minimum',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
