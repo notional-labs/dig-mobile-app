@@ -24,5 +24,5 @@ abstract class TokenBalanceRatio {
 }
 
 abstract class Fee {
-  static const defaultFee = 42949673;
+  static const double defaultFee = 42949673;
 }

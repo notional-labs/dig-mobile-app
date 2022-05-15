@@ -2,6 +2,7 @@ import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/cubit/active_account/transfer_token/transfer_token_cubit.dart';
 import 'package:dig_mobile_app/app/cubit/active_account/transfer_token/transfer_token_state.dart';
 import 'package:dig_mobile_app/app/definition/regex.dart';
+import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/transfer_token_viewmodel.dart';
@@ -172,8 +173,8 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
                   const SizedBox(height: 4),
                   DSTextField(
                     disable: true,
-                    hintText:
-                        S.current.dig_token_format(widget.param.tokenAvailable.toDigTokenDisplay()),
+                    hintText: S.current.dig_token_format(
+                        widget.param.tokenAvailable.toDigTokenDisplay()),
                     onChange: (String value) {},
                   ),
                   const SizedBox(height: 10),
@@ -235,7 +236,7 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         DSTextField(
-                          hintText: S.current.input_a_number,
+                          hintText: S.current.dig_token_format(Fee.defaultFee),
                           textInputAction: TextInputAction.done,
                           textInputType: TextInputType.number,
                           inputFormatters: [
