@@ -6,14 +6,25 @@ class DSPrimaryButton extends StatelessWidget {
   final String title;
   final GestureTapCallback onTap;
   final bool enable;
+  final double width;
+  final double height;
+  final TextStyle? textStyle;
+  final Widget? leftIcon;
+  final Widget? rightIcon;
+
   const DSPrimaryButton({
     required this.title,
     required this.onTap,
     this.enable = true,
+    this.width = double.infinity,
+    this.height = 50,
+    this.textStyle,
+    this.leftIcon,
+    this.rightIcon,
     Key? key,
   }) : super(key: key);
 
-  LinearGradient get _resolveBackgroudColor => enable
+  LinearGradient get _resolveBackgroundColor => enable
       ? const LinearGradient(
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
@@ -29,18 +40,21 @@ class DSPrimaryButton extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(5)),
-              gradient: _resolveBackgroudColor),
-          width: double.infinity,
-          height: 50,
-          child: Align(
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: DSTextStyle.tsMontserrat.copyWith(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700),
-            ),
+              gradient: _resolveBackgroundColor),
+          width: width,
+          height: height,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              leftIcon ?? const SizedBox.shrink(),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: textStyle ??
+                    DSTextStyle.tsMontserratT20B.copyWith(color: Colors.white),
+              ),
+              rightIcon ?? const SizedBox.shrink(),
+            ],
           ),
         ),
       );
