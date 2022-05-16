@@ -89,7 +89,7 @@ class _BodyWidget extends StatelessWidget with WidgetUtil {
         width: double.infinity,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
-            S.current.wellcome,
+            S.current.welcome,
             style: DSTextStyle.tsMontserrat.copyWith(
                 color: DSColors.tulipTree,
                 fontSize: 40,

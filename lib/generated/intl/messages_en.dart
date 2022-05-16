@@ -33,8 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "account": MessageLookupByLibrary.simpleMessage("ACCOUNT"),
         "advance": MessageLookupByLibrary.simpleMessage("Advance"),
         "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
-        "amount_avaliable":
-            MessageLookupByLibrary.simpleMessage("Amount Avaliable"),
+        "amount_available":
+            MessageLookupByLibrary.simpleMessage("Amount Available"),
         "amount_to_send":
             MessageLookupByLibrary.simpleMessage("Amount To Send"),
         "amount_to_stack":
@@ -71,6 +71,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "create": MessageLookupByLibrary.simpleMessage("Create"),
         "create_account":
             MessageLookupByLibrary.simpleMessage("Create account"),
+        "create_proposal":
+            MessageLookupByLibrary.simpleMessage("Create Proposal"),
         "delegate_token":
             MessageLookupByLibrary.simpleMessage("Delegate Token"),
         "delegator": MessageLookupByLibrary.simpleMessage("Delegator"),
@@ -131,8 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "proposer": MessageLookupByLibrary.simpleMessage("Proposer"),
         "real_estate": MessageLookupByLibrary.simpleMessage("Real estate"),
         "receive": MessageLookupByLibrary.simpleMessage("Receive"),
-        "recipent_address":
-            MessageLookupByLibrary.simpleMessage("Recipent address"),
+        "recipient_address":
+            MessageLookupByLibrary.simpleMessage("Recipient address"),
         "remove": MessageLookupByLibrary.simpleMessage("Remove"),
         "remove_account":
             MessageLookupByLibrary.simpleMessage("Remove Account"),
@@ -167,7 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "validator": MessageLookupByLibrary.simpleMessage("Validator"),
         "vote": MessageLookupByLibrary.simpleMessage("vote"),
         "voting_time": MessageLookupByLibrary.simpleMessage("Voting Time"),
-        "wellcome": MessageLookupByLibrary.simpleMessage("WELCOME"),
+        "welcome": MessageLookupByLibrary.simpleMessage("WELCOME"),
         "your_recovery_phrase":
             MessageLookupByLibrary.simpleMessage("Your recovery phrase"),
         "your_recovery_phrase_description": MessageLookupByLibrary.simpleMessage(

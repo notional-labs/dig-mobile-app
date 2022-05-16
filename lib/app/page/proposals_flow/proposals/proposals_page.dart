@@ -1,5 +1,6 @@
 import 'package:dig_mobile_app/app/cubit/proposals/proposals_cubit.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
+import 'package:dig_mobile_app/app/designsystem/ds_primary_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_refresh_cupertino_sliver.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
@@ -62,6 +63,19 @@ class _ProposalsPageState extends State<ProposalsPage>
             S.current.proposals.toUpperCase(),
             style: DSTextStyle.tsMontserratT32B
                 .copyWith(color: DSColors.tulipTree),
+          ),
+          const SizedBox(
+            height: 6,
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 120),
+            child: DSPrimaryButton(
+                title: S.current.create_proposal,
+                leftIcon: const Icon(Icons.add, size: 14, color: Colors.white,),
+                height: 30,
+                textStyle: DSTextStyle.tsMontserratT10R.copyWith(
+                    color: Colors.white),
+                onTap: () {}),
           ),
           const SizedBox(
             height: 20,
