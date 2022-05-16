@@ -26,9 +26,9 @@ class TransferTokenCubit extends Cubit<TransferTokenState> {
   Future transferToken(AccountPublicInfo account) async {
     emit(TransferTokenSendingState(viewmodel: state.viewmodel.copyWith()));
     final amount = state.viewmodel.tokenToSend * TokenBalanceRatio.ratio;
-    double fee = state.viewmodel.gas * TokenBalanceRatio.ratio;
-    if (fee == 0) {
-      fee = Fee.defaultFee;
+    double fee = Fee.defaultFee;
+    if (state.viewmodel.advance) {
+      fee = state.viewmodel.gas * TokenBalanceRatio.ratio;
     }
     final result = await _sendTokenUsecase.call(SendTokenUsecaseParam(
         request: SendTokenRequest(
