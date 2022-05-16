@@ -155,7 +155,7 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
                   ),
                   const SizedBox(height: 4),
                   DSTextField(
-                    hintText: S.current.recipent_address,
+                    hintText: S.current.recipient_address,
                     controller: _toRecipientController,
                     onChange: (String value) {
                       _cubit.changeRecipientAddressEvent(value);
@@ -166,7 +166,7 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
 
                   /// Token available
                   Text(
-                    '${S.current.amount_avaliable}:',
+                    '${S.current.amount_available}:',
                     style: DSTextStyle.tsMontserratT12R
                         .copyWith(color: Colors.white),
                   ),

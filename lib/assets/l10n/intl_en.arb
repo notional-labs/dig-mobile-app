@@ -6,7 +6,7 @@
     "exchange": "Exchange",
     "delete": "Delete",
     "ig": "ig",
-    "wellcome": "WELCOME",
+    "welcome": "WELCOME",
     "sign_in_on_your_account": "Sign in on your account",
     "email": "Email",
     "password": "Password",
@@ -81,11 +81,11 @@
     "transfer_token": "Transfer Token",
     "from": "From",
     "to": "To",
-    "amount_avaliable": "Amount Avaliable",
+    "amount_available": "Amount Available",
     "amount_to_send": "Amount To Send",
     "advance": "Advance",
     "set_gas": "Set Gas",
-    "recipent_address": "Recipent address",
+    "recipient_address": "Recipient address",
     "input_a_number": "Input a number",
     "not_enough_token": "Not enough token",
     "scan_qr_code_page_title": "Scan QR code",
@@ -95,5 +95,6 @@
     "amount_to_stack": "Amount To Stake",
     "n_percent": "{n}%",
     "token_sent": "Token sent",
-    "minimum": "Minimum"
+    "minimum": "Minimum",
+    "create_proposal": "Create Proposal"
 }

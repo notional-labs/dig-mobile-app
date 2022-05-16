@@ -146,7 +146,7 @@ class _DelegateWidgetState extends State<DelegateWidget> with WidgetUtil {
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.white.withOpacity(0.3),
-                                  offset: Offset(-1, 1),
+                                  offset: const Offset(-1, 1),
                                   blurRadius: 5,
                                   blurStyle: BlurStyle.normal)
                             ]),
@@ -176,7 +176,7 @@ class _DelegateWidgetState extends State<DelegateWidget> with WidgetUtil {
 
                   /// Token available
                   Text(
-                    '${S.current.amount_avaliable}:',
+                    '${S.current.amount_available}:',
                     style: DSTextStyle.tsMontserratT12R
                         .copyWith(color: Colors.white),
                   ),

@@ -121,10 +121,10 @@ class S {
   }
 
   /// `WELCOME`
-  String get wellcome {
+  String get welcome {
     return Intl.message(
       'WELCOME',
-      name: 'wellcome',
+      name: 'welcome',
       desc: '',
       args: [],
     );
@@ -870,11 +870,11 @@ class S {
     );
   }
 
-  /// `Amount Avaliable`
-  String get amount_avaliable {
+  /// `Amount Available`
+  String get amount_available {
     return Intl.message(
-      'Amount Avaliable',
-      name: 'amount_avaliable',
+      'Amount Available',
+      name: 'amount_available',
       desc: '',
       args: [],
     );
@@ -910,11 +910,11 @@ class S {
     );
   }
 
-  /// `Recipent address`
-  String get recipent_address {
+  /// `Recipient address`
+  String get recipient_address {
     return Intl.message(
-      'Recipent address',
-      name: 'recipent_address',
+      'Recipient address',
+      name: 'recipient_address',
       desc: '',
       args: [],
     );
@@ -1015,6 +1015,16 @@ class S {
     return Intl.message(
       'Minimum',
       name: 'minimum',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Proposal`
+  String get create_proposal {
+    return Intl.message(
+      'Create Proposal',
+      name: 'create_proposal',
       desc: '',
       args: [],
     );
