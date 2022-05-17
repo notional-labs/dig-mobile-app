@@ -96,5 +96,7 @@
     "n_percent": "{n}%",
     "token_sent": "Token sent",
     "minimum": "Minimum",
-    "create_proposal": "Create Proposal"
+    "create_proposal": "Create Proposal",
+    "initial_deposit": "Initial Deposit",
+    "minimal_deposit": "Minimal Deposit"
 }

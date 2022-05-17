@@ -96,9 +96,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "import": MessageLookupByLibrary.simpleMessage("Import"),
         "import_account":
             MessageLookupByLibrary.simpleMessage("Import account"),
+        "initial_deposit":
+            MessageLookupByLibrary.simpleMessage("Initial Deposit"),
         "input_a_number":
             MessageLookupByLibrary.simpleMessage("Input a number"),
         "into_the_mine": MessageLookupByLibrary.simpleMessage("into the mine"),
+        "minimal_deposit":
+            MessageLookupByLibrary.simpleMessage("Minimal Deposit"),
         "minimum": MessageLookupByLibrary.simpleMessage("Minimum"),
         "n_percent": m2,
         "name_account": MessageLookupByLibrary.simpleMessage("Name account"),
