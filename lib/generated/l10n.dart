@@ -1029,6 +1029,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Initial Deposit`
+  String get initial_deposit {
+    return Intl.message(
+      'Initial Deposit',
+      name: 'initial_deposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minimal Deposit`
+  String get minimal_deposit {
+    return Intl.message(
+      'Minimal Deposit',
+      name: 'minimal_deposit',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

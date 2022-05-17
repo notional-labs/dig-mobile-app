@@ -1,5 +1,5 @@
 import 'package:dig_core/dig_core.dart';
-import 'package:dig_mobile_app/app/cubit/proposal_detail/proposal_detail_cubit.dart';
+import 'package:dig_mobile_app/app/cubit/proposal/proposal_detail/proposal_detail_cubit.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_proposal_percentage_bar.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_proposal_status.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';

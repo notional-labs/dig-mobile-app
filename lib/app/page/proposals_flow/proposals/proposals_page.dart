@@ -1,9 +1,10 @@
-import 'package:dig_mobile_app/app/cubit/proposals/proposals_cubit.dart';
+import 'package:dig_mobile_app/app/cubit/proposal/proposals/proposals_cubit.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_refresh_cupertino_sliver.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
+import 'package:dig_mobile_app/app/page/proposals_flow/create_proposal/create_proposal_widget.dart';
 import 'package:dig_mobile_app/app/page/proposals_flow/proposals/proposal_row_item.dart';
 import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/proposals_viewmodel.dart';
@@ -71,11 +72,21 @@ class _ProposalsPageState extends State<ProposalsPage>
             margin: const EdgeInsets.symmetric(horizontal: 120),
             child: DSPrimaryButton(
                 title: S.current.create_proposal,
-                leftIcon: const Icon(Icons.add, size: 14, color: Colors.white,),
+                leftIcon: const Icon(
+                  Icons.add,
+                  size: 14,
+                  color: Colors.white,
+                ),
                 height: 30,
-                textStyle: DSTextStyle.tsMontserratT10R.copyWith(
-                    color: Colors.white),
-                onTap: () {}),
+                textStyle:
+                    DSTextStyle.tsMontserratT10R.copyWith(color: Colors.white),
+                onTap: () {
+                  showFullScreenDialog(
+                      context: context,
+                      child: const CreateProposalWidget(
+                        param: CreateProposalWidgetParam(),
+                      ));
+                }),
           ),
           const SizedBox(
             height: 20,
