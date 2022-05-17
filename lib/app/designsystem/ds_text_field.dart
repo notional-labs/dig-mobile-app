@@ -18,6 +18,10 @@ class DSTextField extends StatefulWidget {
   final bool disable;
   final TextEditingController? controller;
   final VoidCallback? onTap;
+  final double width;
+  final double? height;
+  final EdgeInsets? contentPadding;
+
   const DSTextField(
       {required this.onChange,
       this.textInputAction,
@@ -32,6 +36,9 @@ class DSTextField extends StatefulWidget {
       this.disable = false,
       this.controller,
       this.onTap,
+      this.width = double.infinity,
+      this.height = 50,
+      this.contentPadding,
       Key? key})
       : super(key: key);
 
@@ -107,9 +114,9 @@ class _DSTextFieldState extends State<DSTextField> {
               FocusScope.of(context).requestFocus(_focusNode);
             },
             child: Container(
-              width: double.infinity,
-              height: 50,
-              padding: const EdgeInsets.all(12),
+              width: widget.width,
+              height: widget.height,
+              padding: widget.contentPadding ?? const EdgeInsets.all(12),
               decoration: BoxDecoration(
                   color: _resolveBackgroundColor,
                   border: _resolveBorder,
