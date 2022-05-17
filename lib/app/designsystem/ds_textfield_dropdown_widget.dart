@@ -16,11 +16,16 @@ class DSTextFieldDropdownWidget extends StatefulWidget {
   final String hintText;
   final TextEditingController? textController;
   final DSTextFieldDropdownController? controller;
+  final double? height;
+  final EdgeInsets? contentPadding;
+
   const DSTextFieldDropdownWidget(
       {required this.child,
       this.textController,
       this.controller,
       this.hintText = '',
+      this.height,
+      this.contentPadding,
       Key? key})
       : super(key: key);
 
@@ -74,6 +79,8 @@ class _DSTextFieldDropdownWidgetState extends State<DSTextFieldDropdownWidget> {
   @override
   Widget build(BuildContext context) => DSTextField(
         key: _dsTextFieldKey,
+        height: widget.height,
+        contentPadding: widget.contentPadding,
         controller: _textController,
         hintText: widget.hintText,
         onChange: (_) {},
