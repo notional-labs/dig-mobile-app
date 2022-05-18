@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:dig_core/src/data/definition/definition.dart';
 import 'package:dig_core/src/data/exception/dig_exception_impl.dart';
+import 'package:dig_core/src/data/extension/extension.dart';
 import 'package:dig_core/src/domain/entity/error_response.dart';
 import 'package:dig_core/src/domain/exception/dig_exception.dart';
 import 'package:dio/dio.dart';
-import 'package:dig_core/src/domain/extension/extension.dart';
 
 class DigIntercepter extends InterceptorsWrapper {
   @override
