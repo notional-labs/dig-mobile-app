@@ -21,10 +21,10 @@ import 'package:dig_mobile_app/app/viewmodel/active_account_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 
-typedef OnRemoteAccount = Function(AccountPublicInfo account);
+typedef OnRemoveAccount = Function(AccountPublicInfo account);
 
 class ActiveAccountPage extends StatefulWidget {
-  final OnRemoteAccount onRemoveAccount;
+  final OnRemoveAccount onRemoveAccount;
   final AccountPublicInfo account;
   final List<Balance> balances;
 
@@ -46,12 +46,16 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
         AutomaticKeepAliveClientMixin {
   final ActiveAccountCubit _cubit = di();
   final PageController _pageController = PageController();
+  final DSWalletAddressController _dsWalletAddressController =
+      DSWalletAddressController();
   late TabController _tabController;
   AccountPublicInfo? _lastAccountPublicInfo;
 
   void _fetchData() {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       if (_lastAccountPublicInfo?.accountId != widget.account.accountId) {
+        _cubit.resetData();
+        _dsWalletAddressController.reset();
         _cubit.fetchData(account: widget.account);
         _lastAccountPublicInfo = widget.account;
       }
@@ -149,7 +153,8 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
           height: 12,
         ),
         Text(
-          S.current.dig_token_format(viewModel.balances.getDigBalance().toDigTokenDisplay()),
+          S.current.dig_token_format(
+              viewModel.balances.getDigBalance().toDigTokenDisplay()),
           style: DSTextStyle.tsMontserrat.copyWith(
               color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400),
         ),
@@ -159,6 +164,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 86),
           child: DSWalletAddress(
+            controller: _dsWalletAddressController,
             address: widget.account.publicAddress,
             onCopyToClipboardTap: (address) =>
                 _cubit.copyAddressToClipboard(address),

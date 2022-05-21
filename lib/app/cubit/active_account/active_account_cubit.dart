@@ -39,6 +39,10 @@ class ActiveAccountCubit extends Cubit<ActiveAccountState> {
     });
   }
 
+  void resetData() {
+    emit(const ActiveAccountPrimaryState(viewModel: ActiveAccountViewModel()));
+  }
+
   Future refreshEvent(AccountPublicInfo account) =>
       fetchData(account: account, isRefresh: true);
 
