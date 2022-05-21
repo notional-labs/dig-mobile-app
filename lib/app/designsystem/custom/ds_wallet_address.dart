@@ -5,12 +5,26 @@ import 'package:flutter/material.dart';
 import 'package:dig_mobile_app/app/extension/extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+class DSWalletAddressController extends ChangeNotifier {
+  bool _shouldReset = false;
+
+  void reset() {
+    _shouldReset = true;
+    notifyListeners();
+    _shouldReset = false;
+  }
+}
+
 class DSWalletAddress extends StatefulWidget {
   final String address;
+  final DSWalletAddressController? controller;
   final Function(String)? onCopyToClipboardTap;
 
   const DSWalletAddress(
-      {required this.address, this.onCopyToClipboardTap, Key? key})
+      {required this.address,
+      this.controller,
+      this.onCopyToClipboardTap,
+      Key? key})
       : super(key: key);
 
   @override
@@ -19,6 +33,19 @@ class DSWalletAddress extends StatefulWidget {
 
 class _DSWalletAddressState extends State<DSWalletAddress> {
   var _isCopied = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    widget.controller?.addListener(() {
+      if (widget.controller?._shouldReset ?? false) {
+        setState(() {
+          _isCopied = false;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
