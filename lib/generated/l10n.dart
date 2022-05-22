@@ -1049,6 +1049,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Gas default`
+  String get gas_default {
+    return Intl.message(
+      'Gas default',
+      name: 'gas_default',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

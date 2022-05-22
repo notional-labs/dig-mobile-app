@@ -91,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgot_you_password":
             MessageLookupByLibrary.simpleMessage("Forgot you Password ?"),
         "from": MessageLookupByLibrary.simpleMessage("From"),
+        "gas_default": MessageLookupByLibrary.simpleMessage("Gas default"),
         "ig": MessageLookupByLibrary.simpleMessage("ig"),
         "ig_chain": MessageLookupByLibrary.simpleMessage("ig CHAIN"),
         "import": MessageLookupByLibrary.simpleMessage("Import"),
