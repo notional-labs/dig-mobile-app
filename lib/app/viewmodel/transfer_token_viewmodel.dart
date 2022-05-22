@@ -1,3 +1,4 @@
+import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/extension/extension.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:equatable/equatable.dart';
@@ -19,27 +20,42 @@ class TransferTokenViewModel extends Equatable {
     this.advance = false,
   });
 
-  bool get isTokenToSendValid =>
-      tokenAvailable > 0 &&
-      tokenToSend > 0 &&
-      (tokenToSend + gas) <= tokenAvailable.toDigTokenDisplay();
+  bool get isTokenToSendValid {
+    if (advance) {
+      return tokenAvailable > 0 &&
+          tokenToSend > 0 &&
+          (tokenToSend + gas) <= tokenAvailable.toDigTokenDisplay();
+    }
+
+    return tokenAvailable > 0 &&
+        tokenToSend > 0 &&
+        (tokenToSend + Fee.defaultFee) <= tokenAvailable.toDigTokenDisplay();
+  }
 
   bool get isGasValid =>
       tokenAvailable > 0 &&
       gas > 0 &&
-      (tokenToSend + gas) <= tokenAvailable.toDigTokenDisplay();
+      (tokenToSend + gas) <= tokenAvailable.toDigTokenDisplay() &&
+      (gas * TokenBalanceRatio.ratio) >= Fee.defaultFee;
 
   String get tokenToSendValidMessage {
     if (tokenToSend == 0 || isTokenToSendValid) {
       return '';
     }
 
-    return S.current.not_enough_token;
+    if (advance) {
+      return S.current.not_enough_token;
+    }
+    return '${S.current.not_enough_token}\n${S.current.gas_default}: ${S.current.dig_token_format(Fee.defaultFee.toDigTokenDisplay())}';
   }
 
   String get gasValidMessage {
     if (gas == 0 || isGasValid) {
       return '';
+    }
+
+    if (gas * TokenBalanceRatio.ratio < Fee.defaultFee) {
+      return '${S.current.minimum}: ${S.current.dig_token_format(Fee.defaultFee.toDigTokenDisplay())}';
     }
 
     return S.current.not_enough_token;

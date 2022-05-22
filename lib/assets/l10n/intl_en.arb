@@ -98,5 +98,6 @@
     "minimum": "Minimum",
     "create_proposal": "Create Proposal",
     "initial_deposit": "Initial Deposit",
-    "minimal_deposit": "Minimal Deposit"
+    "minimal_deposit": "Minimal Deposit",
+    "gas_default": "Gas default"
 }
