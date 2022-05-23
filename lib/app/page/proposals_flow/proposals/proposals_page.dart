@@ -68,26 +68,24 @@ class _ProposalsPageState extends State<ProposalsPage>
           const SizedBox(
             height: 6,
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 120),
-            child: DSPrimaryButton(
-                title: S.current.create_proposal,
-                leftIcon: const Icon(
-                  Icons.add,
-                  size: 14,
-                  color: Colors.white,
-                ),
-                height: 30,
-                textStyle:
-                    DSTextStyle.tsMontserratT10R.copyWith(color: Colors.white),
-                onTap: () {
-                  showFullScreenDialog(
-                      context: context,
-                      child: const CreateProposalWidget(
-                        param: CreateProposalWidgetParam(),
-                      ));
-                }),
-          ),
+          DSPrimaryButton(
+              title: S.current.create_proposal,
+              leftIcon: const Icon(
+                Icons.add,
+                size: 14,
+                color: Colors.white,
+              ),
+              width: 120,
+              height: 30,
+              textStyle:
+                  DSTextStyle.tsMontserratT10R.copyWith(color: Colors.white),
+              onTap: () {
+                showFullScreenDialog(
+                    context: context,
+                    child: const CreateProposalWidget(
+                      param: CreateProposalWidgetParam(),
+                    ));
+              }),
           const SizedBox(
             height: 20,
           ),
