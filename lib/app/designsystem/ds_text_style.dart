@@ -5,29 +5,29 @@ class DSTextStyle {
   static TextStyle get tsMontserrat => GoogleFonts.montserrat();
 
   static TextStyle get tsMontserratT10R =>
-      GoogleFonts.montserrat(fontSize: 10, fontWeight: FontWeight.normal);
+     tsMontserrat.copyWith(fontSize: 10, fontWeight: FontWeight.normal);
 
   static TextStyle get tsMontserratT10B =>
-      GoogleFonts.montserrat(fontSize: 10, fontWeight: FontWeight.w700);
+      tsMontserrat.copyWith(fontSize: 10, fontWeight: FontWeight.w700);
 
   static TextStyle get tsMontserratT12R =>
-      GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.normal);
+      tsMontserrat.copyWith(fontSize: 12, fontWeight: FontWeight.normal);
 
   static TextStyle get tsMontserratT12B =>
-      GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.bold);
+      tsMontserrat.copyWith(fontSize: 12, fontWeight: FontWeight.bold);
 
   static TextStyle get tsMontserratT16R =>
-      GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w400);
+      tsMontserrat.copyWith(fontSize: 16, fontWeight: FontWeight.w400);
 
   static TextStyle get tsMontserratT16M =>
-      GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w500);
+      tsMontserrat.copyWith(fontSize: 16, fontWeight: FontWeight.w500);
 
   static TextStyle get tsMontserratT16B =>
-      GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w700);
+      tsMontserrat.copyWith(fontSize: 16, fontWeight: FontWeight.w700);
 
   static TextStyle get tsMontserratT20B =>
-      GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.bold);
+      tsMontserrat.copyWith(fontSize: 20, fontWeight: FontWeight.bold);
 
   static TextStyle get tsMontserratT32B =>
-      GoogleFonts.montserrat(fontSize: 32, fontWeight: FontWeight.bold);
+      tsMontserrat.copyWith(fontSize: 32, fontWeight: FontWeight.bold);
 }
