@@ -1059,6 +1059,26 @@ class S {
       args: [],
     );
   }
+
+  /// `DIG CHAIN`
+  String get dig_chain {
+    return Intl.message(
+      'DIG CHAIN',
+      name: 'dig_chain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{n} USD`
+  String usd_format(Object n) {
+    return Intl.message(
+      '$n USD',
+      name: 'usd_format',
+      desc: '',
+      args: [n],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
