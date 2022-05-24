@@ -99,5 +99,7 @@
     "create_proposal": "Create Proposal",
     "initial_deposit": "Initial Deposit",
     "minimal_deposit": "Minimal Deposit",
-    "gas_default": "Gas default"
+    "gas_default": "Gas default",
+    "dig_chain": "DIG CHAIN",
+    "usd_format": "{n} USD"
 }
