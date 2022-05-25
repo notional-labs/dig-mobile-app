@@ -19,8 +19,10 @@ class StakingCubit extends Cubit<StakingState> {
   final GetValidatorUseCase _getValidatorUseCase;
   final GetSelectedAccountUseCase _getSelectedAccountUseCase;
   final GetBalanceUseCase _getBalanceUseCase;
+  final GetCoinUseCase _getCoinUseCase;
+
   StakingCubit(this._getValidatorUseCase, this._getSelectedAccountUseCase,
-      this._getBalanceUseCase)
+      this._getBalanceUseCase, this._getCoinUseCase)
       : super(const StakingPrimaryState());
 
   Future fetchData([bool isRefresh = false]) async {
@@ -30,10 +32,23 @@ class StakingCubit extends Cubit<StakingState> {
     final List<StakingItemViewModel> stakingItemViewModels = [];
     final List<DelegateValidatorItemViewmodel> validatorItemViewModels = [];
 
-    final result =
-        await _getValidatorUseCase.call(const GetValidatorUseCaseParam());
+    final results = await Future.wait([
+      _getValidatorUseCase.call(const GetValidatorUseCaseParam()),
+      _getCoinUseCase.call(GetCoinUseCaseParam(
+          param: const CoinRequest(
+              ids: Chain.digChain, vs_currency: Currency.usd)))
+    ]);
 
-    result.fold((l) {
+    final Either<BaseDigException, ValidatorResponse>
+        getValidatorUseCaseResult =
+        results.first as Either<BaseDigException, ValidatorResponse>;
+    final Either<BaseDigException, List<Market>> _getCoinUseCaseResult =
+        results.last as Either<BaseDigException, List<Market>>;
+
+    num currentPrice = 0;
+    num priceChangePercentage24h = 0;
+
+    getValidatorUseCaseResult.fold((l) {
       emit(StakingErrorState(
           viewmodel: state.viewmodel.copyWith(), exception: l));
     }, (r) {
@@ -81,6 +96,7 @@ class StakingCubit extends Cubit<StakingState> {
           power = ((double.tryParse(element.delegatorShares) ?? 0) * 100) /
               totalSupply;
         }
+
         final StakingItemViewModel stakingItemViewModel = StakingItemViewModel(
           identity: element.description.identity,
           name: element.description.moniker,
@@ -100,12 +116,25 @@ class StakingCubit extends Cubit<StakingState> {
         stakingItemViewModels.add(stakingItemViewModel);
         validatorItemViewModels.add(delegateValidatorItemViewmodel);
       }
-
-      emit(StakingPrimaryState(
-          viewmodel: state.viewmodel.copyWith(
-              stakingItems: stakingItemViewModels,
-              validatorItems: validatorItemViewModels)));
     });
+
+    _getCoinUseCaseResult.fold((l) {
+      emit(StakingErrorState(
+          viewmodel: state.viewmodel.copyWith(), exception: l));
+    }, ((r) {
+      if (r.isNotEmpty) {
+        final market = r.first;
+        currentPrice = market.currentPrice;
+        priceChangePercentage24h = market.priceChangePercentage24h;
+      }
+    }));
+
+    emit(StakingPrimaryState(
+        viewmodel: state.viewmodel.copyWith(
+            stakingItems: stakingItemViewModels,
+            validatorItems: validatorItemViewModels,
+            currentPrice: currentPrice,
+            priceChangePercentage24h: priceChangePercentage24h)));
   }
 
   Future tapDelegateEvent(DelegateValidatorItemViewmodel validator) async {

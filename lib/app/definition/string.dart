@@ -27,3 +27,11 @@ abstract class Fee {
   static const double defaultFee = 42949673;
   static double defaultFeeDisplay = defaultFee / TokenBalanceRatio.ratio;
 }
+
+abstract class Chain {
+  static const String digChain = 'dig-chain';
+}
+
+abstract class Currency {
+  static const String usd = 'usd';
+}

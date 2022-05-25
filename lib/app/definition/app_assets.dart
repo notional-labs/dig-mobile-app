@@ -32,6 +32,7 @@ class AppAssets {
   static final String icAvatarEmpty = _generateImagePath('ic_avatar_empty.png');
   static final String icDig = _generateImagePath('ic_dig.png');
   static final String icArrowUp = _generateImagePath('ic_arrow_up.png');
+  static final String icArrowDown = _generateImagePath('ic_arrow_down.png');
 
   // -------- SVG --------
   static final String icCopied = _generateImagePath('ic_copied.svg');

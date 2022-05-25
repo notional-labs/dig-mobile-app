@@ -1,4 +1,5 @@
 import 'package:dig_core/src/data/definition/definition.dart';
+import 'package:dig_core/src/data/network/coingecko_rest_client.dart';
 import 'package:dig_core/src/data/network/intercepter/dig_intecepter.dart';
 import 'package:dig_core/src/data/network/rest_client.dart';
 import 'package:dig_core/src/di/di.config.dart';
@@ -30,9 +31,13 @@ void initDI(GetIt _di, ENV env) {
   digCoreDI.registerLazySingleton<Dio>(() => dio);
 
   /// Register [RestClient] for DigChain
-  digCoreDI.registerFactory(
+  digCoreDI.registerFactory<RestClient>(
       () => RestClient.from(digCoreDI<Dio>(), digCoreDI<ENV>().digChain),
       instanceName: GetItInstanceName.restClientDigChain);
+
+  /// Register [CoingeckoRestClient]
+  digCoreDI.registerFactory<CoingeckoRestClient>(
+      () => CoingeckoRestClient.from(digCoreDI<Dio>(), digCoreDI<ENV>()));
 
   /// TODO: Register [RestClient] for other chain here...
   ///      ....

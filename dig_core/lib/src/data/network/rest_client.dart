@@ -13,8 +13,8 @@ part 'rest_client.g.dart';
 
 @RestApi(parser: Parser.JsonSerializable, autoCastResponse: true)
 abstract class RestClient {
-  factory RestClient.from(Dio dio, ChainENV baseUrl) =>
-      _RestClient(dio, baseUrl: baseUrl.baseApiUrl);
+  factory RestClient.from(Dio dio, ChainENV env) =>
+      _RestClient(dio, baseUrl: env.baseApiUrl);
 
   @GET(EndPoint.getBalancePath)
   Future<BalanceResponse> getBalances(

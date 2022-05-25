@@ -2,6 +2,7 @@ import 'package:alan/wallet/network_info.dart';
 
 abstract class ENV {
   ChainENV get digChain;
+  String get coingeckoBaseUrl;
 
   /// TODO: Define other chain here
   /// Example:
