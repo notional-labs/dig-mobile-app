@@ -74,21 +74,14 @@ class _StakingPageState extends State<StakingPage>
             child: SafeArea(
                 child: BlocConsumer<StakingCubit, StakingState>(
                     builder: (context, state) {
-                      return _body(state.viewmodel);
+                      return _buildRefreshWidget(state.viewmodel);
                     },
                     listener: _onBlocListener)),
           ),
         ),
       );
 
-  Widget _body(StakingViewmodel viewmodel) => Column(
-        children: [
-          _header(viewmodel),
-          Expanded(child: _buildRefreshWidget(viewmodel))
-        ],
-      );
-
-  Widget _header(StakingViewmodel viewmodel) => Padding(
+  Widget _buildHeaderWidget(StakingViewmodel viewmodel) => Padding(
         padding: const EdgeInsets.only(left: 30, right: 30, top: 19),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,26 +101,33 @@ class _StakingPageState extends State<StakingPage>
               ],
             ),
             const SizedBox(height: 15),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Wrap(
               children: [
                 DSTextSpan(
-                        S.current.usd_format('0,0015'),
+                        S.current.usd_format(viewmodel.currentPrice),
                         [
                           DSTextSpanHighlight(
                               'USD', DSTextStyle.tsMontserratT12B, null)
                         ],
-                        DSTextStyle.tsMontserratT32B)
+                        DSTextStyle.tsMontserratT32B,
+                        maxLine: 100)
                     .format(),
                 const SizedBox(width: 5),
                 SizedBox(
                     width: 30,
                     height: 30,
-                    child: Image.asset(AppAssets.icArrowUp)),
-                Text(
-                  S.current.n_percent('17,6'),
-                  style: DSTextStyle.tsMontserratT12M
-                      .copyWith(color: DSColors.jungleGreen),
+                    child: Image.asset(viewmodel.isPriceChangePercentage24hDown
+                        ? AppAssets.icArrowDown
+                        : AppAssets.icArrowUp)),
+                Expanded(
+                  child: Text(
+                    S.current.n_percent(viewmodel.priceChangePercentage24h.toStringAsFixed(2)),
+                    maxLines: 100,
+                    style: DSTextStyle.tsMontserratT12M.copyWith(
+                        color: viewmodel.isPriceChangePercentage24hDown
+                            ? DSColors.burntSienna
+                            : DSColors.jungleGreen),
+                  ),
                 )
               ],
             ),
@@ -156,6 +156,7 @@ class _StakingPageState extends State<StakingPage>
                     refreshTriggerPullDistance,
                     refreshIndicatorExtent),
           ),
+          SliverToBoxAdapter(child: _buildHeaderWidget(viewmodel)),
           SliverList(
               delegate: SliverChildBuilderDelegate(
                   ((context, index) => StakingItem(

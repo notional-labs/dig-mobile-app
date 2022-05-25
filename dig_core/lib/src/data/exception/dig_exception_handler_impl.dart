@@ -36,7 +36,7 @@ class DigExceptionHandler implements BaseDigExceptionHandler {
       return any.error;
     }
 
-    return const DigNetworkException();
+    return const DigServerException();
   }
 
   BaseDigException _handleFirebaseAuthError(FirebaseAuthException any) {
