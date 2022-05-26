@@ -15,6 +15,7 @@ abstract class EndPoint {
   static const String validators = 'staking/validators';
   static const String validatorLogo =
       'https://keybase.io/_/api/1.0/user/lookup.json?key_suffix={identity}&fields=pictures';
+  static const String getDelegations = 'cosmos/staking/v1beta1/delegations/{address}';
 }
 
 abstract class GetItInstanceName {
