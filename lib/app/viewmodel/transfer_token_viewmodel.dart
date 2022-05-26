@@ -29,14 +29,15 @@ class TransferTokenViewModel extends Equatable {
 
     return tokenAvailable > 0 &&
         tokenToSend > 0 &&
-        (tokenToSend + Fee.defaultFee) <= tokenAvailable.toDigTokenDisplay();
+        (tokenToSend + (Fee.defaultFee / TokenBalanceRatio.ratio)) <=
+            tokenAvailable.toDigTokenDisplay();
   }
 
   bool get isGasValid =>
       tokenAvailable > 0 &&
       gas > 0 &&
       (tokenToSend + gas) <= tokenAvailable.toDigTokenDisplay() &&
-      (gas * TokenBalanceRatio.ratio) >= Fee.defaultFee;
+      gas >= (Fee.defaultFee / TokenBalanceRatio.ratio);
 
   String get tokenToSendValidMessage {
     if (tokenToSend == 0 || isTokenToSendValid) {
@@ -54,7 +55,7 @@ class TransferTokenViewModel extends Equatable {
       return '';
     }
 
-    if (gas * TokenBalanceRatio.ratio < Fee.defaultFee) {
+    if (gas < (Fee.defaultFee / TokenBalanceRatio.ratio)) {
       return '${S.current.minimum}: ${S.current.dig_token_format(Fee.defaultFee.toDigTokenDisplay())}';
     }
 
