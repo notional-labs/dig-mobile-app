@@ -23,9 +23,9 @@ class DigIntercepter extends InterceptorsWrapper {
   /// Trigger when [statusCode] = 200
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    /// Response data is not json or list, throw [BeanstalServerException]
+    /// Response data is not json or list, throw [DigServerException]
     if (response.data is! Map && response.data is! List) {
-      /// Throw [BeanstalServerException] and catch it in [onError]
+      /// Throw [DigServerException] and catch it in [onError]
       handler.reject(DioError(
           requestOptions: response.requestOptions,
           error: const DigServerException()));

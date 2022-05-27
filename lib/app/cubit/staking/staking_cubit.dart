@@ -48,11 +48,11 @@ class StakingCubit extends Cubit<StakingState> {
     num currentPrice = 0;
     num priceChangePercentage24h = 0;
 
-    getValidatorUseCaseResult.fold((l) {
+    getValidatorUseCaseResult.fold((failure) {
       emit(StakingErrorState(
-          viewmodel: state.viewmodel.copyWith(), exception: l));
-    }, (r) {
-      final ValidatorResponse validatorResponse = r.copyWith();
+          viewmodel: state.viewmodel.copyWith(), exception: failure));
+    }, (validator) {
+      final ValidatorResponse validatorResponse = validator.copyWith();
 
       /// Get priority items
       final bogo1 = validatorResponse.result.firstWhereOrNull((element) =>
@@ -118,12 +118,12 @@ class StakingCubit extends Cubit<StakingState> {
       }
     });
 
-    _getCoinUseCaseResult.fold((l) {
+    _getCoinUseCaseResult.fold((failure) {
       emit(StakingErrorState(
-          viewmodel: state.viewmodel.copyWith(), exception: l));
-    }, ((r) {
-      if (r.isNotEmpty) {
-        final market = r.first;
+          viewmodel: state.viewmodel.copyWith(), exception: failure));
+    }, ((markets) {
+      if (markets.isNotEmpty) {
+        final market = markets.first;
         currentPrice = market.currentPrice;
         priceChangePercentage24h = market.priceChangePercentage24h;
       }
