@@ -30,7 +30,6 @@ class _ImportAccountPageState extends State<ImportAccountPage> with WidgetUtil {
     }
     dismissGlobalLoadingOverlay();
     if (state is ImportAccountSuccessState) {
-      
       BlocProvider.of<ImportAccountCubit>(context).goToNameAccountEvent();
       return;
     }
@@ -93,10 +92,8 @@ class _Header extends StatelessWidget {
           child: Text('',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: DSTextStyle.tsMontserrat.copyWith(
-                  color: DSColors.tulipTree,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400)),
+              style: DSTextStyle.tsMontserratT16R
+                  .copyWith(color: DSColors.tulipTree)),
         ),
       );
 }
@@ -114,19 +111,13 @@ class _Body extends StatelessWidget {
           children: [
             Text(
               S.current.import_account,
-              style: DSTextStyle.tsMontserrat.copyWith(
-                fontSize: 20,
-                color: DSColors.tulipTree,
-                fontWeight: FontWeight.w700,
-              ),
+              style: DSTextStyle.tsMontserratT20B
+                  .copyWith(color: DSColors.tulipTree),
             ),
             const SizedBox(height: 15),
             Text(
               S.current.enter_your_recovery_phrase,
-              style: DSTextStyle.tsMontserrat.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12),
+              style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.white),
             ),
             const SizedBox(height: 15),
             DSUnderlineTextField(
@@ -159,7 +150,8 @@ class _FooterWidget extends StatelessWidget {
   Widget build(BuildContext context) =>
       BlocBuilder<ImportAccountCubit, ImportAccountState>(
           builder: (_, state) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 child: DSPrimaryButton(
                     enable: state.viewmodel.isValid,
                     title: S.current.import,

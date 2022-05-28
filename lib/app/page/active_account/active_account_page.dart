@@ -144,10 +144,8 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
         ),
         Text(
           widget.account.name,
-          style: DSTextStyle.tsMontserrat.copyWith(
-              color: DSColors.tulipTree,
-              fontSize: 20,
-              fontWeight: FontWeight.w400),
+          style:
+              DSTextStyle.tsMontserratT20R.copyWith(color: DSColors.tulipTree),
         ),
         const SizedBox(
           height: 12,
@@ -155,8 +153,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
         Text(
           S.current.dig_token_format(
               viewModel.balances.getDigBalance().toDigTokenDisplay()),
-          style: DSTextStyle.tsMontserrat.copyWith(
-              color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400),
+          style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.white),
         ),
         const SizedBox(
           height: 12,
@@ -313,8 +310,7 @@ class _TabItem extends StatelessWidget {
       child: Center(
           child: Text(
         text,
-        style: DSTextStyle.tsMontserrat.copyWith(
-            fontSize: 12, color: Colors.white, fontWeight: FontWeight.w400),
+        style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.white),
       )),
     );
   }

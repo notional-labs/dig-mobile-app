@@ -68,12 +68,8 @@ class _Normal extends StatelessWidget {
           child: Text(
             title,
             textAlign: TextAlign.center,
-            style: DSTextStyle.tsMontserrat.copyWith(
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
-              fontStyle: FontStyle.normal,
-              color: DSColors.tulipTree,
-            ),
+            style: DSTextStyle.tsMontserratT24B
+                .copyWith(color: DSColors.tulipTree),
           ),
         ),
         if (onBackButtonPressed != null)

@@ -240,11 +240,8 @@ class _MenuItem extends StatelessWidget {
               Expanded(
                 child: Text(
                   title,
-                  style: DSTextStyle.tsMontserrat.copyWith(
-                    color: _resolveTextColor(),
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,
-                  ),
+                  style: DSTextStyle.tsMontserratT20B
+                      .copyWith(color: _resolveTextColor()),
                 ),
               ),
             ],
@@ -282,11 +279,8 @@ class _CreateAccountButton extends StatelessWidget {
                 ),
                 Text(
                   'New account',
-                  style: DSTextStyle.tsMontserrat.copyWith(
-                    color: DSColors.tulipTree,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                  ),
+                  style: DSTextStyle.tsMontserratT12R
+                      .copyWith(color: DSColors.tulipTree),
                 )
               ],
             )),

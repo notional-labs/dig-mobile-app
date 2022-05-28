@@ -84,12 +84,8 @@ class DSSnackBar {
                           _message,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: DSTextStyle.tsMontserrat.copyWith(
-                              fontSize: 14,
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.normal,
-                              letterSpacing: 0.4,
-                              color: Colors.white),
+                          style: DSTextStyle.tsMontserratT14R.copyWith(
+                              letterSpacing: 0.4, color: Colors.white),
                         ),
                       ),
                     ],

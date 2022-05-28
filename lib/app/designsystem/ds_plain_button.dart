@@ -21,10 +21,7 @@ class DSPlainButton extends StatelessWidget {
             child: Text(
               title,
               textAlign: TextAlign.center,
-              style: DSTextStyle.tsMontserrat.copyWith(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400),
+              style: DSTextStyle.tsMontserratT16R.copyWith(color: Colors.white),
             ),
           ),
         ),

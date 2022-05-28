@@ -210,11 +210,7 @@ class _ErrorMessageWidget extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 errorText,
-                style: DSTextStyle.tsMontserrat.copyWith(
-                    fontSize: 12,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.red),
+                style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.red),
               ))
         ],
       );
