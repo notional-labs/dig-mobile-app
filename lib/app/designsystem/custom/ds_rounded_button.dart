@@ -40,8 +40,7 @@ class DSRoundedButton extends StatelessWidget {
           ),
           Text(
             text ?? _getTextByType(),
-            style: DSTextStyle.tsMontserrat.copyWith(
-                fontSize: 12, fontWeight: FontWeight.w400, color: Colors.white),
+            style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.white),
           )
         ],
       ),

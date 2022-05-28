@@ -11,7 +11,6 @@ import 'package:flutter/services.dart';
 const Duration _animateDurationTitle = Duration(milliseconds: 500);
 const Duration _animateDurationDescription = Duration(milliseconds: 450);
 
-
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -29,11 +28,8 @@ class _SplashPageState extends State<SplashPage> {
     TextPainter textPainter = TextPainter()
       ..text = TextSpan(
           text: S.current.ig_chain,
-          style: DSTextStyle.tsMontserrat.copyWith(
-            color: DSColors.tulipTree,
-            fontWeight: FontWeight.w700,
-            fontSize: 35,
-          ))
+          style:
+              DSTextStyle.tsMontserratT35B.copyWith(color: DSColors.tulipTree))
       ..textDirection = TextDirection.ltr
       ..layout(minWidth: 0, maxWidth: double.infinity);
     return textPainter.size.width;
@@ -43,11 +39,7 @@ class _SplashPageState extends State<SplashPage> {
     TextPainter textPainter = TextPainter()
       ..text = TextSpan(
           text: S.current.into_the_mine,
-          style: DSTextStyle.tsMontserrat.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-            fontSize: 20,
-          ))
+          style: DSTextStyle.tsMontserratT20R.copyWith(color: Colors.white))
       ..textDirection = TextDirection.ltr
       ..layout(minWidth: 0, maxWidth: double.infinity);
     return textPainter.size.width;
@@ -92,11 +84,8 @@ class _SplashPageState extends State<SplashPage> {
                         softWrap: false,
                         maxLines: 1,
                         overflow: TextOverflow.clip,
-                        style: DSTextStyle.tsMontserrat.copyWith(
-                          color: DSColors.tulipTree,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 35,
-                        ),
+                        style: DSTextStyle.tsMontserratT35B
+                            .copyWith(color: DSColors.tulipTree),
                       ),
                     )
                   ],
@@ -126,11 +115,8 @@ class _SplashPageState extends State<SplashPage> {
                               softWrap: false,
                               maxLines: 1,
                               overflow: TextOverflow.clip,
-                              style: DSTextStyle.tsMontserrat.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 20,
-                              ),
+                              style: DSTextStyle.tsMontserratT20R
+                                  .copyWith(color: Colors.white),
                             ),
                           ),
                           const SizedBox(width: 8),

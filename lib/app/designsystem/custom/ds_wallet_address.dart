@@ -62,11 +62,8 @@ class _DSWalletAddressState extends State<DSWalletAddress> {
                   : widget.address,
               textAlign: TextAlign.center,
               maxLines: 1,
-              style: DSTextStyle.tsMontserrat.copyWith(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: DSColors.tundora,
-                  overflow: TextOverflow.clip),
+              style: DSTextStyle.tsMontserratT12R.copyWith(
+                  color: DSColors.tundora, overflow: TextOverflow.clip),
             ),
           ),
           const SizedBox(

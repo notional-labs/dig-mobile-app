@@ -90,18 +90,14 @@ class _BodyWidget extends StatelessWidget with WidgetUtil {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
             S.current.welcome,
-            style: DSTextStyle.tsMontserrat.copyWith(
-                color: DSColors.tulipTree,
-                fontSize: 40,
-                fontWeight: FontWeight.w700),
+            style: DSTextStyle.tsMontserratT40B
+                .copyWith(color: DSColors.tulipTree),
           ),
           const SizedBox(height: 5),
           Text(
             S.current.to_digchain,
-            style: DSTextStyle.tsMontserrat.copyWith(
+            style: DSTextStyle.tsMontserratT24B.copyWith(
               color: Colors.white,
-              fontSize: 24,
-              fontWeight: FontWeight.w700,
             ),
           ),
           const SizedBox(height: 60),
@@ -123,10 +119,8 @@ class _BodyWidget extends StatelessWidget with WidgetUtil {
                   Expanded(
                     child: Text(
                       S.current.create_account,
-                      style: DSTextStyle.tsMontserrat.copyWith(
-                          color: DSColors.tulipTree,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700),
+                      style: DSTextStyle.tsMontserratT20B
+                          .copyWith(color: DSColors.tulipTree),
                     ),
                   )
                 ],
@@ -152,10 +146,8 @@ class _BodyWidget extends StatelessWidget with WidgetUtil {
                   Expanded(
                     child: Text(
                       S.current.import_account,
-                      style: DSTextStyle.tsMontserrat.copyWith(
-                          color: DSColors.tulipTree,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700),
+                      style: DSTextStyle.tsMontserratT20B
+                          .copyWith(color: DSColors.tulipTree),
                     ),
                   )
                 ],
@@ -174,10 +166,6 @@ class _BottomWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
         S.current.copyright_digchain(DateTime.now().year),
-        style: DSTextStyle.tsMontserrat.copyWith(
-          color: Colors.white,
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
-        ),
+        style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.white),
       );
 }

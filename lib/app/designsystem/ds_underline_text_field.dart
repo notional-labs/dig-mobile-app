@@ -84,11 +84,8 @@ class _DSUnderlineTextFieldState extends State<DSUnderlineTextField> {
                     keyboardType: widget.textInputType,
                     maxLines: widget.maxLine,
                     textInputAction: widget.textInputAction,
-                    style: DSTextStyle.tsMontserrat.copyWith(
-                        fontSize: 12,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white),
+                    style: DSTextStyle.tsMontserratT12R
+                        .copyWith(color: Colors.white),
                     obscureText: widget.obscureText,
                     enableSuggestions: widget.enableSuggestions,
                     autocorrect: widget.autocorrect,
@@ -98,11 +95,8 @@ class _DSUnderlineTextFieldState extends State<DSUnderlineTextField> {
                         isCollapsed: true,
                         border: InputBorder.none,
                         hintText: widget.hintText,
-                        hintStyle: DSTextStyle.tsMontserrat.copyWith(
-                            fontSize: 12,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white.withOpacity(0.5))),
+                        hintStyle: DSTextStyle.tsMontserratT12R
+                            .copyWith(color: Colors.white.withOpacity(0.5))),
                   ),
                 ),
                 const SizedBox(width: 5),
@@ -164,11 +158,7 @@ class _ErrorMessageWidget extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 errorText,
-                style: DSTextStyle.tsMontserrat.copyWith(
-                    fontSize: 12,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.red),
+                style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.red),
               ))
         ],
       );

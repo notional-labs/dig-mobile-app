@@ -114,10 +114,8 @@ class _Header extends StatelessWidget {
           child: Text('',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: DSTextStyle.tsMontserrat.copyWith(
-                  color: DSColors.tulipTree,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400)),
+              style: DSTextStyle.tsMontserratT16R
+                  .copyWith(color: DSColors.tulipTree)),
         ),
       );
 }
@@ -135,11 +133,8 @@ class _Body extends StatelessWidget {
           children: [
             Text(
               S.current.name_account,
-              style: DSTextStyle.tsMontserrat.copyWith(
-                fontSize: 20,
-                color: DSColors.tulipTree,
-                fontWeight: FontWeight.w700,
-              ),
+              style: DSTextStyle.tsMontserratT20B
+                  .copyWith(color: DSColors.tulipTree),
             ),
             const SizedBox(height: 30),
             DSUnderlineTextField(

@@ -49,18 +49,15 @@ class _BackUpYourWalletPageState extends State<BackUpYourWalletPage> {
         children: [
           Text(
             S.current.back_up_your_wallet,
-            style: DSTextStyle.tsMontserrat.copyWith(
-                color: DSColors.tulipTree,
-                fontSize: 20,
-                fontWeight: FontWeight.bold),
+            style: DSTextStyle.tsMontserratT20B
+                .copyWith(color: DSColors.tulipTree),
           ),
           const SizedBox(
             height: 14,
           ),
           Text(
             S.current.back_up_your_wallet_description,
-            style: DSTextStyle.tsMontserrat.copyWith(
-                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w400),
+            style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.white),
           ),
           const SizedBox(
             height: 34,
@@ -117,10 +114,7 @@ class _ReminderBox extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: DSTextStyle.tsMontserrat.copyWith(
-                  color: Colors.black,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400),
+              style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.black),
             ),
           )
         ],
