@@ -8,7 +8,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i24;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../../dig_core.dart' as _i42;
+import '../../dig_core.dart' as _i44;
 import '../data/datasource/local/account_local_datasource.dart' as _i3;
 import '../data/datasource/local/create_db_datasource.dart' as _i9;
 import '../data/datasource/local/pin_local_datasource.dart' as _i23;
@@ -52,8 +52,8 @@ import '../domain/usecase/delegation/get_delegations_usecase.dart' as _i16;
 import '../domain/usecase/delegation/get_delegator_rewards_usecase.dart'
     as _i17;
 import '../domain/usecase/market/get_coin_use_case.dart' as _i40;
-import '../domain/usecase/proposals/get_proposals_usecase.dart' as _i43;
-import '../domain/usecase/proposals/get_proposer_usecase.dart' as _i44;
+import '../domain/usecase/proposals/get_proposals_usecase.dart' as _i42;
+import '../domain/usecase/proposals/get_proposer_usecase.dart' as _i43;
 import '../domain/usecase/transaction/send_token_use_case.dart' as _i52;
 import '../domain/usecase/validator/get_validator_logo_usecase.dart' as _i46;
 import '../domain/usecase/validator/get_validator_usecase.dart' as _i47;
@@ -121,14 +121,14 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i40.GetCoinUseCase>(
       () => _i40.GetCoinUseCase(get<_i21.MarketRepository>()));
   gh.factory<_i41.GetListAccountUseCase>(() =>
-      _i41.GetListAccountUseCase(get<_i33.AuthRepository>(), get<_i42.ENV>()));
-  gh.factory<_i43.GetProposalsUseCase>(() => _i43.GetProposalsUseCase(
+      _i41.GetListAccountUseCase(get<_i33.AuthRepository>(), get<_i15.ENV>()));
+  gh.factory<_i42.GetProposalsUseCase>(() => _i42.GetProposalsUseCase(
       get<_i26.ProposalsRepository>(), get<_i15.ENV>()));
-  gh.factory<_i44.GetProposerUseCase>(() => _i44.GetProposerUseCase(
-      get<_i26.ProposalsRepository>(), get<_i42.ENV>()));
+  gh.factory<_i43.GetProposerUseCase>(() => _i43.GetProposerUseCase(
+      get<_i26.ProposalsRepository>(), get<_i44.ENV>()));
   gh.factory<_i45.GetSelectedAccountUseCase>(() =>
       _i45.GetSelectedAccountUseCase(
-          get<_i33.AuthRepository>(), get<_i42.ENV>()));
+          get<_i33.AuthRepository>(), get<_i44.ENV>()));
   gh.factory<_i46.GetValidatorLogoUseCase>(() => _i46.GetValidatorLogoUseCase(
       get<_i31.ValidatorRepository>(), get<_i15.ENV>()));
   gh.factory<_i47.GetValidatorUseCase>(() => _i47.GetValidatorUseCase(
@@ -142,6 +142,6 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i51.SelectAccountUseCase>(
       () => _i51.SelectAccountUseCase(get<_i33.AuthRepository>()));
   gh.factory<_i52.SendTokenUsecase>(() => _i52.SendTokenUsecase(
-      get<_i28.TransactionRepository>(), get<_i42.ENV>()));
+      get<_i28.TransactionRepository>(), get<_i44.ENV>()));
   return get;
 }

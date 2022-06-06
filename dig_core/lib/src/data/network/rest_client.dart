@@ -2,6 +2,7 @@ import 'package:dig_core/src/data/definition/definition.dart';
 import 'package:dig_core/src/domain/entity/balance_response.dart';
 import 'package:dig_core/src/domain/entity/proposals/proposals_response.dart';
 import 'package:dig_core/src/domain/entity/proposals/proposer_response.dart';
+import 'package:dig_core/src/domain/entity/staking/delegations/delegation_unbonding_response.dart';
 import 'package:dig_core/src/domain/entity/staking/delegations/delegations_response.dart';
 import 'package:dig_core/src/domain/entity/staking/delegations/delegator_rewards_response.dart';
 import 'package:dig_core/src/domain/entity/staking/logo_response.dart';
@@ -45,5 +46,9 @@ abstract class RestClient {
 
   @GET(EndPoint.getDelegatorRewards)
   Future<DelegatorRewardsResponse> getDelegatorRewards(
+      {@Path('address') required String address});
+
+  @GET(EndPoint.getDelegationUnBonding)
+  Future<DelegationUnBondingResponse> getDelegationUnBonding(
       {@Path('address') required String address});
 }
