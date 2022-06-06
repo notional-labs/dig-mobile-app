@@ -17,6 +17,7 @@ abstract class EndPoint {
       'https://keybase.io/_/api/1.0/user/lookup.json?key_suffix={identity}&fields=pictures';
   static const String getDelegations = 'cosmos/staking/v1beta1/delegations/{address}';
   static const String getDelegatorRewards = 'cosmos/distribution/v1beta1/delegators/{address}/rewards';
+  static const String getDelegationUnBonding = '/cosmos/staking/v1beta1/delegators/{address}/unbonding_delegations';
   
   static const String market = 'api/v3/coins/markets';
 }
