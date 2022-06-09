@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> with WidgetUtil {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _cubit.init();
     });
   }

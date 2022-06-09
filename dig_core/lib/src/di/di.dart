@@ -16,9 +16,8 @@ void initDI(GetIt _di, ENV env) {
   digCoreDI = _di;
   digCoreDI
     ..registerLazySingleton<ENV>(() => env)
-    ..registerLazySingleton<DigIntercepter>(() => DigIntercepter());
-  digCoreDI.registerFactory<FlutterSecureStorage>(
-      () => const FlutterSecureStorage());
+    ..registerLazySingleton<DigIntercepter>(() => DigIntercepter())
+    ..registerFactory<FlutterSecureStorage>(() => const FlutterSecureStorage());
 
   final Dio dio = Dio()
     ..options = BaseOptions(
@@ -28,16 +27,16 @@ void initDI(GetIt _di, ENV env) {
     );
   dio.interceptors.add(digCoreDI<DigIntercepter>());
 
-  digCoreDI.registerLazySingleton<Dio>(() => dio);
-
-  /// Register [RestClient] for DigChain
-  digCoreDI.registerFactory<RestClient>(
-      () => RestClient.from(digCoreDI<Dio>(), digCoreDI<ENV>().digChain),
-      instanceName: GetItInstanceName.restClientDigChain);
+  digCoreDI
+    ..registerLazySingleton<Dio>(() => dio)
+    /// Register [RestClient] for DigChain
+    ..registerFactory<RestClient>(
+        () => RestClient.from(digCoreDI<Dio>(), digCoreDI<ENV>().digChain),
+        instanceName: GetItInstanceName.restClientDigChain)
+    ..registerFactory<CoingeckoRestClient>(
+        () => CoingeckoRestClient.from(digCoreDI<Dio>(), digCoreDI<ENV>()));
 
   /// Register [CoingeckoRestClient]
-  digCoreDI.registerFactory<CoingeckoRestClient>(
-      () => CoingeckoRestClient.from(digCoreDI<Dio>(), digCoreDI<ENV>()));
 
   /// TODO: Register [RestClient] for other chain here...
   ///      ....

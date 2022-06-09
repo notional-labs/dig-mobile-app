@@ -10,7 +10,7 @@ class CheckFirstTimeRunAppUseCase extends UseCase<bool, None> {
   @override
   Future<Either<BaseDigException, bool>> call(None params) async {
     try {
-      bool result = await IsFirstRun.isFirstRun();
+      final bool result = await IsFirstRun.isFirstRun();
       return Right(result);
     } catch (e, trace) {
       Logger().e('CheckFirstRunUseCase ERROR', e, trace);

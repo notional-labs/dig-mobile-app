@@ -8,11 +8,11 @@ class DSWindowAreaFittedBox extends StatelessWidget {
   final Color? color;
 
   DSWindowAreaFittedBox(
-      {this.fitTop = false,
+      {Key? key, this.fitTop = false,
       this.fitBottom = false,
       this.fitLeft = false,
       this.fitRight = false,
-      this.color = Colors.transparent});
+      this.color = Colors.transparent}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

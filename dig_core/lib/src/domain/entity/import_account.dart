@@ -11,11 +11,11 @@ class ImportAccount extends Equatable {
   });
 
   ImportAccount copyWith({
-    ImportAccountFormData? data,
+    ImportAccountFormData? importAccountFormData,
     VoidCallback? onAccountCreationStarted,
   }) {
     return ImportAccount(
-      importAccountFormData: data ?? this.importAccountFormData,
+      importAccountFormData: importAccountFormData ?? this.importAccountFormData,
       onAccountCreationStarted:
           onAccountCreationStarted ?? this.onAccountCreationStarted,
     );

@@ -1,4 +1,3 @@
-import 'package:dig_core/src/data/exception/dig_exception_impl.dart';
 import 'package:dig_core/src/domain/exception/dig_exception.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dig_core/src/domain/repository/auth_repository.dart';

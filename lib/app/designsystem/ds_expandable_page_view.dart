@@ -91,9 +91,9 @@ class DSSizeReportingWidget extends StatefulWidget {
   final ValueChanged<Size> onSizeChange;
 
   const DSSizeReportingWidget({
-    Key? key,
     required this.child,
     required this.onSizeChange,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -105,12 +105,12 @@ class _SizeReportingWidgetState extends State<DSSizeReportingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance?.addPostFrameCallback((_) => _notifySize());
+    WidgetsBinding.instance.addPostFrameCallback((_) => _notifySize());
     return widget.child;
   }
 
   void _notifySize() {
-    if (!this.mounted) {
+    if (!mounted) {
       return;
     }
     final size = context.size;

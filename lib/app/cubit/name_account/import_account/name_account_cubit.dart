@@ -49,7 +49,7 @@ class NameAccountCubit extends Cubit<NameAccountState> {
     });
   }
 
-  void checkShouldCreatePINEvent(AccountPublicInfo accountPublicInfo) async {
+  Future checkShouldCreatePINEvent(AccountPublicInfo accountPublicInfo) async {
     final result = await _checkHasPinUseCase.call(const None());
     final exist = result.getOrElse(() => false);
 

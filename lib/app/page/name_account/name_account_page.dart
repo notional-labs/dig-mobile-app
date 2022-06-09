@@ -51,7 +51,7 @@ class _NameAccountPageState extends State<NameAccountPage> with WidgetUtil {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _cubit.init(widget.param.mnemonic);
     });
   }

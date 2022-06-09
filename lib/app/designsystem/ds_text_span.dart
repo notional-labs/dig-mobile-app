@@ -29,16 +29,16 @@ class DSTextSpan {
         textHeightBehavior: TextHeightBehavior(
             applyHeightToFirstAscent: !trimHeight,
             applyHeightToLastDescent: !trimHeight),
-        text: TextSpan(text: "", children: _generateTextSpans()));
+        text: TextSpan(text: '', children: _generateTextSpans()));
   }
 
   List<TextSpan> _generateTextSpans() {
-    List<TextSpan> result = [];
-    List<DSTextSpanHighlight> contentList = _findContent();
+    final List<TextSpan> result = [];
+    final List<DSTextSpanHighlight> contentList = _findContent();
     if (contentList.isEmpty) {
       result.add(TextSpan(text: content, style: defaultStyle));
     } else {
-      for (DSTextSpanHighlight item in _findContent()) {
+      for (final DSTextSpanHighlight item in _findContent()) {
         result.add(TextSpan(
             text: item.content,
             style: item.style,
@@ -49,23 +49,25 @@ class DSTextSpan {
   }
 
   List<DSTextSpanHighlight> _findContent() {
-    List<DSTextSpanHighlight> result = [];
+    final List<DSTextSpanHighlight> result = [];
     String processString = content;
     int index = 0;
     while (processString.isNotEmpty && index < contentHighlightList.length) {
-      DSTextSpanHighlight replaceValue = contentHighlightList[index];
-      int startIndex = processString.indexOf(replaceValue.content);
-      int endIndex = startIndex + replaceValue.content.length;
+      final DSTextSpanHighlight replaceValue = contentHighlightList[index];
+      final int startIndex = processString.indexOf(replaceValue.content);
+      final int endIndex = startIndex + replaceValue.content.length;
       final recognizer = contentHighlightList[index].recognizer;
 
       if (startIndex == -1) {
         index += 1;
       } else {
-        String firstString = processString.substring(0, startIndex);
-        String secondString = processString.substring(startIndex, endIndex);
-        result.add(DSTextSpanHighlight(firstString, defaultStyle, null));
-        result.add(
-            DSTextSpanHighlight(secondString, replaceValue.style, recognizer));
+        final String firstString = processString.substring(0, startIndex);
+        final String secondString =
+            processString.substring(startIndex, endIndex);
+        result
+          ..add(DSTextSpanHighlight(firstString, defaultStyle, null))
+          ..add(DSTextSpanHighlight(
+              secondString, replaceValue.style, recognizer));
         index += 1;
         processString = processString.substring(endIndex, processString.length);
       }

@@ -40,9 +40,9 @@ class DSPrimaryAppBar extends StatelessWidget {
 
 class _Normal extends StatelessWidget {
   const _Normal({
-    Key? key,
     required this.onBackButtonPressed,
     required this.title,
+    Key? key,
   }) : super(key: key);
 
   final GestureTapCallback? onBackButtonPressed;
@@ -83,9 +83,9 @@ class _Normal extends StatelessWidget {
 
 class _Action extends StatelessWidget {
   const _Action({
-    Key? key,
     required this.onBackButtonPressed,
     required this.action,
+    Key? key,
   }) : super(key: key);
 
   final GestureTapCallback? onBackButtonPressed;

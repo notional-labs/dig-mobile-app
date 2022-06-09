@@ -1,7 +1,6 @@
 import 'package:dig_core/dig_core.dart';
 import 'package:dig_mobile_app/app/viewmodel/name_account_viewmodel.dart';
 import 'package:equatable/equatable.dart';
-import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 abstract class NameAccountState extends Equatable {
   final NameAccountViewmodel viewmodel;

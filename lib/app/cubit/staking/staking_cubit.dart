@@ -80,10 +80,6 @@ class StakingCubit extends Cubit<StakingState> {
           (num previousValue, element) =>
               previousValue + (double.tryParse(element.delegatorShares) ?? 0));
 
-      final List<String> url = validatorResponse.result
-          .map((element) => element.description.identity)
-          .toList();
-
       for (final element in validatorResponse.result) {
         /// Compute commsion
         final commsion =
@@ -141,38 +137,41 @@ class StakingCubit extends Cubit<StakingState> {
     emit(StakingLoadingState(
         viewmodel: state.viewmodel.copyWith(), isRefresh: false));
 
-    BaseDigException? exception;
     AccountPublicInfo? account;
     num balance = 0;
 
+    BaseDigException? getSelectedAccountUseCaseException;
     final result = await _getSelectedAccountUseCase
         .call(const GetSelectedAccountUseCaseParam());
     result.fold((l) {
-      exception = l;
+      getSelectedAccountUseCaseException = l;
     }, (r) {
       account = r;
     });
 
-    if (exception != null) {
+    if (getSelectedAccountUseCaseException != null) {
       emit(StakingErrorState(
-          exception: exception!, viewmodel: state.viewmodel.copyWith()));
+          exception: getSelectedAccountUseCaseException!,
+          viewmodel: state.viewmodel.copyWith()));
       return;
     }
 
+    BaseDigException? getBalanceUseCaseException;
     final _getBalanceUseCaseResult = await _getBalanceUseCase.call(
         GetBalanceUseCaseParam(
             request: BalanceRequest(address: account!.publicAddress),
             denom: Denom.udig));
 
     _getBalanceUseCaseResult.fold((l) {
-      exception = l;
+      getBalanceUseCaseException = l;
     }, (r) {
       balance = r.getToken();
     });
 
-    if (exception != null) {
+    if (getBalanceUseCaseException != null) {
       emit(StakingErrorState(
-          exception: exception!, viewmodel: state.viewmodel.copyWith()));
+          exception: getBalanceUseCaseException!,
+          viewmodel: state.viewmodel.copyWith()));
       return;
     }
 

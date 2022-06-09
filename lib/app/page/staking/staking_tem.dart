@@ -32,27 +32,30 @@ class _StakingItemState extends State<StakingItem>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _cubit.fetchAvatar(widget.viewModel.identity);
     });
   }
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(left: 30, right: 30, top: 19),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          _buildTopWidget(),
-          const SizedBox(height: 20),
-          _buildBottomWidget(),
-          if (!widget.isLast)
-            const Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: Divider(
-                color: DSColors.tulipTree,
-              ),
-            )
-        ]),
-      );
+  Widget build(BuildContext context) {
+    super.build(context);
+    return Padding(
+      padding: const EdgeInsets.only(left: 30, right: 30, top: 19),
+      child: Column(mainAxisSize: MainAxisSize.min, children: [
+        _buildTopWidget(),
+        const SizedBox(height: 20),
+        _buildBottomWidget(),
+        if (!widget.isLast)
+          const Padding(
+            padding: EdgeInsets.only(top: 20),
+            child: Divider(
+              color: DSColors.tulipTree,
+            ),
+          )
+      ]),
+    );
+  }
 
   Widget _buildTopWidget() => Row(
         crossAxisAlignment: CrossAxisAlignment.start,

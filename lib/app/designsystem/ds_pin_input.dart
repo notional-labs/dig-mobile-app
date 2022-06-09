@@ -86,7 +86,7 @@ class _DSPinInputState extends State<DSPinInput> {
     if (widget.controller != null) {
       _controller = widget.controller!;
     }
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.addListener(() {
         _textEditingController.text = _controller.text;
         _onPinChange(_controller.text);
