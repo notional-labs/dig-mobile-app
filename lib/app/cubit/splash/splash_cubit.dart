@@ -37,8 +37,8 @@ class SplashCubit extends Cubit<SplashState> {
   /// So need to clearn data at first time open app.
   Future cleanOldData() async {
     final result = await _checkFirstRunUseCase.call(const None());
-    bool isFirtCall = result.getOrElse(() => false);
-    if (isFirtCall) {
+    final bool isFirstCall = result.getOrElse(() => false);
+    if (isFirstCall) {
       await _deletePinUseCase.call(const None());
     }
   }

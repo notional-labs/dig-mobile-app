@@ -278,11 +278,11 @@ class _CreateProposalWidgetState extends State<CreateProposalWidget>
         ],
       );
 
-  Widget _errorMessage(String text) => Padding(
-    padding: EdgeInsets.only(top: text.isEmpty ? 0 : 2),
-    child: Text(
-      text,
-      style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.red),
-    ),
-  );
+  // Widget _errorMessage(String text) => Padding(
+  //   padding: EdgeInsets.only(top: text.isEmpty ? 0 : 2),
+  //   child: Text(
+  //     text,
+  //     style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.red),
+  //   ),
+  // );
 }

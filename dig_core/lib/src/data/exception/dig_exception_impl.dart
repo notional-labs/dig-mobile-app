@@ -11,11 +11,11 @@ class DigServerException extends BaseDigException {
       : super(message: message);
 
   BaseDigException copyWith({
-    int? code,
+    int? statusCode,
     String? message,
   }) {
     return DigServerException(
-      statusCode: code ?? this.statusCode,
+      statusCode: statusCode ?? this.statusCode,
       message: message ?? this.message,
     );
   }

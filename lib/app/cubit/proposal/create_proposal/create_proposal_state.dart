@@ -10,5 +10,5 @@ abstract class CreateProposalState with EquatableMixin {
 }
 
 class CreateProposalInitial extends CreateProposalState {
-  CreateProposalInitial() : super(viewModel: CreateProposalViewModel());
+  CreateProposalInitial() : super(viewModel: const CreateProposalViewModel());
 }

@@ -27,7 +27,7 @@ class TransactionRepositoryImplement implements TransactionRepository {
   @override
   TransactionSigningGateway createTransactionSigningGateway() {
     assert(_chain != null,
-        "`_chain` must be not null. Ensure called `createChainENV` first");
+        '`_chain` must be not null. Ensure called `createChainENV` first');
     _transactionSigningGateway ??= TransactionSigningGateway(
       transactionSummaryUI: NoOpTransactionSummaryUI(),
       signers: [
@@ -46,6 +46,7 @@ class TransactionRepositoryImplement implements TransactionRepository {
     return _transactionSigningGateway!;
   }
 
+  @override
   Future<TransactionResponse?> sendToken(SendTokenRequest param) async {
     TransactionResponse? txnResponse;
     final message = bank.MsgSend.create()

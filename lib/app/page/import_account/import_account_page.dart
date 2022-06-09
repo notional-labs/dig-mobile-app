@@ -81,7 +81,7 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) => DSPrimaryAppBar.action(
         onBackButtonPressed: () {
-          BlocProvider.of<ImportAccountCubit>(context).backEnvent();
+          BlocProvider.of<ImportAccountCubit>(context).backEvent();
         },
         action: GestureDetector(
           onTap: () {

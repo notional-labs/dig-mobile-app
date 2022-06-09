@@ -45,7 +45,7 @@ class _ConfirmPinPageState extends State<ConfirmPinPage> with WidgetUtil {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _cubit.init(widget.param.pin);
     });
   }

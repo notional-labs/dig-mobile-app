@@ -108,10 +108,10 @@ class _CupertinoSliverRefreshControlState
       nextState = RefreshIndicatorMode.done;
       // Either schedule the RenderSliver to re-layout on the next frame
       // when not currently in a frame or schedule it on the next frame.
-      if (SchedulerBinding.instance!.schedulerPhase == SchedulerPhase.idle) {
+      if (SchedulerBinding.instance.schedulerPhase == SchedulerPhase.idle) {
         setState(() => hasSliverLayoutExtent = false);
       } else {
-        SchedulerBinding.instance!.addPostFrameCallback((Duration timestamp) {
+        SchedulerBinding.instance.addPostFrameCallback((Duration timestamp) {
           setState(() => hasSliverLayoutExtent = false);
         });
       }
@@ -127,6 +127,7 @@ class _CupertinoSliverRefreshControlState
         continue drag;
       drag:
       case RefreshIndicatorMode.drag:
+        // ignore: invariant_booleans
         if (latestIndicatorBoxExtent == 0) {
           return RefreshIndicatorMode.inactive;
         } else if (latestIndicatorBoxExtent <
@@ -138,7 +139,7 @@ class _CupertinoSliverRefreshControlState
             // Call onRefresh after this frame finished since the function is
             // user supplied and we're always here in the middle of the sliver's
             // performLayout.
-            SchedulerBinding.instance!
+            SchedulerBinding.instance
                 .addPostFrameCallback((Duration timestamp) {
               refreshTask = widget.onRefresh!()
                 ..whenComplete(() {
@@ -228,9 +229,7 @@ class _CupertinoSliverRefresh extends SingleChildRenderObjectWidget {
     this.refreshIndicatorLayoutExtent = 0.0,
     this.hasLayoutExtent = false,
     Widget? child,
-  })  : assert(refreshIndicatorLayoutExtent != null),
-        assert(refreshIndicatorLayoutExtent >= 0.0),
-        assert(hasLayoutExtent != null),
+  })  : assert(refreshIndicatorLayoutExtent >= 0.0),
         super(key: key, child: child);
 
   // The amount of space the indicator should occupy in the sliver in a
@@ -265,9 +264,7 @@ class _RenderCupertinoSliverRefresh extends RenderSliver
     required double refreshIndicatorExtent,
     required bool hasLayoutExtent,
     RenderBox? child,
-  })  : assert(refreshIndicatorExtent != null),
-        assert(refreshIndicatorExtent >= 0.0),
-        assert(hasLayoutExtent != null),
+  })  : assert(refreshIndicatorExtent >= 0.0),
         _refreshIndicatorExtent = refreshIndicatorExtent,
         _hasLayoutExtent = hasLayoutExtent {
     this.child = child;
@@ -278,7 +275,6 @@ class _RenderCupertinoSliverRefresh extends RenderSliver
   double get refreshIndicatorLayoutExtent => _refreshIndicatorExtent;
   double _refreshIndicatorExtent;
   set refreshIndicatorLayoutExtent(double value) {
-    assert(value != null);
     assert(value >= 0.0);
     if (value == _refreshIndicatorExtent) return;
     _refreshIndicatorExtent = value;
@@ -291,7 +287,6 @@ class _RenderCupertinoSliverRefresh extends RenderSliver
   bool get hasLayoutExtent => _hasLayoutExtent;
   bool _hasLayoutExtent;
   set hasLayoutExtent(bool value) {
-    assert(value != null);
     if (value == _hasLayoutExtent) return;
     _hasLayoutExtent = value;
     markNeedsLayout();

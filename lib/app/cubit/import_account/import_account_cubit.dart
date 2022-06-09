@@ -20,13 +20,13 @@ class ImportAccountCubit extends Cubit<ImportAccountState> {
   }
 
   String checkMnemonicValid(String mnemonic) {
-    String message = '';
     final result = _checkMnemonicValidUseCase
         .call(CheckMnemonicValidUseCaseParam(mnemonic: mnemonic));
-    result.fold((l) {
-      message = l.message;
-    }, (_) {});
-    return message;
+    return result.fold((l) {
+      return l.message;
+    }, (_) {
+      return '';
+    });
   }
 
   Future importEvent() async {
@@ -34,7 +34,7 @@ class ImportAccountCubit extends Cubit<ImportAccountState> {
     emit(ImportAccountSuccessState(viewmodel: state.viewmodel.copyWith()));
   }
 
-  void backEnvent() => navigatorKey.currentState!.pop();
+  void backEvent() => navigatorKey.currentState!.pop();
 
   /// TODO: Impl [tapAdvancedEvent]
   void tapAdvancedEvent() {}

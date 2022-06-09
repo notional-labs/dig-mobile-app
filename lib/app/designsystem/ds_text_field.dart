@@ -97,7 +97,7 @@ class _DSTextFieldState extends State<DSTextField> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller = widget.controller ?? TextEditingController();
       _setData();
       _onFocus();

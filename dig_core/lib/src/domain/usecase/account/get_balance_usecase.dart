@@ -23,9 +23,6 @@ class GetBalanceUseCase extends UseCase<Balance, GetBalanceUseCaseParam> {
     try {
       _repository.createChainENV(params.chain ?? _env.digChain);
       final result = await _repository.getBalances(params.request);
-      if (result == null) {
-        throw const DigException(message: DomainErrorMessage.noBalanceFound);
-      }
       final balance = result.balances
           .firstWhereOrNull((element) => element.denom == params.denom);
 

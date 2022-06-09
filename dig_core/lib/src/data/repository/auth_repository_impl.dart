@@ -2,7 +2,6 @@ import 'package:dig_core/dig_core.dart';
 import 'package:dig_core/src/data/datasource/local/account_local_datasource.dart';
 import 'package:dig_core/src/data/datasource/local/pin_local_datasource.dart';
 import 'package:dig_core/src/domain/entity/create_mnemonic.dart';
-import 'package:dig_core/src/domain/env/env.dart';
 import 'package:dig_core/src/domain/repository/auth_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package:transaction_signing_gateway/alan/alan_account_derivation_info.dart';
@@ -28,7 +27,7 @@ class AuthRepositoryImplement extends AuthRepository {
   @override
   TransactionSigningGateway createTransactionSigningGateway() {
     assert(_chain != null,
-        "`_chain` must be not null. Ensure called `createChainENV` first");
+        '`_chain` must be not null. Ensure called `createChainENV` first');
     _transactionSigningGateway ??= TransactionSigningGateway(
       transactionSummaryUI: NoOpTransactionSummaryUI(),
       signers: [
@@ -56,7 +55,7 @@ class AuthRepositoryImplement extends AuthRepository {
   @override
   Future<AccountPublicInfo> importAccount(ImportAccount param) async {
     assert(_chain != null,
-        "`_chain` must be not null. Ensure called `createChainENV` first");
+        '`_chain` must be not null. Ensure called `createChainENV` first');
     final result = await createTransactionSigningGateway()
         .deriveAccount(
       accountDerivationInfo: AlanAccountDerivationInfo(

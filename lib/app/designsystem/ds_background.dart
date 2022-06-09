@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:flutter/material.dart';
 

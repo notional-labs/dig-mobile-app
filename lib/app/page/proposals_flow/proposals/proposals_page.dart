@@ -28,13 +28,14 @@ class _ProposalsPageState extends State<ProposalsPage>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _cubit.getProposals();
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocConsumer<ProposalsCubit, ProposalsState>(
       bloc: _cubit,
       listener: _listener,

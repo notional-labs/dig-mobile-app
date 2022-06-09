@@ -30,7 +30,7 @@ class _ConfirmRecoveryPhraseState extends State<ConfirmRecoveryPhrase> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _cubit.init(widget.mnemonic);
     });
   }
@@ -208,7 +208,7 @@ class _ConfirmResultGridItem extends StatelessWidget {
   final Function(String)? onTap;
 
   const _ConfirmResultGridItem(
-      {this.index = 0, required this.text, this.onTap, Key? key})
+      {required this.text, this.index = 0, this.onTap, Key? key})
       : super(key: key);
 
   @override

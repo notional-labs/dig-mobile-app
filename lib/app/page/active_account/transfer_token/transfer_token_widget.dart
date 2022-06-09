@@ -69,7 +69,7 @@ class _TransferTokenWidgetState extends State<TransferTokenWidget>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _toRecipientController.text = widget.param.toAddress ?? '';
       _cubit.init(
           senderAddress: widget.param.account.publicAddress,

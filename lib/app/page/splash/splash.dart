@@ -25,7 +25,7 @@ class _SplashPageState extends State<SplashPage> {
   bool _showArrowIcon = false;
 
   double get _widthOfTextTitle {
-    TextPainter textPainter = TextPainter()
+    final TextPainter textPainter = TextPainter()
       ..text = TextSpan(
           text: S.current.ig_chain,
           style:
@@ -36,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   double get _widthOfUnderTextTitle {
-    TextPainter textPainter = TextPainter()
+    final TextPainter textPainter = TextPainter()
       ..text = TextSpan(
           text: S.current.into_the_mine,
           style: DSTextStyle.tsMontserratT20R.copyWith(color: Colors.white))
@@ -48,7 +48,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(seconds: 1)).then((value) {
         setState(() {
           _widthOfContainerTitle = _widthOfTextTitle;

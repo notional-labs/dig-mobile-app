@@ -15,14 +15,14 @@ class DecimalTextInputFormatter extends TextInputFormatter {
     String truncated = newValue.text;
 
     if (decimalRange != null) {
-      String value = newValue.text;
+      final String value = newValue.text;
 
-      if (value.contains(".") &&
-          value.substring(value.indexOf(".") + 1).length > decimalRange!) {
+      if (value.contains('.') &&
+          value.substring(value.indexOf('.') + 1).length > decimalRange!) {
         truncated = oldValue.text;
         newSelection = oldValue.selection;
-      } else if (value == ".") {
-        truncated = "0.";
+      } else if (value == '.') {
+        truncated = '0.';
 
         newSelection = newValue.selection.copyWith(
           baseOffset: math.min(truncated.length, truncated.length + 1),
@@ -64,7 +64,7 @@ class RegExInputFormatter implements TextInputFormatter {
   bool _isValid(String value) {
     try {
       final matches = _regExp.allMatches(value);
-      for (Match match in matches) {
+      for (final Match match in matches) {
         if (match.start == 0 && match.end == value.length) {
           return true;
         }

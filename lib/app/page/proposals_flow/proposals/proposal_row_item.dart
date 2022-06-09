@@ -4,7 +4,6 @@ import 'package:dig_mobile_app/app/designsystem/custom/ds_proposal_status.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_small_button.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
-import 'package:dig_mobile_app/app/extension/datetime_extensions.dart';
 import 'package:dig_mobile_app/app/extension/extension.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
