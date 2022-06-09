@@ -4,7 +4,6 @@ import 'package:dig_mobile_app/app/definition/app_assets.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_refresh_cupertino_sliver.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
-import 'package:dig_mobile_app/app/designsystem/ds_text_field.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_span.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_text_style.dart';
 import 'package:dig_mobile_app/app/page/staking/delegate/delegate_widget.dart';
@@ -59,27 +58,30 @@ class _StakingPageState extends State<StakingPage>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _cubit.fetchData();
     });
   }
 
   @override
-  Widget build(BuildContext context) => AnnotatedRegion(
-        value: SystemUiOverlayStyle.light,
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: BlocProvider(
-            create: (_) => _cubit,
-            child: SafeArea(
-                child: BlocConsumer<StakingCubit, StakingState>(
-                    builder: (context, state) {
-                      return _buildRefreshWidget(state.viewmodel);
-                    },
-                    listener: _onBlocListener)),
-          ),
+  Widget build(BuildContext context) {
+    super.build(context);
+    return AnnotatedRegion(
+      value: SystemUiOverlayStyle.light,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: BlocProvider(
+          create: (_) => _cubit,
+          child: SafeArea(
+              child: BlocConsumer<StakingCubit, StakingState>(
+                  builder: (context, state) {
+                    return _buildRefreshWidget(state.viewmodel);
+                  },
+                  listener: _onBlocListener)),
         ),
-      );
+      ),
+    );
+  }
 
   Widget _buildHeaderWidget(StakingViewmodel viewmodel) => Padding(
         padding: const EdgeInsets.only(left: 30, right: 30, top: 19),
@@ -121,7 +123,8 @@ class _StakingPageState extends State<StakingPage>
                         : AppAssets.icArrowUp)),
                 Expanded(
                   child: Text(
-                    S.current.n_percent(viewmodel.priceChangePercentage24h.toStringAsFixed(2)),
+                    S.current.n_percent(
+                        viewmodel.priceChangePercentage24h.toStringAsFixed(2)),
                     maxLines: 100,
                     style: DSTextStyle.tsMontserratT12M.copyWith(
                         color: viewmodel.isPriceChangePercentage24hDown

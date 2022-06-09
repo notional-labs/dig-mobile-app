@@ -59,7 +59,7 @@ class DSSnackBar {
   OverlaySupportEntry _showSnackBar() => showOverlayNotification(
       (context) => _slideDismiss
           ? _dismissible(
-              key: ValueKey(null), direction: DismissDirection.up, child: _body)
+              key: const ValueKey(null), direction: DismissDirection.up, child: _body)
           : _body,
       duration: _duration,
       key: key);

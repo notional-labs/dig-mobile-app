@@ -40,5 +40,5 @@ class SendTokenUsecase
 class SendTokenUsecaseParam {
   final ChainENV? chain;
   final SendTokenRequest request;
-  const SendTokenUsecaseParam({this.chain, required this.request});
+  const SendTokenUsecaseParam({required this.request, this.chain});
 }

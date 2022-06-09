@@ -38,7 +38,7 @@ class _ProposalDetailPageState extends State<ProposalDetailPage>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _cubit.init(widget.params?.proposal);
     });
   }

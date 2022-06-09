@@ -31,7 +31,7 @@ class _RecoveryPhrasePageState extends State<RecoveryPhrasePage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _cubit.init(widget.mnemonic);
     });
   }
@@ -166,7 +166,7 @@ class _PhraseGridItem extends StatelessWidget {
   final int index;
   final String text;
 
-  const _PhraseGridItem({this.index = 0, required this.text, Key? key})
+  const _PhraseGridItem({required this.text, this.index = 0, Key? key})
       : super(key: key);
 
   @override

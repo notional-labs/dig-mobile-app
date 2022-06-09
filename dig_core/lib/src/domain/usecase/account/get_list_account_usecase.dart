@@ -5,8 +5,6 @@ import 'package:dig_core/src/domain/repository/auth_repository.dart';
 import 'package:dig_core/src/domain/usecase/usecase.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
-import 'package:transaction_signing_gateway/model/account_public_info.dart';
-import 'package:dig_core/src/domain/env/env.dart';
 
 @injectable
 class GetListAccountUseCase

@@ -14,7 +14,7 @@ class BackupYourWalletCubit extends Cubit<BackupYourWalletState> {
   BackupYourWalletCubit(this._createMnemonicUseCase)
       : super(BackupYourWalletInitial());
 
-  void onBackUpNowTap() async {
+  Future onBackUpNowTap() async {
     final result = await _createMnemonicUseCase.call(const None());
     result.fold(
         (failure) => null,

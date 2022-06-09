@@ -52,7 +52,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
   AccountPublicInfo? _lastAccountPublicInfo;
 
   void _fetchData() {
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       if (_lastAccountPublicInfo?.accountId != widget.account.accountId) {
         _cubit.resetData();
         _dsWalletAddressController.reset();
@@ -66,7 +66,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _cubit.init(widget.balances);
     });
   }
@@ -80,6 +80,7 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocConsumer<ActiveAccountCubit, ActiveAccountState>(
       bloc: _cubit,
       listener: _cubitListener,

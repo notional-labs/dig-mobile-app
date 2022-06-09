@@ -50,7 +50,7 @@ class _DelegateWidgetState extends State<DelegateWidget> with WidgetUtil {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _cubit.init(
           delegatorAddress: widget.param.account.publicAddress,
           tokenAvailable: widget.param.tokenAvailable,

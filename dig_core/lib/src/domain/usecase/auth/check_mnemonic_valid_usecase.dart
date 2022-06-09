@@ -1,4 +1,3 @@
-import 'package:cosmos_utils/mnemonic.dart';
 import 'package:dig_core/dig_core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dig_core/src/domain/definition/definition.dart';
