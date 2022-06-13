@@ -17,12 +17,11 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    name: "${{ matrix.bot }} (${{ matrix.dart-version }}/${{ matrix.code-version }}/${{ matrix.os }})"
     runs-on: ${{ matrix.operating-system }}
     strategy:
       matrix:
-        operating-system: [ubuntu-latest, windows-latest, macos-latest]
-        channel: [stable, beta]
+        operating-system: [macos-latest]
+        channel: [stable]
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v3
