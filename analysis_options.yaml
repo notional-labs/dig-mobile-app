@@ -4,6 +4,7 @@ analyzer:
   exclude:
     - lib/**/*.config.dart
     - lib/generated/*.dart
+    - lib/generated/*/*.dart
 
   errors:
     unawaited_futures: ignore

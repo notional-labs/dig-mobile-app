@@ -34,6 +34,7 @@ export 'package:dig_core/src/domain/usecase/delegation/get_delegations_usecase.d
 export 'package:dig_core/src/domain/usecase/market/get_coin_use_case.dart';
 export 'package:dig_core/src/domain/entity/staking/market.dart';
 export 'package:dig_core/src/domain/usecase/delegation/get_delegator_rewards_usecase.dart';
+export 'package:dig_core/src/domain/usecase/market/get_coin_chart_use_case.dart';
 
 // domain - model
 export 'package:dig_core/src/domain/entity/import_account.dart';
@@ -51,8 +52,10 @@ export 'package:dig_core/src/domain/entity/balance.dart';
 export 'package:dig_core/src/domain/entity/balance_resquest.dart';
 export 'package:dig_core/src/domain/entity/send_token_request.dart';
 export 'package:dig_core/src/domain/entity/staking/delegations/requests/get_delegations_request.dart';
-export 'package:dig_core/src/domain/entity/coin_request.dart';
+export 'package:dig_core/src/domain/entity/staking/coin_request.dart';
 export 'package:dig_core/src/domain/entity/staking/delegations/requests/get_delegator_rewards_request.dart';
+export 'package:dig_core/src/domain/entity/staking/chart_request.dart';
+export 'package:dig_core/src/domain/entity/staking/market_chart_price.dart';
 
 export 'package:dig_core/src/domain/util/util.dart';
 

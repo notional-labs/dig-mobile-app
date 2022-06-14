@@ -1,4 +1,4 @@
-import 'package:dig_core/src/domain/entity/coin_request.dart';
+import 'package:dig_core/src/domain/entity/staking/coin_request.dart';
 import 'package:dig_core/src/domain/entity/staking/market.dart';
 import 'package:dig_core/src/domain/exception/dig_exception.dart';
 import 'package:dartz/dartz.dart';

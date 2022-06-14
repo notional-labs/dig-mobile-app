@@ -8,7 +8,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i24;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../../dig_core.dart' as _i44;
+import '../../dig_core.dart' as _i43;
 import '../data/datasource/local/account_local_datasource.dart' as _i3;
 import '../data/datasource/local/create_db_datasource.dart' as _i9;
 import '../data/datasource/local/pin_local_datasource.dart' as _i23;
@@ -34,29 +34,30 @@ import '../domain/repository/proposals_repository.dart' as _i26;
 import '../domain/repository/transaction_repository.dart' as _i28;
 import '../domain/repository/validator_repository.dart' as _i31;
 import '../domain/usecase/account/get_balance_usecase.dart' as _i14;
-import '../domain/usecase/account/get_list_account_usecase.dart' as _i41;
+import '../domain/usecase/account/get_list_account_usecase.dart' as _i42;
 import '../domain/usecase/account/get_list_balance_usecase.dart' as _i18;
-import '../domain/usecase/account/get_selected_account_usecase.dart' as _i45;
-import '../domain/usecase/account/select_account_usecase.dart' as _i51;
+import '../domain/usecase/account/get_selected_account_usecase.dart' as _i46;
+import '../domain/usecase/account/select_account_usecase.dart' as _i52;
 import '../domain/usecase/auth/change_pin_usecase.dart' as _i35;
 import '../domain/usecase/auth/check_has_pin_usecase.dart' as _i36;
 import '../domain/usecase/auth/check_mnemonic_valid_usecase.dart' as _i8;
 import '../domain/usecase/auth/create_mnemonic_usecase.dart' as _i37;
 import '../domain/usecase/auth/create_pin_usecase.dart' as _i38;
 import '../domain/usecase/auth/delete_pin_usecase.dart' as _i39;
-import '../domain/usecase/auth/import_account_usecase.dart' as _i48;
-import '../domain/usecase/auth/match_pin_usecase.dart' as _i49;
-import '../domain/usecase/auth/remove_account_usecase.dart' as _i50;
+import '../domain/usecase/auth/import_account_usecase.dart' as _i49;
+import '../domain/usecase/auth/match_pin_usecase.dart' as _i50;
+import '../domain/usecase/auth/remove_account_usecase.dart' as _i51;
 import '../domain/usecase/check_fist_time_run_app_usecase.dart' as _i7;
 import '../domain/usecase/delegation/get_delegations_usecase.dart' as _i16;
 import '../domain/usecase/delegation/get_delegator_rewards_usecase.dart'
     as _i17;
-import '../domain/usecase/market/get_coin_use_case.dart' as _i40;
-import '../domain/usecase/proposals/get_proposals_usecase.dart' as _i42;
-import '../domain/usecase/proposals/get_proposer_usecase.dart' as _i43;
-import '../domain/usecase/transaction/send_token_use_case.dart' as _i52;
-import '../domain/usecase/validator/get_validator_logo_usecase.dart' as _i46;
-import '../domain/usecase/validator/get_validator_usecase.dart' as _i47;
+import '../domain/usecase/market/get_coin_chart_use_case.dart' as _i40;
+import '../domain/usecase/market/get_coin_use_case.dart' as _i41;
+import '../domain/usecase/proposals/get_proposals_usecase.dart' as _i44;
+import '../domain/usecase/proposals/get_proposer_usecase.dart' as _i45;
+import '../domain/usecase/transaction/send_token_use_case.dart' as _i53;
+import '../domain/usecase/validator/get_validator_logo_usecase.dart' as _i47;
+import '../domain/usecase/validator/get_validator_usecase.dart' as _i48;
 import '../domain/util/util.dart'
     as _i10; // ignore_for_file: unnecessary_lambdas
 
@@ -118,30 +119,32 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i38.CreatePinUseCase(get<_i33.AuthRepository>()));
   gh.factory<_i39.DeletePinUseCase>(
       () => _i39.DeletePinUseCase(get<_i33.AuthRepository>()));
-  gh.factory<_i40.GetCoinUseCase>(
-      () => _i40.GetCoinUseCase(get<_i21.MarketRepository>()));
-  gh.factory<_i41.GetListAccountUseCase>(() =>
-      _i41.GetListAccountUseCase(get<_i33.AuthRepository>(), get<_i15.ENV>()));
-  gh.factory<_i42.GetProposalsUseCase>(() => _i42.GetProposalsUseCase(
+  gh.factory<_i40.GetCoinChartUseCase>(
+      () => _i40.GetCoinChartUseCase(get<_i21.MarketRepository>()));
+  gh.factory<_i41.GetCoinUseCase>(
+      () => _i41.GetCoinUseCase(get<_i21.MarketRepository>()));
+  gh.factory<_i42.GetListAccountUseCase>(() =>
+      _i42.GetListAccountUseCase(get<_i33.AuthRepository>(), get<_i43.ENV>()));
+  gh.factory<_i44.GetProposalsUseCase>(() => _i44.GetProposalsUseCase(
       get<_i26.ProposalsRepository>(), get<_i15.ENV>()));
-  gh.factory<_i43.GetProposerUseCase>(() => _i43.GetProposerUseCase(
-      get<_i26.ProposalsRepository>(), get<_i44.ENV>()));
-  gh.factory<_i45.GetSelectedAccountUseCase>(() =>
-      _i45.GetSelectedAccountUseCase(
-          get<_i33.AuthRepository>(), get<_i44.ENV>()));
-  gh.factory<_i46.GetValidatorLogoUseCase>(() => _i46.GetValidatorLogoUseCase(
+  gh.factory<_i45.GetProposerUseCase>(() => _i45.GetProposerUseCase(
+      get<_i26.ProposalsRepository>(), get<_i43.ENV>()));
+  gh.factory<_i46.GetSelectedAccountUseCase>(() =>
+      _i46.GetSelectedAccountUseCase(
+          get<_i33.AuthRepository>(), get<_i43.ENV>()));
+  gh.factory<_i47.GetValidatorLogoUseCase>(() => _i47.GetValidatorLogoUseCase(
       get<_i31.ValidatorRepository>(), get<_i15.ENV>()));
-  gh.factory<_i47.GetValidatorUseCase>(() => _i47.GetValidatorUseCase(
+  gh.factory<_i48.GetValidatorUseCase>(() => _i48.GetValidatorUseCase(
       get<_i31.ValidatorRepository>(), get<_i15.ENV>()));
-  gh.factory<_i48.ImportAccountUseCase>(() =>
-      _i48.ImportAccountUseCase(get<_i33.AuthRepository>(), get<_i15.ENV>()));
-  gh.factory<_i49.MatchPinUseCase>(
-      () => _i49.MatchPinUseCase(get<_i33.AuthRepository>()));
-  gh.factory<_i50.RemoveAccountUseCase>(() =>
-      _i50.RemoveAccountUseCase(get<_i33.AuthRepository>(), get<_i15.ENV>()));
-  gh.factory<_i51.SelectAccountUseCase>(
-      () => _i51.SelectAccountUseCase(get<_i33.AuthRepository>()));
-  gh.factory<_i52.SendTokenUsecase>(() => _i52.SendTokenUsecase(
-      get<_i28.TransactionRepository>(), get<_i44.ENV>()));
+  gh.factory<_i49.ImportAccountUseCase>(() =>
+      _i49.ImportAccountUseCase(get<_i33.AuthRepository>(), get<_i15.ENV>()));
+  gh.factory<_i50.MatchPinUseCase>(
+      () => _i50.MatchPinUseCase(get<_i33.AuthRepository>()));
+  gh.factory<_i51.RemoveAccountUseCase>(() =>
+      _i51.RemoveAccountUseCase(get<_i33.AuthRepository>(), get<_i15.ENV>()));
+  gh.factory<_i52.SelectAccountUseCase>(
+      () => _i52.SelectAccountUseCase(get<_i33.AuthRepository>()));
+  gh.factory<_i53.SendTokenUsecase>(() => _i53.SendTokenUsecase(
+      get<_i28.TransactionRepository>(), get<_i43.ENV>()));
   return get;
 }
