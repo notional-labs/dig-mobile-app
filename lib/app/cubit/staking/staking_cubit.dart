@@ -20,9 +20,10 @@ class StakingCubit extends Cubit<StakingState> {
   final GetSelectedAccountUseCase _getSelectedAccountUseCase;
   final GetBalanceUseCase _getBalanceUseCase;
   final GetCoinUseCase _getCoinUseCase;
+  final GetCoinChartUseCase _getCoinChartUseCase;
 
   StakingCubit(this._getValidatorUseCase, this._getSelectedAccountUseCase,
-      this._getBalanceUseCase, this._getCoinUseCase)
+      this._getBalanceUseCase, this._getCoinUseCase, this._getCoinChartUseCase)
       : super(const StakingPrimaryState());
 
   Future fetchData([bool isRefresh = false]) async {
@@ -34,19 +35,29 @@ class StakingCubit extends Cubit<StakingState> {
 
     final results = await Future.wait([
       _getValidatorUseCase.call(const GetValidatorUseCaseParam()),
-      _getCoinUseCase.call(GetCoinUseCaseParam(
-          param: const CoinRequest(
-              ids: Chain.digChain, vs_currency: Currency.usd)))
+      _getCoinUseCase.call(
+        GetCoinUseCaseParam(
+            param: const CoinRequest(
+                ids: Chain.digChain, vs_currency: Currency.usd)),
+      ),
+      _getCoinChartUseCase.call(GetCoinChartUseCaseParam(
+          param: const ChartRequest(
+              id: Chain.digChain, vs_currency: Currency.usd, days: '1')))
     ]);
 
     final Either<BaseDigException, ValidatorResponse>
         getValidatorUseCaseResult =
         results.first as Either<BaseDigException, ValidatorResponse>;
     final Either<BaseDigException, List<Market>> _getCoinUseCaseResult =
-        results.last as Either<BaseDigException, List<Market>>;
+        results[1] as Either<BaseDigException, List<Market>>;
+    final Either<BaseDigException, List<MarketChartPrice>>
+        _getCoinChartUseCaseResult =
+        results[2] as Either<BaseDigException, List<MarketChartPrice>>;
 
     num currentPrice = 0;
     num priceChangePercentage24h = 0;
+    // ignore: omit_local_variable_types, unused_local_variable
+    List<MarketChartPrice> prices = [];
 
     getValidatorUseCaseResult.fold((failure) {
       emit(StakingErrorState(
@@ -124,6 +135,10 @@ class StakingCubit extends Cubit<StakingState> {
         priceChangePercentage24h = market.priceChangePercentage24h;
       }
     }));
+
+    _getCoinChartUseCaseResult.fold((failure) {}, (value) {
+      prices = value;
+    });
 
     emit(StakingPrimaryState(
         viewmodel: state.viewmodel.copyWith(

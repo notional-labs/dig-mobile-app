@@ -80,7 +80,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i4.GetValidatorUseCase>(),
       get<_i4.GetSelectedAccountUseCase>(),
       get<_i4.GetBalanceUseCase>(),
-      get<_i4.GetCoinUseCase>()));
+      get<_i4.GetCoinUseCase>(),
+      get<_i4.GetCoinChartUseCase>()));
   gh.factory<_i21.StakingItemCubit>(
       () => _i21.StakingItemCubit(get<_i4.GetValidatorLogoUseCase>()));
   gh.factory<_i22.TransferTokenCubit>(
