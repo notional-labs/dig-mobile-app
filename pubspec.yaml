@@ -45,7 +45,7 @@ dependencies:
   pedantic: ^1.8.0
   qr_flutter: ^4.0.0
   share_plus: ^4.0.4
-  qr_code_scanner: ^0.7.0
+  qr_code_scanner: ^1.0.0
   candlesticks: ^2.1.0
 
   dig_core:
