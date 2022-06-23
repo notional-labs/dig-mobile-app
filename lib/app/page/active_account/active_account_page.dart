@@ -5,7 +5,6 @@ import 'package:dig_mobile_app/app/designsystem/custom/ds_wallet_address.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_refresh_cupertino_sliver.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/extension/extension.dart';
-import 'package:dig_mobile_app/app/page/active_account/active_account_detail/active_account_detail_page.dart';
 import 'package:dig_mobile_app/app/page/active_account/transfer_token/transfer_token_widget.dart';
 import 'package:dig_mobile_app/app/page/receive_token/receive_token_dialog.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,7 +22,7 @@ import 'package:dig_mobile_app/app/viewmodel/active_account_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 
-import '../../route/dig_route.dart';
+import 'package:dig_mobile_app/app/route/dig_route.dart';
 
 typedef OnRemoveAccount = Function(AccountPublicInfo account);
 
