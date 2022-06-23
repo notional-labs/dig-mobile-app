@@ -1,4 +1,5 @@
 import 'package:dig_mobile_app/app/definition/string.dart';
+import 'package:dig_mobile_app/app/page/active_account/active_account_detail/active_account_detail_page.dart';
 import 'package:dig_mobile_app/app/page/confirm_pin/confirm_pin_page.dart';
 import 'package:dig_mobile_app/app/page/create_wallet_flow/backup_your_wallet/backup_your_wallet_page.dart';
 import 'package:dig_mobile_app/app/page/create_wallet_flow/confirm_recovery_phrase/confirm_recovery_phrase.dart';
@@ -69,6 +70,8 @@ class DigRoute {
         return _materialPage(const StakingPage(), settings);
       case DigPageName.scanQrCode:
         return _materialPage(const ScanQrCodePage(), settings);
+      case DigPageName.activeAccountDetail:
+        return _materialPage(const ActiveAccountDetailPage(), settings);
       default:
         return _materialPage(const SizedBox.shrink(), settings);
     }

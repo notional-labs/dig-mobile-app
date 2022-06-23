@@ -33,6 +33,10 @@ class AppAssets {
   static final String icDig = _generateImagePath('ic_dig.png');
   static final String icArrowUp = _generateImagePath('ic_arrow_up.png');
   static final String icArrowDown = _generateImagePath('ic_arrow_down.png');
+  static final String icBalance = _generateImagePath('ic_balance.png');
+  static final String icDelegation = _generateImagePath('ic_delegation.png');
+  static final String icReward = _generateImagePath('ic_reward.png');
+  static final String icUnbonding = _generateImagePath('ic_unbonding.png');
 
   // -------- SVG --------
   static final String icCopied = _generateImagePath('ic_copied.svg');
