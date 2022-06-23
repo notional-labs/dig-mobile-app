@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_background.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_primary_appbar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'package:dig_mobile_app/app/designsystem/ds_colors.dart';
@@ -22,16 +23,6 @@ class ActiveAccountDetailPage extends StatelessWidget {
       PieChartSeries('Reward', 0.58, 374.79, 0, const Color.fromRGBO(233, 196, 106, 1), AppAssets.icReward),
       PieChartSeries('Unbonding', 0.0, 100, 0, const Color.fromRGBO(231, 111, 81, 1), AppAssets.icUnbonding),
     ];
-
-    // final List<charts.Series<PieChartSeries, int>> series = [
-    //   charts.Series(
-    //       id: 'series',
-    //       data: data,
-    //       domainFn: (PieChartSeries series, _) => series.name,
-    //       measureFn: (PieChartSeries series, _) => series.value,
-    //       colorFn: (PieChartSeries series, _) => series.color
-    //   )
-    // ];
 
 
     return AnnotatedRegion(
@@ -133,7 +124,7 @@ class AssetsDetailItem extends StatelessWidget {
               color: pieChartSeries.color,
             ),
             child: Center(
-              child: Image.asset(pieChartSeries.image),
+              child: SvgPicture.asset(pieChartSeries.image),
             ),
           ),
           Padding(
