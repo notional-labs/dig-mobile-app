@@ -1,9 +1,11 @@
 import 'package:dig_core/dig_core.dart';
+import 'package:dig_mobile_app/app/definition/string.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_primary_avatar.dart';
 import 'package:dig_mobile_app/app/designsystem/custom/ds_wallet_address.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_refresh_cupertino_sliver.dart';
 import 'package:dig_mobile_app/app/designsystem/ds_snack_bar.dart';
 import 'package:dig_mobile_app/app/extension/extension.dart';
+import 'package:dig_mobile_app/app/page/active_account/active_account_detail/active_account_detail_page.dart';
 import 'package:dig_mobile_app/app/page/active_account/transfer_token/transfer_token_widget.dart';
 import 'package:dig_mobile_app/app/page/receive_token/receive_token_dialog.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,6 +22,8 @@ import 'package:dig_mobile_app/app/util/util.dart';
 import 'package:dig_mobile_app/app/viewmodel/active_account_viewmodel.dart';
 import 'package:dig_mobile_app/di/di.dart';
 import 'package:dig_mobile_app/generated/l10n.dart';
+
+import '../../route/dig_route.dart';
 
 typedef OnRemoveAccount = Function(AccountPublicInfo account);
 
@@ -143,10 +147,13 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
             backgroundColor: DSColors.silver2,
           ),
         ),
-        Text(
-          widget.account.name,
-          style:
-              DSTextStyle.tsMontserratT20R.copyWith(color: DSColors.tulipTree),
+        GestureDetector(
+          onTap: () => navigatorKey.currentState!.pushNamed(DigPageName.activeAccountDetail),
+          child: Text(
+            widget.account.name,
+            style:
+                DSTextStyle.tsMontserratT20R.copyWith(color: DSColors.tulipTree),
+          ),
         ),
         const SizedBox(
           height: 12,
