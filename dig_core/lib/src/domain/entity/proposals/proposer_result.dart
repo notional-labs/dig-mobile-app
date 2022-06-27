@@ -10,7 +10,8 @@ class ProposerResult with EquatableMixin {
 
   const ProposerResult({this.proposalId = '', this.proposer = ''});
 
-  factory ProposerResult.fromJson(Map<String, dynamic> json) => _$ProposerResultFromJson(json);
+  factory ProposerResult.fromJson(Map<String, dynamic> json) =>
+      _$ProposerResultFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProposerResultToJson(this);
 

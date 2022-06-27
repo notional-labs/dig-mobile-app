@@ -6,13 +6,15 @@ class ConfirmRecoveryPhraseViewModel with EquatableMixin {
   final List<ConfirmRecoveryPhraseDataItem> selectItems;
   final bool canContinue;
 
-  ConfirmRecoveryPhraseViewModel({this.confirmResults = const <String>[],
-    this.selectItems = const <ConfirmRecoveryPhraseDataItem>[],
-    this.canContinue = false});
+  ConfirmRecoveryPhraseViewModel(
+      {this.confirmResults = const <String>[],
+      this.selectItems = const <ConfirmRecoveryPhraseDataItem>[],
+      this.canContinue = false});
 
-  ConfirmRecoveryPhraseViewModel copyWith({List<String>? confirmResults,
-    List<ConfirmRecoveryPhraseDataItem>? selectItems,
-    bool? canContinue}) =>
+  ConfirmRecoveryPhraseViewModel copyWith(
+          {List<String>? confirmResults,
+          List<ConfirmRecoveryPhraseDataItem>? selectItems,
+          bool? canContinue}) =>
       ConfirmRecoveryPhraseViewModel(
           confirmResults: confirmResults ?? this.confirmResults,
           selectItems: selectItems ?? this.selectItems,

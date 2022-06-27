@@ -35,38 +35,39 @@ class _CreateProposalWidgetState extends State<CreateProposalWidget>
 
   @override
   Widget build(BuildContext context) => Material(
-    color: Colors.transparent,
-    child: BlocConsumer<CreateProposalCubit, CreateProposalState>(
-        bloc: _cubit,
-        listener: _onBlocListener,
-        builder: (_, CreateProposalState state) =>
-            _buildScrollableWidget(state.viewModel)),
-  );
+        color: Colors.transparent,
+        child: BlocConsumer<CreateProposalCubit, CreateProposalState>(
+            bloc: _cubit,
+            listener: _onBlocListener,
+            builder: (_, CreateProposalState state) =>
+                _buildScrollableWidget(state.viewModel)),
+      );
 
   void _onBlocListener(BuildContext context, CreateProposalState state) {}
 
-  Widget _buildScrollableWidget(CreateProposalViewModel viewModel) => GestureDetector(
-    onTap: () {
-      _cubit.closeEvent();
-    },
-    child: Container(
-      height: double.infinity,
-      color: Colors.transparent,
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Column(
-        children: [
-          Expanded(
-            child: Center(
-              child: SingleChildScrollView(
-                child: _buildBodyWidget(viewModel),
+  Widget _buildScrollableWidget(CreateProposalViewModel viewModel) =>
+      GestureDetector(
+        onTap: () {
+          _cubit.closeEvent();
+        },
+        child: Container(
+          height: double.infinity,
+          color: Colors.transparent,
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Column(
+            children: [
+              Expanded(
+                child: Center(
+                  child: SingleChildScrollView(
+                    child: _buildBodyWidget(viewModel),
+                  ),
+                ),
               ),
-            ),
+              SizedBox(height: MediaQuery.of(context).viewInsets.bottom + 5)
+            ],
           ),
-          SizedBox(height: MediaQuery.of(context).viewInsets.bottom + 5)
-        ],
-      ),
-    ),
-  );
+        ),
+      );
 
   Widget _buildBodyWidget(CreateProposalViewModel viewModel) {
     final textFieldHeight = 30.0;
@@ -90,6 +91,7 @@ class _CreateProposalWidgetState extends State<CreateProposalWidget>
                         .copyWith(color: DSColors.tulipTree),
                   ),
                   const SizedBox(height: 20),
+
                   /// Proposer
                   Text(
                     '${S.current.proposer}:',
@@ -99,6 +101,7 @@ class _CreateProposalWidgetState extends State<CreateProposalWidget>
                   const SizedBox(height: 4),
                   _buildProposerDropdown(viewModel),
                   const SizedBox(height: 10),
+
                   /// Title
                   Text(
                     '${S.current.title}:',
@@ -113,6 +116,7 @@ class _CreateProposalWidgetState extends State<CreateProposalWidget>
                     onChange: (String value) {},
                   ),
                   const SizedBox(height: 10),
+
                   /// Description
                   Text(
                     '${S.current.description}:',
@@ -127,6 +131,7 @@ class _CreateProposalWidgetState extends State<CreateProposalWidget>
                     onChange: (String value) {},
                   ),
                   const SizedBox(height: 10),
+
                   /// Initial Deposit
                   Text(
                     '${S.current.initial_deposit}:',
@@ -140,6 +145,7 @@ class _CreateProposalWidgetState extends State<CreateProposalWidget>
                     onChange: (String value) {},
                   ),
                   const SizedBox(height: 10),
+
                   /// Minimal Deposit
                   Text(
                     '${S.current.minimal_deposit}:',
@@ -158,8 +164,7 @@ class _CreateProposalWidgetState extends State<CreateProposalWidget>
                   ..._buildAdvanceSection(viewModel),
                   const SizedBox(height: 14),
                   _buildActionButtonWidget(viewModel)
-                ]
-            ),
+                ]),
           ),
         ));
   }
@@ -169,8 +174,7 @@ class _CreateProposalWidgetState extends State<CreateProposalWidget>
         controller: _dropdownController,
         height: 30,
         contentPadding: const EdgeInsets.all(6),
-        hintText:
-        'dig1wappp4nlv682q3f5fz4y0qk2mcvvmewc4sc8hs',
+        hintText: 'dig1wappp4nlv682q3f5fz4y0qk2mcvvmewc4sc8hs',
         child: Container(
           decoration: BoxDecoration(
               color: DSColors.tundora,
@@ -206,61 +210,57 @@ class _CreateProposalWidgetState extends State<CreateProposalWidget>
   }
 
   List<Widget> _buildAdvanceSection(CreateProposalViewModel viewModel) {
-    return /// Advance
-      [
-        Row(
+    return
+
+        /// Advance
+        [
+      Row(
+        children: [
+          DSCheckBox(
+            width: 15,
+            height: 15,
+            initialChecked: false,
+            onChanged: (value) {},
+          ),
+          const SizedBox(width: 9),
+          Text(
+            S.current.advanced,
+            style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.white),
+          )
+        ],
+      ),
+      if (viewModel.showAdvance)
+        Padding(
+          padding: const EdgeInsets.only(top: 10, bottom: 4),
+          child: Text(
+            '${S.current.set_gas}:',
+            style: DSTextStyle.tsMontserratT12R.copyWith(color: Colors.white),
+          ),
+        ),
+      if (viewModel.showAdvance)
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DSCheckBox(
-              width: 15,
-              height: 15,
-              initialChecked: false,
-              onChanged: (value) {
-              },
+            DSTextField(
+              height: 30,
+              contentPadding: const EdgeInsets.all(6),
+              hintText:
+                  '${S.current.minimum}: ${S.current.dig_token_format(0)}',
+              textInputAction: TextInputAction.done,
+              textInputType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(
+                    RegExp(RegexPatternString.number)),
+              ],
+              onChange: (String value) {},
             ),
-            const SizedBox(width: 9),
-            Text(
-              S.current.advanced,
-              style: DSTextStyle.tsMontserratT12R
-                  .copyWith(color: Colors.white),
-            )
+            // _errorMessage(viewmodel.gasValidMessage)
           ],
         ),
-        if (viewModel.showAdvance)
-          Padding(
-            padding: const EdgeInsets.only(top: 10, bottom: 4),
-            child: Text(
-              '${S.current.set_gas}:',
-              style: DSTextStyle.tsMontserratT12R
-                  .copyWith(color: Colors.white),
-            ),
-          ),
-        if (viewModel.showAdvance)
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DSTextField(
-                height: 30,
-                contentPadding: const EdgeInsets.all(6),
-                hintText:
-                '${S.current.minimum}: ${S.current.dig_token_format(0)}',
-                textInputAction: TextInputAction.done,
-                textInputType: TextInputType.number,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(
-                      RegExp(RegexPatternString.number)),
-                ],
-                onChange: (String value) {
-
-                },
-              ),
-              // _errorMessage(viewmodel.gasValidMessage)
-            ],
-          ),
-        const SizedBox(height: 17),
-      ];
+      const SizedBox(height: 17),
+    ];
   }
-
 
   Row _buildActionButtonWidget(CreateProposalViewModel viewModel) => Row(
         mainAxisSize: MainAxisSize.max,

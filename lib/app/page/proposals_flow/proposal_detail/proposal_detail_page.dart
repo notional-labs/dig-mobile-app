@@ -49,26 +49,26 @@ class _ProposalDetailPageState extends State<ProposalDetailPage>
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
           body: DSBackground(
-            child: SafeArea(
-              child: Column(
-                children: [
-                  DSPrimaryAppBar.normal(
-                    title: S.current.proposal_detail_page_title,
-                    onBackButtonPressed: () => Navigator.of(context).pop(),
-                  ),
-                  const SizedBox(height: 38),
-                  Expanded(
-                      child: SingleChildScrollView(
-                          child: BlocConsumer<ProposalDetailCubit,
-                              ProposalDetailState>(
-                            bloc: _cubit,
-                            listener: _listener,
-                            builder: (_, state) => _buildBody(state.model),
-                          )))
-                ],
+        child: SafeArea(
+          child: Column(
+            children: [
+              DSPrimaryAppBar.normal(
+                title: S.current.proposal_detail_page_title,
+                onBackButtonPressed: () => Navigator.of(context).pop(),
               ),
-            ),
-          )),
+              const SizedBox(height: 38),
+              Expanded(
+                  child: SingleChildScrollView(
+                      child: BlocConsumer<ProposalDetailCubit,
+                          ProposalDetailState>(
+                bloc: _cubit,
+                listener: _listener,
+                builder: (_, state) => _buildBody(state.model),
+              )))
+            ],
+          ),
+        ),
+      )),
     );
   }
 
@@ -138,9 +138,7 @@ class _ProposalDetailPageState extends State<ProposalDetailPage>
           _InfoRowItem(
             name: S.current.voting_time,
             value:
-            '${_toDisplayDateFormat(
-                model.proposal.votingStartTime)} - ${_toDisplayDateFormat(
-                model.proposal.votingEndTime)}',
+                '${_toDisplayDateFormat(model.proposal.votingStartTime)} - ${_toDisplayDateFormat(model.proposal.votingEndTime)}',
           ),
           _InfoRowItem(
             name: S.current.proposal_type,
@@ -154,8 +152,11 @@ class _ProposalDetailPageState extends State<ProposalDetailPage>
             name: S.current.description,
             value: model.proposal.content?.description ?? '',
           ),
-          const SizedBox(height: 75,),
-          Text(S.current.vote.toUpperCase(),
+          const SizedBox(
+            height: 75,
+          ),
+          Text(
+            S.current.vote.toUpperCase(),
             style: DSTextStyle.tsMontserratT20B
                 .copyWith(color: DSColors.tulipTree),
           ),

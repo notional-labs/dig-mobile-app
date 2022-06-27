@@ -8,7 +8,7 @@ import 'package:injectable/injectable.dart';
 class MarketRepositoryImplement implements MarketRepository {
   final MarketRemoteDatasource _datasource;
   MarketRepositoryImplement(this._datasource);
-  
+
   @override
   Future<List<Market>> getCoin(CoinRequest param) => _datasource.getCoin(param);
 }

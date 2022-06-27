@@ -8,7 +8,6 @@ class DSSecondaryButton extends StatelessWidget {
   final bool enable;
   final Color backgroundColor;
 
-
   const DSSecondaryButton({
     required this.title,
     required this.onTap,
@@ -22,7 +21,7 @@ class DSSecondaryButton extends StatelessWidget {
     return GestureDetector(
         onTap: enable ? onTap : null,
         child: Container(
-          decoration:  BoxDecoration(
+          decoration: BoxDecoration(
             color: backgroundColor,
             borderRadius: const BorderRadius.all(Radius.circular(5)),
           ),

@@ -7,9 +7,11 @@ import 'package:dig_core/src/di/di.dart';
 extension ChainEnvExtension on ChainENV {
   RestClient getRestClient() {
     if (this is DigChainMainNet || this is DigChainTestNet) {
-      return digCoreDI<RestClient>(instanceName: GetItInstanceName.restClientDigChain);
+      return digCoreDI<RestClient>(
+          instanceName: GetItInstanceName.restClientDigChain);
     }
 
-    return digCoreDI<RestClient>(instanceName: GetItInstanceName.restClientDigChain);
+    return digCoreDI<RestClient>(
+        instanceName: GetItInstanceName.restClientDigChain);
   }
 }

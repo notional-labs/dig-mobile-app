@@ -10,6 +10,7 @@ abstract class MarketRemoteDatasource {
 @Injectable(as: MarketRemoteDatasource)
 class MarketRemoteDatasourceImplemet implements MarketRemoteDatasource {
   final CoingeckoRestClient _client;
+
   MarketRemoteDatasourceImplemet(this._client);
 
   @override

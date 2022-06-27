@@ -10,7 +10,8 @@ class ProposalsResponse with EquatableMixin {
   final List<Proposal> proposals;
   final Pagination? pagination;
 
-  const ProposalsResponse({this.proposals = const <Proposal>[], this.pagination});
+  const ProposalsResponse(
+      {this.proposals = const <Proposal>[], this.pagination});
 
   factory ProposalsResponse.fromJson(Map<String, dynamic> json) =>
       _$ProposalsResponseFromJson(json);
