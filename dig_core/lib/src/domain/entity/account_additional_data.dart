@@ -25,6 +25,7 @@ class AccountAdditionalData {
 }
 
 extension AdditionalDataParsing on AccountPublicInfo {
-  AccountAdditionalData get accountAdditionalData => AccountAdditionalData.fromJson(
-      jsonDecode(additionalData ?? '{}') as Map<String, dynamic>);
+  AccountAdditionalData get accountAdditionalData =>
+      AccountAdditionalData.fromJson(
+          jsonDecode(additionalData ?? '{}') as Map<String, dynamic>);
 }

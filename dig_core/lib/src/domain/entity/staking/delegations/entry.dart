@@ -17,8 +17,7 @@ class Entry with EquatableMixin {
     this.balance = '',
   });
 
-  factory Entry.fromJson(Map<String, dynamic> json) =>
-      _$EntryFromJson(json);
+  factory Entry.fromJson(Map<String, dynamic> json) => _$EntryFromJson(json);
 
   Map<String, dynamic> toJson() => _$EntryToJson(this);
 

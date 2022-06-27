@@ -38,7 +38,7 @@ class StakingShowDelegateDialogState extends StakingState {
       : super(viewmodel: viewmodel);
 
   @override
-  List<Object?> get props => [validatorSelected,viewmodel];
+  List<Object?> get props => [validatorSelected, viewmodel];
 }
 
 class StakingErrorState extends StakingState {

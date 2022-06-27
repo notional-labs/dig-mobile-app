@@ -8,7 +8,8 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class ConfirmPinCubit extends Cubit<ConfirmPinState> {
-  ConfirmPinCubit(this._createPinUseCase) : super(const ConfirmPinPrimaryState());
+  ConfirmPinCubit(this._createPinUseCase)
+      : super(const ConfirmPinPrimaryState());
 
   final CreatePinUseCase _createPinUseCase;
 

@@ -29,6 +29,7 @@ void initDI(GetIt _di, ENV env) {
 
   digCoreDI
     ..registerLazySingleton<Dio>(() => dio)
+
     /// Register [RestClient] for DigChain
     ..registerFactory<RestClient>(
         () => RestClient.from(digCoreDI<Dio>(), digCoreDI<ENV>().digChain),
