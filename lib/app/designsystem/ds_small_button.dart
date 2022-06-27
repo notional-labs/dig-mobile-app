@@ -8,7 +8,6 @@ class DSSmallButton extends StatelessWidget {
   final bool enable;
   final Color backgroundColor;
 
-
   const DSSmallButton({
     required this.title,
     required this.onTap,
@@ -21,7 +20,7 @@ class DSSmallButton extends StatelessWidget {
   Widget build(BuildContext context) => GestureDetector(
       onTap: enable ? onTap : null,
       child: Container(
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: const BorderRadius.all(Radius.circular(5)),
         ),

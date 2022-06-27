@@ -28,7 +28,7 @@ class SendTokenUsecase
       if (result.data.isNotEmpty) {
         return Right(result);
       }
-      
+
       throw DigException(message: result.rawLog);
     } catch (e, trace) {
       Logger().e('SendTokenUsecase ERROR', e, trace);

@@ -34,7 +34,8 @@ class ConfirmRecoveryPhraseCubit extends Cubit<ConfirmRecoveryPhraseState> {
     final currentList =
         List<ConfirmRecoveryPhraseDataItem>.from(state.model.selectItems);
     final confirmList = List<String>.from(state.model.confirmResults);
-    currentList.firstWhere((element) => data.word == element.word).isSelected = true;
+    currentList.firstWhere((element) => data.word == element.word).isSelected =
+        true;
     confirmList.add(data.word);
 
     var canContinue = false;

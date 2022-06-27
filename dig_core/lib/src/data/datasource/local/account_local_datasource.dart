@@ -2,7 +2,6 @@ import 'package:dig_core/src/data/definition/definition.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 abstract class AccountLocalDatasource {
   Future<String?> getLastSelectedAccountId();
   Future selectAccount(String accountId);

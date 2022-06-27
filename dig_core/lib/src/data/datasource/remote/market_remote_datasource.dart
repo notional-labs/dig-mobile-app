@@ -20,7 +20,6 @@ class MarketRemoteDatasourceImplemet implements MarketRemoteDatasource {
       _client.getBalances(ids: param.ids, vs_currency: param.vs_currency);
 
   @override
-  Future<MarketChart> getChart(ChartRequest param) =>
-      _client.getMarketChart(
-          id: param.id, vs_currency: param.vs_currency, days: param.days);
+  Future<MarketChart> getChart(ChartRequest param) => _client.getMarketChart(
+      id: param.id, vs_currency: param.vs_currency, days: param.days);
 }

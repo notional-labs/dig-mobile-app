@@ -16,18 +16,16 @@ class HomeViewModel extends Equatable {
       this.currentDrawerMenu = DrawerMenu.account,
       this.balances = const []});
 
-  HomeViewModel copyWith({
-    AccountPublicInfo? account,
-    List<AccountPublicInfo>? accounts,
-    DrawerMenu? currentHomePage,
-    List<Balance>? balances
-  }) {
+  HomeViewModel copyWith(
+      {AccountPublicInfo? account,
+      List<AccountPublicInfo>? accounts,
+      DrawerMenu? currentHomePage,
+      List<Balance>? balances}) {
     return HomeViewModel(
-      account: account ?? this.account,
-      accounts: accounts ?? this.accounts,
-      currentDrawerMenu: currentHomePage ?? currentDrawerMenu,
-      balances: balances ?? this.balances
-    );
+        account: account ?? this.account,
+        accounts: accounts ?? this.accounts,
+        currentDrawerMenu: currentHomePage ?? currentDrawerMenu,
+        balances: balances ?? this.balances);
   }
 
   @override

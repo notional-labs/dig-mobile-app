@@ -154,9 +154,9 @@ class _RowBottom extends StatelessWidget {
                 color: Colors.transparent,
                 alignment: Alignment.centerLeft,
                 child: Text(
-              leftLabel,
-              style: DSTextStyle.tsMontserratT12R
-                  .copyWith(color: Colors.white),
+                  leftLabel,
+                  style: DSTextStyle.tsMontserratT12R
+                      .copyWith(color: Colors.white),
                 ),
               ),
             ),

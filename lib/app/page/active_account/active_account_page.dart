@@ -147,11 +147,12 @@ class _ActiveAccountPageState extends State<ActiveAccountPage>
           ),
         ),
         GestureDetector(
-          onTap: () => navigatorKey.currentState!.pushNamed(DigPageName.activeAccountDetail),
+          onTap: () => navigatorKey.currentState!
+              .pushNamed(DigPageName.activeAccountDetail),
           child: Text(
             widget.account.name,
-            style:
-                DSTextStyle.tsMontserratT20R.copyWith(color: DSColors.tulipTree),
+            style: DSTextStyle.tsMontserratT20R
+                .copyWith(color: DSColors.tulipTree),
           ),
         ),
         const SizedBox(

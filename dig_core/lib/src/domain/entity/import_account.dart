@@ -15,7 +15,8 @@ class ImportAccount extends Equatable {
     VoidCallback? onAccountCreationStarted,
   }) {
     return ImportAccount(
-      importAccountFormData: importAccountFormData ?? this.importAccountFormData,
+      importAccountFormData:
+          importAccountFormData ?? this.importAccountFormData,
       onAccountCreationStarted:
           onAccountCreationStarted ?? this.onAccountCreationStarted,
     );

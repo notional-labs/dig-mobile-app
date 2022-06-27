@@ -110,7 +110,6 @@ class _RecoveryPhrasePageState extends State<RecoveryPhrasePage> {
                         Expanded(
                           child: Text(
                             S.current.confirm_backup_recovery_phrase,
-                            
                             style: DSTextStyle.tsMontserratT12R
                                 .copyWith(color: Colors.white),
                           ),
